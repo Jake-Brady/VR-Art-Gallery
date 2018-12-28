@@ -1,5 +1,4 @@
 import React from 'react'
-import stylus from 'stylus-in-react'
 
 
 const register = (props) => {

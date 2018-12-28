@@ -3,6 +3,9 @@ import React,{Component} from 'react'
 class Lobby extends Component{
     constructor(){
         super()
+            this.state ={
+                filler: ''
+            }
     }
 
 render(){
