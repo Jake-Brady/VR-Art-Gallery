@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aframe": "^0.8.2",
+    "aframe-react": "^4.4.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "glamorous-stylus": "^1.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2"
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.2",
+    "stylus-in-react": "^2.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -13,6 +22,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "main": "server/server.js",
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"
   },
