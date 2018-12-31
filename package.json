@@ -14,12 +14,18 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "glamorous-stylus": "^1.0.0",
+    "preact": "^8.4.2",
+    "preact-compat": "^3.18.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
     "stylus-in-react": "^2.0.1"
   },
+    "alias": {
+      "react": "preact-compat",
+      "react-dom": "preact-compat"
+    },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

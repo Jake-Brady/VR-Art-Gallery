@@ -7,7 +7,6 @@ import rootAssets from '../components/Gallery/rootAssets'
 import Assets from 'aframe-react-assets'
 
 
-
 class ArtGallery extends Component{
     constructor(){
         super()
