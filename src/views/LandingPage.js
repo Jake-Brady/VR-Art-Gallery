@@ -28,6 +28,7 @@ render(){
         <Login/>
         <Register 
         handleChange={this.handleChange}/>
+        
         </>
     )
 }

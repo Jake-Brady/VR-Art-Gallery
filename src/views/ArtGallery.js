@@ -27,13 +27,13 @@ render(){
         onLoadingBySize={this.updateAssetsCurrentInfo}
         onLoadingByAmount={this.updateAssetsLoadingInfo}
             />
-                    <rw-room position="-2 0 -2" material="color:#866">
+                    <rw-room position="-2 0 -2">
                     <rw-floor material="src:#floor; repeat:2" ></rw-floor>
-                    <rw-ceiling></rw-ceiling>
-                    <rw-wall position="10 0 0" height="6m"></rw-wall>
-                    <rw-wall position="10 0 10" height="6m"></rw-wall>
-                    <rw-wall position="0 0 10" height="6m"></rw-wall>
-                    <rw-wall position="0 0 0" height="6m">
+                    <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling>
+                    <rw-wall material="src:#wall; repeat:2" position="10 0 0" height="4m"></rw-wall>
+                    <rw-wall material="src:#wall; repeat:2" position="10 0 20" height="4m"></rw-wall>
+                    <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="4m"></rw-wall>
+                    <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="4m">
                     </rw-wall>
                 </rw-room>
             </Scene>

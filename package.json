@@ -9,6 +9,7 @@
     "aframe-react": "^4.4.0",
     "aframe-react-assets": "^2.0.5",
     "aframe-room-component": "^0.3.0",
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
@@ -22,10 +23,10 @@
     "react-scripts": "2.1.2",
     "stylus-in-react": "^2.0.1"
   },
-    "alias": {
-      "react": "preact-compat",
-      "react-dom": "preact-compat"
-    },
+  "alias": {
+    "react": "preact-compat",
+    "react-dom": "preact-compat"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

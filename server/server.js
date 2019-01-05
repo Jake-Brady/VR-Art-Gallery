@@ -8,6 +8,8 @@ require('dotenv').config()
 
     app.use(bodyParser.json())
 
+    app.get('/api/register', ctrl.registerUser)
+
 
     PORT = SERVER_PORT || 4500
     app.listen(PORT, ()=> console.log(`Someone is looking at Art on ${PORT}`))
