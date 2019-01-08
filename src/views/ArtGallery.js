@@ -53,19 +53,33 @@ render(){
         </a-camera>
             
         {/* User-Uploaded Images */}
-        <a-image src={`${Portrait1}`} position="2 2 -1.99" ></a-image>
+        <a-image src={`${Portrait1}`} position="7.99 2 -1" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait2}`} position="7.99 2 1" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait3}`} position="7.99 2 3" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait4}`} position="7.99 2 5" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait5}`} position="7.99 2 7" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait6}`} position="7.99 2 9" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait7}`} position="7.99 2 11" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait8}`} position="7.99 2 13" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait9}`} position="7.99 2 15" rotation=" 0 270 0"></a-image>
+        <a-image src={`${Portrait10}`} position="7.99 2 17" rotation=" 0 270 0"></a-image>
+        
 
         {/* Objects */}
         <a-entity 
-        geometry="primitive: sphere; radius: 1.5"
-        position="5 2 16"
+        geometry="primitive: sphere; radius: .5; color: 000"
+        position="0 2 16"
+        color="000"
         sound="src:#music; on:click;"
-        preload="auto"
+        light="color:orange; type:point; intensity:.1"
         >
         </a-entity>
 
+        <a-light type="point" color="lightblue" position="-1 1 0"></a-light>
+        <a-light type="point" color="lightblue" position="-1 1 12"></a-light>
+
         {/* Chandelier */}
-        <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model>
+        {/* <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model> */}
 
 
         {/* Everything below here is part of the architecture */}
