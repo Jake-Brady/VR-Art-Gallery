@@ -8,7 +8,6 @@ create table users(
     id serial primary key,
     username varchar (60) unique not null,
     password varchar (60) not null,
-    rating integer,
     -- image text, 
     email varchar (250),
     first_name varchar(60),
@@ -37,3 +36,5 @@ user_id integer references user(id)
 -- Create Table relationships
 -- is_friend <true/false>, friend_pending <true/false>, is_blocked <true/false>,
 
+-- Create Table Gallery_Presets
+--Wall-Texture <TEXT>, Floor-Texture <TEXT>, Atmosphere-Lighting <TEXT>, 

@@ -9,6 +9,7 @@ require('dotenv').config()
     app.use(bodyParser.json())
 
     app.get('/api/register', ctrl.registerUser)
+    
     app.get('/api/getImages/', ctrl.getImages)
 
 
