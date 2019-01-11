@@ -1,40 +1,25 @@
-import React,{Component} from 'react'
-import Login from '../components/LandingPage/login'
-import Register from '../components/LandingPage/register'
+import React, { Component } from 'react'
+import '../Styles/LandingPage.css'
 
-class LandingPage extends Component{
-    constructor(){
-        super()
-        this.state={
-            name: '',
-            username: '',
-            password: '',
-            email: ''
-        }
-        this.handleChange = this.handleChange.bind(this)
+class LandingPage extends Component {
+    constructor(props) {
+        super(props)
     }
 
-handleChange(e){
-    this.setState({
-        [e.target.name]: e.target.value
-    })
-}
-
-render(){
-    console.log(this.state)
-    return(
-        <>
-        <h1>Landing Page</h1>
-
-        <section>
-        <Login/>
-        <Register 
-        handleChange={this.handleChange}/>
-        </section>
-        
-        </>
-    )
-}
+    render() {
+        return (
+            <div className='landing'>
+                <header className='landing-header'>
+                    <div className='landing-header_name'>
+                    VR <span className='lighttext'>ART GALLERY</span>
+                    </div>
+                    <div className='landing-header_links'>
+                        <span>LOGIN</span><span> | </span><span>REGISTER</span>
+                    </div>
+                </header>
+            </div>
+        )
+    }
 }
 
 export default LandingPage
