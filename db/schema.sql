@@ -41,6 +41,8 @@ create table images(
 -- Create Table Gallery_Presets
 --Wall-Texture <TEXT>, Floor-Texture <TEXT>, Atmosphere-Lighting <TEXT>, User_id (foreign key to SPK of user)
 create table Gallery_Presets(
+    name_of_gallery varchar(20),
+    thumbnail text,
     wall_texture text,
     floor_texture text,
     atmosphere_lighting text,
