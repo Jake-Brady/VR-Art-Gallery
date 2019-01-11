@@ -1,0 +1,34 @@
+.landing {
+    width: 100vw;
+    height: 100vh;
+    background: rgb(117, 148, 253);
+    font-family: 'Oswald', sans-serif;
+}
+
+.landing-header {
+    width: 100vw;
+    height: 100px;
+    background: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    color: white;
+}
+
+.landing-header_name {
+    font-size: 25px;
+}
+
+.lighttext {
+    opacity: .6;
+}
+
+.landing-header_links {
+    width: 250px;
+    height: 50px;
+    background: orange;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
