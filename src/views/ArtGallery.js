@@ -52,6 +52,10 @@ render(){
         {/* Invisible Box Barriers to prevent players from leaving the room. */}
         <a-box material="visible:false" width="18" height="5" static-body position="9 0 8" rotation=" 0 270 0"></a-box>
 
+        <a-box material="visible:false" width="13" height="5" static-body position="-3 0 15" rotation=" 0 270 0"></a-box>
+
+        <a-box material="visible:false" width="4" height="5" static-body position="-6 0 7" rotation=" 0 270 0"></a-box>
+
         <a-box material="visible:false" width="6" height="5" static-body position="5 0 -3" rotation=" 0 180 0"></a-box>
 
         <a-box material="visible:false" width="10" height="5" static-body position="2 0 19" rotation=" 0 180 0"></a-box>
@@ -67,6 +71,7 @@ render(){
         </a-entity>
       </a-entity>
 
+        {/* Interior Walls and Pillars for added Decorations */}
       <a-box width="3" height="5" depth="1" static-body position="3 1 1"></a-box>
       <a-box width="3" height="5" depth="1" static-body position="3 1 5"></a-box>
       <a-box width="3" height="5" depth="1" static-body position="3 1 9"></a-box>
@@ -86,19 +91,22 @@ render(){
         
 
         {/* Objects */}
+        {/* Sphere of Music */}
         <a-entity
         static-body
         width="3"
-        geometry="primitive: sphere; radius: .5; color: 000"
-        position="0 2 16"
-        color="000"
+        geometry="primitive: sphere; radius: .5;"
+        position="2 2 14"
+        material="color:#C0C0C0"
+        glow="color:#C0C0C0;intensity:.2"
         sound="src:#music; on:click; rolloffFactor:.1"
-        light="color:orange; type:point; intensity:.2s"
+        light="color:lightblue;type: point; intensity: .7; decay: 2;"
+        
         >
         </a-entity>
 
-        <a-light type="point" color="lightblue" position="-1 1 0"></a-light>
-        <a-light type="point" color="lightblue" position="-1 1 12"></a-light>
+        <a-light type="point" color="lightblue" intensity=".3" position="-1 1 0"></a-light>
+        <a-light type="point" color="lightblue" intensity=".3" position="-1 1 12"></a-light>
 
         {/* Chandelier */}
         {/* <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model> */}
