@@ -6,12 +6,10 @@ import ArtGallery from '../views/ArtGallery'
 
 export default function Nav() {
     return(
-        <>
             <Switch>
                 <Route exact path='/' component={LandingPage}/>
                 <Route path='/lobby' component={Lobby} />
                 <Route path='/gallery' component={ArtGallery} />
             </Switch>
-        </>
     )
 }

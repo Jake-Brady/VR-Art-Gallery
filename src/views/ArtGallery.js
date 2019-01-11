@@ -39,7 +39,7 @@ render(){
     let {Portrait1, Portrait2, Portrait3, Portrait4, Portrait5, Portrait6, Portrait7, Portrait8, Portrait9, Portrait10} = this.state
     console.log()
     return(
-        <Scene physics="debug: false" stats id='scene'>
+        <Scene physics="debug: true" stats id='scene'>
         <Assets 
     assets={rootAssets}
     debug={true}
