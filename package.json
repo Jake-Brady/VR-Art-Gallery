@@ -21,6 +21,7 @@
     "preact-compat": "^3.18.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-dropzone": "^8.0.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
     "stylus-in-react": "^2.0.1"
