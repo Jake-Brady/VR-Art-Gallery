@@ -2,26 +2,13 @@ import React, {Component} from 'react'
 import Dropzone from 'react-dropzone'
 import {v4 as randomStringGenerator} from 'uuid';
 import {GridLoader} from 'react-spinners'
+import '../Styles/image-uploads.css'
 
 class ImageUploads extends Component{
     constructor(){
         super()
             this.state={
-                image1: '',
-                image2: '',
-                image3: '',
-                image4: '',
-                image5: '',
-                image6: '',
-                image7: '',
-                image8: '',
-                image9: '',
-                image10: '',
-                image11: '',
-                image12: '',
-                image13: '',
-                image14: '',
-                image15: '',
+                images: [],
                 isUploading: false,
                 url: 'http://via.placeholder.com/450x450'
             }
@@ -42,12 +29,32 @@ uploadFile = (file, signRequest, url) => {
 render(){
     const {url, isUploading} = this.state;
     return(
-    <section className="image-uploads">
+    <section id="image-uploads">
     <h2>User-Uploaded Image Section</h2>
         <div className="img-block">
             <h3>Frame 1</h3>
             <img src={url} alt="This is what is in frame 1" width="450px" />
-
+            <Dropzone
+          onDropAccepted={this.getSignedRequest}
+          style={{
+            position: 'relative',
+            width: 200,
+            height: 200,
+            borderWidth: 7,
+            marginTop: 100,
+            borderColor: 'rgb(102, 102, 102)',
+            borderStyle: 'dashed',
+            borderRadius: 5,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: 28,
+          }}
+          accept="image/*"
+          multiple={false}
+        >
+          {isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}
+        </Dropzone>
 
         </div>
         <div className="img-block">

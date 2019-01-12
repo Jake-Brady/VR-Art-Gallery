@@ -1,4 +1,5 @@
 import React from 'react';
+import '../Styles/blueprint.css'
 
 const GalleryBluePrint = () => {
     return(

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Dropdown } from 'react-bootstrap';
+import '../Styles/presets.css'
 
 class Presets extends Component{
     constructor(){
@@ -19,19 +19,35 @@ componentDidMount(){
 
 render(){
     return(
-        <section className="gallery-presets">
+        <section id="gallery-presets">
         <h2>Gallery Preset Section</h2>
             <div className="music preset">
-                <dropdown value=""></dropdown>
+                <select>
+                    <option value="Gymnopedie">Gymnopedie</option>
+                    <option value="whatever">Open Source</option>
+                    <option value="whatever">Open Source</option>
+                </select>
             </div>
             <div className="floor-texture preset">
-                <dropdown value=""></dropdown>
+                <select>
+                    <option value="Wood">Laminate Wood Flooring</option>
+                    <option value="whatever">Open Source</option>
+                    <option value="whatever">Open Source</option>
+                </select>
             </div>
             <div className="wall-texture preset">
-                <dropdown value=""></dropdown>
+                <select>
+                    <option value="Granite">Grey Granite</option>
+                    <option value="whatever">Open Source</option>
+                    <option value="whatever">Open Source</option>
+                </select>
             </div>
             <div className="lighting preset">
-                <dropdown value=""></dropdown>
+                <select>
+                    <option value="Blue">Light Blue</option>
+                    <option value="whatever">Open Source</option>
+                    <option value="whatever">Open Source</option>
+                </select>
             </div>
         </section>
     )
