@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../Styles/LandingPage.css'
+import VRVideo from '../assets/video/VR-Trailer.mp4'
 
 class LandingPage extends Component {
     constructor(props) {
@@ -25,6 +26,9 @@ class LandingPage extends Component {
                     <div className='landing-main_body'>
                         <h1>Walk around and see cool shit in VR</h1>
                         <h3>Make your own or browse other galleries</h3>
+                        <div id="video-container">
+                            <video id="video" autoPlay loop width="400px" src={VRVideo} alt="trailer of VR-Art-Gallery"></video>
+                        </div>
                         <div className='center'>View Galleries</div>
                     </div>
                 </main>
