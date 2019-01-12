@@ -24,7 +24,9 @@
     "react-dropzone": "^8.0.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
-    "stylus-in-react": "^2.0.1"
+    "react-spinners": "^0.5.1",
+    "stylus-in-react": "^2.0.1",
+    "uuid": "^3.3.2"
   },
   "alias": {
     "react": "preact-compat",
