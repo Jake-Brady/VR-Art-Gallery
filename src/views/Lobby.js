@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import axios from 'axios'
 import Presets from '../components/Lobby/presets'
 import ImageUploads from '../components/Lobby/image-uploads'
+import GalleryBluePrint from '../components/Lobby/blueprint'
 
 class Lobby extends Component{
     constructor(){
@@ -24,6 +25,7 @@ render(){
 
         <Presets />
         <ImageUploads />
+        <GalleryBluePrint />
 
         
         </main>
