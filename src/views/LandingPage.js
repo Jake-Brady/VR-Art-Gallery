@@ -12,18 +12,18 @@ class LandingPage extends Component {
             <div className='home'>
                 <div className='landing'>
                     <header className='landing-header'>
-                        <div className='landing-header_name'>
+                        <div className='landing-header_name center'>
                             VR <span className='lighttext'>ART GALLERY</span>
                         </div>
                         <div className='landing-header_links'>
                             <span>LOGIN</span>
                             <span>REGISTER</span>
-                            <div className='landing-header_search'>
-                                <input type='text' placeholder='Search Galleries'></input>
+                            <div className='landing-header_search center'>
+                                <input type='text' placeholder='SEARCH GALLERIES'></input>
                             </div>
                         </div>
                     </header>
-                    <div className='landing-welcome center'>
+                    <div className='landing-welcome'>
                         <div className='landing-welcome_body'>
                             <h1>Walk around and see cool shit in VR</h1>
                             <h3>Make your own or browse other galleries</h3>
