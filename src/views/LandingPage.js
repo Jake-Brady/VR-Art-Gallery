@@ -9,28 +9,33 @@ class LandingPage extends Component {
 
     render() {
         return (
-            <div className='landing'>
-                <header className='landing-header'>
-                    <div className='landing-header_name'>
-                        VR <span className='lighttext'>ART GALLERY</span>
-                    </div>
-                    <div className='landing-header_links'>
-                        <span>LOGIN</span>
-                        <span>REGISTER</span>
-                        <div className='landing-header_search'>
-                            <input type='text' placeholder='Search Galleries'></input>
+            <div className='home'>
+                <div className='landing'>
+                    <header className='landing-header'>
+                        <div className='landing-header_name'>
+                            VR <span className='lighttext'>ART GALLERY</span>
+                        </div>
+                        <div className='landing-header_links'>
+                            <span>LOGIN</span>
+                            <span>REGISTER</span>
+                            <div className='landing-header_search'>
+                                <input type='text' placeholder='Search Galleries'></input>
+                            </div>
+                        </div>
+                    </header>
+                    <div className='landing-welcome center'>
+                        <div className='landing-welcome_body'>
+                            <h1>Walk around and see cool shit in VR</h1>
+                            <h3>Make your own or browse other galleries</h3>
+                            <div className='center'>VIEW GALLERIES</div>
+                            <div className='video-container center'>
+                                <video controls src={VRVideo} alt="trailer of VR-Art-Gallery"></video>
+                            </div>
                         </div>
                     </div>
-                </header>
-                <main className='landing-main center'>
-                    <div className='landing-main_body'>
-                        <h1>Walk around and see cool shit in VR</h1>
-                        <h3>Make your own or browse other galleries</h3>
-                        <div id="video-container">
-                            <video id="video" autoPlay loop width="400px" src={VRVideo} alt="trailer of VR-Art-Gallery"></video>
-                        </div>
-                        <div className='center'>View Galleries</div>
-                    </div>
+                </div>
+                <main className='landing-main'>
+
                 </main>
             </div>
         )
