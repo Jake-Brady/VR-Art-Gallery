@@ -26,6 +26,16 @@ uploadFile = (file, signRequest, url) => {
 
 }
 
+onDrop(files) {
+    this.setState({files});
+  }
+
+  onCancel() {
+    this.setState({
+      files: []
+    });
+  }
+
 render(){
     const {url, isUploading} = this.state;
     return(
@@ -35,25 +45,30 @@ render(){
             <h3>Frame 1</h3>
             <img src={url} alt="This is what is in frame 1" width="450px" />
             <Dropzone
-          onDropAccepted={this.getSignedRequest}
-          style={{
-            position: 'relative',
-            width: 200,
-            height: 200,
-            borderWidth: 7,
-            marginTop: 100,
-            borderColor: 'rgb(102, 102, 102)',
-            borderStyle: 'dashed',
-            borderRadius: 5,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            fontSize: 28,
-          }}
+          onDrop={this.onDrop.bind(this)}
+          onFileDialogCancel={this.onCancel.bind(this)}
           accept="image/*"
           multiple={false}
         >
-          {isUploading ? <GridLoader /> : <p>Drop File or Click Here</p>}
+          {({getRootProps, getInputProps}) => (
+            <div {...getRootProps()} style={{
+                position: 'relative',
+                width: 200,
+                height: 200,
+                borderWidth: 7,
+                marginTop: 100,
+                borderColor: 'rgb(102, 102, 102)',
+                borderStyle: 'dashed',
+                borderRadius: 5,
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: 28,
+              }}>
+              <input {...getInputProps()} />
+                
+            </div>
+          )}
         </Dropzone>
 
         </div>
