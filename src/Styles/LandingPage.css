@@ -3,17 +3,18 @@
     height: 100vh;
     background: rgb(117, 148, 253);
     font-family: 'Oswald', sans-serif;
+    color: white;
+    background-image: url(../Styles/background.png);
+    background-size: cover;
 }
 
 .landing-header {
-    width: 100vw;
+    width: inherit;
     height: 100px;
-    background: red;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-    color: white;
 }
 
 .landing-header_name {
@@ -25,10 +26,77 @@
 }
 
 .landing-header_links {
-    width: 250px;
+    width: 300px;
     height: 50px;
-    background: orange;
     display: flex;
     align-items: center;
-    font-size: 15px;
+    justify-content: space-around;
+    font-size: 12px;
+}
+
+.landing-header_links > span {
+    cursor: pointer;
+}
+
+.landing-header_search {
+    width: 200px;
+    height: 40px;
+    background: rgb(95, 122, 221);
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px rgba(27, 30, 206, 0.288);
+}
+
+.landing-header_search > input  {
+    background: inherit;
+    color: inherit;
+    font-family: inherit;
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 0px 10px;
+}
+
+.landing-header_search > input::placeholder {
+    color: inherit;
+}
+
+.landing-main {
+    width: 100vw;
+    height: calc(100vh - 100px);
+}
+
+.landing-main_body {
+    width: 1200px;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.landing-main_body > h1 {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+.landing-main_body > h3 {
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.landing-main_body > div {
+    width: 200px;
+    height: 40px;
+    background: white;
+    border-radius: 50px;
+    color: rgba(0, 0, 0, 0.479);
+    position: absolute;
+    bottom: 10px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
