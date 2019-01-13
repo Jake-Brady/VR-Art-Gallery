@@ -18,6 +18,8 @@
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "massive": "^5.7.2",
     "preact": "^8.4.2",
     "preact-compat": "^3.18.4",
     "prop-types": "^15.6.2",
