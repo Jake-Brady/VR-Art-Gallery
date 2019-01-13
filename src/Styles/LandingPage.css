@@ -1,7 +1,31 @@
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .landing {
-    width: 100vw;
-    height: 100vh;
-    background: rgb(117, 148, 253);
+    width: 100%;
     font-family: 'Oswald', sans-serif;
     color: white;
     background-image: url(../Styles/background.png);
@@ -9,90 +33,118 @@
 }
 
 .landing-header {
-    width: inherit;
-    height: 100px;
+    width: 100%;
+    height: 75px;
     display: flex;
-    align-items: center;
+    align-items: top;
     justify-content: space-between;
     padding: 15px;
 }
 
 .landing-header_name {
-    font-size: 25px;
+    font-size: 18px;
 }
 
 .lighttext {
     opacity: .6;
+    margin-left: 5px;
 }
 
 .landing-header_links {
-    width: 300px;
-    height: 50px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-end;
     font-size: 12px;
+    margin-right: 15px;
 }
 
 .landing-header_links > span {
     cursor: pointer;
+    margin-right: 10px;
+    opacity: .8;
 }
 
-.landing-header_search {
-    width: 200px;
-    height: 40px;
-    background: rgb(95, 122, 221);
-    border-radius: 50px;
-    padding: 10px;
-    box-shadow: 2px 2px 2px rgba(27, 30, 206, 0.288);
-}
-
-.landing-header_search > input  {
-    background: inherit;
-    color: inherit;
-    font-family: inherit;
-    border: none;
-    height: 100%;
+.landing-welcome {
     width: 100%;
-    padding: 0px 10px;
+    height: 400px;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+    padding-top: 40px;
 }
 
-.landing-header_search > input::placeholder {
-    color: inherit;
-}
-
-.landing-main {
-    width: 100vw;
-    height: calc(100vh - 100px);
-}
-
-.landing-main_body {
-    width: 1200px;
-    height: 60vh;
+.landing-welcome_body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    position: relative;
 }
 
-.landing-main_body > h1 {
+.landing-welcome_body > h1 {
     font-size: 45px;
     font-weight: 300;
+    letter-spacing: 1px;
+    opacity: .8;
 }
 
-.landing-main_body > h3 {
+.landing-welcome_body > h3 {
     font-weight: 300;
-    font-size: 16px;
+    font-size: 15px;
+    letter-spacing: .5px;
+    opacity: .8;
 }
 
-.landing-main_body > div {
+.landing-welcome_body > div {
     width: 200px;
     height: 40px;
     background: white;
     border-radius: 50px;
-    color: rgba(0, 0, 0, 0.479);
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.video-container {
     position: absolute;
-    bottom: 10px;
+    bottom: -20px;
+}
+
+.video-container > video {
+    width: 425px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.landing-main {
+    min-height: 600px;
+    margin-top: 200px;
+    width: 1260px;
+    padding: 30px 80px;
+    font-family: 'Oswald', sans-serif;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.gallery-container {
+    width: 250px;
+    height: 300px;
+    background: orange;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+.landing-back {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    visibility: hidden;
+    cursor: pointer;
+    background: rgb(112, 142, 252);
+    color: white;
+    font-size: 12px;
 }
 
 .center {
@@ -101,11 +153,39 @@
     align-items: center;
 }
 
-.landing-main_body > #video-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    height: 400px;
+.animate-fadeOut {
+    animation: fadeOut 1s 1;
+    animation-fill-mode: forwards;
+}
+
+.animate-fadeIn {
+    animation: fadeIn 1s 1; 
+    animation-fill-mode: forwards;
+}
+
+@media (max-width: 650px) {
+    .landing-welcome_body > h1 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 500px) {
+    .landing-header_name {
+        font-size: 15px;
+    }
+    .video-container > video {
+        width: 300px;
+    }
+    .landing-header_links > span {
+        font-size: 12px;
+    }
+    .landing-welcome_body > h1 {
+        font-size: 23px;
+    }
+    .landing-welcome_body > h3 {
+        font-size: 13px;
+    }
+    .landing-welcome {
+        height: 325px;
+    }
 }
