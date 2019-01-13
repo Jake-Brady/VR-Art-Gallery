@@ -1,3 +1,23 @@
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 .landing {
     width: 100%;
     font-family: 'Oswald', sans-serif;
@@ -36,33 +56,6 @@
     cursor: pointer;
     margin-right: 10px;
     opacity: .8;
-}
-
-.landing-header_search {
-    width: 150px;
-    height: 30px;
-    background: rgb(95, 122, 221);
-    border-radius: 50px;
-    padding: 5px;
-    box-shadow: 2px 2px 2px rgba(27, 30, 206, 0.288);
-}
-
-.landing-header_search > input  {
-    background: inherit;
-    color: inherit;
-    font-family: inherit;
-    border: none;
-    height: 100%;
-    width: 100%;
-    padding: 0px 10px;
-    font-size: 12px;
-    opacity: .8;
-}
-
-.landing-header_search > input::placeholder {
-    color: inherit;
-    opacity: .8;
-    font-size: 12px;
 }
 
 .landing-welcome {
@@ -116,13 +109,39 @@
 }
 
 .landing-main {
-    height: 1000px;
+    height: 10000px;
+    margin-top: 200px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.landing-back {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    visibility: hidden;
+    cursor: pointer;
+    background: rgb(112, 142, 252);
+    color: white;
+    font-size: 12px;
 }
 
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.animate-fadeOut {
+    animation: fadeOut 1s 1;
+    animation-fill-mode: forwards;
+}
+
+.animate-fadeIn {
+    animation: fadeIn 1s 1; 
+    animation-fill-mode: forwards;
 }
 
 @media (max-width: 650px) {
@@ -132,8 +151,6 @@
 }
 
 @media (max-width: 500px) {
-    .landing-header_links {
-    }
     .landing-header_name {
         font-size: 15px;
     }
@@ -142,9 +159,6 @@
     }
     .landing-header_links > span {
         font-size: 12px;
-    }
-    .landing-header_search {
-        display: none;
     }
     .landing-welcome_body > h1 {
         font-size: 23px;
