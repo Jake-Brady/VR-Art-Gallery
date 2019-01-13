@@ -1,35 +1,35 @@
 require('dotenv').config()
+let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     const express = require('express'),
+    session = require('express-session')({
+        secret: SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true,
+    }),
     app = express(),
     bodyParser = require('body-parser'),
     massive = require('massive'),
-    session = require('express-session')
     ctrl = require('./controller')
-
-    let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
-
     app.use(bodyParser.json())
-    app.use(session({
-        secret: SESSION_SECRET,
-        resave: true,
-        saveUninitialized: true
-    }))
+    app.use(session)
+    app.use((req,res,next) => {
+    if (ENVIRONMENT === 'dev') {
+        req.app.get('db').set_data()
+        .then(userData => {
+            req.session.user = userData[0]
+            next()
+        })
+    } else {
+        next()
+    }
+})
 
-//     app.use((req,res,next) => {
-//     if (ENVIRONMENT === 'dev') {
-//         req.app.get('db').set_data()
-//         .then(userData => {
-//             req.session.user = userData[0]
-//             next()
-//         })
-//     } else {
-//         next()
-//     }
-// })
 
-    // VR-Art-Gallery Endpoints
+
+    /* VR-Art-Gallery Endpoints */
     //Landing Page - Register/Login
-    app.post('/api/register', ctrl.registerUser)
+    app.post('/api/registerUser', ctrl.registerUser)
+    app.post('/api/login', ctrl.login)
 
     //Lobby
 
