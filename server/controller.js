@@ -5,7 +5,7 @@ let testUser = [
     {
     id: 1,
     username: 'YumYums',
-    password: 'pussyDestroyer',
+    pw: 'pussyDestroyer',
     email: 'lickmyballs@aol.com',
     imgTable: {
         img1: 'https://lovinlife.com/wp-content/uploads/2018/09/Dog.jpg',
@@ -25,8 +25,33 @@ let testUser = [
 
 module.exports={
     registerUser: (req,res,next) => {
-            // Check whether username or email address already exist to avoid duplicates
-            // Create new account if above sql file returns false
+        console.log(req.body)
+        let {firstname, lastname, username, email, password} = req.body
+        //Salt and Hash password
+        const salt = bcrypt.genSaltSync(10)
+        const passwordHashed = bcrypt.hashSync(password, salt)
+         
+
+        //Check for existing email address and username. If both are false, then register new user.
+        const db = req.app.get('db/LandingPage')
+        db.check_email([email]).then(user => {
+            if (user[0]){
+                res.status(200).send('email')
+            } else {
+                db.check_username([username]).then(user => {
+                    if (user[0]){
+                        res.status(200).send('username')
+                    } else {
+                        db.register_user([username, passwordHashed, email, firstname, lastname]).then((user) => {
+                            req.session.user = user[0].username
+                        })
+                    }
+                })
+            }
+        })
+    },
+    login: (req,res,next) => {
+        
     },
     getImages: (req,res,next) => {
         let images = testUser[0].imgTable
