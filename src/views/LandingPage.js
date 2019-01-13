@@ -7,7 +7,8 @@ class LandingPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            mobileToggle: false
+            mobileToggle: false,
+            galleries: [{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'}]
         }
     }
 
@@ -63,13 +64,23 @@ class LandingPage extends Component {
             main.scrollIntoView()
         }
         else if (target === 'top') {
-            console.log('helo')
             const top = document.querySelector('.home')
             top.scrollIntoView()
         }
     }
 
+    addMore = () => {
+        this.setState({galleries: [...this.state.galleries, {author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'},{author: 'Jake the Snake', name: 'A collection of ass', thumbnail: 'https://cdn.vox-cdn.com/thumbor/Gba6nO4uV6xw_iOP8tnQI-YxfyA=/0x0:2048x1080/1200x800/filters:focal(571x183:897x509)/cdn.vox-cdn.com/uploads/chorus_image/image/60706099/thanos.0.jpg'}]})
+    }
+
     render() {
+        const galleryArray = this.state.galleries.map(gallery => {
+            return (
+                <div className='gallery-container' onClick={() => this.addMore()}>
+
+                </div>
+            )
+        })
         return (
             <div className='home'>
                 <div className='landing'>
@@ -95,6 +106,7 @@ class LandingPage extends Component {
                 </div>
                 <main className='landing-main'>
                     
+                    {galleryArray}
                     <div className='landing-back center' onClick={() => this.handleClick('top')}>
                         <i className="fas fa-arrow-up"></i>
                     </div>

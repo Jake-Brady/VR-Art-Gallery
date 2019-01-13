@@ -18,6 +18,12 @@
     }
 }
 
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .landing {
     width: 100%;
     font-family: 'Oswald', sans-serif;
@@ -109,9 +115,22 @@
 }
 
 .landing-main {
-    height: 10000px;
+    min-height: 600px;
     margin-top: 200px;
+    width: 1260px;
+    padding: 30px 80px;
     font-family: 'Oswald', sans-serif;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.gallery-container {
+    width: 250px;
+    height: 300px;
+    background: orange;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 .landing-back {
