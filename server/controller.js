@@ -1,11 +1,12 @@
 const bcrypt = require('bcryptjs')
+let session_id_count = 1
 
 //Test User Simulation
 let testUser = [
     {
     id: 1,
     username: 'YumYums',
-    password: 'pussyDestroyer',
+    pw: 'pussyDestroyer',
     email: 'lickmyballs@aol.com',
     imgTable: {
         img1: 'https://lovinlife.com/wp-content/uploads/2018/09/Dog.jpg',
@@ -25,8 +26,67 @@ let testUser = [
 
 module.exports={
     registerUser: (req,res,next) => {
-            // Check whether username or email address already exist to avoid duplicates
-            // Create new account if above sql file returns false
+        console.log(req.body, 'Entering registerUser')
+        let {firstName, lastName, username, email, password} = req.body
+        //Salt and Hash password
+        const salt = bcrypt.genSaltSync(10)
+        const passwordHashed = bcrypt.hashSync(password, salt)
+        const is_online = false
+        //Check for existing email address and username. If both are false, then register new user.
+        const db = req.app.get('db')
+        db.check_email([email]).then(user => {
+            if (user[0]){
+                res.status(200).send('email')
+            } else {
+                db.check_username([username]).then(user => {
+                    if (user[0]){
+                        res.status(200).send('username')
+                    } else {
+                        db.register_user([username, passwordHashed, email, firstName, lastName, is_online]).then(user => {
+                            res.status(200).send('success')
+                        }).catch(err => {
+                            console.log(err)
+                            res.status(500).send(err)
+                        })
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    res.status(500).send(err)
+                })
+            }
+        }).catch(err => {
+            res.status(500).send(err)
+        })
+    },
+    login: (req,res,next) => {
+        let {username, password} = req.body
+        const db = req.app.get('db')
+        db.check_user_login([username]).then(user => {
+            //if username exists, the array will have a length
+            if(user.length){
+                const validPassword = bcrypt.compareSync(password, user[0].password)
+                //if the password is correct, validPassword will become truthy
+                if (validPassword) {
+                    req.session.user
+                    console.log(req.session.user)
+                    req.session.user = user[0].username
+                    req.session.user.session_id = session_id_count
+                    session_id_count++
+                     //runs db.toggle_online to turn user's is_online to true as they'll be redirected to lobby.
+                    db.toggle_online([username])
+                    res.status(200).send(user[0])
+                } else {
+                //if password is incorrect, validPassword would be falsy and send wrong password.
+                    res.status(200).send('Wrong Password')
+                }
+            } else {
+                //if the above doesn't work, then the username does not exist.
+                res.status(200).send('Wrong Username')
+            }
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(res)
+        })
     },
     getImages: (req,res,next) => {
         let images = testUser[0].imgTable

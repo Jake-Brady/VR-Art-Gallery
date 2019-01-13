@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import '../Styles/LandingPage.css'
 import VRVideo from '../assets/video/VR-Trailer.mp4'
+import Register from '../components/LandingPage/register'
+import Login from '../components/LandingPage/login'
 
 class LandingPage extends Component {
     constructor(props) {
@@ -96,6 +98,8 @@ class LandingPage extends Component {
                             <div className='center' onClick={() => this.handleClick('gallery')}>VIEW GALLERIES</div>
                             <div className='video-container center'>
                                 <video controls src={VRVideo} alt="trailer of VR-Art-Gallery"></video>
+                                <Register />
+                                <Login />
                             </div>
                         </div>
                     </div>
