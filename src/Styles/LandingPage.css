@@ -197,6 +197,19 @@
 .gallery-stats {
     width: 100%;
     height: 20px;
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.39);
+}
+
+.gallery-stats > span {
+    font-size: 11px;
+    margin-right: 5px;
+}
+
+.stat {
+    font-size: 11px;
+    margin-right: 3px;
 }
 
 .gallery-view {

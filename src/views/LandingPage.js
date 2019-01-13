@@ -77,7 +77,14 @@ class LandingPage extends Component {
                     <div className='gallery-text'>
                         <h1 className='gallery-title'>{gallery.name}</h1>
                         <h3 className='gallery-author'>BY: {gallery.author}</h3>
-                        <div className='gallery-stats'></div>
+                        <div className='gallery-stats'>
+                        <i className="fas fa-eye stat"></i>
+                        <span>12</span>
+                        <i className="fas fa-heart stat"></i>
+                        <span>12</span>
+                        <i className="fas fa-share stat"></i>
+                        <span>25</span>
+                        </div>
                         <div className='gallery-view center'>Visit Gallery</div>
                     </div>
                 </div>
