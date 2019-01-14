@@ -1,5 +1,8 @@
-drop table if exists Gallery_Presets;
+drop table if exists gallery_presets;
 drop table if exists images;
+drop table if exists gallery_favorites;
+drop table if exists gallery_popularity;
+drop table if exists galleries;
 drop table if exists users;
 
 -- Create Table users
@@ -8,11 +11,33 @@ create table users(
     id serial primary key,
     username varchar (60) unique not null,
     password varchar (60) not null,
-    -- image text, (user avatar - might be useful if we this becomes multi-networked and need images to display in 3d Environment.)
     email varchar (250),
     first_name varchar(60),
-    last_name varchar(60),
-    is_online boolean
+    last_name varchar(60)
+);
+
+-- Create Table Galleries
+create table galleries(
+    id serial primary key,
+    gallery_name varchar(20) not null,
+    thumbnail text,
+    is_private boolean,
+    author text references users(username),
+    user_id integer references users(id)
+);
+
+create table gallery_popularity(
+    primary key (gallery_id),
+    views integer,
+    likes integer,
+    times_favorited integer,
+    gallery_id integer references galleries(id)
+);
+
+create table gallery_favorites(
+    primary key (user_id, favorited),
+    user_id integer references users(id),
+    favorited integer references galleries(id)
 );
 
 -- Create Table images
@@ -34,19 +59,17 @@ create table images(
     image13 text,
     image14 text,
     image15 text,
-    user_id integer references users(id)
+    gallery_id integer references galleries(id)
 );
--- ^user_id is a foreign key referencing the primary key of users table for joins.
 
 -- Create Table Gallery_Presets
 --Wall-Texture <TEXT>, Floor-Texture <TEXT>, Atmosphere-Lighting <TEXT>, User_id (foreign key to SPK of user)
-create table Gallery_Presets(
-    name_of_gallery varchar(20),
-    thumbnail text,
+create table gallery_presets(
+    id serial primary key,
     wall_texture text,
     floor_texture text,
     atmosphere_lighting text,
     music text,
-    user_id integer references users(id)
+    gallery_id integer references galleries(id)
 );
 

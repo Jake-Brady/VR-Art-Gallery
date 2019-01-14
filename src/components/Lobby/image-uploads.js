@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone'
 import {v4 as randomStringGenerator} from 'uuid';
 import {GridLoader} from 'react-spinners'
 import '../Styles/image-uploads.css'
+import axios from 'axios';
 
 class ImageUploads extends Component{
     constructor(){
@@ -10,12 +11,20 @@ class ImageUploads extends Component{
             this.state={
                 images: [],
                 isUploading: false,
-                url: 'http://via.placeholder.com/450x450'
+                url: 'http://via.placeholder.com/450x450',
             }
     }
 
 componentDidMount(){
-// GET user's image URLs from their images table.
+console.log(this.props)
+let {user} = this.props
+console.log(user)
+//axios GET user's existing images and set to array in order they appear in table to match frames1 through 15.
+axios.get(`/api/getUserImages/${user}`).then(res => {
+    console.log(res.data)
+    this.setState({images: res.data})
+})
+
 }
 
 getSignedRequest = ([file]) => {
@@ -38,6 +47,7 @@ onDrop(files) {
 
 render(){
     const {url, isUploading} = this.state;
+    console.log(this.props)
     return(
     <section id="image-uploads">
     <h2>User-Uploaded Image Section</h2>
