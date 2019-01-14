@@ -54,7 +54,7 @@ class LandingPage extends Component {
         }
     }, 150)
 
-    handleClick = (target) => {
+    handleClick = target => {
         if (target === 'gallery') {
             const main = document.querySelector('.landing-main')
             main.scrollIntoView()
@@ -63,6 +63,11 @@ class LandingPage extends Component {
             const top = document.querySelector('.home')
             top.scrollIntoView()
         }
+    }
+
+    handleSign = type => {
+        if (type === 'login') this.props.history.push('/login')
+        else if (type === 'register') this.props.history.push('/register')
     }
 
     addMore = () => {
@@ -98,8 +103,8 @@ class LandingPage extends Component {
                             VR <span className='lighttext'>ART GALLERY</span>
                         </div>
                         <div className='landing-header_links'>
-                            <span>LOGIN</span>
-                            <span>REGISTER</span>
+                            <span onClick={() => this.handleSign('login')}>LOGIN</span>
+                            <span onClick={() => this.handleSign('register')}>REGISTER</span>
                         </div>
                     </header>
                     <div className='landing-welcome'>
