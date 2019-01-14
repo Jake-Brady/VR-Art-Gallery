@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import axios from 'axios'
 import GalleryBluePrint from '../components/Lobby/blueprint'
 import Galleries from '../components/Lobby/galleries'
-import '../Styles/Lobby.css'
+import '../Styles/Views/Lobby.css'
 
 class Lobby extends Component{
     constructor(){

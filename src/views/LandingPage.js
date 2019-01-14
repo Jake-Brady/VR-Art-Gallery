@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../Styles/LandingPage.css'
+import '../Styles/Views/LandingPage.css'
 import VRVideo from '../assets/video/VR-Trailer.mp4'
 
 class LandingPage extends Component {
