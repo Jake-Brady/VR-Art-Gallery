@@ -1,7 +1,6 @@
 drop table if exists gallery_presets;
 drop table if exists images;
 drop table if exists gallery_favorites;
-drop table if exists gallery_popularity;
 drop table if exists galleries;
 drop table if exists users;
 
@@ -22,16 +21,9 @@ create table galleries(
     gallery_name varchar(20) not null,
     thumbnail text,
     is_private boolean,
-    author text references users(username),
-    user_id integer references users(id)
-);
-
-create table gallery_popularity(
-    primary key (gallery_id),
     views integer,
-    likes integer,
     times_favorited integer,
-    gallery_id integer references galleries(id)
+    user_id integer references users(id)
 );
 
 create table gallery_favorites(
@@ -72,4 +64,3 @@ create table gallery_presets(
     music text,
     gallery_id integer references galleries(id)
 );
-

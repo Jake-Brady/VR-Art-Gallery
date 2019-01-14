@@ -8,7 +8,6 @@ class Lobby extends Component{
     constructor(){
         super()
             this.state ={
-                onlineUsers: [],
                 user: '',
                 usersGalleries: [],
                 favoritedGalleries: []
@@ -22,9 +21,16 @@ axios.get(`/api/checkUser/`).then(res => {
     if (res.data !== user){
         this.props.history.push('/')
     } else {
-        //retrieve existing galleries
-
-        //retrieve favorited galleries
+        //Retrieve user's galleries and favorited galleries
+        axios.get('/api/retrieveGalleries/').then(res => {
+            console.log(res.data)
+            this.setState({usersGalleries: res.data}, () => {
+                axios.get('/api/getFavorites/').then(res => {
+                    console.log(res.data)
+                    this.setState({favoritedGaleries: res.data})
+                })
+            })
+        })
     }
 })
 

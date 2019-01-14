@@ -3,7 +3,7 @@ let session_id_count = 1
 
 module.exports={
     registerUser: (req,res,next) => {
-        console.log(req.body, 'Entering registerUser')
+       
         let {firstName, lastName, username, email, password} = req.body
         //Salt and Hash password
         const salt = bcrypt.genSaltSync(10)
@@ -31,6 +31,7 @@ module.exports={
                 })
             }
         }).catch(err => {
+            console.log(err)
             res.status(500).send(err)
         })
     },
@@ -59,7 +60,7 @@ module.exports={
             }
         }).catch(err => {
             console.log(err)
-            res.status(500).send(res)
+            res.status(500).send(err)
         })
     },
     getUserImages: (req, res, next) => {
@@ -71,6 +72,14 @@ module.exports={
     },
     retrieveGalleries: (req, res, next) => {
         const {user} = req.session
+        console.log(user)
+        const db = req.app.get('db')
+        db.get_gallery_info([user]).then(galleries => {
+            res.status(200).send(galleries)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
     },
     getImages: (req,res,next) => {
         let images = testUser[0].imgTable
