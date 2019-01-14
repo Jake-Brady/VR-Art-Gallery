@@ -114,12 +114,6 @@ class LandingPage extends Component {
                     </div>
                 </div>
                 <main className='landing-main'>
-                    {/* <div className='landing-main_filter center'>
-                        <div><span>Gallery</span><span>/</span><span>Popular</span></div>
-                        <div className='landing-main_search center'>
-                            <input type='text'></input>
-                        </div>
-                    </div> */}
                     <div className='landing-galleries'>
                         {galleryArray}
                     </div>
