@@ -1,4 +1,6 @@
-select * from views, times_favorited, gallery_name, thumbnail
-join users.id
-on gallery_favorites.user_id = user.id
-where user.username = $1
+select views, times_favorited, gallery_name, thumbnail from galleries
+join gallery_favorites
+on galleries.id = gallery_favorites.favorited
+join users
+on gallery_favorites.user_id = users.id
+where users.username = $1

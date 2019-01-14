@@ -83,7 +83,7 @@ module.exports={
     getFavorites: (req, res, next) => {
         const {user} = req.session
         const db = req.app.get('db')
-        db.get_favorite_galleries([user]).then(favorites  => {
+        db.get_favorites([user]).then(favorites  => {
             res.status(200).send(favorites)
         }).catch(err => {
             console.log(err)
