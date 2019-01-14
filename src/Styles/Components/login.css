@@ -1,0 +1,104 @@
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../Styles/Media/LoginBackdrop.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+}
+
+.login-container > h1 {
+    color: white;
+    font-weight: 300;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.login-header {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    color: white;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 40px 0px;
+}
+
+.login-header > img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.login-content {
+    width: 470px;
+    height: 400px;
+    background: white;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.055), 0 15px 12px rgba(0, 0, 0, 0.055);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.login-content > h1 {
+    font-weight: 300;
+    opacity: .7;
+    letter-spacing: .5px;
+    font-size: 40px;
+    margin-bottom: 25px;
+}
+
+.login-content > input {
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.185);
+    border-radius: 3px;
+    padding: 15px;
+    font-size: 18px;
+    font-family: 'Oswald', sans-serif;
+    background: rgb(252, 252, 252);
+    color: rgba(0, 0, 0, 0.472);
+}
+
+.login-content > input::placeholder {
+    color: rgba(0, 0, 0, 0.472);
+}
+
+.login-content > div {
+    margin-top: 15px;
+    width: 100%;
+    height: 50px;
+    background: rgb(21, 205, 114);
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.login-content > div:hover {
+    background: rgb(4, 179, 91);
+}
+
+.login-content > h2 {
+    color: rgb(0, 105, 255);
+    font-weight: 400;
+    font-size: 15px;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.login-sign {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 400;
+}
