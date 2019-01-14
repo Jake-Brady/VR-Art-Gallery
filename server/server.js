@@ -24,15 +24,15 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     }
 })
 
-
-
     /* VR-Art-Gallery Endpoints */
     //Landing Page - Register/Login
     app.post('/api/registerUser', ctrl.registerUser)
     app.post('/api/login', ctrl.login)
 
     //Lobby
-
+    app.get('/api/getUserImages/:user', ctrl.getUserImages)
+    app.get('/api/checkUser/', ctrl.checkUser)
+    app.get('/api/retrieveGalleries/', ctrl.retrieveGalleries)
 
     //Art-Gallery
     app.get('/api/getImages/', ctrl.getImages)

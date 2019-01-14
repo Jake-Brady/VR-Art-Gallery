@@ -38,7 +38,7 @@ axios.post(`/api/login`, {username, password}).then(res => {
     } else {
         let {username} = res.data
         console.log(username)
-        this.props.history.push(`/lobby/:${username}`)
+        this.props.history.push(`/lobby/${username}`)
     }  
 })
 } 
