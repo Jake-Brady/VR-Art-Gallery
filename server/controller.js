@@ -72,10 +72,19 @@ module.exports={
     },
     retrieveGalleries: (req, res, next) => {
         const {user} = req.session
-        console.log(user)
         const db = req.app.get('db')
         db.get_gallery_info([user]).then(galleries => {
             res.status(200).send(galleries)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
+    getFavorites: (req, res, next) => {
+        const {user} = req.session
+        const db = req.app.get('db')
+        db.get_favorite_galleries([user]).then(favorites  => {
+            res.status(200).send(favorites)
         }).catch(err => {
             console.log(err)
             res.status(500).send(err)
