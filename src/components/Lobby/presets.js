@@ -10,6 +10,7 @@ class Presets extends Component{
                 wallTexture: '',
                 music: '',
                 lighting: '',
+                user:''
             }
     }
 
