@@ -27,25 +27,32 @@ axios.get(`/api/checkUser/`).then(res => {
             this.setState({usersGalleries: res.data}, () => {
                 axios.get('/api/getFavorites/').then(res => {
                     console.log(res.data)
-                    this.setState({favoritedGaleries: res.data})
+                    this.setState({favoritedGalleries: res.data})
                 })
             })
         })
     }
 })
-
-//axios get for online users
-
-//axios get for favorited gallories by user
-
-//axios get for user's existing galleries
-
 }
 
 render(){
-    console.log(this.state)
-    let {user} = this.props.match.params.username
-    console.log(user)
+    const {favoritedGalleries, usersGalleries} = this.state
+    //Map over list of favorites and 
+    const listOfFavorites = favoritedGalleries.map((i, e) => {
+        return(
+            <section>
+
+            </section>
+        )
+    })
+
+    const galleries = usersGalleries.map((i, e) => {
+        return(
+            <section>
+                
+            </section>
+        )
+    })
     return(
         <main id="Lobby">
             <h1>Lobby</h1>
