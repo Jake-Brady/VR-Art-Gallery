@@ -33,6 +33,7 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     app.get('/api/getUserImages/:user', ctrl.getUserImages)
     app.get('/api/checkUser/', ctrl.checkUser)
     app.get('/api/retrieveGalleries/', ctrl.retrieveGalleries)
+    app.get('/api/getFavorites/', ctrl.getFavorites)
 
     //Art-Gallery
     app.get('/api/getImages/', ctrl.getImages)
