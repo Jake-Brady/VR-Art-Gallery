@@ -17,7 +17,7 @@
 }
 
 .login-header {
-    width: 400px;
+    width: 470px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,4 +100,10 @@
     text-decoration: underline;
     cursor: pointer;
     font-weight: 400;
+}
+
+@media (max-width: 600px) {
+    .login-header, .login-content {
+        width: 300px;
+    }
 }
