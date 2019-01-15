@@ -14,11 +14,12 @@ class Galleries extends Component{
     }
 
 componentDidMount(props){
-
+console.log(props)
 
 }
 
-render(){
+render(props){
+    console.log(props)
     return(
         <section id="user-gallery-section">
             
