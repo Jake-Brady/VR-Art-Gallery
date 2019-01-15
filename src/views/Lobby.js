@@ -4,6 +4,8 @@ import CreateGalleries from '../components//Lobby/createGalleries'
 import GalleryBluePrint from '../components/Lobby/blueprint'
 import Galleries from '../components/Lobby/galleries'
 import Favorites from '../components/Lobby/favorites'
+import Account from '../components/Lobby/account'
+import Help from '../components/Lobby/help'
 import '../Styles/Views/Lobby.css'
 import Icon from '../Styles/Media/Icon.png'
 
@@ -72,22 +74,21 @@ render(){
     const {favoritedGalleries, usersGalleries, theMagicWord} = this.state
     //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct section, 
     const listOfFavorites = favoritedGalleries.map((e, i) => {
-        return(
-            <div key={i} className="favorites-container">
-                <img src={e.thumbnail} alt="thumbnail" />
-                <h3>{e.gallery_name}</h3>
-                <h3>{e.views}</h3>
-                <h3>{e.times_favorited}</h3>
-                <h3>Author of Gallery?</h3>
-                <span className="container-btn" onClick={this.visitGallery}>Visit Gallery</span>
-            </div>
+    return(
+        <Favorites
+            key={i}
+            image={e.thumbnail}
+            views={e.views}
+            favoritedNum={e.times_favorited}
+            visitGallery={this.visitGallery}
+        />
         )
     })
 
     const galleryContainers = usersGalleries.map((e, i) => {
         let is_private_string = e.is_private.toString()
         return(
-           <div key={i} className="gallery-container_lobby">
+           <div key={i} className="gallery-container_lobby"> 
                 <img src={e.thumbnail} alt="thumbnail" />
                 <h3>Name of Gallery: {e.gallery_name}</h3>
                 <h3># of Views: {e.views}</h3>
@@ -101,7 +102,7 @@ render(){
         <main id="Lobby">
             <section className="side-menu">
                 <div id="menu-lobby">
-        <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />
+                    <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />
                     <span className="menu-btn" onClick={(e) => this.changeWindow('create')}>Create</span>
                     <span className="menu-btn" onClick={(e) => this.changeWindow('galleries')}>Galleries</span>
                     <span className="menu-btn" onClick={(e) => this.changeWindow('favorites')}>Favorites</span>
@@ -117,45 +118,33 @@ render(){
                 {
                     theMagicWord === 'create' ?
                     <div className="middle-window-container"> 
-                        <h1>Create Gallery Tab</h1>
                         <CreateGalleries />
                     </div>
                     : theMagicWord === 'galleries' ? 
                     <div className="middle-window-container"> 
-                        <h1>Existing Galleries Tab</h1>
                         {galleryContainers}
                     </div>
                     : theMagicWord === 'favorites' ?
                     <div className="middle-window-container">
-                        <h1>Favorite Galleries Tab</h1>
-                        <Favorites 
-                        listOfFavorites={listOfFavorites}
-                         />
+                        <Favorites />
                     </div>
                     : theMagicWord === 'account' ?
                     <div className="middle-window-container">
-                        <h1>Account Settings Tab</h1>
-                        <p>Change password</p>
-                        <p>Change username</p>
-                        <p>Change email address</p>
-                        <p>Upload your image for author section of Art Gallery</p>
+                        <Account />
                     </div>
                     : theMagicWord === 'help' &&
                     <div className="middle-window-container">
-                        <h1>Help Tab</h1>
-                        <p>Recommended Browsers</p>
-                        <p>Why is my Art-Gallery lagging?</p>
-                        <p>Why is my Art-Gallery music not playing on mobile?</p>
+                        <Help />
                     </div>
                 }   
                 </div>
             </section>
            
-            <section className="right-window">
+            {/* <section className="right-window">
                 <div id="blueprint-lobby">
                     <GalleryBluePrint />
                 </div>
-            </section>
+            </section> */}
         </main>
     )
 }
