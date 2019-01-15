@@ -12,6 +12,7 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     ctrl = require('./controller')
     app.use(bodyParser.json())
     app.use(session)
+    
     app.use((req,res,next) => {
     if (ENVIRONMENT === 'dev') {
         req.app.get('db').set_data()
