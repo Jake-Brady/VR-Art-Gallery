@@ -2,10 +2,10 @@ import React, {Component} from 'react'
 import Dropzone from 'react-dropzone'
 import {v4 as randomStringGenerator} from 'uuid';
 import {GridLoader} from 'react-spinners'
-import '../Styles/image-uploads.css'
+import '../Styles/createGalleries.css'
 import axios from 'axios';
 
-class ImageUploads extends Component{
+class CreateGalleries extends Component{
     constructor(){
         super()
             this.state={
@@ -152,15 +152,9 @@ render(){
             <img src={url} alt="This is what is in frame 15" width="450px" />
 
         </div>
-        <div className="img-block">
-            <h3>Image for Frame 15</h3>
-            <img src={url} alt="This is what is in frame 1" width="450px" />
-
-        </div>
-
     </section>
     )
 }
 }
 
-export default ImageUploads
+export default CreateGalleries

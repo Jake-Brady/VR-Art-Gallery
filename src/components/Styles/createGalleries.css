@@ -1,10 +1,9 @@
-#blueprint{
+#image-uploads{
+    border: 1px solid blue
+}
+
+.img-block{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-img{
-    width: 300px;
-    height: 300px;
 }
