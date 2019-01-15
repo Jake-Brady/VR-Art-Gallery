@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-let session_id_count = 1
+
 
 module.exports={
     registerUser: (req,res,next) => {
@@ -45,10 +45,7 @@ module.exports={
                 //if the password is correct, validPassword will become truthy
                 if (validPassword) {
                     req.session.user
-                    console.log(req.session.user)
                     req.session.user = user[0].username
-                    req.session.user.session_id = session_id_count
-                    session_id_count++
                     res.status(200).send(user[0])
                 } else {
                 //if password is incorrect, validPassword would be falsy and send wrong password.
@@ -93,6 +90,10 @@ module.exports={
     getImages: (req,res,next) => {
         let images = testUser[0].imgTable
         res.status(200).send(images)
+    },
+    logout: (req, res, next) => {
+        req.session.destroy()
+        res.sendStatus(200)
     }
     // login handle,
     // getUserImages based on username -> Portrait images that are uploaded by users

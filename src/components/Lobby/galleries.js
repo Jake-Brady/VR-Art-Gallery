@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import '../Styles/galleries.css'
-import imageUploads from './image-uploads'
+import imageUploads from './createGalleries'
 import Presets from './presets'
 
 class Galleries extends Component{

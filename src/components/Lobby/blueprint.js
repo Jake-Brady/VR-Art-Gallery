@@ -4,8 +4,12 @@ import '../Styles/blueprint.css'
 const GalleryBluePrint = () => {
     return(
         <section id="blueprint">
-            <h2>GalleryBluePrint</h2>
-            <p>Will show markers on 2D layout of where images will appear by their frames. This should also specify image dimensions of each frame and the best resolution for quality appearance of each image upload.</p>
+            {/* Clicking Images enlarge them? Perhaps some other design for this window. */}
+            <h2>Gallery Blueprint</h2>
+            <h3>First Floor</h3>
+            <img src="https://wcs.smartdraw.com/floor-plan/img/blueprint-example.png?bn=1510011143" alt="First floor blue print." />
+            <h3>Second Floor</h3>
+            <img src="https://wcs.smartdraw.com/floor-plan/img/house-design-blueprint-example.png?bn=1510011143" alt="Second floor blue print" />
         </section>
     )
 }
