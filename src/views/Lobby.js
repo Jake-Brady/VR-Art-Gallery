@@ -129,7 +129,10 @@ render(){
         <main id="Lobby">
             <section className="side-menu">
                 <div id="menu-lobby">
-                    <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />
+                    <div className='menu-header center'>
+                    <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                    <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />                    
+                    </div>
                     <span className="menu-btn" onClick={(e) => this.changeWindow('create')}>Create</span>
                     <span className="menu-btn" onClick={(e) => this.changeWindow('galleries')}>Galleries</span>
                     <span className="menu-btn" onClick={(e) => this.changeWindow('favorites')}>Favorites</span>

@@ -1,41 +1,50 @@
-#Lobby{
+#Lobby {
    position: relative;
    width: 100vw;
+   font-family: 'Oswald', sans-serif;
 }
 
 /* Mapped Containers */
-.favorites-container{
+.favorites-container {
     display: flex;
     flex-direction: column;
     border: 1px dashed black;
     align-content: center;
 }
 
-.gallery-container_lobby{
+.gallery-container_lobby {
     width: 100%;
     height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #3D6FDC;
+    background: rgb(110, 142, 254);
 }
 
-.container-btn{
+.container-btn {
     width:100px;
     height: 15px;
     border: 1px white solid;
 }
 
 /* Side Menu */
-.side-menu{
-    position: absolute;
+.side-menu {
+    position: fixed;
     height: 100vh;
-    background-color: #8DA6FA;
-    width: 15vw;
+    background: rgb(110, 142, 254);
+    width: 175px;
     left: 0;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
 }
 
-#menu-lobby{
+.menu-header {
+    background: rgb(59, 88, 192);
+    width: 100%;
+    height: 75px;
+    color: white;
+}
+
+#menu-lobby {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,52 +52,51 @@
     width: 100%;
 }
 
-.menu-btn{
-    color: white;
-    margin-top: 4rem;
-    padding-top: .1rem;
+.menu-btn {
+    width: 100%;
+    height: 75px;
+    padding: 10px;
     display: flex;
-    width: 75px;
-    height: 25px;
-    justify-content: center;
-    align-content: center;
-    border: 1px solid 
+    align-items: center;
+    color: white;
+    font-weight: 300;
 }
 
-.menu-btn:hover{
+.menu-btn:hover {
     cursor: pointer;
 }
 
-.icon{
-    width: 125px;
-    height: 100px;
+.icon {
+    width: 30px; 
+    height: 30px;
+    margin-left: 10px;
 }
 
-.icon:hover{
+.icon:hover {
     cursor: pointer;
 }
 
 
 /* Middle Window which renders what is chosen on the side menu */
-.middle-window{
+/* .middle-window{
     position: absolute;
     height: 100vh;
     background-color: #829DFB;
     width: 42.5vw;
     left: 15vw;
     border: dashed 1px black;
-}
+} */
 
 
 
-#conditionally-rendered-lobby{
+#conditionally-rendered-lobby {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 /* Right Window which serves as a constant layout for the layout of the VR Art Gallery blueprint */
-.right-window{
+.right-window {
     position: absolute;
     height: 100vh;
     background-color: #829DFB;
@@ -96,7 +104,7 @@
     right: 0;
 }
 
-#blueprint-lobby{
+#blueprint-lobby {
     display: flex;
     flex-direction: column;
     align-items: center;
