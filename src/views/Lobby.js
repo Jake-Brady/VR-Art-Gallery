@@ -28,7 +28,7 @@ axios.get(`/api/checkUser/`).then(res => {
     } else {
         //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
         axios.get('/api/retrieveGalleries/').then(res => {
-            this.setState({usersGalleries: res.data, theMagicWord:'create'}, () => {
+            this.setState({usersGalleries: res.data, theMagicWord:'galleries'}, () => {
                 axios.get('/api/getFavorites/').then(res => {
                     this.setState({favoritedGalleries: res.data})
                 })
@@ -79,7 +79,7 @@ render(){
                 <h3>{e.views}</h3>
                 <h3>{e.times_favorited}</h3>
                 <h3>Author of Gallery?</h3>
-                <span onClick={this.visitGallery}>Visit Gallery</span>
+                <span className="container-btn" onClick={this.visitGallery}>Visit Gallery</span>
             </div>
         )
     })
@@ -92,8 +92,8 @@ render(){
                 <h3>Name of Gallery: {e.gallery_name}</h3>
                 <h3># of Views: {e.views}</h3>
                 <h3># of times Favorited:{e.times_favorited}</h3>
-                <span onClick={this.visitGallery}>Visit Gallery</span>
-                <span onClick={this.editGallery}>Edit Gallery</span>
+                <span className="container-btn" onClick={this.visitGallery}>Visit Gallery</span>
+                <span className="container-btn" onClick={this.editGallery}>Edit Gallery</span>
            </div>
         )
     })
@@ -123,8 +123,7 @@ render(){
                     : theMagicWord === 'galleries' ? 
                     <div className="middle-window-container"> 
                         <h1>Existing Galleries Tab</h1>
-                        <Galleries
-                        />
+                        {galleryContainers}
                     </div>
                     : theMagicWord === 'favorites' ?
                     <div className="middle-window-container">
@@ -136,10 +135,17 @@ render(){
                     : theMagicWord === 'account' ?
                     <div className="middle-window-container">
                         <h1>Account Settings Tab</h1>
+                        <p>Change password</p>
+                        <p>Change username</p>
+                        <p>Change email address</p>
+                        <p>Upload your image for author section of Art Gallery</p>
                     </div>
                     : theMagicWord === 'help' &&
                     <div className="middle-window-container">
                         <h1>Help Tab</h1>
+                        <p>Recommended Browsers</p>
+                        <p>Why is my Art-Gallery lagging?</p>
+                        <p>Why is my Art-Gallery music not playing on mobile?</p>
                     </div>
                 }   
                 </div>
