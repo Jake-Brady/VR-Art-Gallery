@@ -87,7 +87,7 @@ render(){
     const galleryContainers = usersGalleries.map((e, i) => {
         let is_private_string = e.is_private.toString()
         return(
-           <div key={i} className="gallery-container">
+           <div key={i} className="gallery-container_lobby">
                 <img src={e.thumbnail} alt="thumbnail" />
                 <h3>Name of Gallery: {e.gallery_name}</h3>
                 <h3># of Views: {e.views}</h3>
