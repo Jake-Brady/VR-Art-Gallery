@@ -5,6 +5,7 @@ import GalleryBluePrint from '../components/Lobby/blueprint'
 import Galleries from '../components/Lobby/galleries'
 import Favorites from '../components/Lobby/favorites'
 import '../Styles/Views/Lobby.css'
+import Icon from '../Styles/Media/Icon.png'
 
 class Lobby extends Component{
     constructor(){
@@ -59,7 +60,9 @@ switch(magicWord){
 }
 }
 
+
 logout(){
+    // destroys sessions and redirects user to landing page.
     axios.post('/api/logout')
     .then(this.props.history.push('/'))
 }
@@ -98,6 +101,7 @@ render(){
         <main id="Lobby">
             <section className="side-menu">
                 <div id="menu-lobby">
+        <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />
                     <span className="menu-btn" onClick={(e) => this.changeWindow('create')}>Create</span>
                     <span className="menu-btn" onClick={(e) => this.changeWindow('galleries')}>Galleries</span>
                     <span className="menu-btn" onClick={(e) => this.changeWindow('favorites')}>Favorites</span>
