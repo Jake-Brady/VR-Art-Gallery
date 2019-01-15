@@ -11,6 +11,20 @@
     align-content: center;
 }
 
+.gallery-container{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    background: #3D6FDC;
+}
+
+.container-btn{
+    width:100px;
+    height: 15px;
+    border: 1px white solid;
+}
+
 /* Side Menu */
 .side-menu{
     position: absolute;
@@ -63,6 +77,8 @@
     left: 15vw;
     border: dashed 1px black;
 }
+
+
 
 #conditionally-rendered-lobby{
     display: flex;
