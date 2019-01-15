@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs')
 
 module.exports={
     registerUser: (req,res,next) => {
-       
         let {firstName, lastName, username, email, password} = req.body
         //Salt and Hash password
         const salt = bcrypt.genSaltSync(10)

@@ -24,7 +24,12 @@ class ArtGallery extends Component{
                 Portrait7: '',
                 Portrait8: '',
                 Portrait9: '',
-                Portrait10: ''
+                Portrait10: '',
+                Portrait11: '',
+                Portrait12: '',
+                Portrait13: '',
+                Portrait14: '',
+                Portrait15: ''
             }
     }
 
@@ -36,7 +41,7 @@ componentDidMount(){
 }
 
 render(){
-    let {Portrait1, Portrait2, Portrait3, Portrait4, Portrait5, Portrait6, Portrait7, Portrait8, Portrait9, Portrait10} = this.state
+    let {Portrait1, Portrait2, Portrait3, Portrait4, Portrait5, Portrait6, Portrait7, Portrait8, Portrait9, Portrait10, Portrait11, Portrait12, Portrait13, Portrait14, Portrait15} = this.state
     console.log()
     return(
         <Scene physics="debug: true" stats id='scene'>

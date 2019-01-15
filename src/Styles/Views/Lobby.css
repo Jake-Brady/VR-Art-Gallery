@@ -30,7 +30,7 @@
 
 .menu-btn{
     color: white;
-    margin-top: 5rem;
+    margin-top: 4rem;
     padding-top: .1rem;
     display: flex;
     width: 75px;
@@ -38,6 +38,19 @@
     justify-content: center;
     align-content: center;
     border: 1px solid 
+}
+
+.menu-btn:hover{
+    cursor: pointer;
+}
+
+.icon{
+    width: 125px;
+    height: 100px;
+}
+
+.icon:hover{
+    cursor: pointer;
 }
 
 

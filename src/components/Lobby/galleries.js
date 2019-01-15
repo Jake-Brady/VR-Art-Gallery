@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import '../Styles/galleries.css'
 import imageUploads from './createGalleries'
 import Presets from './presets'
+import axios from 'axios';
 
 class Galleries extends Component{
     constructor(props){
@@ -13,7 +14,8 @@ class Galleries extends Component{
             }
     }
 
-componentDidMount(){
+componentDidMount(props){
+
 
 }
 
