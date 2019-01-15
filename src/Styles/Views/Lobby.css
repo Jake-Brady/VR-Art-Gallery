@@ -1,6 +1,73 @@
 #Lobby{
+   position: relative;
+   width: 100vw;
+}
+
+/* Mapped Containers */
+.favorites-container{
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed black;
+    align-content: center;
+}
+
+/* Side Menu */
+.side-menu{
+    position: absolute;
+    height: 100vh;
+    background-color: #8DA6FA;
+    width: 15vw;
+    left: 0;
+}
+
+#menu-lobby{
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.menu-btn{
+    color: white;
+    margin-top: 5rem;
+    padding-top: .1rem;
+    display: flex;
+    width: 75px;
+    height: 25px;
     justify-content: center;
+    align-content: center;
+    border: 1px solid 
+}
+
+
+/* Middle Window which renders what is chosen on the side menu */
+.middle-window{
+    position: absolute;
+    height: 100vh;
+    background-color: #829DFB;
+    width: 42.5vw;
+    left: 15vw;
+    border: dashed 1px black;
+}
+
+#conditionally-rendered-lobby{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Right Window which serves as a constant layout for the layout of the VR Art Gallery blueprint */
+.right-window{
+    position: absolute;
+    height: 100vh;
+    background-color: #829DFB;
+    width: 42.5vw;
+    right: 0;
+}
+
+#blueprint-lobby{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
