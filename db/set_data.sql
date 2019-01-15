@@ -1,2 +1,2 @@
-select * from users
+select username from users
 where id =  1

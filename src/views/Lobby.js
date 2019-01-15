@@ -69,33 +69,60 @@ logout(){
     .then(this.props.history.push('/'))
 }
 
+visitGallery(){
+this.props.history.push('/gallery/')
+}
+
+editGallery(){
+
+}
+
+deleteGallery(){
+
+}
+
 render(){
-    console.log(this.state.theMagicWord)
+    console.log(this.state.favoritedGalleries)
     const {favoritedGalleries, usersGalleries, theMagicWord} = this.state
-    //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct section, 
+    //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
     const listOfFavorites = favoritedGalleries.map((e, i) => {
-    return(
-        <Favorites
-            key={i}
-            image={e.thumbnail}
-            views={e.views}
-            favoritedNum={e.times_favorited}
-            visitGallery={this.visitGallery}
-        />
+        const image = e.thumbnail;
+        const key = i;
+        const views = e.views
+        const favoriteNum = e.times_favorited
+        const galleryName = e.gallery_name
+        return(
+            <>
+            <Favorites
+                key={key}
+                image={image}
+                views={views}
+                favoriteNum={favoriteNum}
+                galleryName={galleryName}
+                visitGallery={this.visitGallery}
+            />
+            </>
         )
     })
 
     const galleryContainers = usersGalleries.map((e, i) => {
-        let is_private_string = e.is_private.toString()
+        const is_private_string = e.is_private.toString();
+        const key = i;
+        const image = e.thumbnail;
+        const views = e.views;
+        const favoriteNum = e.times_favorited
         return(
-           <div key={i} className="gallery-container_lobby"> 
-                <img src={e.thumbnail} alt="thumbnail" />
-                <h3>Name of Gallery: {e.gallery_name}</h3>
-                <h3># of Views: {e.views}</h3>
-                <h3># of times Favorited:{e.times_favorited}</h3>
-                <span className="container-btn" onClick={this.visitGallery}>Visit Gallery</span>
-                <span className="container-btn" onClick={this.editGallery}>Edit Gallery</span>
-           </div>
+           <>
+           <Galleries
+            private={is_private_string}
+            key={key}
+            image={image}
+            views={views}
+            favoriteNum={favoriteNum}
+            visitGallery={this.visitGallery}
+            editGallery={this.editGallery}
+           />
+           </>
         )
     })
     return(
@@ -126,7 +153,7 @@ render(){
                     </div>
                     : theMagicWord === 'favorites' ?
                     <div className="middle-window-container">
-                        <Favorites />
+                        {listOfFavorites}
                     </div>
                     : theMagicWord === 'account' ?
                     <div className="middle-window-container">
