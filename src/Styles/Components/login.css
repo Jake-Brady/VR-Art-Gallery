@@ -1,6 +1,6 @@
 .login-container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     background-image: url('../../Styles/Media/LoginBackdrop.png');
     background-size: cover;
     display: flex;
@@ -36,7 +36,6 @@
 
 .login-content {
     width: 470px;
-    height: 400px;
     background: white;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.055), 0 15px 12px rgba(0, 0, 0, 0.055);
     border-radius: 3px;

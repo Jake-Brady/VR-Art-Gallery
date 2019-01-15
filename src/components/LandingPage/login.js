@@ -51,14 +51,13 @@ class Login extends Component {
                 <span>VR<span className='lighttext'>ART GALLERY</span></span>
             </div>
                 <div className='login-content'>
-                    {/* <button onClick={this.login}>Login</button> */}
                     <h1>Log In</h1>
                     <input name="username" placeholder="Username" onChange={this.handleChange}></input>
                     <input name="password" placeholder="Password" type="password" onChange={this.handleChange}></input>
-                    <div>Log In</div>
+                    <div onClick={() => this.login()}>Log In</div>
                     <h2>Forgot Password?</h2>
                 </div>
-                <h1>Don't have an account? <span className='login-sign'>Sign Up.</span></h1>
+                <h1>Don't have an account? <span className='login-sign' onClick={() => this.props.history.push('/register')}>Sign Up.</span></h1>
             </div>
         )
     }
