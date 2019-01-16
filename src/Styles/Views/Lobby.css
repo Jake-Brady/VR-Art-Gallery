@@ -62,6 +62,12 @@
     font-weight: 300;
 }
 
+.menu-back {
+    background: rgb(59, 88, 192);
+    padding-left: 7px;
+    border-left: 2px solid white;
+}
+
 .menu-btn:hover {
     cursor: pointer;
 }
