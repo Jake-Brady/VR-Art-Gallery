@@ -17,7 +17,8 @@ class Lobby extends Component{
                 user: '',
                 usersGalleries: [],
                 favoritedGalleries: [],
-                theMagicWord: ''
+                theMagicWord: '',
+                deleteConfirm: ''
             }
         this.changeWindow = this.changeWindow.bind(this)
         this.visitGallery = this.visitGallery.bind(this)
@@ -87,11 +88,12 @@ visitGallery(galleryName, author){
 this.props.history.push(`/${author}/${galleryName}/`)
 }
 
-editGallery(){
+editGallery(id){
 
 }
 
-deleteGallery(){
+deleteGallery(id){
+
 
 }
 
