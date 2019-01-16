@@ -99,9 +99,9 @@ render(){
     console.log(this.state.favoritedGalleries)
     const {favoritedGalleries, usersGalleries, theMagicWord} = this.state
     //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
-    const listOfFavorites = favoritedGalleries.map((e, i) => {
+    const listOfFavorites = favoritedGalleries.map((e) => {
         const image = e.thumbnail;
-        const key = i;
+        const key = e.id;
         const views = e.views;
         const shares = e.shares;
         const favoriteNum = e.times_favorited;
@@ -123,19 +123,23 @@ render(){
         )
     })
 
-    const galleryContainers = usersGalleries.map((e, i) => {
+    const galleryContainers = usersGalleries.map((e) => {
         const is_private_string = e.is_private.toString();
-        const key = i;
+        const key = e.id;
         const image = e.thumbnail;
         const views = e.views;
-        const favoriteNum = e.times_favorited
+        const favoriteNum = e.times_favorited;
+        const author = e.author
+        const galleryName = e.gallery_name
         return(
            <>
            <Galleries
+            galleryName={galleryName}
             private={is_private_string}
             key={key}
             image={image}
             views={views}
+            author={author}
             favoriteNum={favoriteNum}
             visitGallery={this.visitGallery}
             editGallery={this.editGallery}
