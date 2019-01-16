@@ -91,7 +91,7 @@ module.exports={
         })
     },
     deleteGallery: (req, res, next) => {
-        const {id} = req.body
+        const {id} = req.params
         const db = req.app.get('db')
         db.delete_gallery([id])
         res.sendStatus(200)

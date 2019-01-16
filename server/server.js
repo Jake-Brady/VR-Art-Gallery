@@ -37,7 +37,7 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
 
     app.post('/api/logout/', ctrl.logout)
 
-    app.delete('/api/deleteGallery', ctrl.deleteGallery)
+    app.delete('/api/deleteGallery/:id', ctrl.deleteGallery)
     
     //Art-Gallery
     app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)

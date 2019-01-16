@@ -22,6 +22,7 @@ class Lobby extends Component{
             }
         this.changeWindow = this.changeWindow.bind(this)
         this.visitGallery = this.visitGallery.bind(this)
+        this.deleteGallery = this.deleteGallery.bind(this)
     }
 
 componentDidMount(){
@@ -92,13 +93,30 @@ editGallery(id){
 
 }
 
-deleteGallery(id){
-
-
+deleteGallery(id, galleryName){
+if(window.confirm('Are you sure you want to delete this gallery?')){
+    let galleries = [...this.state.usersGalleries];
+    let index;
+        for(let i = 0; i < galleries.length; i++){
+            if(galleries[i].id === id){
+                index = i
+            }
+        }
+        if (index !== -1){
+            galleries.splice(index,1);
+            console.log(galleries)
+            this.setState({usersGalleries: galleries})
+        }
+    axios.delete(`/api/deleteGallery/${id}`).then(res => {
+        this.setState({deleteConfirm: `${galleryName} was successfully deleted.`})
+    })
+} else {
+    this.setState({deleteConfirm: `${galleryName} was not deleted.`})
+}
 }
 
 render(){
-    console.log(this.state.favoritedGalleries)
+    console.log(this.state)
     const {favoritedGalleries, usersGalleries, theMagicWord} = this.state
     //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
     const listOfFavorites = favoritedGalleries.map((e) => {
@@ -112,7 +130,7 @@ render(){
         return(
             <>
             <Favorites
-                key={key}
+                id={key}
                 image={image}
                 views={views}
                 shares={shares}
@@ -138,7 +156,7 @@ render(){
            <Galleries
             galleryName={galleryName}
             private={is_private_string}
-            key={key}
+            id={key}
             image={image}
             views={views}
             author={author}
