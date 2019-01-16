@@ -1,0 +1,14 @@
+.help-container {
+    width: calc(100vw - 175px);
+    height: 100vh;
+    padding: 20px;
+    margin-left: 175px;
+}
+
+.help-container > h1 {
+    color:rgb(110, 142, 254);
+}
+
+.help-container > h2 {
+    
+}

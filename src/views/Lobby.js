@@ -40,24 +40,37 @@ axios.get(`/api/checkUser/`).then(res => {
 })
 }
 
+changeNav = current => {
+    document.querySelectorAll('[data-tab]').forEach(tab => {
+        if (tab.innerText === current) {
+            tab.classList.add('menu-back')
+        }
+        else {
+            tab.classList.remove('menu-back')
+        }
+    })
+    
+}
+
 changeWindow(magicWord){
-let {theMagicWord} = this.state
+const { theMagicWord } = this.state
+console.log(magicWord)
 if (magicWord === theMagicWord) return;
 switch(magicWord){
-    case "create":
-    this.setState({theMagicWord: 'create'})
+    case "Create":
+    this.setState({ theMagicWord: 'create' }, () => this.changeNav(magicWord))
     break;
-    case "galleries":
-    this.setState({theMagicWord: 'galleries'})
+    case "Galleries":
+    this.setState({ theMagicWord: 'galleries' }, () => this.changeNav(magicWord))
     break;
-    case "favorites":
-    this.setState({theMagicWord: 'favorites'})
+    case "Favorites":
+    this.setState({ theMagicWord: 'favorites' }, () => this.changeNav(magicWord))
     break;
-    case 'account':
-    this.setState({theMagicWord: 'account'})
+    case 'Account':
+    this.setState({ theMagicWord: 'account' }, () => this.changeNav(magicWord))
     break;
-    case 'help':
-    this.setState({theMagicWord: 'help'})
+    case 'Help':
+    this.setState({ theMagicWord: 'help' }, () => this.changeNav(magicWord))
     break;
 }
 }
@@ -129,12 +142,15 @@ render(){
         <main id="Lobby">
             <section className="side-menu">
                 <div id="menu-lobby">
-                    <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />
-                    <span className="menu-btn" onClick={(e) => this.changeWindow('create')}>Create</span>
-                    <span className="menu-btn" onClick={(e) => this.changeWindow('galleries')}>Galleries</span>
-                    <span className="menu-btn" onClick={(e) => this.changeWindow('favorites')}>Favorites</span>
-                    <span className="menu-btn" onClick={(e) => this.changeWindow('account')}>Account</span>
-                    <span className="menu-btn" onClick={(e) => this.changeWindow('help')}>Help</span>
+                    <div className='menu-header center'>
+                    <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                    <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />                    
+                    </div>
+                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Create')}>Create</span>
+                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Galleries')}>Galleries</span>
+                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Favorites')}>Favorites</span>
+                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Account')}>Account</span>
+                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Help')}>Help</span>
                     <span className="menu-btn" onClick={() => this.logout()}>Logout</span>
                 </div>
             </section>

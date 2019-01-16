@@ -23,7 +23,8 @@ class LandingPage extends Component {
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll)
     }
-
+    
+    //yoinked this from the interwebs 😂
     debounce = (func, wait, immediate) => {
         let timeout
         return function () {
