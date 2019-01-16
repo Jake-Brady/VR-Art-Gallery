@@ -1,26 +1,9 @@
-import React, {Component} from 'react'
+import React from 'react'
 import '../Styles/galleries.css'
-import imageUploads from './createGalleries'
-import axios from 'axios';
 
-class Galleries extends Component{
-    constructor(props){
-        super(props)
-            this.state={
-                gallery: [],
-                images: [],
-                presets: []
-            }
-    }
 
-componentDidMount(props){
-console.log(props)
-
-}
-
-render(props){
-    console.log(this.props)
-    let {key, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery } = this.props
+const Galleries = (props) => {
+    let {key, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery } = props
     return(
         <div key={key} className="gallery-container">
             <img src={image} alt="gallery thumbnail" className="gallery-thumbnail" />
@@ -41,7 +24,6 @@ render(props){
             <span className="gallery-view" onClick={() => deleteGallery(key)}>Delete Gallery</span>
         </div>
     )
-}
 }
 
 export default Galleries
