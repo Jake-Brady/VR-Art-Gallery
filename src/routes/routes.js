@@ -11,7 +11,7 @@ export default function Nav() {
             <Switch>
                 <Route exact path='/' component={LandingPage}/>
                 <Route path='/lobby/:username' component={Lobby} />
-                <Route path='/gallery' component={ArtGallery} />
+                <Route path='/:username/:galleryName' component={ArtGallery} />
                 <Route path='/login' component={Login} /> 
                 <Route path='/register' component={Register} />
             </Switch>

@@ -23,6 +23,8 @@ create table galleries(
     is_private boolean,
     views integer,
     times_favorited integer,
+    shares integer,
+    author text,
     user_id integer references users(id)
 );
 

@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import axios from 'axios'
+import {withRouter} from 'react-router-dom'
 import CreateGalleries from '../components//Lobby/createGalleries'
 import GalleryBluePrint from '../components/Lobby/blueprint'
 import Galleries from '../components/Lobby/galleries'
@@ -19,6 +20,7 @@ class Lobby extends Component{
                 theMagicWord: ''
             }
         this.changeWindow = this.changeWindow.bind(this)
+        this.visitGallery = this.visitGallery.bind(this)
     }
 
 componentDidMount(){
@@ -30,7 +32,7 @@ axios.get(`/api/checkUser/`).then(res => {
     } else {
         //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
         axios.get('/api/retrieveGalleries/').then(res => {
-            this.setState({usersGalleries: res.data, theMagicWord:'galleries'}, () => {
+            this.setState({usersGalleries: res.data, theMagicWord:'create'}, () => {
                 axios.get('/api/getFavorites/').then(res => {
                     this.setState({favoritedGalleries: res.data})
                 })
@@ -54,7 +56,6 @@ changeNav = current => {
 
 changeWindow(magicWord){
 const { theMagicWord } = this.state
-console.log(magicWord)
 if (magicWord === theMagicWord) return;
 switch(magicWord){
     case "Create":
@@ -82,8 +83,8 @@ logout(){
     .then(this.props.history.push('/'))
 }
 
-visitGallery(){
-this.props.history.push('/gallery/')
+visitGallery(galleryName, author){
+this.props.history.push(`/${author}/${galleryName}/`)
 }
 
 editGallery(){
@@ -98,42 +99,51 @@ render(){
     console.log(this.state.favoritedGalleries)
     const {favoritedGalleries, usersGalleries, theMagicWord} = this.state
     //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
-    const listOfFavorites = favoritedGalleries.map((e, i) => {
+    const listOfFavorites = favoritedGalleries.map((e) => {
         const image = e.thumbnail;
-        const key = i;
-        const views = e.views
-        const favoriteNum = e.times_favorited
-        const galleryName = e.gallery_name
+        const key = e.id;
+        const views = e.views;
+        const shares = e.shares;
+        const favoriteNum = e.times_favorited;
+        const galleryName = e.gallery_name;
+        const galleryAuthor = e.author;
         return(
             <>
             <Favorites
                 key={key}
                 image={image}
                 views={views}
+                shares={shares}
                 favoriteNum={favoriteNum}
                 galleryName={galleryName}
                 visitGallery={this.visitGallery}
+                author={galleryAuthor}
             />
             </>
         )
     })
 
-    const galleryContainers = usersGalleries.map((e, i) => {
+    const galleryContainers = usersGalleries.map((e) => {
         const is_private_string = e.is_private.toString();
-        const key = i;
+        const key = e.id;
         const image = e.thumbnail;
         const views = e.views;
-        const favoriteNum = e.times_favorited
+        const favoriteNum = e.times_favorited;
+        const author = e.author
+        const galleryName = e.gallery_name
         return(
            <>
            <Galleries
+            galleryName={galleryName}
             private={is_private_string}
             key={key}
             image={image}
             views={views}
+            author={author}
             favoriteNum={favoriteNum}
             visitGallery={this.visitGallery}
             editGallery={this.editGallery}
+            deleteGallery={this.deleteGallery}
            />
            </>
         )
@@ -193,4 +203,4 @@ render(){
 }
 }
 
-export default Lobby
+export default withRouter(Lobby)

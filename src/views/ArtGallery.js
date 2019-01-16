@@ -29,20 +29,51 @@ class ArtGallery extends Component{
                 Portrait12: '',
                 Portrait13: '',
                 Portrait14: '',
-                Portrait15: ''
+                Portrait15: '',
+                wallTexture: '',
+                floorTexture: '',
+                atmosphereLighting: '',
+                music: ''
             }
     }
 
 componentDidMount(){
-    axios.get('/api/getImages/').then(res => {
-        let {img1, img2, img3, img4, img5, img6, img7, img8, img9, img10} = res.data
-        this.setState({Portrait1: img1, Portrait2: img2, Portrait3: img3, Portrait4: img4, Portrait5: img5, Portrait6: img6, Portrait7: img7, Portrait8: img8, Portrait9: img9, Portrait10: img10})
+    let {username, galleryName} = this.props.match.params
+    // Retrieve User's Images and Presets
+    axios.get(`/api/getGalleryData/${username}/${galleryName}`).then(res => {
+        let {image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, wall_texture, floor_texture, atmosphere_lighting, music} = res.data[0]
+        // Check values of wall, floor, lighting, and music and assign them proper IDs to be set to state and then as src material to each entity.
+        // Floor Texture Assignments
+        switch(floor_texture){
+            case "wood":
+            floor_texture = '#wood-floor'
+            break;
+            case "marble":
+            floor_texture = '#marble-floor';
+            break;
+        }
+        // Wall Texture Assignments
+        switch(wall_texture){
+
+        }
+        // Lighting Color Assignments
+        switch(atmosphere_lighting){
+
+        }
+        // Music Selection Assignments
+        switch(music){
+
+        }
+        this.setState({Portrait1: image1, Portrait2: image2, Portrait3: image3, Portrait4: image4, Portrait5: image5, Portrait6: image6, Portrait7: image7, Portrait8: image8, Portrait9: image9, Portrait10: image10, Portrait11: image11, Portrait12: image12, Portrait13:image13, Portrait14:image14, Portrait15:image15, wallTexture: wall_texture, floorTexture: floor_texture, atmosphereLighting: atmosphere_lighting, music: music})
     })
 }
 
 render(){
-    let {Portrait1, Portrait2, Portrait3, Portrait4, Portrait5, Portrait6, Portrait7, Portrait8, Portrait9, Portrait10, Portrait11, Portrait12, Portrait13, Portrait14, Portrait15} = this.state
-    console.log()
+    let {Portrait1, Portrait2, Portrait3, Portrait4, Portrait5, Portrait6, Portrait7, Portrait8, Portrait9, Portrait10, Portrait11, Portrait12, Portrait13, Portrait14, Portrait15, wallTexture, floorTexture, atmosphereLighting, music} = this.state
+    console.log(this.state)
+    // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
+    
+    
     return(
         <Scene physics="debug: true" stats id='scene'>
         <Assets 
@@ -120,7 +151,7 @@ render(){
         {/* Everything below here is part of the architecture */}
         {/* Main Art Gallery */}
         <rw-room  position="-2 0 -2">
-            <rw-floor material="src:#floor; repeat:2"></rw-floor>
+            <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
             <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling>
             <rw-wall  material="src:#wall; repeat:2" position="10 0 0" height="4m"></rw-wall>
             <rw-wall  material="src:#wall; repeat:2" position="10 0 20" height="4m"></rw-wall>
