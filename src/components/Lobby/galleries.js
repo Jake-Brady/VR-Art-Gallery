@@ -37,8 +37,8 @@ render(props){
                 </div>
             </div>
             <span className="gallery-view" onClick={() => visitGallery(galleryName,author)}>Visit Gallery</span>
-            <span className="gallery-view" onClick={() => editGallery(galleryName,author)}>Edit Gallery</span>
-            <span className="gallery-view" onClick={() => deleteGallery(galleryName,author)}>Delete Gallery</span>
+            <span className="gallery-view" onClick={() => editGallery(key)}>Edit Gallery</span>
+            <span className="gallery-view" onClick={() => deleteGallery(key)}>Delete Gallery</span>
         </div>
     )
 }
