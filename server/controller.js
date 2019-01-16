@@ -61,7 +61,6 @@ module.exports={
     },
     getGalleryData: (req, res, next) => {
         let {username, galleryName} = req.params
-        console.log(username, galleryName)
         const db = req.app.get('db')
         db.get_gallery_images([galleryName, username]).then(images => {
             res.status(200).send(images)
@@ -90,6 +89,12 @@ module.exports={
             console.log(err)
             res.status(500).send(err)
         })
+    },
+    deleteGallery: (req, res, next) => {
+        const {id} = req.body
+        const db = req.app.get('db')
+        db.delete_gallery([id])
+        res.sendStatus(200)
     },
     logout: (req, res, next) => {
         req.session.destroy()
