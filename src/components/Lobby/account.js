@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function() {
-    return (
-        <div>pussy</div>
-    )
+class Account extends Component {
+    render() {
+        return (
+            <div>
+                Pooooosy
+            </div>
+        )
+    }
 }
+
+export default Account
