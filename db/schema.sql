@@ -31,7 +31,7 @@ create table galleries(
 create table gallery_favorites(
     primary key (user_id, favorited),
     user_id integer references users(id),
-    favorited integer references galleries(id)
+    favorited integer references galleries(id) ON DELETE CASCADE
 );
 
 -- Create Table images
@@ -53,7 +53,7 @@ create table images(
     image13 text,
     image14 text,
     image15 text,
-    gallery_id integer references galleries(id)
+    gallery_id integer references galleries(id) ON DELETE CASCADE
 );
 
 -- Create Table Gallery_Presets
@@ -64,5 +64,5 @@ create table gallery_presets(
     floor_texture text,
     atmosphere_lighting text,
     music text,
-    gallery_id integer references galleries(id)
+    gallery_id integer references galleries(id) ON DELETE CASCADE
 );

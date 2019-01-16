@@ -36,6 +36,8 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     app.get('/api/getFavorites/', ctrl.getFavorites)
 
     app.post('/api/logout/', ctrl.logout)
+
+    app.delete('/api/deleteGallery', ctrl.deleteGallery)
     
     //Art-Gallery
     app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)
