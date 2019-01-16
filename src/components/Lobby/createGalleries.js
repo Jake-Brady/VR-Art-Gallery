@@ -6,25 +6,41 @@ import '../Styles/createGalleries.css'
 import axios from 'axios';
 
 class CreateGalleries extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
             this.state={
-                images: [],
-                isUploading: false,
-                url: 'http://via.placeholder.com/450x450',
+                galleryName: '',
+                author: '',
+                isPrivate: false,
+                thumbnail: 'http://via.placeholder.com/450x450',
+                numOfGalleries: 0
             }
+        this.handleChange = this.handleChange.bind(this)
+        this.setPrivacy = this.setPrivacy.bind(this)
     }
 
 componentDidMount(){
 console.log(this.props)
 let {user} = this.props
 console.log(user)
-//axios GET user's existing images and set to array in order they appear in table to match frames1 through 15.
-axios.get(`/api/getUserImages/${user}`).then(res => {
-    console.log(res.data)
-    this.setState({images: res.data})
-})
+this.setState({author: user})
+// Should set author and number of galleries tied to user in state. Immediately throw popup if user has reached limit 12.
 
+
+}
+
+handleChange(e){
+this.setState({
+[e.target.name]: e.target.value
+})
+}
+
+setPrivacy(par){
+if(par === 'private'){
+    this.setState({isPrivate: true})
+} else {
+    this.setState({isPrivate: false})
+}
 }
 
 getSignedRequest = ([file]) => {
@@ -39,119 +55,74 @@ onDrop(files) {
     this.setState({files});
   }
 
-  onCancel() {
-    this.setState({
-      files: []
-    });
-  }
+onCancel() {
+this.setState({
+    files: []
+});
+}
+
+createNewGallery(){
+// Check to see if all gallery fields are not blank. If blank, then throw popup that all fields must be filled.
+
+}
 
 render(){
-    const {url, isUploading} = this.state;
-    console.log(this.props)
-    return(
-    <section id="image-uploads">
-    <h2>User-Uploaded Image Section</h2>
-        <div className="img-block">
-            <h3>Frame 1</h3>
-            <img src={url} alt="This is what is in frame 1" width="450px" />
-            <Dropzone
-          onDrop={this.onDrop.bind(this)}
-          onFileDialogCancel={this.onCancel.bind(this)}
-          accept="image/*"
-          multiple={false}
-        >
-          {({getRootProps, getInputProps}) => (
-            <div {...getRootProps()} style={{
-                position: 'relative',
-                width: 200,
-                height: 200,
-                borderWidth: 7,
-                marginTop: 100,
-                borderColor: 'rgb(102, 102, 102)',
-                borderStyle: 'dashed',
-                borderRadius: 5,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: 28,
-              }}>
-              <input {...getInputProps()} />
-                
+let {author, galleryName, thumbnail, isPrivate, numOfGalleries} = this.state
+return(
+    <section id="create-galleries">
+        {/* Inform User of how many galleries he/she has */}
+        <div className="user-galleries">
+            <h2>Welcome {author}.</h2>
+            <h2>You currently have {numOfGalleries}.</h2>
+            <h5>{12 - numOfGalleries} available.</h5>
+        </div>
+
+        {/* Initializing a new Gallery */}
+        <section className="gallery-initialization">
+            <div className="name-gallery">
+                <h2>Your Gallery Name</h2>
+                <input name="galleryName" onChange={(e) => {this.handleChange(e)}}></input>
             </div>
-          )}
-        </Dropzone>
 
-        </div>
-        <div className="img-block">
-            <h3>Frame 2</h3>
-            <img src={url} alt="This is what is in frame 2" width="450px" />
+            <div className="privacy-gallery">
+                <h2>Privacy</h2>
+                <h3>Will your gallery be public or private?</h3>
+                <h5>Must be public to share.</h5>
+                {isPrivate ? "Private" : "Public"}
+                <span onClick={() => this.setPrivacy('private')} id="private-span">Private</span>
+                <span onClick={this.setPrivacy} id="public-span">Public</span>
+            </div>
 
-        </div>
-        <div className="img-block">
-            <h3>Frame 3</h3>
-            <img src={url} alt="This is what is in frame 3" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 4</h3>
-            <img src={url} alt="This is what is in frame 4" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 5</h3>
-            <img src={url} alt="This is what is in frame 5" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 6</h3>
-            <img src={url} alt="This is what is in frame 6" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 7</h3>
-            <img src={url} alt="This is what is in frame 7" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 8</h3>
-            <img src={url} alt="This is what is in frame 8" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 9</h3>
-            <img src={url} alt="This is what is in frame 9" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 10</h3>
-            <img src={url} alt="This is what is in frame 10" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Frame 11</h3>
-            <img src={url} alt="This is what is in frame 11" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Image for Frame 12</h3>
-            <img src={url} alt="This is what is in frame 12" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Image for Frame 13</h3>
-            <img src={url} alt="This is what is in frame 13" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Image for Frame 14</h3>
-            <img src={url} alt="This is what is in frame 14" width="450px" />
-
-        </div>
-        <div className="img-block">
-            <h3>Image for Frame 15</h3>
-            <img src={url} alt="This is what is in frame 15" width="450px" />
-
-        </div>
+            <div>
+                <h2>Gallery Thumbnail</h2>
+                <img src={thumbnail} alt="This is what is in frame 1" width="450px" />
+                <Dropzone
+                onDrop={this.onDrop.bind(this)}
+                onFileDialogCancel={this.onCancel.bind(this)}
+                accept="image/*"
+                multiple={false}
+                >
+                {({getRootProps, getInputProps}) => (
+                    <div {...getRootProps()} style={{
+                        position: 'relative',
+                        width: 200,
+                        height: 200,
+                        borderWidth: 7,
+                        borderColor: 'rgb(102, 102, 102)',
+                        borderStyle: 'dashed',
+                        borderRadius: 5,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        fontSize: 28,
+                    }}>
+                    <input {...getInputProps()} />
+                    </div>
+                )}
+                </Dropzone>
+            </div>
+            <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
+        </section>
     </section>
     )
 }
