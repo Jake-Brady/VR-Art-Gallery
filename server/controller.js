@@ -59,8 +59,13 @@ module.exports={
             res.status(500).send(err)
         })
     },
-    getUserImages: (req, res, next) => {
-        let {user} = req.params
+    getGalleryData: (req, res, next) => {
+        let {username, galleryName} = req.params
+        console.log(username, galleryName)
+        const db = req.app.get('db')
+        db.get_gallery_images([galleryName, username]).then(images => {
+            res.status(200).send(images)
+        })
     },
     checkUser: (req,res,next) => {
         const {user} = req.session
@@ -85,10 +90,6 @@ module.exports={
             console.log(err)
             res.status(500).send(err)
         })
-    },
-    getImages: (req,res,next) => {
-        let images = testUser[0].imgTable
-        res.status(200).send(images)
     },
     logout: (req, res, next) => {
         req.session.destroy()

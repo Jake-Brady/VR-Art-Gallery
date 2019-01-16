@@ -13,17 +13,17 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     app.use(bodyParser.json())
     app.use(session)
     
-    app.use((req,res,next) => {
-    if (ENVIRONMENT === 'dev') {
-        req.app.get('db').set_data()
-        .then(userData => {
-            req.session.user = userData[0]
-            next()
-        })
-    } else {
-        next()
-    }
-})
+//     app.use((req,res,next) => {
+//     if (ENVIRONMENT === 'dev') {
+//         req.app.get('db').set_data()
+//         .then(userData => {
+//             req.session.user = userData[0]
+//             next()
+//         })
+//     } else {
+//         next()
+//     }
+// })
 
     /* VR-Art-Gallery Endpoints */
     //Landing Page - Register/Login
@@ -31,7 +31,6 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     app.post('/api/login', ctrl.login)
 
     //Lobby
-    app.get('/api/getUserImages/:user', ctrl.getUserImages)
     app.get('/api/checkUser/', ctrl.checkUser)
     app.get('/api/retrieveGalleries/', ctrl.retrieveGalleries)
     app.get('/api/getFavorites/', ctrl.getFavorites)
@@ -39,7 +38,7 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     app.post('/api/logout/', ctrl.logout)
     
     //Art-Gallery
-    app.get('/api/getImages/', ctrl.getImages)
+    app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)
 
     // PORT
     PORT = SERVER_PORT || 4500

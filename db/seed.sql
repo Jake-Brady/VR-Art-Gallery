@@ -6,9 +6,9 @@ username, password, email, first_name, last_name
 );
 
 insert into galleries(
-gallery_name, thumbnail, is_private, views, times_favorited, author, user_id
+gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 'test', 1
+'test gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
 );
 
 insert into images
@@ -30,9 +30,9 @@ username, password, email, first_name, last_name
 );
 
 insert into galleries(
-gallery_name, thumbnail, is_private, views, times_favorited, author, user_id
+gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test2 gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 'test2', 2
+'test2 gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test2', 2
 );
 
 insert into images
