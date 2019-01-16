@@ -3,8 +3,26 @@
     height: 100vh;
     padding: 20px;
     margin-left: 175px;
+    font-family: 'Montserrat', 'Oswald', sans-serif;
 }
 
-.help-container > h1 {
+.help-text {
+    width: 80%;
+    max-width: 1200px;
+}
+
+.help-text > h1 {
     color:rgb(110, 142, 254);
+    font-family: 'Oswald';
+    font-weight: 300;
+}
+
+.help-text > h2 {
+    font-weight: 300;
+    margin-top: 25px;
+}
+
+.help-text > p {
+    margin-top: 10px;
+    font-size: 13px;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../Styles/Views/LandingPage.css'
 import VRVideo from '../assets/video/VR-Trailer.mp4'
+import Splat from '../Styles/Media/yoinkminenow.png'
 import axios from 'axios'
 
 class LandingPage extends Component {
@@ -144,7 +145,7 @@ class LandingPage extends Component {
                     </div>
                     : 
                     <div>
-                        hello
+                        <img src={Splat} alt='' className='landing-splat'/>
                     </div>
             }
 
