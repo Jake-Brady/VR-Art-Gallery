@@ -60,12 +60,15 @@
     align-items: center;
     color: white;
     font-weight: 300;
+    overflow: hidden;
+}
+
+.menu-btn:hover {
+    background: rgb(93, 120, 216);
 }
 
 .menu-back {
     background: rgb(59, 88, 192);
-    padding-left: 7px;
-    border-left: 2px solid white;
 }
 
 .menu-btn:hover {

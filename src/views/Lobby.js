@@ -144,13 +144,13 @@ render(){
                 <div id="menu-lobby">
                     <div className='menu-header center'>
                     <span>VR<span className='lighttext'>ART GALLERY</span></span>
-                    <img src={Icon} className="icon" onClick={(e) => this.props.history.push('/')} />                    
+                    <img src={Icon} className="icon" onClick={() => this.props.history.push('/')} />                    
                     </div>
-                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Create')}>Create</span>
-                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Galleries')}>Galleries</span>
-                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Favorites')}>Favorites</span>
-                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Account')}>Account</span>
-                    <span data-tab className="menu-btn" onClick={(e) => this.changeWindow('Help')}>Help</span>
+                    <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}>Create</span>
+                    <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}>Galleries</span>
+                    <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}>Favorites</span>
+                    <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}>Account</span>
+                    <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}>Help</span>
                     <span className="menu-btn" onClick={() => this.logout()}>Logout</span>
                 </div>
             </section>
