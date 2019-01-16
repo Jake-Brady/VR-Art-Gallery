@@ -1,4 +1,4 @@
-select views, times_favorited, gallery_name, thumbnail from galleries
+select views, times_favorited, gallery_name, thumbnail, author from galleries
 join gallery_favorites
 on galleries.id = gallery_favorites.favorited
 join users
