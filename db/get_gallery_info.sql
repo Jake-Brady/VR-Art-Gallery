@@ -1,4 +1,4 @@
-SELECT is_private, views, times_favorited, gallery_name, galleries.id, thumbnail
+SELECT is_private, views, times_favorited, gallery_name, galleries.id, author, thumbnail
 FROM galleries
 JOIN users
 ON users.id = galleries.user_id
