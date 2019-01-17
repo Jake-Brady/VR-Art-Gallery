@@ -67,8 +67,8 @@ class Lobby extends Component {
         switch (magicWord) {
             case "Create":
                 this.setState({ theMagicWord: 'create' }, () => {
-                    const header = document.querySelector('.lobby-header_search')
-                    header.style.visibility = 'hidden'
+                    const search = document.querySelector('.lobby-header_search')
+                    search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
@@ -76,8 +76,8 @@ class Lobby extends Component {
             case "Galleries":
                 this.pageTop(magicWord)
                 this.setState({ theMagicWord: 'galleries' }, () => {
-                    const header = document.querySelector('.lobby-header_search')
-                    header.style.visibility = 'visible'
+                    const search = document.querySelector('.lobby-header_search')
+                    search.style.visibility = 'visible'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
@@ -85,24 +85,24 @@ class Lobby extends Component {
             case "Favorites":
                 this.pageTop(magicWord)
                 this.setState({ theMagicWord: 'favorites' }, () => {
-                    const header = document.querySelector('.lobby-header_search')
-                    header.style.visibility = 'visible'
+                    const search = document.querySelector('.lobby-header_search')
+                    search.style.visibility = 'visible'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
                 break;
             case 'Account':
                 this.setState({ theMagicWord: 'account' }, () => {
-                    const header = document.querySelector('.lobby-header_search')
-                    header.style.visibility = 'hidden'
+                    const search = document.querySelector('.lobby-header_search')
+                    search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
                 break;
             case 'Help':
                 this.setState({ theMagicWord: 'help' }, () => {
-                    const header = document.querySelector('.lobby-header_search')
-                    header.style.visibility = 'hidden'
+                    const search = document.querySelector('.lobby-header_search')
+                    search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })

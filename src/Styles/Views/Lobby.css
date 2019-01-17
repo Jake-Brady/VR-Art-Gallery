@@ -39,7 +39,6 @@
     background: rgb(59, 88, 192);
     position: fixed;
     top: 0px;
-    padding: 0px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,7 +80,6 @@
     width: 500px;
     height: 60%;
     background: rgb(8, 36, 138);
-    margin-left: 50px;
     display: flex;
     visibility: hidden;
 }
@@ -291,11 +289,17 @@
     .lobby-card-grid {
         width: 890px;
     }
+    .lobby-header_search {
+        width: 400px;
+    }
 }
 
 @media (max-width: 890px) {
     .lobby-card-grid {
         width: 620px;
+    }
+    .lobby-header_search {
+        width: 275px;
     }
 }
 
@@ -304,5 +308,8 @@
         padding: 100px 20px;
         width: 310px;
         padding-bottom: 25px;
+    }
+    .lobby-header_left > img, .lobby-header_left > span, .lobby-header_right {
+        display: none;
     }
 }
