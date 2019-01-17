@@ -70,12 +70,14 @@ class Lobby extends Component {
                 })
                 break;
             case "Galleries":
+                this.pageTop(magicWord)
                 this.setState({ theMagicWord: 'galleries' }, () => {
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
                 break;
             case "Favorites":
+                this.pageTop(magicWord)
                 this.setState({ theMagicWord: 'favorites' }, () => {
                     this.changeNav(magicWord)
                     this.toggleMenu()
@@ -135,8 +137,8 @@ class Lobby extends Component {
 
     toggleMenu = command => {
         const menu = document.querySelector('.side-menu'),
-        overlay = document.querySelector('.lobby-overlay'),
-        body = document.querySelector('html')
+            overlay = document.querySelector('.lobby-overlay'),
+            body = document.querySelector('html')
         if (command === 'open') {
             menu.classList.add('menu-toggle')
             menu.classList.remove('menu-slide')
@@ -151,6 +153,10 @@ class Lobby extends Component {
                 menu.classList.remove('menu-toggle')
             }, 500);
         }
+    }
+
+    pageTop = word => {
+        if (word.toLowerCase() !== this.state.theMagicWord) window.scrollTo(0, 0)
     }
 
     render() {
@@ -182,12 +188,12 @@ class Lobby extends Component {
 
         const galleryContainers = usersGalleries.map((e) => {
             // const is_private_string = e.is_private.toString();
-            const key = e.id;
-            const image = e.thumbnail;
-            const views = e.views;
-            const favoriteNum = e.times_favorited;
-            const author = e.author
-            const galleryName = e.gallery_name
+            const key = e.id,
+                image = e.thumbnail,
+                views = e.views,
+                favoriteNum = e.times_favorited,
+                author = e.author,
+                galleryName = e.gallery_name
             return (
                 <Galleries
                     galleryName={galleryName}
@@ -253,11 +259,15 @@ class Lobby extends Component {
                                 </div>
                                 : theMagicWord === 'galleries' ?
                                     <div className='lobby-container_gallery'>
-                                        {galleryContainers}
+                                        <div className='lobby-card-grid'>
+                                            {galleryContainers}
+                                        </div>
                                     </div>
                                     : theMagicWord === 'favorites' ?
                                         <div className='lobby-container_gallery'>
-                                            {listOfFavorites}
+                                            <div className='lobby-card-grid'>
+                                                {listOfFavorites}
+                                            </div>
                                         </div>
                                         : theMagicWord === 'account' ?
                                             <div>

@@ -1,4 +1,4 @@
-/* Animation for side menu */
+/* Animations for side menu */
 
 @keyframes slideIn {
     0% {
@@ -224,8 +224,13 @@
 }
 
 .lobby-container_gallery {
-    width: calc(100vw - 175px);
-    margin-left: 175px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.lobby-card-grid {
+    width: 1240px;
     display: flex;
     flex-flow: row wrap;
     padding: 100px 80px;
