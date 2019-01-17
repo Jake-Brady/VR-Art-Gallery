@@ -20,9 +20,6 @@ class Lobby extends Component {
             theMagicWord: '',
             deleteConfirm: ''
         }
-        this.changeWindow = this.changeWindow.bind(this)
-        this.visitGallery = this.visitGallery.bind(this)
-        this.deleteGallery = this.deleteGallery.bind(this)
     }
 
     componentDidMount() {
@@ -34,11 +31,11 @@ class Lobby extends Component {
             } else {
                 //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
                 axios.get('/api/retrieveGalleries/').then(res => {
-                    this.setState({usersGalleries: res.data, theMagicWord:'create'}, () => {
-                        axios.get('/api/getFavorites/').then(res => {
-                            this.setState({favoritedGalleries: res.data})
-                        })
-                    })
+                    // this.setState({ usersGalleries: res.data, theMagicWord: 'create' }, () => {
+                    //     axios.get('/api/getFavorites/').then(res => {
+                    //         this.setState({ favoritedGalleries: res.data })
+                    //     })
+                    // })
                 })
             }
         })
@@ -56,7 +53,7 @@ class Lobby extends Component {
 
     }
 
-    changeWindow(magicWord) {
+    changeWindow = magicWord => {
         const { theMagicWord } = this.state
         if (magicWord === theMagicWord) return;
         switch (magicWord) {
@@ -85,15 +82,15 @@ class Lobby extends Component {
             .then(this.props.history.push('/'))
     }
 
-    visitGallery(galleryName, author) {
+    visitGallery = (galleryName, author) => {
         this.props.history.push(`/${author}/${galleryName}/`)
     }
 
-    editGallery(id) {
+    editGallery = id => {
 
     }
 
-    deleteGallery(id, galleryName) {
+    deleteGallery = (id, galleryName) => {
         if (window.confirm('Are you sure you want to delete this gallery?')) {
             let galleries = [...this.state.usersGalleries];
             let index;
@@ -129,16 +126,16 @@ class Lobby extends Component {
             const galleryName = e.name
             const galleryAuthor = e.author;
             return (
-                    <Favorites
-                        id={key}
-                        image={image}
-                        views={views}
-                        shares={shares}
-                        favoriteNum={favoriteNum}
-                        galleryName={galleryName}
-                        visitGallery={this.visitGallery}
-                        author={galleryAuthor}
-                    />
+                <Favorites
+                    id={key}
+                    image={image}
+                    views={views}
+                    shares={shares}
+                    favoriteNum={favoriteNum}
+                    galleryName={galleryName}
+                    visitGallery={this.visitGallery}
+                    author={galleryAuthor}
+                />
             )
         })
 
@@ -151,18 +148,18 @@ class Lobby extends Component {
             const author = e.author
             const galleryName = e.gallery_name
             return (
-                    <Galleries
-                        galleryName={galleryName}
-                        // private={is_private_string}
-                        id={key}
-                        image={image}
-                        views={views}
-                        author={author}
-                        favoriteNum={favoriteNum}
-                        visitGallery={this.visitGallery}
-                        editGallery={this.editGallery}
-                        deleteGallery={this.deleteGallery}
-                    />
+                <Galleries
+                    galleryName={galleryName}
+                    // private={is_private_string}
+                    id={key}
+                    image={image}
+                    views={views}
+                    author={author}
+                    favoriteNum={favoriteNum}
+                    visitGallery={this.visitGallery}
+                    editGallery={this.editGallery}
+                    deleteGallery={this.deleteGallery}
+                />
             )
         })
         return (
@@ -182,15 +179,15 @@ class Lobby extends Component {
                     </div>
                 </section>
 
-                <section style={{overflowX: 'hidden'}}>
+                <section style={{ overflowX: 'hidden' }}>
                     <div>
                         {/* Conditionally rendering based on magicWord */}
                         {
                             theMagicWord === 'create' ?
                                 <div>
-                                    <CreateGalleries 
-                                    user={this.props.match.params.username}
-                                    galleries={usersGalleries}
+                                    <CreateGalleries
+                                        user={this.props.match.params.username}
+                                        galleries={usersGalleries}
                                     />
                                 </div>
                                 : theMagicWord === 'galleries' ?
@@ -199,6 +196,8 @@ class Lobby extends Component {
                                     </div>
                                     : theMagicWord === 'favorites' ?
                                         <div className='lobby-container_gallery'>
+                                            <input type='text' placeholder='Search Favorites' />
+                                            <div className='lobby-underline' />
                                             {listOfFavorites}
                                         </div>
                                         : theMagicWord === 'account' ?

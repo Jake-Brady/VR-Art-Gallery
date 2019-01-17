@@ -20,7 +20,34 @@
     margin-left: 175px;
     display: flex;
     flex-flow: row wrap;
-    padding: 30px 80px;
+    padding: 100px 80px;
+    padding-bottom: 50px;
+}
+
+.lobby-container_gallery > input {
+    position: absolute;
+    top: 30px;
+    left: 265px;
+    height: 30px;
+    width: 250px;
+    padding: 0px 10px;
+    font-family: 'Montserrat';
+    border: none;
+    color: black;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.155), 0 1px 1px rgba(0, 0, 0, 0.155);
+
+}
+
+.lobby-container_gallery > input::placeholder {
+    color: black;
+}
+
+.lobby-underline {
+    position: absolute;
+    top: 85px;
+    left: 265px;
+    width: calc(100vw - 365px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.137);
 }
 
 .container-btn {
@@ -34,6 +61,7 @@
     position: fixed;
     height: 100vh;
     background: rgb(110, 142, 254);
+    /* background: linear-gradient(#5b66e2, #ffffff,); */
     width: 175px;
     left: 0;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
@@ -44,6 +72,7 @@
     width: 100%;
     height: 75px;
     color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.466);
 }
 
 #menu-lobby {
@@ -60,14 +89,15 @@
     padding: 10px;
     display: flex;
     align-items: center;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 300;
     overflow: hidden;
     cursor: pointer;
+    letter-spacing: .5px;
 }
 
 .menu-btn:hover {
-    background: rgb(93, 120, 216);
+    background: rgb(76, 103, 201);
 }
 
 .menu-back {
