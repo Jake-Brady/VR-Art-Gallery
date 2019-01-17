@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Dropzone from 'react-dropzone'
+import {withRouter} from 'react-router-dom'
 import {v4 as randomStringGenerator} from 'uuid';
 import {GridLoader} from 'react-spinners'
 import '../Styles/createGalleries.css'
@@ -13,7 +14,8 @@ class CreateGalleries extends Component{
                 author: '',
                 isPrivate: false,
                 thumbnail: 'http://via.placeholder.com/450x450',
-                numOfGalleries: 0
+                numOfGalleries: 0,
+                maxLimit: false
             }
         this.handleChange = this.handleChange.bind(this)
         this.setPrivacy = this.setPrivacy.bind(this)
@@ -23,7 +25,11 @@ class CreateGalleries extends Component{
 componentDidMount(){
 let {user, galleries} = this.props
 const numOfGalleries = galleries.length
-this.setState({author: user, numOfGalleries})
+this.setState({author: user, numOfGalleries}, () => {
+    if(this.state.numOfGalleries === 12){
+        this.setState({maxLimit: true})
+    }
+})
 // Should set author and number of galleries tied to user in state. Immediately throw popup if user has reached limit 12 and disallow the rendering of the create Gallery
 
 
@@ -66,13 +72,13 @@ createNewGallery(){
 const {galleryName, author, thumbnail} = this.state
 if (!galleryName || !author || !thumbnail) return;
 
-// Creates new gallery in database and redirects user to EditGallery component to add their images and captions
-
+// Redirects user to EditGallery component to add their images and captions where they can actually create gallery
+this.props.history.push(`/lobby/${author}/${galleryName}/uploadGallery`)
 
 }
 
 render(props){
-let {author, galleryName, thumbnail, isPrivate, numOfGalleries} = this.state
+let {author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit} = this.state
 // If there are multiple galleries, the spelling should reflect that correctly.
 let spellingGallery;
 if (numOfGalleries === 1){
@@ -81,6 +87,9 @@ if (numOfGalleries === 1){
     spellingGallery = "galleries"
 }
 return(
+    // If maxLimit is true, then user can receives div notifying that galleries must be deleted first in order to create new ones.
+
+
     <section id="create-galleries">
         {/* Inform User of how many galleries he/she has */}
         <div className="user-galleries">
@@ -89,7 +98,8 @@ return(
             <h5>{12 - numOfGalleries} available.</h5>
         </div>
 
-        {/* Initializing a new Gallery */}
+        {/* if maxLimit is true, then notify user. If false, then allow user to continue making gallery name and thumbnail. */}
+    {maxLimit ? <section><h1>Too many galleries.</h1></section> :
         <section className="gallery-initialization">
             <div className="name-gallery">
                 <h2>Your Gallery Name</h2>
@@ -138,9 +148,10 @@ return(
             </div>
             <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
         </section>
+        }
     </section>
     )
 }
 }
 
-export default CreateGalleries
+export default withRouter (CreateGalleries)
