@@ -1,4 +1,5 @@
 drop table if exists gallery_presets;
+drop table if exists captions;
 drop table if exists images;
 drop table if exists gallery_favorites;
 drop table if exists galleries;
@@ -25,12 +26,12 @@ create table galleries(
     times_favorited integer,
     shares integer,
     author text,
-    user_id integer references users(id)
+    user_id integer references users(id) ON DELETE CASCADE
 );
 
 create table gallery_favorites(
     primary key (user_id, favorited),
-    user_id integer references users(id),
+    user_id integer references users(id) ON DELETE CASCADE,
     favorited integer references galleries(id) ON DELETE CASCADE
 );
 
@@ -59,23 +60,23 @@ create table images(
 -- Create Table Images Captions
 create table captions (
     id serial primary key,
-    img1-caption varchar(30),
-    img2-caption varchar(30),
-    img3-caption varchar(30),
-    img4-caption varchar(30),
-    img5-caption varchar(30),
-    img6-caption varchar(30),
-    img7-caption varchar(30),
-    img8-caption varchar(30),
-    img9-caption varchar(30),
-    img10-caption varchar(30),
-    img11-caption varchar(30),
-    img12-caption varchar(30),
-    img13-caption varchar(30),
-    img14-caption varchar(30),
-    img15-caption varchar(30),
-    gallery_id integer references galleries(id) ON DELETE CASCADE
-)
+    img1_caption varchar(30),
+    img2_caption varchar(30),
+    img3_caption varchar(30),
+    img4_caption varchar(30),
+    img5_caption varchar(30),
+    img6_caption varchar(30),
+    img7_caption varchar(30),
+    img8_caption varchar(30),
+    img9_caption varchar(30),
+    img10_caption varchar(30),
+    img11_caption varchar(30),
+    img12_caption varchar(30),
+    img13_caption varchar(30),
+    img14_caption varchar(30),
+    img15_caption varchar(30),
+    images_id integer references images(id) ON DELETE CASCADE
+);
 
 -- Create Table Gallery_Presets
 --Wall-Texture <TEXT>, Floor-Texture <TEXT>, Atmosphere-Lighting <TEXT>, User_id (foreign key to SPK of user)
