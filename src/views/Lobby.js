@@ -25,6 +25,7 @@ class Lobby extends Component {
     componentDidMount() {
         //Validate User on Page as being logged in with session. If not, send back to landingPage; otherwise retrieve user's existing galleries and favorited galleries.
         let user = this.props.match.params.username
+        this.changeWindow('Favorites')
         axios.get(`/api/checkUser/`).then(res => {
             if (res.data !== user) {
                 this.props.history.push('/')
@@ -163,8 +164,24 @@ class Lobby extends Component {
             )
         })
         return (
-            <main id="Lobby">
-                <section className="side-menu">
+            <div className='lobby'>
+                <header className='lobby-header'>
+                    <div className='lobby-header_left'>
+                        <i className="fas fa-bars"></i>
+                        <img src={Icon} onClick={() => this.props.history.push('/')} />
+                        <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                    </div>
+                    {/* <div className='lobby-header_search'>
+                        <input name='header' type='text' />
+                        <div className='center'>
+                            <i className="fas fa-search"></i>
+                        </div>
+                    </div> */}
+                    <div className='lobby-header_right center'>
+                        <span>LOGOUT</span>
+                    </div>
+                </header>
+                {/* <section className="side-menu">
                     <div id="menu-lobby">
                         <div className='menu-header center'>
                             <span>VR<span className='lighttext'>ART GALLERY</span></span>
@@ -177,9 +194,9 @@ class Lobby extends Component {
                         <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}>Help</span>
                         <span className="menu-btn" onClick={() => this.logout()}>Logout</span>
                     </div>
-                </section>
+                </section> */}
 
-                <section style={{ overflowX: 'hidden' }}>
+                <section>
                     <div>
                         {/* Conditionally rendering based on magicWord */}
                         {
@@ -196,8 +213,6 @@ class Lobby extends Component {
                                     </div>
                                     : theMagicWord === 'favorites' ?
                                         <div className='lobby-container_gallery'>
-                                            <input type='text' placeholder='Search Favorites' />
-                                            <div className='lobby-underline' />
                                             {listOfFavorites}
                                         </div>
                                         : theMagicWord === 'account' ?
@@ -211,7 +226,7 @@ class Lobby extends Component {
                         }
                     </div>
                 </section>
-            </main>
+            </div>
         )
     }
 }

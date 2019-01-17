@@ -1,11 +1,86 @@
-#Lobby {
-   position: relative;
-   width: 100vw;
+.lobby {
    font-family: 'Oswald', sans-serif;
 }
 
-/* Mapped Containers */
+/*Header*/
+.lobby-header {
+    width: 100vw;
+    height: 50px;
+    background: rgb(59, 88, 192);
+    position: fixed;
+    top: 0px;
+    padding: 0px 30px;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.80);
+}
 
+.lobby-header_left {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.lobby-header_left > i {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.lobby-header_left > i:hover {
+    color: white;
+}
+
+.lobby-header_left > img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 25px;
+    margin-right: 5px;
+}
+
+.lobby-header_left > span {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.lobby-header_search {
+    width: 500px;
+    height: 60%;
+    background: rgb(8, 36, 138);
+    margin-left: 100px;
+    display: flex;
+}
+
+.lobby-header_search > input {
+    height: 100%;
+    width: 88%;
+    background: inherit;
+    border: none;
+    color: white;
+    padding: 0px 10px;
+    font-family: inherit;
+}
+
+.lobby-header_search > div {
+    width: 12%;
+    height: 100%;
+    font-size: 13px;
+}
+
+.lobby-header_right {
+    height: 100%;
+    width: 100px;
+    position: absolute;
+    right: 0px;
+    font-size: 11px;
+}
+
+.lobby-header_right > span {
+    cursor: pointer;
+}
+
+/* Mapped Containers */
 .gallery-container_lobby {
     width: 100%;
     height: 300px;
@@ -61,7 +136,6 @@
     position: fixed;
     height: 100vh;
     background: rgb(110, 142, 254);
-    /* background: linear-gradient(#5b66e2, #ffffff,); */
     width: 175px;
     left: 0;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
@@ -102,24 +176,4 @@
 
 .menu-back {
     background: rgb(59, 88, 192);
-}
-
-.icon {
-    width: 30px; 
-    height: 30px;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-@media (max-width: 1025px) {
-    .side-menu {
-        visibility: hidden;
-    }
-    .lobby-container_gallery {
-        width: 870px;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        background: blue;
-        padding: 30px 30px;
-    }
 }
