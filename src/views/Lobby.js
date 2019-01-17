@@ -59,19 +59,34 @@ class Lobby extends Component {
         if (magicWord === theMagicWord) return;
         switch (magicWord) {
             case "Create":
-                this.setState({ theMagicWord: 'create' }, () => this.changeNav(magicWord))
+                this.setState({ theMagicWord: 'create' }, () => {
+                    this.changeNav(magicWord)
+                    this.toggleMenu()
+                })
                 break;
             case "Galleries":
-                this.setState({ theMagicWord: 'galleries' }, () => this.changeNav(magicWord))
+                this.setState({ theMagicWord: 'galleries' }, () => {
+                    this.changeNav(magicWord)
+                    this.toggleMenu()
+                })
                 break;
             case "Favorites":
-                this.setState({ theMagicWord: 'favorites' }, () => this.changeNav(magicWord))
+                this.setState({ theMagicWord: 'favorites' }, () => {
+                    this.changeNav(magicWord)
+                    this.toggleMenu()
+                })
                 break;
             case 'Account':
-                this.setState({ theMagicWord: 'account' }, () => this.changeNav(magicWord))
+                this.setState({ theMagicWord: 'account' }, () => {
+                    this.changeNav(magicWord)
+                    this.toggleMenu()
+                })
                 break;
             case 'Help':
-                this.setState({ theMagicWord: 'help' }, () => this.changeNav(magicWord))
+                this.setState({ theMagicWord: 'help' }, () => {
+                    this.changeNav(magicWord)
+                    this.toggleMenu()
+                })
                 break;
         }
     }
@@ -110,6 +125,20 @@ class Lobby extends Component {
             })
         } else {
             this.setState({ deleteConfirm: `${galleryName} was not deleted.` })
+        }
+    }
+
+    toggleMenu = command => {
+        const menu = document.querySelector('.side-menu')
+        if (command === 'open') {
+            menu.classList.add('menu-toggle')
+            menu.classList.remove('menu-slide')
+        }
+        else {
+            menu.classList.add('menu-slide')
+            setTimeout(() => {
+                menu.classList.remove('menu-toggle')
+            }, 500);
         }
     }
 
@@ -167,7 +196,7 @@ class Lobby extends Component {
             <div className='lobby'>
                 <header className='lobby-header'>
                     <div className='lobby-header_left'>
-                        <i className="fas fa-bars"></i>
+                        <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
                         <img src={Icon} onClick={() => this.props.history.push('/')} />
                         <span>VR<span className='lighttext'>ART GALLERY</span></span>
                     </div>
@@ -178,14 +207,16 @@ class Lobby extends Component {
                         </div>
                     </div> */}
                     <div className='lobby-header_right center'>
-                        <span>LOGOUT</span>
+                        <span onClick={() => this.logout()}>LOGOUT</span>
                     </div>
                 </header>
-                {/* <section className="side-menu">
-                    <div id="menu-lobby">
+
+                <section className="side-menu">
+                    <div className="menu-column">
                         <div className='menu-header center'>
+                            <i className="fas fa-bars" onClick={() => this.toggleMenu()}></i>
+                            <img src={Icon} onClick={() => this.props.history.push('/')} />
                             <span>VR<span className='lighttext'>ART GALLERY</span></span>
-                            <img src={Icon} className="icon" onClick={() => this.props.history.push('/')} />
                         </div>
                         <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}>Create</span>
                         <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}>Galleries</span>
@@ -194,9 +225,9 @@ class Lobby extends Component {
                         <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}>Help</span>
                         <span className="menu-btn" onClick={() => this.logout()}>Logout</span>
                     </div>
-                </section> */}
+                </section>
 
-                <section>
+                <main>
                     <div>
                         {/* Conditionally rendering based on magicWord */}
                         {
@@ -225,7 +256,7 @@ class Lobby extends Component {
                                             </div>
                         }
                     </div>
-                </section>
+                </main>
             </div>
         )
     }
