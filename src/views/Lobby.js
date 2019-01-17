@@ -44,7 +44,7 @@ class Lobby extends Component {
 
     componentWillUnmount() {
         const body = document.querySelector('html'),
-        overlay = document.querySelector('.lobby-overlay')
+            overlay = document.querySelector('.lobby-overlay')
         body.classList.remove('lobby-main-hide')
         overlay.removeEventListener('click', () => this.toggleMenu())
     }
@@ -67,6 +67,8 @@ class Lobby extends Component {
         switch (magicWord) {
             case "Create":
                 this.setState({ theMagicWord: 'create' }, () => {
+                    const header = document.querySelector('.lobby-header_search')
+                    header.style.visibility = 'hidden'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
@@ -74,6 +76,8 @@ class Lobby extends Component {
             case "Galleries":
                 this.pageTop(magicWord)
                 this.setState({ theMagicWord: 'galleries' }, () => {
+                    const header = document.querySelector('.lobby-header_search')
+                    header.style.visibility = 'visible'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
@@ -81,18 +85,24 @@ class Lobby extends Component {
             case "Favorites":
                 this.pageTop(magicWord)
                 this.setState({ theMagicWord: 'favorites' }, () => {
+                    const header = document.querySelector('.lobby-header_search')
+                    header.style.visibility = 'visible'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
                 break;
             case 'Account':
                 this.setState({ theMagicWord: 'account' }, () => {
+                    const header = document.querySelector('.lobby-header_search')
+                    header.style.visibility = 'hidden'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
                 break;
             case 'Help':
                 this.setState({ theMagicWord: 'help' }, () => {
+                    const header = document.querySelector('.lobby-header_search')
+                    header.style.visibility = 'hidden'
                     this.changeNav(magicWord)
                     this.toggleMenu()
                 })
@@ -221,12 +231,12 @@ class Lobby extends Component {
                         <img src={Icon} onClick={() => this.props.history.push('/')} />
                         <span>VR<span className='lighttext'>ART GALLERY</span></span>
                     </div>
-                    {/* <div className='lobby-header_search'>
-                        <input name='header' type='text' />
+                    <div className='lobby-header_search'>
+                        <input name='header' type='text' placeholder='Search' />
                         <div className='center'>
                             <i className="fas fa-search"></i>
                         </div>
-                    </div> */}
+                    </div>
                     <div className='lobby-header_right center'>
                         <span onClick={() => this.logout()}>LOGOUT</span>
                     </div>

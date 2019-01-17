@@ -42,6 +42,7 @@
     padding: 0px 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
     color: rgba(255, 255, 255, 0.80);
 }
 
@@ -50,6 +51,8 @@
     height: 100%;
     display: flex;
     align-items: center;
+    position: fixed;
+    left: 20px;
 }
 
 .lobby-header_left > i {
@@ -78,22 +81,28 @@
     width: 500px;
     height: 60%;
     background: rgb(8, 36, 138);
-    margin-left: 100px;
+    margin-left: 50px;
     display: flex;
+    visibility: hidden;
 }
 
 .lobby-header_search > input {
     height: 100%;
-    width: 88%;
+    width: 90%;
     background: inherit;
     border: none;
-    color: white;
+    color: rgba(255, 255, 255, 0.80);
     padding: 0px 10px;
     font-family: inherit;
+    font-weight: 300;
+}
+
+.lobby-header_search > input::placeholder {
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .lobby-header_search > div {
-    width: 12%;
+    width: 10%;
     height: 100%;
     font-size: 13px;
 }
@@ -269,6 +278,8 @@
     border: 1px white solid;
 }
 
+/* Queries to make card grid work on mobile */
+
 @media (max-width: 1240px) {
     .lobby-card-grid {
         padding: 100px 40px;
@@ -292,5 +303,6 @@
     .lobby-card-grid {
         padding: 100px 20px;
         width: 310px;
+        padding-bottom: 25px;
     }
 }
