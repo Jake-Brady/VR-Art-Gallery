@@ -268,3 +268,29 @@
     height: 15px;
     border: 1px white solid;
 }
+
+@media (max-width: 1240px) {
+    .lobby-card-grid {
+        padding: 100px 40px;
+        width: 1160px;
+    }
+}
+
+@media (max-width: 1160px) {
+    .lobby-card-grid {
+        width: 890px;
+    }
+}
+
+@media (max-width: 890px) {
+    .lobby-card-grid {
+        width: 620px;
+    }
+}
+
+@media (max-width: 620px) {
+    .lobby-card-grid {
+        padding: 100px 20px;
+        width: 310px;
+    }
+}
