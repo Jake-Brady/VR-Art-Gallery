@@ -3,6 +3,7 @@ import '../Styles/favorites.css'
 
 const Favorites = (props) => {
    let { id, image, views, shares, favoriteNum, visitGallery, galleryName, author } = props
+   console.log(galleryName)
    return (
       <div key={id} className="gallery-container">
          <img src={image} alt="gallery thumbnail" className="gallery-thumbnail" />

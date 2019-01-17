@@ -126,7 +126,7 @@ class Lobby extends Component {
             const shares = e.shares;
             const favoriteNum = e.times_favorited;
             // const galleryName = e.gallery_name;
-            const galleryName = e.name
+            const galleryName = e.gallery_name
             const galleryAuthor = e.author;
             return (
                     <Favorites

@@ -21,7 +21,6 @@ class CreateGalleries extends Component{
     }
 
 componentDidMount(){
-console.log(this.props)
 let {user, galleries} = this.props
 const numOfGalleries = galleries.length
 this.setState({author: user, numOfGalleries})
@@ -66,6 +65,10 @@ createNewGallery(){
 // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
 const {galleryName, author, thumbnail} = this.state
 if (!galleryName || !author || !thumbnail) return;
+
+// Creates new gallery in database and redirects user to EditGallery component to add their images and captions
+
+
 }
 
 render(props){
