@@ -43,8 +43,10 @@ class Lobby extends Component {
     }
 
     componentWillUnmount() {
-        const body = document.querySelector('html')
+        const body = document.querySelector('html'),
+        overlay = document.querySelector('.lobby-overlay')
         body.classList.remove('lobby-main-hide')
+        overlay.removeEventListener('click', () => this.toggleMenu())
     }
 
     changeNav = current => {
@@ -144,11 +146,13 @@ class Lobby extends Component {
             menu.classList.remove('menu-slide')
             overlay.style.visibility = 'visible'
             body.classList.add('lobby-main-hide')
+            overlay.addEventListener('click', () => this.toggleMenu())
         }
         else {
             menu.classList.add('menu-slide')
             overlay.style.visibility = 'hidden'
             body.classList.remove('lobby-main-hide')
+            overlay.removeEventListener('click', () => this.toggleMenu())
             setTimeout(() => {
                 menu.classList.remove('menu-toggle')
             }, 500);
@@ -164,14 +168,14 @@ class Lobby extends Component {
         const { favoritedGalleries, usersGalleries, theMagicWord } = this.state
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
-            const image = e.thumbnail;
-            const key = e.id;
-            const views = e.views;
-            const shares = e.shares;
-            const favoriteNum = e.times_favorited;
-            // const galleryName = e.gallery_name;
-            const galleryName = e.name
-            const galleryAuthor = e.author;
+            const image = e.thumbnail,
+                key = e.id,
+                views = e.views,
+                shares = e.shares,
+                favoriteNum = e.times_favorited,
+                // const galleryName = e.gallery_name;
+                galleryName = e.name,
+                galleryAuthor = e.author;
             return (
                 <Favorites
                     id={key}
