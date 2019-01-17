@@ -22,6 +22,16 @@
    font-family: 'Oswald', sans-serif;
 }
 
+.lobby-overlay {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    position: fixed;
+    opacity: .2;
+    z-index: 1;
+    visibility: hidden;
+}
+
 /*Header*/
 .lobby-header {
     width: 100vw;
@@ -29,7 +39,7 @@
     background: rgb(59, 88, 192);
     position: fixed;
     top: 0px;
-    padding: 0px 30px;
+    padding: 0px 20px;
     display: flex;
     align-items: center;
     color: rgba(255, 255, 255, 0.80);
@@ -113,6 +123,7 @@
     left: 0;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
     visibility: hidden;
+    z-index: 2;
 }
 
 .menu-column {
@@ -128,8 +139,10 @@
     width: 100%;
     height: 50px;
     color: rgba(255, 255, 255, 0.80);
-    padding-left: 12px;
     font-size: 14px;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
 }
 
 .menu-header > i {
@@ -155,8 +168,8 @@
 
 .menu-btn {
     width: 100%;
-    height: 70px;
-    padding: 10px;
+    height: 50px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     color: rgba(255, 255, 255, 0.9);
@@ -164,6 +177,11 @@
     overflow: hidden;
     cursor: pointer;
     letter-spacing: .5px;
+    font-size: 13px;
+}
+
+.menu-btn-first {
+    margin-top: 15px;
 }
 
 .menu-btn:hover {
@@ -172,6 +190,11 @@
 
 .menu-back {
     background: rgb(94, 82, 209);
+}
+
+.menu-icon {
+    margin-right: 35px;
+    width: 5px;
 }
 
 .menu-toggle {
@@ -186,6 +209,11 @@
 }
 
 /* Mapped Containers */
+
+.lobby-main-hide {
+    overflow: hidden;
+}
+
 .gallery-container_lobby {
     width: 100%;
     height: 300px;

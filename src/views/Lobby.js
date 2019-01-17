@@ -42,6 +42,11 @@ class Lobby extends Component {
         })
     }
 
+    componentWillUnmount() {
+        const body = document.querySelector('html')
+        body.classList.remove('lobby-main-hide')
+    }
+
     changeNav = current => {
         document.querySelectorAll('[data-tab]').forEach(tab => {
             if (tab.innerText === current) {
@@ -129,13 +134,19 @@ class Lobby extends Component {
     }
 
     toggleMenu = command => {
-        const menu = document.querySelector('.side-menu')
+        const menu = document.querySelector('.side-menu'),
+        overlay = document.querySelector('.lobby-overlay'),
+        body = document.querySelector('html')
         if (command === 'open') {
             menu.classList.add('menu-toggle')
             menu.classList.remove('menu-slide')
+            overlay.style.visibility = 'visible'
+            body.classList.add('lobby-main-hide')
         }
         else {
             menu.classList.add('menu-slide')
+            overlay.style.visibility = 'hidden'
+            body.classList.remove('lobby-main-hide')
             setTimeout(() => {
                 menu.classList.remove('menu-toggle')
             }, 500);
@@ -194,6 +205,7 @@ class Lobby extends Component {
         })
         return (
             <div className='lobby'>
+                <div className='lobby-overlay' />
                 <header className='lobby-header'>
                     <div className='lobby-header_left'>
                         <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
@@ -213,21 +225,22 @@ class Lobby extends Component {
 
                 <section className="side-menu">
                     <div className="menu-column">
-                        <div className='menu-header center'>
+                        <div className='menu-header'>
                             <i className="fas fa-bars" onClick={() => this.toggleMenu()}></i>
                             <img src={Icon} onClick={() => this.props.history.push('/')} />
                             <span>VR<span className='lighttext'>ART GALLERY</span></span>
                         </div>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}>Create</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}>Galleries</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}>Favorites</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}>Account</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}>Help</span>
-                        <span className="menu-btn" onClick={() => this.logout()}>Logout</span>
+                        <span data-tab className="menu-btn menu-btn-first" onClick={() => this.props.history.push('/')}><i className="fas fa-home menu-icon"></i>Home</span>
+                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}><i className="fas fa-plus menu-icon"></i>Create</span>
+                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries</span>
+                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites</span>
+                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-user menu-icon"></i>Account</span>
+                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>Help</span>
+                        <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
                     </div>
                 </section>
 
-                <main>
+                <main className='lobby-main'>
                     <div>
                         {/* Conditionally rendering based on magicWord */}
                         {
