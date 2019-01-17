@@ -1,7 +1,66 @@
 const bcrypt = require('bcryptjs')
 
-
 module.exports={
+    getAllGalleries: (req, res, next) => {
+        // offset variable destructured from params to be passed as offset in query
+        const {offset} = req.params
+        const {userId} = req.session
+        // get all galleries for non-registered users.
+        const db = req.app.get('db')
+        db.get_all_public_galleries([offset]).then(galleries => {
+            // Checks to see whether user is logged in to retrieve favorites along with galleries to compare on client side.
+            if (userId){
+               db.get_favorites([userId]).then(favorited => {
+                   res.status(200).send(favorited)
+               }).catch(err => {
+                   console.log(err)
+                   res.status(500).send(err)
+               })
+            }
+            res.status(200).send(galleries)}).catch(err => {
+                console.log(err)
+                res.status(500).send(err)
+            })
+
+            
+    },
+    addToFavorites: (req, res, next) =>{
+        let {galleryId} = req.params
+        let {userId} = req.session
+        const db = req.app.get('db')
+        console.log(galleryId, 'this is galleryID')
+        console.log(userId, 'this is user id pulled off of req.session')
+        db.add_to_favorites([userId, galleryId]).then(favorited => {
+            res.status(200).send(favorited)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
+    deleteFromFavorites: (req, res, next) => {
+        let {galleryId} = req.params
+        let {userId} = req.session
+        const db = req.app.get('db')
+        console.log(galleryId, 'this is galleryID')
+        console.log(userId, 'this is user id pulled off of req.session')
+        db.delete_from_favorites([userId, galleryId]).then(deleted => {
+            res.status(200).send(deleted)
+        }).catch(err => {
+            console.log(err)
+            res.status(500). send(err)
+        })
+    },
+    incrementView: (req, res, next) => {
+        let {galleryId} = req.params
+        console.log(galleryId)
+        const db = req.app.get('db')
+        db.increment_view([galleryId]).then(view => {
+            res.status(200).send(view)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
     registerUser: (req,res,next) => {
         let {firstName, lastName, username, email, password} = req.body
         //Salt and Hash password
@@ -44,7 +103,9 @@ module.exports={
                 //if the password is correct, validPassword will become truthy
                 if (validPassword) {
                     req.session.user
+                    req.session.userId
                     req.session.user = user[0].username
+                    req.session.userId = user[0].id
                     res.status(200).send(user[0])
                 } else {
                 //if password is incorrect, validPassword would be falsy and send wrong password.
