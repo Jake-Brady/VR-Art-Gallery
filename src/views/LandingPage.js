@@ -3,6 +3,7 @@ import '../Styles/Views/LandingPage.css'
 import VRVideo from '../assets/video/VR-Trailer.mp4'
 import Splat from '../Styles/Media/yoinkminenow.png'
 import axios from 'axios'
+import $ from 'jquery'
 
 class LandingPage extends Component {
     constructor(props) {
@@ -61,16 +62,30 @@ class LandingPage extends Component {
         }
     }, 150)
 
-    handleClick = target => {
-        if (target === 'gallery') {
-            const main = document.querySelector('.landing-main')
-            main.scrollIntoView()
-        }
-        else if (target === 'top') {
-            const top = document.querySelector('.home')
-            top.scrollIntoView()
-        }
-    }
+    // handleClick = target => {
+    //     if (target === 'gallery') {
+    //         const main = document.querySelector('.landing-main')
+    //         main.scrollIntoView()
+    //     }
+    //     else if (target === 'top') {
+    //         const top = document.querySelector('.home')
+    //         top.scrollIntoView()
+    //     }
+    // }
+
+    smoothScroll(target){
+        if (target === 'gallery'){
+        const galleries = $('.landing-galleries').position().top;
+        $('html, body').animate({
+            scrollTop: galleries
+        }, 300)
+    } else if (target === 'home') {
+        const home = $('.home').position().top;
+        $('html, body').animate({
+            scrollTop: home
+        }, 300)
+    }}
+
 
     handleSign = type => {
         if (type === 'login') this.props.history.push('/login')
@@ -127,7 +142,7 @@ class LandingPage extends Component {
                                 <div className='landing-welcome_body'>
                                     <h1>Walk around and see cool shit in VR</h1>
                                     <h3>Make your own or browse other galleries</h3>
-                                    <div className='center' onClick={() => this.handleClick('gallery')}>VIEW GALLERIES</div>
+                                    <div className='center' onClick={() => this.smoothScroll('gallery')}>VIEW GALLERIES</div>
                                     <div className='video-container center'>
                                         <video controls src={VRVideo} alt="trailer of VR-Art-Gallery"></video>
                                     </div>
@@ -138,7 +153,7 @@ class LandingPage extends Component {
                             <div className='landing-galleries'>
                                 {galleryArray}
                             </div>
-                            <div className='landing-back center' onClick={() => this.handleClick('top')}>
+                            <div className='landing-back center' onClick={() => this.smoothScroll('home')}>
                                 <i className="fas fa-arrow-up"></i>
                             </div>
                         </main>
