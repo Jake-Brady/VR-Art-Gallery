@@ -2,27 +2,65 @@ import React, {Component} from 'react'
 import Dropzone from 'react-dropzone'
 import {v4 as randomStringGenerator} from 'uuid';
 import {GridLoader} from 'react-spinners'
+import axios from 'axios'
 
 class EditGalleries extends Component{
     constructor(){
         super()
             this.state={
                 images: [],
+                galleryPresets: [],
                 isUploading: false,
-                url: 'http://via.placeholder.com/450x450'
+                url: 'http://via.placeholder.com/450x450',
+                image1: '',
+                image1Caption: '',
+                image2: '',
+                image2Caption: '',
+                image3: '',
+                image3Caption: '',
+                image4: '',
+                image4Caption: '',
+                image5: '',
+                image5Caption: '',
+                image6: '',
+                image6Caption: '',
+                Image7: '',
+                Image7Caption: '',
+                Image8: '',
+                Image8Caption: '',
+                Image9: '',
+                Image9Caption: '',
+                Image10: '',
+                Image10Caption: '',
+                Image11: '',
+                Image11Caption: '',
+                Image12: '',
+                Image12Caption: '',
+                Image13: '',
+                Image13Caption: '',
+                Image14: '',
+                Image14Caption: '',
+                Image15: '',
+                Image15Caption: '',
+                
             }
     }
 
 componentDidMount(){
+//Needs to confirm whether user is logged in and is the author. If not, redirects the user back to landingPage.
+let user = this.props.match.params.username
+axios.get(`/api/checkUser/`).then(res => {
+    if (res.data !== user) {
+        this.props.history.push('/')
+    }
+}, () => {
 // Needs to take in the galleryID and retrieve all associated images from images table for it, along with presets, and general info related to it.
-console.log(this.props)
-let {user} = this.props
-console.log(user)
-//axios GET user's existing images and set to array in order they appear in table to match frames1 through 15.
-axios.get(`/api/getUserImages/${user}`).then(res => {
-    console.log(res.data)
-    this.setState({images: res.data})
+axios.get()
+
 })
+
+
+
 }
 
 getSignedRequest = ([file]) => {
@@ -37,11 +75,11 @@ onDrop(files) {
     this.setState({files});
   }
 
-  onCancel() {
+onCancel() {
     this.setState({
       files: []
     });
-  }
+}
 
 
 render(){
