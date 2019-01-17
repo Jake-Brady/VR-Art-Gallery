@@ -27,8 +27,12 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
 
     /* VR-Art-Gallery Endpoints */
     //Landing Page - Register/Login
+    app.get('/api/getAllGalleries/:offset', ctrl.getAllGalleries)
     app.post('/api/registerUser', ctrl.registerUser)
     app.post('/api/login', ctrl.login)
+    app.put('/api/incrementView/:galleryId', ctrl.incrementView)
+    app.post('/api/addToFavorites/:galleryId', ctrl.addToFavorites)
+    app.delete('/api/deleteFromFavorites/:galleryId', ctrl.deleteFromFavorites)
 
     //Lobby
     app.get('/api/checkUser/', ctrl.checkUser)
