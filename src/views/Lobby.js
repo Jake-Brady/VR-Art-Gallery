@@ -177,14 +177,13 @@ class Lobby extends Component {
         const { favoritedGalleries, usersGalleries, theMagicWord } = this.state
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
-            const image = e.thumbnail,
-                key = e.id,
-                views = e.views,
-                shares = e.shares,
-                favoriteNum = e.times_favorited,
-                // const galleryName = e.gallery_name;
-                galleryName = e.name,
-                galleryAuthor = e.author;
+            const image = e.thumbnail;
+            const key = e.id;
+            const views = e.views;
+            const shares = e.shares;
+            const favoriteNum = e.times_favorited;
+            const galleryName = e.gallery_name;
+            const galleryAuthor = e.author;
             return (
                 <Favorites
                     id={key}
@@ -200,26 +199,27 @@ class Lobby extends Component {
         })
 
         const galleryContainers = usersGalleries.map((e) => {
-            // const is_private_string = e.is_private.toString();
-            const key = e.id,
-                image = e.thumbnail,
-                views = e.views,
-                favoriteNum = e.times_favorited,
-                author = e.author,
-                galleryName = e.gallery_name
+            console.log(e.is_private)
+            const isPrivate = (e.is_private === 'true');
+            const key = e.id;
+            const image = e.thumbnail;
+            const views = e.views;
+            const favoriteNum = e.times_favorited;
+            const author = e.author
+            const galleryName = e.gallery_name
             return (
-                <Galleries
-                    galleryName={galleryName}
-                    // private={is_private_string}
-                    id={key}
-                    image={image}
-                    views={views}
-                    author={author}
-                    favoriteNum={favoriteNum}
-                    visitGallery={this.visitGallery}
-                    editGallery={this.editGallery}
-                    deleteGallery={this.deleteGallery}
-                />
+                    <Galleries
+                        galleryName={galleryName}
+                        isPrivate={isPrivate}
+                        id={key}
+                        image={image}
+                        views={views}
+                        author={author}
+                        favoriteNum={favoriteNum}
+                        visitGallery={this.visitGallery}
+                        editGallery={this.editGallery}
+                        deleteGallery={this.deleteGallery}
+                    />
             )
         })
         return (

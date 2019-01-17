@@ -2,8 +2,7 @@ import React from 'react'
 import '../Styles/galleries.css'
 
 const Galleries = (props) => {
-    let {id, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery } = props
-    console.log(id)
+    let {id, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery, isPrivate } = props
     return(
         <div key={id} className="gallery-container">
             <img src={image} alt="gallery thumbnail" className="gallery-thumbnail" />
@@ -11,6 +10,8 @@ const Galleries = (props) => {
                 <h1 className='gallery-title'>{galleryName}</h1>
                 <h3 className='gallery-author'>BY: {author}</h3>
                 <div className='gallery-stats'>
+                {/* if isPrivate is truthy, then lock icon will appear. If false, it will be unlocked icon. */}
+                    {isPrivate ? <><i className="fas fa-lock stat"></i> <span>Private</span></> : <><i className="fas fa-unlock stat"></i> <span>Public</span> </>}
                     <i className="fas fa-eye stat"></i>
                     <span>{views}</span>
                     <i className="fas fa-heart stat"></i>

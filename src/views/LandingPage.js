@@ -83,7 +83,7 @@ class LandingPage extends Component {
         const home = $('.home').position().top;
         $('html, body').animate({
             scrollTop: home
-        }, 300)
+        }, 500)
     }}
 
 
