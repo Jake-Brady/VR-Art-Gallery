@@ -34,11 +34,11 @@ class Lobby extends Component {
             } else {
                 //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
                 axios.get('/api/retrieveGalleries/').then(res => {
-                    // this.setState({usersGalleries: res.data, theMagicWord:'create'}, () => {
-                    //     axios.get('/api/getFavorites/').then(res => {
-                    //         this.setState({favoritedGalleries: res.data})
-                    //     })
-                    // })
+                    this.setState({usersGalleries: res.data, theMagicWord:'create'}, () => {
+                        axios.get('/api/getFavorites/').then(res => {
+                            this.setState({favoritedGalleries: res.data})
+                        })
+                    })
                 })
             }
         })
@@ -116,6 +116,7 @@ class Lobby extends Component {
     }
 
     render() {
+        console.log(this.state)
         const { favoritedGalleries, usersGalleries, theMagicWord } = this.state
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
@@ -187,7 +188,10 @@ class Lobby extends Component {
                         {
                             theMagicWord === 'create' ?
                                 <div>
-                                    <CreateGalleries user={this.props.match.params.username}/>
+                                    <CreateGalleries 
+                                    user={this.props.match.params.username}
+                                    galleries={usersGalleries}
+                                    />
                                 </div>
                                 : theMagicWord === 'galleries' ?
                                     <div className='lobby-container_gallery'>
