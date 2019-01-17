@@ -125,8 +125,7 @@ class Lobby extends Component {
             const views = e.views;
             const shares = e.shares;
             const favoriteNum = e.times_favorited;
-            // const galleryName = e.gallery_name;
-            const galleryName = e.gallery_name
+            const galleryName = e.gallery_name;
             const galleryAuthor = e.author;
             return (
                     <Favorites
@@ -143,7 +142,8 @@ class Lobby extends Component {
         })
 
         const galleryContainers = usersGalleries.map((e) => {
-            // const is_private_string = e.is_private.toString();
+            console.log(e.is_private)
+            const isPrivate = (e.is_private === 'true');
             const key = e.id;
             const image = e.thumbnail;
             const views = e.views;
@@ -153,7 +153,7 @@ class Lobby extends Component {
             return (
                     <Galleries
                         galleryName={galleryName}
-                        // private={is_private_string}
+                        isPrivate={isPrivate}
                         id={key}
                         image={image}
                         views={views}
