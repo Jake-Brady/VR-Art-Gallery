@@ -1,10 +1,225 @@
-#Lobby {
-   position: relative;
-   width: 100vw;
+/* Animations for side menu */
+
+@keyframes slideIn {
+    0% {
+        margin-left: -100%;
+    }
+    60% {
+        margin-left: 0%;
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        margin-left: 0%;
+    }
+    100% {
+        margin-left: -100%;
+    }
+}
+
+.lobby {
    font-family: 'Oswald', sans-serif;
 }
 
+.lobby-overlay {
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    position: fixed;
+    opacity: .2;
+    z-index: 1;
+    visibility: hidden;
+}
+
+/*Header*/
+.lobby-header {
+    width: 100vw;
+    height: 50px;
+    background: rgb(59, 88, 192);
+    position: fixed;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.lobby-header_left {
+    width: 200px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    left: 20px;
+}
+
+.lobby-header_left > i {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.lobby-header_left > i:hover {
+    color: white;
+}
+
+.lobby-header_left > img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 25px;
+    margin-right: 5px;
+}
+
+.lobby-header_left > span {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.lobby-header_search {
+    width: 500px;
+    height: 60%;
+    background: rgb(8, 36, 138);
+    display: flex;
+    visibility: hidden;
+}
+
+.lobby-header_search > input {
+    height: 100%;
+    width: 90%;
+    background: inherit;
+    border: none;
+    color: rgba(255, 255, 255, 0.80);
+    padding: 0px 10px;
+    font-family: inherit;
+    font-weight: 300;
+}
+
+.lobby-header_search > input::placeholder {
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.lobby-header_search > div {
+    width: 10%;
+    height: 100%;
+    font-size: 13px;
+}
+
+.lobby-header_right {
+    height: 100%;
+    width: 100px;
+    position: absolute;
+    right: 0px;
+    font-size: 11px;
+}
+
+.lobby-header_right > span {
+    cursor: pointer;
+}
+
+.lobby-header_right > span:hover {
+    color: white;
+}
+
+/* Side Menu */
+.side-menu {
+    position: fixed;
+    height: 100vh;
+    background: rgb(110, 142, 254);
+    width: 200px;
+    left: 0;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
+    visibility: hidden;
+    z-index: 2;
+}
+
+.menu-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.menu-header {
+    background: rgb(59, 88, 192);
+    width: 100%;
+    height: 50px;
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 14px;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.menu-header > i {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.menu-header > img {
+    width: 20px;
+    height: 20px;
+    margin-left: 25px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.menu-header > span {
+    cursor: pointer;
+}
+
+.menu-header > span:hover, .menu-header > i:hover {
+    color: white;
+}
+
+.menu-btn {
+    width: 100%;
+    height: 50px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+    overflow: hidden;
+    cursor: pointer;
+    letter-spacing: .5px;
+    font-size: 13px;
+}
+
+.menu-btn-first {
+    margin-top: 15px;
+}
+
+.menu-btn:hover {
+    background: rgb(76, 103, 201);
+}
+
+.menu-back {
+    background: rgb(94, 82, 209);
+}
+
+.menu-icon {
+    margin-right: 35px;
+    width: 5px;
+}
+
+.menu-toggle {
+    visibility: visible;
+    animation: slideIn .5s 1;
+    animation-fill-mode: forwards;
+}
+
+.menu-slide {
+    animation: slideOut .5s 1;
+    animation-fill-mode: forwards;
+}
+
 /* Mapped Containers */
+
+.lobby-main-hide {
+    overflow: hidden;
+}
 
 .gallery-container_lobby {
     width: 100%;
@@ -13,15 +228,46 @@
     flex-direction: column;
     align-items: center;
     background: rgb(110, 142, 254);
-    overflow-x: hidden !important;
 }
 
 .lobby-container_gallery {
-    width: 1780px;
-    margin-left: 175px;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.lobby-card-grid {
+    width: 1240px;
     display: flex;
     flex-flow: row wrap;
-    padding: 30px 80px;
+    padding: 100px 80px;
+    padding-bottom: 50px;
+}
+
+.lobby-container_gallery > input {
+    position: absolute;
+    top: 30px;
+    left: 265px;
+    height: 30px;
+    width: 250px;
+    padding: 0px 10px;
+    font-family: 'Montserrat';
+    border: none;
+    color: black;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.155), 0 1px 1px rgba(0, 0, 0, 0.155);
+
+}
+
+.lobby-container_gallery > input::placeholder {
+    color: black;
+}
+
+.lobby-underline {
+    position: absolute;
+    top: 85px;
+    left: 265px;
+    width: calc(100vw - 365px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.137);
 }
 
 .container-btn {
@@ -30,61 +276,40 @@
     border: 1px white solid;
 }
 
-/* Side Menu */
-.side-menu {
-    position: fixed;
-    height: 100vh;
-    background: rgb(110, 142, 254);
-    width: 175px;
-    left: 0;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
+/* Queries to make card grid work on mobile */
+
+@media (max-width: 1240px) {
+    .lobby-card-grid {
+        padding: 100px 40px;
+        width: 1160px;
+    }
 }
 
-.menu-header {
-    background: rgb(59, 88, 192);
-    width: 100%;
-    height: 75px;
-    color: white;
+@media (max-width: 1160px) {
+    .lobby-card-grid {
+        width: 890px;
+    }
+    .lobby-header_search {
+        width: 400px;
+    }
 }
 
-#menu-lobby {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
+@media (max-width: 890px) {
+    .lobby-card-grid {
+        width: 620px;
+    }
+    .lobby-header_search {
+        width: 275px;
+    }
 }
 
-.menu-btn {
-    width: 100%;
-    height: 75px;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    color: white;
-    font-weight: 300;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.menu-btn:hover {
-    background: rgb(93, 120, 216);
-}
-
-.menu-back {
-    background: rgb(59, 88, 192);
-}
-
-.icon {
-    width: 30px; 
-    height: 30px;
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-@media (max-width: 1955px) {
-    .lobby-container_gallery {
-        background: blue;
-        width: 1510px;
+@media (max-width: 620px) {
+    .lobby-card-grid {
+        padding: 100px 20px;
+        width: 310px;
+        padding-bottom: 25px;
+    }
+    .lobby-header_left > img, .lobby-header_left > span, .lobby-header_right {
+        display: none;
     }
 }

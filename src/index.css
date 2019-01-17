@@ -5,7 +5,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 input:focus {

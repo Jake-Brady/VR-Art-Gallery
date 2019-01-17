@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import {withRouter} from 'react-router-dom'
 import {v4 as randomStringGenerator} from 'uuid';
@@ -6,8 +6,8 @@ import {GridLoader} from 'react-spinners'
 import '../Styles/createGalleries.css'
 import axios from 'axios';
 
-class CreateGalleries extends Component{
-    constructor(props){
+class CreateGalleries extends Component {
+    constructor(props) {
         super(props)
             this.state={
                 galleryName: '',
@@ -33,39 +33,39 @@ this.setState({author: user, numOfGalleries}, () => {
 // Should set author and number of galleries tied to user in state. Immediately throw popup if user has reached limit 12 and disallow the rendering of the create Gallery
 
 
-}
+    }
 
-handleChange(e){
-this.setState({
-[e.target.name]: e.target.value
-})
-}
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
 
-setPrivacy(par){
-if(par === 'private'){
-    this.setState({isPrivate: true})
-} else {
-    this.setState({isPrivate: false})
-}
-}
+    setPrivacy = par => {
+        if (par === 'private') {
+            this.setState({ isPrivate: true })
+        } else {
+            this.setState({ isPrivate: false })
+        }
+    }
 
-getSignedRequest = ([file]) => {
+    getSignedRequest = ([file]) => {
 
-}
+    }
 
-uploadFile = (file, signRequest, url) => {
+    uploadFile = (file, signRequest, url) => {
 
-}
+    }
 
-onDrop(files) {
-    this.setState({files});
-  }
+    onDrop(files) {
+        this.setState({ files });
+    }
 
-onCancel() {
-this.setState({
-    files: []
-});
-}
+    onCancel() {
+        this.setState({
+            files: []
+        });
+    }
 
 createNewGallery(){
 // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
