@@ -11,7 +11,7 @@ const Galleries = (props) => {
                 <h3 className='gallery-author'>BY: {author}</h3>
                 <div className='gallery-stats'>
                 {/* if isPrivate is truthy, then lock icon will appear. If false, it will be unlocked icon. */}
-                    {isPrivate ? <i className="fas fa-lock stat"></i> : <i className="fas fa-unlock stat"></i>}
+                    {isPrivate ? <><i className="fas fa-lock stat"></i> <span>Private</span></> : <><i className="fas fa-unlock stat"></i> <span>Public</span> </>}
                     <i className="fas fa-eye stat"></i>
                     <span>{views}</span>
                     <i className="fas fa-heart stat"></i>
