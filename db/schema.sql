@@ -56,6 +56,27 @@ create table images(
     gallery_id integer references galleries(id) ON DELETE CASCADE
 );
 
+-- Create Table Images Captions
+create table captions (
+    id serial primary key,
+    img1-caption varchar(30),
+    img2-caption varchar(30),
+    img3-caption varchar(30),
+    img4-caption varchar(30),
+    img5-caption varchar(30),
+    img6-caption varchar(30),
+    img7-caption varchar(30),
+    img8-caption varchar(30),
+    img9-caption varchar(30),
+    img10-caption varchar(30),
+    img11-caption varchar(30),
+    img12-caption varchar(30),
+    img13-caption varchar(30),
+    img14-caption varchar(30),
+    img15-caption varchar(30),
+    gallery_id integer references galleries(id) ON DELETE CASCADE
+)
+
 -- Create Table Gallery_Presets
 --Wall-Texture <TEXT>, Floor-Texture <TEXT>, Atmosphere-Lighting <TEXT>, User_id (foreign key to SPK of user)
 create table gallery_presets(
