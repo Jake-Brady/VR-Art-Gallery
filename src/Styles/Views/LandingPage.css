@@ -225,6 +225,14 @@
     margin-right: 3px;
 }
 
+.fa-heart, .fa-share:hover{
+    cursor: pointer;
+}
+
+.make-red {
+    color: #8B0000;
+}
+
 .gallery-view {
     width: 100%;
     height: 30px;
