@@ -200,6 +200,19 @@ class LandingPage extends Component {
       }
     }
 
+    shareGallery(galleryName, author){
+    const location = window.location
+    // Check for spaces in galleryName and author function - and replace with %20 for url to understand destination
+    const galleryDestination = galleryName.replace(" ", "%20");
+    const authorDestination = author.replace(" ", "%20");
+    let destination = `${location}${galleryDestination}/${authorDestination}`
+    console.log(destination)
+    }
+
+    urlSpaceCleaner(){
+
+    }
+
     render() {
         console.log(this.state.galleries)
         const galleryArray = this.state.galleries.map(gallery => {
