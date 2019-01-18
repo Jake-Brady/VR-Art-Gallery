@@ -32,73 +32,73 @@ username, password, email, first_name, last_name
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 2', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 2', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 3', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 3', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 4', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 4', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 5', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 5', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 6', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 6', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 7', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 7', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 8', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 8', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 9', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 9', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 10', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 10', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 11', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 11', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 12', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test', 1
+'test gallery 12', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
 );
 
 -- images for User - Test/Galleries
@@ -240,19 +240,19 @@ wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test2 gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test2', 2
+'test2 gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test2', 2
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test2 gallery 2', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test2', 2
+'test2 gallery 2', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test2', 2
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test2 gallery 3', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 0, 0, 'test2', 2
+'test2 gallery 3', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test2', 2
 );
 
 insert into images
@@ -293,19 +293,19 @@ wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 insert into galleries (
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'artsy_kid gallery', 'https://www.billboard.com/files/styles/900_wide/public/media/29-tyler-the-creator-flower-boy-album-art-2017-billboard-1240.jpg', false, 0, 0, 0, 'artsy_kid', 3
+'artsy_kid gallery', 'https://www.billboard.com/files/styles/900_wide/public/media/29-tyler-the-creator-flower-boy-album-art-2017-billboard-1240.jpg', false, 0, 1, 0, 'artsy_kid', 3
 );
 
 insert into galleries (
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'artsy_kid gallery 2', 'https://www.billboard.com/files/styles/900_wide/public/media/29-tyler-the-creator-flower-boy-album-art-2017-billboard-1240.jpg', false, 0, 0, 0, 'artsy_kid', 3
+'artsy_kid gallery 2', 'https://www.billboard.com/files/styles/900_wide/public/media/29-tyler-the-creator-flower-boy-album-art-2017-billboard-1240.jpg', false, 0, 1, 0, 'artsy_kid', 3
 );
 
 insert into galleries (
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'artsy_kid gallery 3', 'https://www.billboard.com/files/styles/900_wide/public/media/29-tyler-the-creator-flower-boy-album-art-2017-billboard-1240.jpg', false, 0, 0, 0, 'artsy_kid', 3
+'artsy_kid gallery 3', 'https://www.billboard.com/files/styles/900_wide/public/media/29-tyler-the-creator-flower-boy-album-art-2017-billboard-1240.jpg', false, 0, 1, 0, 'artsy_kid', 3
 );
 
 -- images for artsy_kid galleries
@@ -350,19 +350,19 @@ wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 insert into galleries (
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'musicGallery', 'https://i.imgur.com/XVbSovA.jpg', false, 0, 0, 0, 'music_lover', 4
+'musicGallery', 'https://i.imgur.com/XVbSovA.jpg', false, 0, 1, 0, 'music_lover', 4
 );
 
 insert into galleries (
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'musicGallery 2', 'https://i.imgur.com/XVbSovA.jpg', false, 0, 0, 0, 'music_lover', 4
+'musicGallery 2', 'https://i.imgur.com/XVbSovA.jpg', false, 0, 1, 0, 'music_lover', 4
 );
 
 insert into galleries (
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'musicGallery 3', 'https://i.imgur.com/XVbSovA.jpg', false, 0, 0, 0, 'music_lover', 4
+'musicGallery 3', 'https://i.imgur.com/XVbSovA.jpg', false, 0, 1, 0, 'music_lover', 4
 );
 
 
@@ -416,18 +416,6 @@ insert into gallery_favorites(
 user_id, favorited
 ) values (
 1, 2
-);
-
-insert into gallery_favorites(
-user_id, favorited
-) values (
-2, 1
-);
-
-insert into gallery_favorites(
-user_id, favorited
-) values (
-2, 2
 );
 
 insert into gallery_favorites(
@@ -543,3 +531,4 @@ user_id, favorited
 ) values (
 1, 21
 );
+

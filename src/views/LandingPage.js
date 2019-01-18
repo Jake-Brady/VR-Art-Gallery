@@ -13,7 +13,8 @@ class LandingPage extends Component {
             user: '',
             loading: true,
             galleries: [],
-            favorited: []
+            favorited: [],
+            favoriteNum: 0
         }
         this.visitGallery = this.visitGallery.bind(this)
     }
@@ -30,11 +31,38 @@ class LandingPage extends Component {
         // Sees whether user is logged in. If true, it will store favorites in array to be compared with galleries array so addToFavorites/removeFromFavorites function will work.
         axios.get(`/api/getFavorites/`).then(res => {
             this.setState({favorited: res.data}, () => {
-                // Once favorited array has been 
+                // Once favorited array has been set to state, trigger function that will loop through array for galleryID
+                this.identifyFavorites()
             })
         })
     }  
     
+    identifyFavorites(){
+    // Array of IDs shared in both galleries and favorited
+    let sharedIds = []
+    // Loop through all favorited galleries and for every id that matches those in galleries (nested for loop), color heart matching that id in galleries red. 
+    for(let i = 0; i < this.state.favorited.length; i++){
+        for(let v = 0; v < this.state.galleries.length; v++){
+            if(this.state.favorited[i].id === this.state.galleries[v].id){
+                sharedIds.push(this.state.favorited[i].id)
+            }
+        }
+    }
+    // Once Ids are collected into a single array, pass them to ColorHeartsRed function to color hearts on page
+    this.colorHeartsRed(sharedIds)
+    }
+
+    colorHeartsRed(sharedIds){
+        // Need node array of all existing hearts on page to receive class '.make-red'
+        const hearts = document.getElementsByClassName('fa-heart')
+        for(let i = 0; i < hearts.length; i++){
+            for(let v = 0; v < sharedIds.length; v++){
+                if(Number(hearts[i].getAttribute('data-id')) === sharedIds[v]){
+                    hearts[i].classList.add('make-red')
+                }
+            }
+        }
+    }
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll)
@@ -103,7 +131,11 @@ class LandingPage extends Component {
             // join res.data with galleries array in state
             let arrayOfNewGalleries = res.data
             let joinedArray = this.state.galleries.concat(arrayOfNewGalleries)
-            this.setState({galleries: joinedArray})
+            this.setState({galleries: joinedArray}, () => {
+                if (this.state.user){
+                    this.identifyFavorites()
+                }
+            })
         })
     }
 
@@ -113,57 +145,78 @@ class LandingPage extends Component {
         axios.put(`/api/incrementView/${galleryId}`)
     }
 
-    makeHeartRed(galleryId){
-      // Array of hearts on page by id of gallery
+    adjustFavorites(galleryId, timesFavorited){
+      //Check whether user is signed in first, otherwise cancel function
+      if (!this.state.user) return;
+      // Array of hearts on page and counters to be passed in axios calls
+      let galleries = this.state.galleries
+      let increaseFave = timesFavorited + 1;
+      let decreaseFave = timesFavorited - 1;
       const hearts = document.getElementsByClassName('fa-heart')
-      console.log(hearts)
-      console.log(galleryId)
       for(let i = 0; i < hearts.length; i++){
-          if (Number(hearts[i].getAttribute('id')) === galleryId){
-            //   if heart is already filled in as red, then remove class and subsequently remove from favorites in database.
+          if (Number(hearts[i].getAttribute('data-id')) === galleryId){
+            // if heart is already filled in as red, then remove class, decrement count on state for increased perceived loading time, decrement count on gallery's database, and then subsequently remove from favorites in user's database.
             if(hearts[i].classList.contains('make-red')){
+            // remove color
             hearts[i].classList.remove('make-red');
-            axios.delete(`/api/deleteFromFavorites/${galleryId}`).then(res => {
-                // popup saying galleryName has been removed from favorites?
-            })
-            } else {
-            hearts[i].classList.add('make-red')
+            // loop through copy of existing galleries to find gallery matching the element where heart is located.
+            for(let i = 0; i < galleries.length; i++){
+            if(galleries[i].id === galleryId){
+            // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
+              galleries[i].times_favorited = decreaseFave
+              this.setState({galleries}, () => {
+                //   after State has been updated, update favorited number on gallery then remove from favorites list in db.
+                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Decrease: 1}).then(res => {
+                    // pass in ID to be deleted from favorites table
+                    axios.delete(`/api/deleteFromFavorites/${galleryId}`).then(res => {
+                        // popup saying galleryName has been removed from favorites?
+                        console.log('favorites successfully updated - decreased.')
+                    })
+                })
+              })
             }
-          }
+            }
+            } else {
+            // add color
+            hearts[i].classList.add('make-red')
+            // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
+            for(let i = 0; i < galleries.length; i++){
+            if(galleries[i].id === galleryId){
+              galleries[i].times_favorited = increaseFave
+              this.setState({galleries}, () => {
+                  // pass in galleryId to adjust favorites number in server
+                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Increase: 1}).then(res => {
+                    // pass in galleryId as body to add into favorites table
+                    axios.post(`/api/addToFavorites`, {galleryId}).then(res => {
+                        //popup saying galleryName has been added to favorites?
+                        console.log('favorites successfully updated - increased.')
+                            })
+                    })
+                })
+            }
+            }   
+           }
+        }
       }
     }
 
-    favoriteGallery(galleryId){
-        //Check whether user is signed in first, otherwise cancel function
-        if (!this.state.user) return;
-        
-        // Should increase perceived loading time by immediately filling in circle in state - run makeHeartRed function.
-        this.makeHeartRed(galleryId)
-
-        // Adds to gallery_favorites with galleryId and consequently updates times_favorited in gallery
-        // axios.post(`/api/addToFavorites/${galleryId}`).then(res => {
-        //     //
-        // })
-    }
-
     render() {
+        console.log(this.state.galleries)
         const galleryArray = this.state.galleries.map(gallery => {
             const galleryId = gallery.id
             const galleryName = gallery.gallery_name
             const author = gallery.author
+            let timesFavorited = gallery.times_favorited
             return (
                 <div id={galleryId} className='gallery-container'>
                     <img src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                     <div className='gallery-text'>
                         <h1 className='gallery-title'>{galleryName}</h1>
-                        <h3 className='gallery-author'>BY: {author}</h3>
+                        <h3 className='gallery-author'>BY:{author}</h3>
                         <div className='gallery-stats'>
-                            <i className="fas fa-eye stat"></i>
-                            <span>{gallery.views}</span>
-                            <i onClick={() => this.favoriteGallery(galleryId)} className="fas fa-heart stat" id={galleryId}></i>
-                            <span>{gallery.times_favorited}</span>
-                            <i className="fas fa-share stat"></i>
-                            <span>{gallery.shares}</span>
+                            <i className="fas fa-eye stat"></i><span>{gallery.views}</span>
+                            <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><span>{timesFavorited}</span>
+                            <i onClick={() => this.shareGallery(galleryName, author)} className="fas fa-share stat"></i><span>{gallery.shares}</span>
                         </div>
                         <div onClick={() => this.visitGallery(galleryId, galleryName, author)} className='gallery-view center'>Visit Gallery</div>
                     </div>
