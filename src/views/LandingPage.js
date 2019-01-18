@@ -167,7 +167,7 @@ class LandingPage extends Component {
               this.setState({galleries}, () => {
                 //   after State has been updated, update favorited number on gallery then remove from favorites list in db.
                 axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Decrease: 1}).then(res => {
-                    console.log('adjusted gallery favorited times by -1')
+                    // pass in ID to be deleted from favorites table
                     axios.delete(`/api/deleteFromFavorites/${galleryId}`).then(res => {
                         // popup saying galleryName has been removed from favorites?
                         console.log('favorites successfully updated - decreased.')
@@ -186,8 +186,8 @@ class LandingPage extends Component {
               this.setState({galleries}, () => {
                   // pass in galleryId to adjust favorites number in server
                 axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Increase: 1}).then(res => {
-                    console.log('adjusted gallery favorited times by +1')
-                    axios.put(`/api/addToFavories/${galleryId}`).then(res => {
+                    // pass in galleryId as body to add into favorites table
+                    axios.post(`/api/addToFavorites`, {galleryId}).then(res => {
                         //popup saying galleryName has been added to favorites?
                         console.log('favorites successfully updated - increased.')
                             })
