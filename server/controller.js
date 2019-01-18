@@ -25,7 +25,7 @@ module.exports={
             
     },
     addToFavorites: (req, res, next) =>{
-        let {galleryId} = req.params
+        let {galleryId} = req.body
         // data contains userid
         let {data} = req.session
         const db = req.app.get('db')

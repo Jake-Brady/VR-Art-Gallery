@@ -1,3 +1,5 @@
 insert into gallery_favorites
-user_id = $1
-favorited = $2;
+(user_id, favorited
+) values (
+    $1, $2
+)
