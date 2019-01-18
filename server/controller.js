@@ -50,6 +50,22 @@ module.exports={
             res.status(500). send(err)
         })
     },
+    adjustGalleryFavorites: (req, res, next) => {
+        let {galleryId} = req.params
+        console.log(req.params, 'params')
+        console.log(req.body, 'body')
+        let {Increase, Decrease} = req.body
+        console.log(Increase, 'this is increment off of req.body')
+        console.log(Decrease, 'this is decrement off of req.body')
+
+        const db = req.app.get('db')
+        if (Increase){
+
+        } else if (Decrease){
+
+        }
+
+    },
     incrementView: (req, res, next) => {
         let {galleryId} = req.params
         console.log(galleryId)

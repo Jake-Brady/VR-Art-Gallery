@@ -33,6 +33,7 @@ let {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
     app.put('/api/incrementView/:galleryId', ctrl.incrementView)
     app.post('/api/addToFavorites/:galleryId', ctrl.addToFavorites)
     app.delete('/api/deleteFromFavorites/:galleryId', ctrl.deleteFromFavorites)
+    app.put('/api/adjustGalleryFavorites/:galleryId', ctrl.adjustGalleryFavorites)
 
     //Lobby
     app.get('/api/checkUser/', ctrl.checkUser)
