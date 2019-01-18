@@ -26,9 +26,10 @@ module.exports={
     },
     addToFavorites: (req, res, next) =>{
         let {galleryId} = req.params
-        let {userId} = req.session
+        // data contains userid
+        let {data} = req.session
         const db = req.app.get('db')
-        db.add_to_favorites([userId, galleryId]).then(favorited => {
+        db.add_to_favorites([data, galleryId]).then(favorited => {
             res.status(200).send(favorited)
         }).catch(err => {
             console.log(err)
@@ -37,9 +38,10 @@ module.exports={
     },
     deleteFromFavorites: (req, res, next) => {
         let {galleryId} = req.params
-        let {userId} = req.session
+        // data contains user id
+        let {data} = req.session
         const db = req.app.get('db')
-        db.delete_from_favorites([userId, galleryId]).then(deleted => {
+        db.delete_from_favorites([data, galleryId]).then(deleted => {
             res.status(200).send(deleted)
         }).catch(err => {
             console.log(err)
@@ -119,10 +121,9 @@ module.exports={
                 const validPassword = bcrypt.compareSync(password, user[0].password)
                 //if the password is correct, validPassword will become truthy
                 if (validPassword) {
-                    req.session.user
-                    req.session.userId
                     req.session.user = user[0].username
-                    req.session.userId = user[0].id
+                    req.session.data = user[0].id
+
                     res.status(200).send(user[0])
                 } else {
                 //if password is incorrect, validPassword would be falsy and send wrong password.

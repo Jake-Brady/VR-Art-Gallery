@@ -1,2 +1,2 @@
-select username,password from users
+select username,password,id from users
 where username = $1

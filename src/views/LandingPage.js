@@ -57,9 +57,7 @@ class LandingPage extends Component {
         const hearts = document.getElementsByClassName('fa-heart')
         for(let i = 0; i < hearts.length; i++){
             for(let v = 0; v < sharedIds.length; v++){
-                // Need double equals to compare numbers to data-id which has a number converted to string. Otherwise, Number() would be needed to convert data-id back to number to be compared back to sharedIds. Either way, you're exploiting coercion.
-                if(hearts[i].getAttribute('data-id') == sharedIds[v]){
-            
+                if(Number(hearts[i].getAttribute('data-id')) === sharedIds[v]){
                     hearts[i].classList.add('make-red')
                 }
             }
@@ -151,58 +149,59 @@ class LandingPage extends Component {
       //Check whether user is signed in first, otherwise cancel function
       if (!this.state.user) return;
       // Array of hearts on page and counters to be passed in axios calls
+      let galleries = this.state.galleries
       let increaseFave = timesFavorited + 1;
       let decreaseFave = timesFavorited - 1;
       const hearts = document.getElementsByClassName('fa-heart')
       for(let i = 0; i < hearts.length; i++){
           if (Number(hearts[i].getAttribute('data-id')) === galleryId){
-            // if heart is already filled in as red, then remove class, decrement count, decrement count on gallery's database, and then subsequently remove from favorites in user's database.
+            // if heart is already filled in as red, then remove class, decrement count on state for increased perceived loading time, decrement count on gallery's database, and then subsequently remove from favorites in user's database.
             if(hearts[i].classList.contains('make-red')){
+            // remove color
             hearts[i].classList.remove('make-red');
-            const galleries = this.state.galleries
+            // loop through copy of existing galleries to find gallery matching the element where heart is located.
             for(let i = 0; i < galleries.length; i++){
             if(galleries[i].id === galleryId){
-              galleries[i].times_favorited = galleries[i].times_favorited - 1
-              let theGallery = galleries[i]
-              let newGalleries = [...this.state.galleries, theGallery]
-              console.log(newGalleries)
-              this.setState({galleries: newGalleries})
-            }
-            }
-            // setState? Or replace innerHTML?
-            axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Decrease: 1}).then(res => {
-                console.log('adjusted gallery favorited times by -1')
-                axios.put(`/api/deleteFromFavorites/${galleryId}`).then(res => {
-                    // popup saying galleryName has been removed from favorites?
-                    console.log('favorites successfully updated.')
+            // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
+              galleries[i].times_favorited = decreaseFave
+              this.setState({galleries}, () => {
+                //   after State has been updated, update favorited number on gallery then remove from favorites list in db.
+                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Decrease: 1}).then(res => {
+                    console.log('adjusted gallery favorited times by -1')
+                    axios.delete(`/api/deleteFromFavorites/${galleryId}`).then(res => {
+                        // popup saying galleryName has been removed from favorites?
+                        console.log('favorites successfully updated - decreased.')
+                    })
                 })
-            })
+              })
+            }
+            }
             } else {
+            // add color
             hearts[i].classList.add('make-red')
-            const galleries = this.state.galleries
+            // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
             for(let i = 0; i < galleries.length; i++){
             if(galleries[i].id === galleryId){
-              galleries[i].times_favorited = galleries[i].times_favorited + 1
-              let theGallery = galleries[i]
-              console.log(theGallery)
-              let newGalleries = [...this.state.galleries, theGallery]
-              this.setState({galleries: newGalleries})
-            }
-            }
-            // setState? Or replace innerHTML?
-            axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Increase: 1}).then(res => {
-                console.log('adjusted gallery favorited times by +1')
-                axios.put(`/api/addToFavories/${galleryId}`).then(res => {
-                    //popup saying galleryName has been added to favorites?
-                    console.log('favorites successfully updated.')
+              galleries[i].times_favorited = increaseFave
+              this.setState({galleries}, () => {
+                  // pass in galleryId to adjust favorites number in server
+                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Increase: 1}).then(res => {
+                    console.log('adjusted gallery favorited times by +1')
+                    axios.put(`/api/addToFavories/${galleryId}`).then(res => {
+                        //popup saying galleryName has been added to favorites?
+                        console.log('favorites successfully updated - increased.')
+                            })
+                    })
                 })
-            })
             }
-          }
+            }   
+           }
+        }
       }
     }
 
     render() {
+        console.log(this.state.galleries)
         const galleryArray = this.state.galleries.map(gallery => {
             const galleryId = gallery.id
             const galleryName = gallery.gallery_name
