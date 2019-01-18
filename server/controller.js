@@ -28,8 +28,6 @@ module.exports={
         let {galleryId} = req.params
         let {userId} = req.session
         const db = req.app.get('db')
-        console.log(galleryId, 'this is galleryID')
-        console.log(userId, 'this is user id pulled off of req.session')
         db.add_to_favorites([userId, galleryId]).then(favorited => {
             res.status(200).send(favorited)
         }).catch(err => {
@@ -41,8 +39,6 @@ module.exports={
         let {galleryId} = req.params
         let {userId} = req.session
         const db = req.app.get('db')
-        console.log(galleryId, 'this is galleryID')
-        console.log(userId, 'this is user id pulled off of req.session')
         db.delete_from_favorites([userId, galleryId]).then(deleted => {
             res.status(200).send(deleted)
         }).catch(err => {
@@ -52,17 +48,22 @@ module.exports={
     },
     adjustGalleryFavorites: (req, res, next) => {
         let {galleryId} = req.params
-        console.log(req.params, 'params')
-        console.log(req.body, 'body')
         let {Increase, Decrease} = req.body
-        console.log(Increase, 'this is increment off of req.body')
-        console.log(Decrease, 'this is decrement off of req.body')
-
         const db = req.app.get('db')
         if (Increase){
-
+        db.increase_gallery_favorites([galleryId]).then(gallery => {
+            res.status(200).send(gallery)
+        }).catch(err =>{
+            console.log(err)
+            res.status(500).send(err)
+        })
         } else if (Decrease){
-
+        db.decrease_gallery_favorites([galleryId]).then(gallery => {
+            res.status(200).send(gallery)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
         }
 
     },
