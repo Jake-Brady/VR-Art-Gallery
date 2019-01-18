@@ -1,0 +1,9 @@
+#scene {
+    visibility: hidden;
+}
+
+.gallery-loading {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
