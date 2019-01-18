@@ -203,9 +203,9 @@ class LandingPage extends Component {
     shareGallery(galleryName, author){
     const location = window.location
     // Check for spaces in galleryName and author function - and replace with %20 for url to understand destination
-    const galleryDestination = galleryName.replace(" ", "%20");
-    const authorDestination = author.replace(" ", "%20");
-    let destination = `${location}${galleryDestination}/${authorDestination}`
+    const galleryDestination = galleryName.replace(/ /g, "%20");
+    const authorDestination = author.replace(/ /g, "%20");
+    let destination = `${location}${authorDestination}/${galleryDestination}`
     console.log(destination)
     }
 
