@@ -66,21 +66,23 @@ class CreateGalleries extends Component {
 
     createNewGallery = () => {
         // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
-        const { galleryName, author, thumbnail } = this.state
+        const { galleryName, author, thumbnail, isPrivate } = this.state
         if (!galleryName || !author || !thumbnail) return;
-
-        // Redirects user to EditGallery component to add their images and captions where they can actually create gallery
-        this.props.history.push(`/lobby/${author}/${galleryName}/uploadGallery`)
-
+        // Adds gallery to Database, as this is needed to generate a SPK id, to be used in next view so images and preset tables can reference it.
+        axios.post(`/api/createNewGallery`, {galleryName, author, thumbnail, isPrivate}).then(res => {
+            // Redirects user to EditGallery component to add their images and captions where they can actually create gallery
+            this.props.history.push({pathname:`/gallery/${author}/${galleryName}/`, state:{galleryName, author, thumbnail, privacy: isPrivate}})
+        })
     }
 
     render(props) {
+        console.log(this.state)
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
             <section className="create-galleries">
-                {!maxLimit ?
+                {maxLimit ?
                     <div className='create-galleries_max center'>
                         You currently have reached the gallery amount cap.
                         You can either edit an existing gallery or delete one to continue.
@@ -136,7 +138,7 @@ class CreateGalleries extends Component {
                     </div>
                 }
                 <div className='create-galleries_bottom'>
-                    {numOfGalleries - 12} {spellingGallery} available
+                    {12 - numOfGalleries} {spellingGallery} available
                 </div>
             </section>
         )
