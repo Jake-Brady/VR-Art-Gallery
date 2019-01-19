@@ -11,7 +11,7 @@ const Favorites = (props) => {
             <div className='gallery-stats'>
                <i className="fas fa-eye stat"></i>
                <span>{views}</span>
-               <i className="fas fa-heart stat"></i>
+               <i className="fas fa-heart stat make-red"></i>
                <span>{favoriteNum}</span>
                <i className="fas fa-share stat"></i>
                <span>{shares}</span>

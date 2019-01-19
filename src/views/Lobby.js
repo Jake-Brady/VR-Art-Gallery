@@ -8,6 +8,7 @@ import Account from '../components/Lobby/account'
 import Help from '../components/Lobby/help'
 import '../styles/Views/Lobby.css'
 import Icon from '../styles/Media/Icon.png'
+import Profile from '../styles/Media/defaultProfile.png'
 
 class Lobby extends Component {
     constructor() {
@@ -239,7 +240,7 @@ class Lobby extends Component {
                         </div>
                     </div>
                     <div className='lobby-header_right center'>
-                        <span>{this.props.match.params.username}</span>
+                        <img src={Profile} alt='User Picture' />
                     </div>
                 </header>
 
