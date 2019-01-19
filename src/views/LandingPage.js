@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import '../Styles/Views/LandingPage.css'
+import '../styles/Views/LandingPage.css'
 import VRVideo from '../assets/video/VR-Trailer.mp4'
-import Splat from '../Styles/Media/yoinkminenow.png'
 import axios from 'axios'
 import $ from 'jquery'
 
@@ -277,7 +276,7 @@ class LandingPage extends Component {
                     </div>
                     : 
                     <div>
-                        <img src={Splat} alt='loader' className='landing-splat'/>
+                        Loading...
                     </div>
             }
 

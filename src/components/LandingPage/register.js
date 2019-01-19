@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import logo from '../../Styles/Media/Icon.png'
-import '../Styles/register.css'
+import logo from '../../styles/Media/Icon.png'
 
 class Register extends Component {
     constructor() {

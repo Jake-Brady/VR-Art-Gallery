@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../Styles/Views/ArtGallery.css'
+import '../styles/Views/ArtGallery.css'
 import 'aframe'
 import { Scene } from 'aframe-react'
 import 'aframe-room-component'

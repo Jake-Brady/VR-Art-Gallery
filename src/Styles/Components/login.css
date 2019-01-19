@@ -1,7 +1,7 @@
 .login-container {
     width: 100vw;
     min-height: 100vh;
-    background-image: url('../../Styles/Media/LoginBackdrop.png');
+    background-image: url('../../styles/Media/LoginBackdrop.png');
     background-size: cover;
     display: flex;
     flex-direction: column;

@@ -1,5 +1,4 @@
 import React from 'react'
-import '../Styles/galleries.css'
 
 const Galleries = (props) => {
     let {id, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery, isPrivate } = props
