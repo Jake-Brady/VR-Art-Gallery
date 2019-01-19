@@ -73,8 +73,7 @@ const {galleryName, author, thumbnail} = this.state
 if (!galleryName || !author || !thumbnail) return;
 
 // Redirects user to EditGallery component to add their images and captions where they can actually create gallery
-this.props.history.push(`/lobby/${author}/${galleryName}/uploadGallery`)
-
+this.props.history.push(`/createGalleryImages/${author}/${galleryName}/`)
 }
 
 render(props){

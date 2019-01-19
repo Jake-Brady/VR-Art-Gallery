@@ -189,6 +189,14 @@ render(){
             <img src={url} alt="This is what is in frame 15" width="450px" />
 
         </div>
+
+        <div>
+            <h1>Presets of Gallery</h1>
+        </div>
+
+        <div>
+            <h1>BluePrints of Art Gallery</h1>
+        </div>
     </section>
     )
 }
