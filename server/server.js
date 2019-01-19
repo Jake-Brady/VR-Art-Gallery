@@ -28,6 +28,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.en
     app.get('/api/getFavorites/', ctrl.getFavorites)
     app.post('/api/logout/', ctrl.logout)
     app.delete('/api/deleteGallery/:id', ctrl.deleteGallery)
+    app.post('/api/createNewGallery', ctrl.createNewGallery)
     
     //Art-Gallery
     app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)

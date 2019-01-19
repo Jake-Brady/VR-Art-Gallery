@@ -169,6 +169,18 @@ module.exports={
             res.status(500).send(err)
         })
     },
+    createNewGallery: (req, res, next) => {
+        const {isPrivate, author, galleryName, thumbnail} = req.body
+        // data is user.id
+        const {data} = req.session
+        const db = req.app.get('db')
+        db.create_new_gallery([galleryName, thumbnail, isPrivate, author, data]).then(newGallery => {
+            res.status(200).send(newGallery)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
     deleteGallery: (req, res, next) => {
         const {id} = req.params
         const db = req.app.get('db')
