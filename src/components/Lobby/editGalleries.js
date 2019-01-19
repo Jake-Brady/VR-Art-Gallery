@@ -49,15 +49,17 @@ class EditGalleries extends Component{
 componentDidMount(){
 //Needs to confirm whether user is logged in and is the author. If not, redirects the user back to landingPage.
 let user = this.props.match.params.username
-axios.get(`/api/checkUser/`).then(res => {
-    if (res.data !== user) {
-        this.props.history.push('/')
-    }
-}, () => {
-// Needs to take in the galleryID and retrieve all associated images from images table for it, along with presets, and general info related to it.
-axios.get()
+console.log(this.props)
+console.log(user)
+// axios.get(`/api/checkUser/`).then(res => {
+//     if (res.data !== user) {
+//         this.props.history.push('/')
+//     }
+// }, () => {
+// // Needs to take in the galleryID and retrieve all associated images from images table for it, along with presets, and general info related to it.
+// axios.get()
 
-})
+// })
 
 
 
