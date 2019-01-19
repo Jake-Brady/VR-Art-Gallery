@@ -32,73 +32,73 @@ username, password, email, first_name, last_name
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 2', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 2', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 3', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 3', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 4', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 4', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 5', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 5', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 6', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 6', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 7', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 7', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 8', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 8', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 9', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 9', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 10', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 10', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 11', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 11', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery 12', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test', 1
+'test gallery 12', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 -- images for User - Test/Galleries
@@ -240,19 +240,19 @@ wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test2 gallery', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test2', 2
+'test2 gallery', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test2', 2
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test2 gallery 2', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test2', 2
+'test2 gallery 2', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test2', 2
 );
 
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test2 gallery 3', 'https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1001244579,width=178,height=178/generic-thumbnail.png', false, 0, 1, 0, 'test2', 2
+'test2 gallery 3', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test2', 2
 );
 
 insert into images
