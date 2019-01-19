@@ -110,22 +110,20 @@
     width: 100px;
     position: absolute;
     right: 0px;
-    font-size: 11px;
+    color: rgba(255, 255, 255, 0.80);
 }
 
 .lobby-header_right > span {
-    cursor: pointer;
-}
-
-.lobby-header_right > span:hover {
-    color: white;
+    font-size: 14px;
+    font-weight: 300;
 }
 
 /* Side Menu */
 .side-menu {
     position: fixed;
     height: 100vh;
-    background: rgb(110, 142, 254);
+    background-image: url('../Media/SideBackdrop.png');
+    background-size: cover;
     width: 200px;
     left: 0;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
@@ -184,7 +182,7 @@
     overflow: hidden;
     cursor: pointer;
     letter-spacing: .5px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .menu-btn-first {

@@ -12,17 +12,29 @@ class Login extends Component {
             password: '',
             loginMsg: ''
         }
-        this.handleChange = this.handleChange.bind(this)
-        this.login = this.login.bind(this)
     }
 
-    handleChange(e) {
+    componentDidMount() {
+        const input = document.querySelector('#login-focus')
+        input.focus()
+        document.addEventListener('keypress', this.checkEnter)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keypress', this.checkEnter)
+    }
+
+    checkEnter = e => {
+        if (e.code === 'Enter') this.login()
+    }
+
+    handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
-    login() {
+    login = () => {
         let { username, password } = this.state
         axios.post(`/api/login`, { username, password }).then(res => {
             //If username does not exist, inform user
@@ -46,13 +58,13 @@ class Login extends Component {
     render() {
         return (
             <div className="login-container">
-            <div className='login-header'>
-                <img src={logo} alt='VR Logo' />
-                <span>VR<span className='lighttext'>ART GALLERY</span></span>
-            </div>
+                <div className='login-header'>
+                    <img src={logo} alt='VR Logo' />
+                    <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                </div>
                 <div className='login-content'>
                     <h1>Log In</h1>
-                    <input name="username" placeholder="Username" onChange={this.handleChange}></input>
+                    <input id='login-focus' name="username" placeholder="Username" onChange={this.handleChange}></input>
                     <input name="password" placeholder="Password" type="password" onChange={this.handleChange}></input>
                     <div onClick={() => this.login()}>Log In</div>
                     <h2>Forgot Password?</h2>

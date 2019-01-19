@@ -18,23 +18,25 @@ class Lobby extends Component {
             usersGalleries: [],
             favoritedGalleries: [],
             theMagicWord: '',
-            deleteConfirm: ''
+            deleteConfirm: '',
+            loading: true
         }
     }
 
     componentDidMount() {
         //Validate User on Page as being logged in with session. If not, send back to landingPage; otherwise retrieve user's existing galleries and favorited galleries.
         let user = this.props.match.params.username
-        this.changeWindow('Favorites')
         axios.get(`/api/checkUser/`).then(res => {
             if (res.data !== user) {
                 this.props.history.push('/')
             } else {
                 //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
+
                 axios.get('/api/retrieveGalleries/').then(res => {
-                    this.setState({ usersGalleries: res.data, theMagicWord: 'create' }, () => {
+                    this.setState({ usersGalleries: res.data,  user: this.props.match.params.username }, () => {
+                        this.changeWindow('Galleries')
                         axios.get('/api/getFavorites/').then(res => {
-                            this.setState({ favoritedGalleries: res.data })
+                            this.setState({ favoritedGalleries: res.data, loading: false })
                         })
                     })
                 })
@@ -51,12 +53,9 @@ class Lobby extends Component {
 
     changeNav = current => {
         document.querySelectorAll('[data-tab]').forEach(tab => {
-            if (tab.innerText === current) {
-                tab.classList.add('menu-back')
-            }
-            else {
-                tab.classList.remove('menu-back')
-            }
+            const title = tab.innerText.split(' ')
+            if (title[0] === current) tab.classList.add('menu-back')
+            else tab.classList.remove('menu-back')
         })
 
     }
@@ -136,7 +135,6 @@ class Lobby extends Component {
             }
             if (index !== -1) {
                 galleries.splice(index, 1);
-                console.log(galleries)
                 this.setState({ usersGalleries: galleries })
             }
             axios.delete(`/api/deleteGallery/${id}`).then(res => {
@@ -173,17 +171,22 @@ class Lobby extends Component {
         if (word.toLowerCase() !== this.state.theMagicWord) window.scrollTo(0, 0)
     }
 
+    checkUser = (loading, user) => {
+        if (!loading && user !== this.props.match.params.username) this.props.history.push('/')
+    }
+
     render() {
-        const { favoritedGalleries, usersGalleries, theMagicWord } = this.state
+        const { favoritedGalleries, usersGalleries, theMagicWord, user, loading } = this.state
+        this.checkUser(loading, user)
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
-            const image = e.thumbnail;
-            const key = e.id;
-            const views = e.views;
-            const shares = e.shares;
-            const favoriteNum = e.times_favorited;
-            const galleryName = e.gallery_name;
-            const galleryAuthor = e.author;
+            const image = e.thumbnail,
+                key = e.id,
+                views = e.views,
+                shares = e.shares,
+                favoriteNum = e.times_favorited,
+                galleryName = e.gallery_name,
+                galleryAuthor = e.author;
             return (
                 <Favorites
                     id={key}
@@ -199,27 +202,26 @@ class Lobby extends Component {
         })
 
         const galleryContainers = usersGalleries.map((e) => {
-            console.log(e.is_private)
-            const isPrivate = (e.is_private === 'true');
-            const key = e.id;
-            const image = e.thumbnail;
-            const views = e.views;
-            const favoriteNum = e.times_favorited;
-            const author = e.author
-            const galleryName = e.gallery_name
+            const isPrivate = (e.is_private === 'true'),
+                key = e.id,
+                image = e.thumbnail,
+                views = e.views,
+                favoriteNum = e.times_favorited,
+                author = e.author,
+                galleryName = e.gallery_name
             return (
-                    <Galleries
-                        galleryName={galleryName}
-                        isPrivate={isPrivate}
-                        id={key}
-                        image={image}
-                        views={views}
-                        author={author}
-                        favoriteNum={favoriteNum}
-                        visitGallery={this.visitGallery}
-                        editGallery={this.editGallery}
-                        deleteGallery={this.deleteGallery}
-                    />
+                <Galleries
+                    galleryName={galleryName}
+                    isPrivate={isPrivate}
+                    id={key}
+                    image={image}
+                    views={views}
+                    author={author}
+                    favoriteNum={favoriteNum}
+                    visitGallery={this.visitGallery}
+                    editGallery={this.editGallery}
+                    deleteGallery={this.deleteGallery}
+                />
             )
         })
         return (
@@ -238,7 +240,7 @@ class Lobby extends Component {
                         </div>
                     </div>
                     <div className='lobby-header_right center'>
-                        <span onClick={() => this.logout()}>LOGOUT</span>
+                        <span>{this.props.match.params.username}</span>
                     </div>
                 </header>
 
@@ -251,8 +253,8 @@ class Lobby extends Component {
                         </div>
                         <span data-tab className="menu-btn menu-btn-first" onClick={() => this.props.history.push('/')}><i className="fas fa-home menu-icon"></i>Home</span>
                         <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}><i className="fas fa-plus menu-icon"></i>Create</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites</span>
+                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.usersGalleries.length})</span>
+                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritedGalleries.length})</span>
                         <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-user menu-icon"></i>Account</span>
                         <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>Help</span>
                         <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>

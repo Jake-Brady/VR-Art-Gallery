@@ -1,15 +1,15 @@
-#create-galleries{
+.create-galleries{
+    width: 100vw;
+    height: 100vh;
+    padding-top: 50px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
+    justify-content: center;
 }
 
-.user-galleries{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-content: center;
+.create-galleries_max {
+    width: 800px;
+    font-size: 45px;
+    text-align: center;
 }
 
 .gallery-initialization{
@@ -42,4 +42,11 @@
 
 #create-gallery-btn{
     border: dashed black 1px;
+}
+
+.create-galleries_bottom {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    font-weight: 300;
 }
