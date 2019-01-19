@@ -50,7 +50,6 @@ componentDidMount(){
 //Needs to confirm whether user is logged in and is the author. If not, redirects the user back to landingPage.
 let {privacy, galleryName, thumbnail, author} = this.props.location.state
 console.log(privacy, galleryName, thumbnail, author)
-
 // axios.get(`/api/checkUser/`).then(res => {
 //     if (res.data !== user) {
 //         this.props.history.push('/')
