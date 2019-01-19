@@ -53,7 +53,10 @@ class Register extends Component {
                         this.setState({ registerMsg: 'That username already exists. Please choose another one.' }, () => alert('Username already exists. Choose another.'))
                     } else if (res.data === 'success') {
                         //If all above is false, then registration is successful.
-                        this.setState({ registerMsg: `Successfully registered ${username}! Login to access your lobby.` }, () => this.props.history.push(`/lobby/${username}`))
+                        this.setState({ registerMsg: `Successfully registered ${username}! Login to access your lobby.` }, () => {
+                            axios.post(`/api/login`, { username, password })
+                            .then(() => this.props.history.push(`/lobby/${username}`))
+                        })
                     }
                 })
             } else {
