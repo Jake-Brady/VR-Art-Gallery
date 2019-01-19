@@ -97,6 +97,7 @@
     padding: 0px 10px;
     font-family: inherit;
     font-weight: 300;
+    z-index: 3;
 }
 
 .lobby-header_search > input::placeholder {
