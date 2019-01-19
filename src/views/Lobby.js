@@ -19,7 +19,10 @@ class Lobby extends Component {
             favoritedGalleries: [],
             theMagicWord: '',
             deleteConfirm: '',
-            loading: true
+            loading: true,
+            galleryCopy: [],
+            favoritesCopy: [],
+            searchInput: ''
         }
     }
 
@@ -31,17 +34,17 @@ class Lobby extends Component {
                 this.props.history.push('/')
             } else {
                 //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
-
                 axios.get('/api/retrieveGalleries/').then(res => {
-                    this.setState({ usersGalleries: res.data,  user: this.props.match.params.username }, () => {
+                    this.setState({ usersGalleries: res.data, galleryCopy: res.data, usersGallery: res.data, user: this.props.match.params.username }, () => {
                         this.changeWindow('Galleries')
                         axios.get('/api/getFavorites/').then(res => {
-                            this.setState({ favoritedGalleries: res.data, loading: false })
+                            this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false })
                         })
                     })
                 })
             }
         })
+        window.addEventListener('resize', this.checkSize)
     }
 
     componentWillUnmount() {
@@ -49,6 +52,20 @@ class Lobby extends Component {
             overlay = document.querySelector('.lobby-overlay')
         body.classList.remove('lobby-main-hide')
         overlay.removeEventListener('click', () => this.toggleMenu())
+        window.removeEventListener('resize', this.checkSize)
+    }
+
+    checkSize = () => {
+        const image = document.querySelector('#header-image'),
+            name = document.querySelector('#header-name')
+        if (!window.matchMedia("(min-width: 620px)").matches && (this.state.theMagicWord === 'galleries' || this.state.theMagicWord === 'favorites')) {
+            image.classList.add('lobby-header_hidden')
+            name.classList.add('lobby-header_hidden')
+        }
+        else {
+            image.classList.remove('lobby-header_hidden')
+            name.classList.remove('lobby-header_hidden')
+        }
     }
 
     changeNav = current => {
@@ -69,6 +86,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -78,6 +96,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -87,6 +106,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -95,6 +115,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -103,6 +124,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -175,9 +197,19 @@ class Lobby extends Component {
         if (!loading && user !== this.props.match.params.username) this.props.history.push('/')
     }
 
+    handleSearch = (filter, target) => {
+        if (filter === 'galleries') {
+            const galleries = this.state.galleryCopy.filter(gallery => gallery.gallery_name.includes(target))
+            this.setState({ usersGalleries: galleries })
+        }
+        else {
+            const favorites = this.state.favoritesCopy.filter(gallery => gallery.gallery_name.includes(target))
+            this.setState({ favoritedGalleries: favorites })
+        }
+    }
+
     render() {
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading } = this.state
-        this.checkUser(loading, user)
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
             const image = e.thumbnail,
@@ -230,11 +262,11 @@ class Lobby extends Component {
                 <header className='lobby-header'>
                     <div className='lobby-header_left'>
                         <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
-                        <img src={Icon} onClick={() => this.props.history.push('/')} />
-                        <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                        <img id='header-image' src={Icon} onClick={() => this.props.history.push('/')} />
+                        <span id='header-name'>VR<span className='lighttext'>ART GALLERY</span></span>
                     </div>
                     <div className='lobby-header_search'>
-                        <input name='header' type='text' placeholder='Search' />
+                        <input onChange={e => this.handleSearch(theMagicWord, e.target.value)} type='text' placeholder={`Search ${theMagicWord.charAt(0).toUpperCase() + theMagicWord.slice(1)}`} />
                         <div className='center'>
                             <i className="fas fa-search"></i>
                         </div>
