@@ -31,8 +31,10 @@ class Lobby extends Component {
                 this.props.history.push('/')
             } else {
                 //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
+
                 axios.get('/api/retrieveGalleries/').then(res => {
-                    this.setState({ usersGalleries: res.data, theMagicWord: 'create', user: this.props.match.params.username }, () => {
+                    this.setState({ usersGalleries: res.data,  user: this.props.match.params.username }, () => {
+                        this.changeWindow('Galleries')
                         axios.get('/api/getFavorites/').then(res => {
                             this.setState({ favoritedGalleries: res.data, loading: false })
                         })
@@ -52,12 +54,8 @@ class Lobby extends Component {
     changeNav = current => {
         document.querySelectorAll('[data-tab]').forEach(tab => {
             const title = tab.innerText.split(' ')
-            if (title[0] === current) {
-                tab.classList.add('menu-back')
-            }
-            else {
-                tab.classList.remove('menu-back')
-            }
+            if (title[0] === current) tab.classList.add('menu-back')
+            else tab.classList.remove('menu-back')
         })
 
     }
@@ -182,13 +180,13 @@ class Lobby extends Component {
         this.checkUser(loading, user)
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
-            const image = e.thumbnail;
-            const key = e.id;
-            const views = e.views;
-            const shares = e.shares;
-            const favoriteNum = e.times_favorited;
-            const galleryName = e.gallery_name;
-            const galleryAuthor = e.author;
+            const image = e.thumbnail,
+                key = e.id,
+                views = e.views,
+                shares = e.shares,
+                favoriteNum = e.times_favorited,
+                galleryName = e.gallery_name,
+                galleryAuthor = e.author;
             return (
                 <Favorites
                     id={key}
@@ -204,13 +202,13 @@ class Lobby extends Component {
         })
 
         const galleryContainers = usersGalleries.map((e) => {
-            const isPrivate = (e.is_private === 'true');
-            const key = e.id;
-            const image = e.thumbnail;
-            const views = e.views;
-            const favoriteNum = e.times_favorited;
-            const author = e.author
-            const galleryName = e.gallery_name
+            const isPrivate = (e.is_private === 'true'),
+                key = e.id,
+                image = e.thumbnail,
+                views = e.views,
+                favoriteNum = e.times_favorited,
+                author = e.author,
+                galleryName = e.gallery_name
             return (
                 <Galleries
                     galleryName={galleryName}
