@@ -16,6 +16,20 @@ class Register extends Component {
         }
     }
 
+    componentDidMount() {
+        const input = document.querySelector('#register-focus')
+        input.focus()
+        document.addEventListener('keypress', this.checkEnter)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keypress', this.checkEnter)
+    }
+
+    checkEnter = e => {
+        if (e.code === 'Enter') this.registerUser()
+    }
+
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
@@ -59,7 +73,7 @@ class Register extends Component {
                     </div>
                     <div className='login-content'>
                         <h1>Register</h1>
-                        <input placeholder="First Name" name="firstName" onChange={this.handleChange}></input>
+                        <input id='register-focus' placeholder="First Name" name="firstName" onChange={this.handleChange}></input>
                         <input placeholder="Last Name" name="lastName" onChange={this.handleChange}></input>
                         <input placeholder="Email Address" name="email" onChange={this.handleChange}></input>
                         <input placeholder="Username" name="username" onChange={this.handleChange}></input>
