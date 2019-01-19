@@ -20,6 +20,10 @@
 
 .lobby {
    font-family: 'Oswald', sans-serif;
+   width: 100vw;
+   min-height: 100vh;
+   background-image: url('../Media/LobbyBackdrop.png');
+   background-size: cover;
 }
 
 .lobby-overlay {

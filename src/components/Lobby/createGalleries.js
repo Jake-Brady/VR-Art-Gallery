@@ -3,7 +3,6 @@ import Dropzone from 'react-dropzone'
 import { withRouter } from 'react-router-dom'
 import { v4 as randomStringGenerator } from 'uuid';
 import { GridLoader } from 'react-spinners'
-import '../Styles/createGalleries.css'
 import axios from 'axios';
 
 class CreateGalleries extends Component {

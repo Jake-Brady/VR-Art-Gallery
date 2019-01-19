@@ -1,5 +1,4 @@
 import React from 'react'
-import '../Styles/favorites.css'
 
 const Favorites = (props) => {
    let { id, image, views, shares, favoriteNum, visitGallery, galleryName, author } = props
