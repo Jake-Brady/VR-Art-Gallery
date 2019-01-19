@@ -1,5 +1,5 @@
 require('dotenv').config()
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.env
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_THUMBNAILS, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env
     const express = require('express'),
     session = require('express-session')({
         secret: SESSION_SECRET,
@@ -7,12 +7,48 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT} = process.en
         saveUninitialized: true,
     }),
     app = express(),
+    aws = require('aws-sdk'),
     massive = require('massive'),
     ctrl = require('./controller')
+
     app.use(express.json())
     app.use(session)
 
     /* VR-Art-Gallery Endpoints */
+    /* AWS Connecting Endpoints */
+    // AWS thumbnails
+    app.get('/api/amazons3/thumbnails', (req, res) => {
+        console.log("in the server on api/amazons3")
+        aws.config = {
+            region: 'us-west-1',
+            accessKeyId: AWS_ACCESS_KEY_ID,
+            secretAccessKey: AWS_SECRET_ACCESS_KEY
+        }
+        const s3 = new aws.S3();
+        const fileName = req.query['file-name'];
+        const fileType = req.query['file-type'];
+        const s3Params = {
+            Bucket: S3_BUCKET,
+            Key: fileName,
+            Expires: 60,
+            ContentType: fileType,
+            ACL: 'public-read'
+        };
+    
+        s3.getSignedUrl('putObject', s3Params, (err, data) => {
+            if (err) {
+                console.log(err);
+                return res.end();
+            }
+            const returnData = {
+                signedRequest: data,
+                url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+            };
+    
+            return res.send(returnData)
+        });
+    });
+
     //Landing Page - Register/Login
     app.get('/api/getAllGalleries/:offset', ctrl.getAllGalleries)
     app.post('/api/registerUser', ctrl.registerUser)

@@ -19,7 +19,7 @@ create table users(
 -- Create Table Galleries
 create table galleries(
     id serial primary key,
-    gallery_name varchar(20) not null,
+    gallery_name varchar(100) not null,
     thumbnail text,
     is_private boolean,
     views integer,
