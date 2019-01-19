@@ -20,6 +20,10 @@
 
 .lobby {
    font-family: 'Oswald', sans-serif;
+   width: 100vw;
+   min-height: 100vh;
+   background-image: url('../Media/LobbyBackdrop.png');
+   background-size: cover;
 }
 
 .lobby-overlay {
@@ -79,7 +83,7 @@
 .lobby-header_search {
     width: 500px;
     height: 60%;
-    background: rgb(8, 36, 138);
+    background: rgb(20, 54, 177);
     display: flex;
     visibility: hidden;
 }
@@ -110,12 +114,12 @@
     width: 100px;
     position: absolute;
     right: 0px;
-    color: rgba(255, 255, 255, 0.80);
 }
 
-.lobby-header_right > span {
-    font-size: 14px;
-    font-weight: 300;
+.lobby-header_right > img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
 }
 
 /* Side Menu */

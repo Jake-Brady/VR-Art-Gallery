@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import '../../Styles/Components/login.css'
-import logo from '../../Styles/Media/Icon.png'
+import '../../styles/Components/signIn.css'
+import logo from '../../styles/Media/Icon.png'
 import { withRouter } from 'react-router-dom'
 
 class Login extends Component {

@@ -1,5 +1,4 @@
 import React from 'react'
-import '../Styles/help.css'
 
 export default function (props) {
     return (

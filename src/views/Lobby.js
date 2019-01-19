@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
-import CreateGalleries from '../components//Lobby/createGalleries'
-import GalleryBluePrint from '../components/Lobby/blueprint'
+import CreateGalleries from '../components/Lobby/createGalleries'
 import Galleries from '../components/Lobby/galleries'
 import Favorites from '../components/Lobby/favorites'
 import Account from '../components/Lobby/account'
 import Help from '../components/Lobby/help'
-import '../Styles/Views/Lobby.css'
-import Icon from '../Styles/Media/Icon.png'
+import '../styles/Views/Lobby.css'
+import Icon from '../styles/Media/Icon.png'
+import Profile from '../styles/Media/defaultProfile.png'
 
 class Lobby extends Component {
     constructor() {
@@ -240,7 +240,7 @@ class Lobby extends Component {
                         </div>
                     </div>
                     <div className='lobby-header_right center'>
-                        <span>{this.props.match.params.username}</span>
+                        <img src={Profile} alt='User Picture' />
                     </div>
                 </header>
 

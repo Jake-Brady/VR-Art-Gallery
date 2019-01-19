@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import logo from '../../Styles/Media/Icon.png'
-import '../Styles/register.css'
+import logo from '../../styles/Media/Icon.png'
 
 class Register extends Component {
     constructor() {
@@ -43,23 +42,27 @@ class Register extends Component {
         if (firstName === "" || lastName === "" || username === "" || password === "" || email === "") {
             alert('One of the fields were left blank. Please fill out all fields to register a new account.')
         } else {
-            // Check to make sure email address has '@' symbol - if true, register; if false, alert user
-            if (email.indexOf('@') > -1) {
-                axios.post(`/api/registerUser`, { firstName, lastName, username, password, email }).then(res => {
-                    if (res.data === 'email') {
-                        //If email is already in use, inform user that email has been sent to their existing account's email address.
-                        this.setState({ RegisterMsg: 'An account with that email exists. An email has been sent to that account with the proper login information.' }, () => alert('Email is taken.'))
-                    } else if (res.data === 'username') {
-                        //If username exists already, inform user to create a new one.
-                        this.setState({ registerMsg: 'That username already exists. Please choose another one.' }, () => alert('Username already exists. Choose another.'))
-                    } else if (res.data === 'success') {
-                        //If all above is false, then registration is successful.
-                        this.setState({ registerMsg: `Successfully registered ${username}! Login to access your lobby.` }, () => alert('Successful registration'))
-                    }
-                })
-            } else {
-                alert('Missing "@" symbol in email address.')
+            if (username.split(' ').length === 1) {
+                if (email.indexOf('@') > -1) {
+                    axios.post(`/api/registerUser`, { firstName, lastName, username, password, email }).then(res => {
+                        if (res.data === 'email') {
+                            //If email is already in use, inform user that email has been sent to their existing account's email address.
+                            this.setState({ RegisterMsg: 'An account with that email exists. An email has been sent to that account with the proper login information.' }, () => alert('Email is taken.'))
+                        } else if (res.data === 'username') {
+                            //If username exists already, inform user to create a new one.
+                            this.setState({ registerMsg: 'That username already exists. Please choose another one.' }, () => alert('Username already exists. Choose another.'))
+                        } else if (res.data === 'success') {
+                            //If all above is false, then registration is successful.
+                            this.setState({ registerMsg: `Successfully registered ${username}! Login to access your lobby.` }, () => {
+                                axios.post(`/api/login`, { username, password })
+                                .then(() => this.props.history.push(`/lobby/${username}`))
+                            })
+                        }
+                    })
+                } else alert('Missing "@" symbol in email address.')
+                
             }
+            else alert('Usernames cannot contain spaces')
         }
     }
 
