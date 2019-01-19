@@ -278,6 +278,10 @@
     border: 1px white solid;
 }
 
+.lobby-header_hidden {
+    visibility: hidden;
+}
+
 /* Queries to make card grid work on mobile */
 
 @media (max-width: 1240px) {
@@ -310,8 +314,5 @@
         padding: 100px 20px;
         width: 310px;
         padding-bottom: 25px;
-    }
-    .lobby-header_left > img, .lobby-header_left > span, .lobby-header_right {
-        display: none;
     }
 }

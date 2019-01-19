@@ -33,7 +33,7 @@ class Lobby extends Component {
                 //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
 
                 axios.get('/api/retrieveGalleries/').then(res => {
-                    this.setState({ usersGalleries: res.data,  user: this.props.match.params.username }, () => {
+                    this.setState({ usersGalleries: res.data, user: this.props.match.params.username }, () => {
                         this.changeWindow('Galleries')
                         axios.get('/api/getFavorites/').then(res => {
                             this.setState({ favoritedGalleries: res.data, loading: false })
@@ -42,6 +42,7 @@ class Lobby extends Component {
                 })
             }
         })
+        window.addEventListener('resize', this.checkSize)
     }
 
     componentWillUnmount() {
@@ -49,6 +50,20 @@ class Lobby extends Component {
             overlay = document.querySelector('.lobby-overlay')
         body.classList.remove('lobby-main-hide')
         overlay.removeEventListener('click', () => this.toggleMenu())
+        window.removeEventListener('resize', this.checkSize)
+    }
+
+    checkSize = () => {
+        const image = document.querySelector('#header-image'),
+            name = document.querySelector('#header-name')
+        if (!window.matchMedia("(min-width: 620px)").matches && (this.state.theMagicWord === 'galleries' || this.state.theMagicWord === 'favorites')) {
+            image.classList.add('lobby-header_hidden')
+            name.classList.add('lobby-header_hidden')
+        }
+        else {
+            image.classList.remove('lobby-header_hidden')
+            name.classList.remove('lobby-header_hidden')
+        }
     }
 
     changeNav = current => {
@@ -69,6 +84,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -78,6 +94,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -87,6 +104,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -95,6 +113,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -103,6 +122,7 @@ class Lobby extends Component {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
+                    this.checkSize()
                     this.toggleMenu()
                 })
                 break;
@@ -230,8 +250,8 @@ class Lobby extends Component {
                 <header className='lobby-header'>
                     <div className='lobby-header_left'>
                         <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
-                        <img src={Icon} onClick={() => this.props.history.push('/')} />
-                        <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                        <img id='header-image' src={Icon} onClick={() => this.props.history.push('/')} />
+                        <span id='header-name'>VR<span className='lighttext'>ART GALLERY</span></span>
                     </div>
                     <div className='lobby-header_search'>
                         <input name='header' type='text' placeholder='Search' />
