@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
+import UploadGalleryImages from './uploadImages'
 import { withRouter } from 'react-router-dom'
 import { v4 as randomStringGenerator } from 'uuid';
 import { GridLoader } from 'react-spinners'
@@ -21,14 +22,12 @@ class CreateGalleries extends Component {
     componentDidMount() {
         let { user, galleries } = this.props
         const numOfGalleries = galleries.length
+        // if user has reached limit 12, conditionally disallow the rendering of the create Gallery
         this.setState({ author: user, numOfGalleries }, () => {
             if (this.state.numOfGalleries === 12) {
                 this.setState({ maxLimit: true })
             }
         })
-        // Should set author and number of galleries tied to user in state. Immediately throw popup if user has reached limit 12 and disallow the rendering of the create Gallery
-
-
     }
 
     handleChange = e => {
@@ -45,17 +44,60 @@ class CreateGalleries extends Component {
         }
     }
 
-    getSignedRequest = ([file]) => {
-
+    getSignedRequestThumbnails = ([file]) => {
+        console.log(this.state.url)
+        console.log(file)
+        this.setState({ isUploading: true });
+        const fileName = `${randomStringGenerator()}-${file.name.replace(/\s/g, '-')}`;
+        axios
+        .get('/api/amazons3/thumbnails', {params: {'file-name': fileName,'file-type': file.type},
+        })
+        .then(res => {
+          const { signedRequest, url } = res.data;
+          console.log(url)
+          this.uploadFile(file, signedRequest, url);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
+    uploadFile = (file, signedRequest, url) => {
+        console.log(url)
+        const options = {
+          headers: {
+            'Content-Type': file.type,
+          },
+        };
+    
+        axios
+          .put(signedRequest, file, options)
+          .then(res => {
+            console.log(url)
+            this.setState({ isUploading: false, thumbnail:url })
+            // .then(console.log("this is the url",url))
+            // THEN DO SOMETHING WITH THE URL. SEND TO DB 
+          })
+          
+          .catch(err => {
+            this.setState({
+              isUploading: false,
+            });
+            if (err.response.status === 403) {
+              alert(
+                `Your request for a signed URL failed with a status 403. Double check the CORS configuration and bucket policy in the README. You also will want to double check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env and ensure that they are the same as the ones that you created in the IAM dashboard. You may need to generate new keys\n${
+                  err.stack
+                }`
+              );
+            } else {
+              alert(`ERROR: ${err.status}\n ${err.stack}`);
+            }
+          });
+          console.log(url)
+          console.log(url)
+          console.log(this.state.thumbnail)
 
-    uploadFile = (file, signRequest, url) => {
+      };
 
-    }
-
-    onDrop(files) {
-        this.setState({ files });
-    }
 
     onCancel() {
         this.setState({
@@ -107,7 +149,7 @@ class CreateGalleries extends Component {
                             <h2>Gallery Thumbnail</h2>
                             <img src={thumbnail} alt="This is what is in frame 1" width="450px" />
                             <Dropzone
-                                onDrop={this.onDrop.bind(this)}
+                                onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
                                 onFileDialogCancel={this.onCancel.bind(this)}
                                 accept="image/*"
                                 multiple={false}
@@ -133,6 +175,7 @@ class CreateGalleries extends Component {
                             </Dropzone>
                             <input placeholder="Image Address"></input>
                         </div>
+                        <UploadGalleryImages />
                         <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
                     </div>
                 }
