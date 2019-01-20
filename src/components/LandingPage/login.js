@@ -36,7 +36,7 @@ class Login extends Component {
 
     login = () => {
         let { username, password } = this.state
-        axios.post(`/api/login`, { username, password }).then(res => {
+        axios.post(`/api/login/`, { username, password }).then(res => {
             //If username does not exist, inform user
             if (res.data === 'Wrong Username') {
                 this.setState({ loginMsg: 'This username does not exist.' }, () => {
