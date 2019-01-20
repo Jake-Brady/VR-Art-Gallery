@@ -8,6 +8,7 @@ import Account from '../components/Lobby/account'
 import Help from '../components/Lobby/help'
 import '../styles/Views/Lobby.css'
 import Icon from '../styles/Media/Icon.png'
+import EmptyGallery from '../styles/Media/emptyGallery.png'
 import Profile from '../styles/Media/defaultProfile.png'
 
 class Lobby extends Component {
@@ -25,6 +26,7 @@ class Lobby extends Component {
             searchInput: '',
             galleryId: 0
         }
+        this.editGallery = this.editGallery.bind(this)
     }
 
     componentDidMount() {
@@ -37,9 +39,10 @@ class Lobby extends Component {
                 //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
                 axios.get('/api/retrieveGalleries/').then(res => {
                     this.setState({ usersGalleries: res.data, galleryCopy: res.data, usersGallery: res.data, user: this.props.match.params.username }, () => {
-                        this.changeWindow('Galleries')
                         axios.get('/api/getFavorites/').then(res => {
-                            this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false })
+                            this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
+                                this.simulateClick()
+                            })
                         })
                     })
                 })
@@ -75,7 +78,18 @@ class Lobby extends Component {
             if (title[0] === current) tab.classList.add('menu-back')
             else tab.classList.remove('menu-back')
         })
+    }
 
+    simulateClick = () => {
+        const tab = document.querySelectorAll('[data-tab]')[2]
+        tab.click()
+    }
+
+    resetSearch = () => {
+        const search = document.querySelector('#lobby-searchbar')
+        search.value = ''
+        search.focus()
+        this.setState({ usersGalleries: [...this.state.galleryCopy], favoritedGalleries: [...this.state.favoritesCopy] })
     }
 
     changeWindow = magicWord => {
@@ -93,6 +107,7 @@ class Lobby extends Component {
                 break;
             case "Galleries":
                 this.pageTop(magicWord)
+                this.resetSearch()
                 this.setState({ theMagicWord: 'galleries' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
@@ -103,6 +118,7 @@ class Lobby extends Component {
                 break;
             case "Favorites":
                 this.pageTop(magicWord)
+                this.resetSearch()
                 this.setState({ theMagicWord: 'favorites' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
@@ -143,12 +159,12 @@ class Lobby extends Component {
         this.props.history.push(`/${author}/${galleryName}/`)
     }
 
-    editGallery (id) {
-    this.setState({
-        galleryId: id
-    }, () => {
-        this.changeWindow('Create')
-    })
+    editGallery(id) {
+        this.setState({
+            galleryId: id
+        }, () => {
+            this.changeWindow('Create')
+        })
     }
 
     deleteGallery = (id, galleryName) => {
@@ -208,12 +224,24 @@ class Lobby extends Component {
             this.setState({ usersGalleries: galleries })
         }
         else {
+            console.log('this bitch as hit joy emoji')
             const favorites = this.state.favoritesCopy.filter(gallery => gallery.gallery_name.includes(target))
             this.setState({ favoritedGalleries: favorites })
         }
     }
 
+    removeFav = (galleryId) => {
+        const input = document.querySelector('#lobby-searchbar').value
+        const filtered = this.state.favoritesCopy.filter(gallery => gallery.id !== galleryId)
+        this.setState({ favoritesCopy: filtered }, () => this.handleSearch('favorites', input ))
+        axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Decrease: 1 }).then(res => {
+            // pass in ID to be deleted from favorites table
+            axios.delete(`/api/deleteFromFavorites/${galleryId}`)
+        })
+    }
+
     render() {
+        console.log(this.state.favoritedGalleries)
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading } = this.state
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
@@ -234,6 +262,7 @@ class Lobby extends Component {
                     galleryName={galleryName}
                     visitGallery={this.visitGallery}
                     author={galleryAuthor}
+                    removeFav={this.removeFav}
                 />
             )
         })
@@ -262,78 +291,90 @@ class Lobby extends Component {
             )
         })
         return (
-            <div className='lobby'>
-                <div className='lobby-overlay' />
-                <header className='lobby-header'>
-                    <div className='lobby-header_left'>
-                        <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
-                        <img id='header-image' src={Icon} onClick={() => this.props.history.push('/')} />
-                        <span id='header-name'>VR<span className='lighttext'>ART GALLERY</span></span>
-                    </div>
-                    <div className='lobby-header_search'>
-                        <input onChange={e => this.handleSearch(theMagicWord, e.target.value)} type='text' placeholder={`Search ${theMagicWord.charAt(0).toUpperCase() + theMagicWord.slice(1)}`} />
-                        <div className='center'>
-                            <i className="fas fa-search"></i>
-                        </div>
-                    </div>
-                    <div className='lobby-header_right center'>
-                        <img src={Profile} alt='User Picture' />
-                    </div>
-                </header>
-
-                <section className="side-menu">
-                    <div className="menu-column">
-                        <div className='menu-header'>
-                            <i className="fas fa-bars" onClick={() => this.toggleMenu()}></i>
-                            <img src={Icon} onClick={() => this.props.history.push('/')} />
-                            <span>VR<span className='lighttext'>ART GALLERY</span></span>
-                        </div>
-                        <span data-tab className="menu-btn menu-btn-first" onClick={() => this.props.history.push('/')}><i className="fas fa-home menu-icon"></i>Home</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}><i className="fas fa-plus menu-icon"></i>Create</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.usersGalleries.length})</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritedGalleries.length})</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-user menu-icon"></i>Account</span>
-                        <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>Help</span>
-                        <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
-                    </div>
-                </section>
-
-                <main className='lobby-main'>
+            <>
+                {loading ?
                     <div>
-                        {/* Conditionally rendering based on magicWord */}
-                        {
-                            theMagicWord === 'create' ?
-                                <div>
-                                    <CreateGalleries
-                                        user={this.props.match.params.username}
-                                        galleries={usersGalleries}
-                                        editGalleryId={this.state.galleryId}
-                                    />
+                        loading
+                </div>
+                    :
+                    <div className='lobby'>
+                        <div className='lobby-overlay' />
+                        <header className='lobby-header'>
+                            <div className='lobby-header_left'>
+                                <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
+                                <img id='header-image' src={Icon} onClick={() => this.props.history.push('/')} />
+                                <span id='header-name'>VR<span className='lighttext'>ART GALLERY</span></span>
+                            </div>
+                            <div className='lobby-header_search'>
+                                <input onChange={e => this.handleSearch(theMagicWord, e.target.value)} type='text' placeholder={`Search ${theMagicWord.charAt(0).toUpperCase() + theMagicWord.slice(1)}`} id='lobby-searchbar' />
+                                <div className='center'>
+                                    <i className="fas fa-search"></i>
                                 </div>
-                                : theMagicWord === 'galleries' ?
-                                    <div className='lobby-container_gallery'>
-                                        <div className='lobby-card-grid'>
-                                            {galleryContainers}
+                            </div>
+                            <div className='lobby-header_right center'>
+                                <img src={Profile} alt='User Picture' />
+                            </div>
+                        </header>
+
+                        <section className="side-menu">
+                            <div className="menu-column">
+                                <div className='menu-header'>
+                                    <i className="fas fa-bars" onClick={() => this.toggleMenu()}></i>
+                                    <img src={Icon} onClick={() => this.props.history.push('/')} />
+                                    <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                                </div>
+                                <span data-tab className="menu-btn menu-btn-first" onClick={() => this.props.history.push('/')}><i className="fas fa-home menu-icon"></i>Home</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}><i className="fas fa-plus menu-icon"></i>Create</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-user menu-icon"></i>Account</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>Help</span>
+                                <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
+                            </div>
+                        </section>
+
+                        <main className='lobby-main'>
+                            <div>
+                                {/* Conditionally rendering based on magicWord */}
+                                {
+                                    theMagicWord === 'create' ?
+                                        <div>
+                                            <CreateGalleries
+                                                user={this.props.match.params.username}
+                                                galleries={usersGalleries}
+                                                editGalleryId={this.state.galleryId}
+                                            />
                                         </div>
-                                    </div>
-                                    : theMagicWord === 'favorites' ?
-                                        <div className='lobby-container_gallery'>
-                                            <div className='lobby-card-grid'>
-                                                {listOfFavorites}
+                                        : theMagicWord === 'galleries' ?
+                                            <div className='lobby-container_gallery'>
+                                                {!this.state.galleryCopy.length ?
+                                                    <h1></h1>
+                                                    :
+                                                    <div className='lobby-card-grid'>
+                                                        {galleryContainers}
+                                                    </div>
+                                                }
                                             </div>
-                                        </div>
-                                        : theMagicWord === 'account' ?
-                                            <div>
-                                                <Account />
-                                            </div>
-                                            : theMagicWord === 'help' &&
-                                            <div>
-                                                <Help />
-                                            </div>
-                        }
+                                            : theMagicWord === 'favorites' ?
+                                                <div className='lobby-container_gallery'>
+                                                    <div className='lobby-card-grid'>
+                                                        {listOfFavorites}
+                                                    </div>
+                                                </div>
+                                                : theMagicWord === 'account' ?
+                                                    <div>
+                                                        <Account />
+                                                    </div>
+                                                    : theMagicWord === 'help' &&
+                                                    <div>
+                                                        <Help />
+                                                    </div>
+                                }
+                            </div>
+                        </main>
                     </div>
-                </main>
-            </div>
+                }
+            </>
         )
     }
 }
