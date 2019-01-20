@@ -1,7 +1,7 @@
 import React from 'react';
-import '../Styles/blueprint.css'
 
-const GalleryBluePrint = () => {
+
+const BluePrint = () => {
     return(
         <section id="blueprint">
             {/* Clicking Images enlarge them? Perhaps some other design for this window. */}
@@ -14,4 +14,4 @@ const GalleryBluePrint = () => {
     )
 }
 
-export default GalleryBluePrint
+export default BluePrint
