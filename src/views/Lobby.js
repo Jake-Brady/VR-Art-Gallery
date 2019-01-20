@@ -8,6 +8,7 @@ import Account from '../components/Lobby/account'
 import Help from '../components/Lobby/help'
 import '../styles/Views/Lobby.css'
 import Icon from '../styles/Media/Icon.png'
+import EmptyGallery from '../styles/Media/emptyGallery.png'
 import Profile from '../styles/Media/defaultProfile.png'
 
 class Lobby extends Component {
@@ -273,8 +274,8 @@ class Lobby extends Component {
         return (
             <>
                 {loading ?
-                <div>
-                    loading
+                    <div>
+                        loading
                 </div>
                     :
                     <div className='lobby'>
@@ -326,9 +327,13 @@ class Lobby extends Component {
                                         </div>
                                         : theMagicWord === 'galleries' ?
                                             <div className='lobby-container_gallery'>
-                                                <div className='lobby-card-grid'>
-                                                    {galleryContainers}
-                                                </div>
+                                                {!this.state.galleryCopy.length ?
+                                                    <h1></h1>
+                                                    :
+                                                    <div className='lobby-card-grid'>
+                                                        {galleryContainers}
+                                                    </div>
+                                                }
                                             </div>
                                             : theMagicWord === 'favorites' ?
                                                 <div className='lobby-container_gallery'>
@@ -348,7 +353,7 @@ class Lobby extends Component {
                             </div>
                         </main>
                     </div>
-            }
+                }
             </>
         )
     }
