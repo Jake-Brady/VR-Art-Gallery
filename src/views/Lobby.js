@@ -23,8 +23,10 @@ class Lobby extends Component {
             loading: true,
             galleryCopy: [],
             favoritesCopy: [],
-            searchInput: ''
+            searchInput: '',
+            galleryId: 0
         }
+        this.editGallery = this.editGallery.bind(this)
     }
 
     componentDidMount() {
@@ -157,8 +159,12 @@ class Lobby extends Component {
         this.props.history.push(`/${author}/${galleryName}/`)
     }
 
-    editGallery = id => {
-
+    editGallery(id) {
+        this.setState({
+            galleryId: id
+        }, () => {
+            this.changeWindow('Create')
+        })
     }
 
     deleteGallery = (id, galleryName) => {
@@ -218,12 +224,24 @@ class Lobby extends Component {
             this.setState({ usersGalleries: galleries })
         }
         else {
+            console.log('this bitch as hit joy emoji')
             const favorites = this.state.favoritesCopy.filter(gallery => gallery.gallery_name.includes(target))
             this.setState({ favoritedGalleries: favorites })
         }
     }
 
+    removeFav = (galleryId) => {
+        const input = document.querySelector('#lobby-searchbar').value
+        const filtered = this.state.favoritesCopy.filter(gallery => gallery.id !== galleryId)
+        this.setState({ favoritesCopy: filtered }, () => this.handleSearch('favorites', input ))
+        axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Decrease: 1 }).then(res => {
+            // pass in ID to be deleted from favorites table
+            axios.delete(`/api/deleteFromFavorites/${galleryId}`)
+        })
+    }
+
     render() {
+        console.log(this.state.favoritedGalleries)
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading } = this.state
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
@@ -244,6 +262,7 @@ class Lobby extends Component {
                     galleryName={galleryName}
                     visitGallery={this.visitGallery}
                     author={galleryAuthor}
+                    removeFav={this.removeFav}
                 />
             )
         })
@@ -323,6 +342,7 @@ class Lobby extends Component {
                                             <CreateGalleries
                                                 user={this.props.match.params.username}
                                                 galleries={usersGalleries}
+                                                editGalleryId={this.state.galleryId}
                                             />
                                         </div>
                                         : theMagicWord === 'galleries' ?

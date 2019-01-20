@@ -24,14 +24,21 @@ class CreateGalleries extends Component {
     }
 
     componentDidMount() {
-        let { user, galleries } = this.props
+        let { user, galleries, editGalleryId } = this.props
         const numOfGalleries = galleries.length
+        if (editGalleryId){
+            this.setState({author: user, numOfGalleries}, ()=> {
+                this.editGallery(editGalleryId)
+            })
+        }
+        else {
         // if user has reached limit 12, conditionally disallow the rendering of the create Gallery
         this.setState({ author: user, numOfGalleries }, () => {
             if (this.state.numOfGalleries === 12) {
                 this.setState({ maxLimit: true })
             }
         })
+      }
     }
 
     handleChange = e => {
@@ -120,6 +127,21 @@ class CreateGalleries extends Component {
         })
     }
 
+    retrievingImages(image){
+    let images = []
+    images.push(image)
+    this.setState({images})
+    }
+
+    editGallery(id){
+    // set State with gallery related info after retrieving gallery info.
+    axios.get(`/api/editGallery/${id}`).then(res => {
+        // Set local State
+        
+    })
+
+    }
+
     render(props) {
         console.log(this.state)
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading } = this.state
@@ -182,7 +204,9 @@ class CreateGalleries extends Component {
                             </Dropzone>
                             <input placeholder="Image Address"></input>
                         </div>
-                        <UploadGalleryImages />
+                        <UploadGalleryImages 
+                        retrievingImages={this.retrievingImages}
+                        />
                         <GalleryPresets />
                         <BluePrint />
                         <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>

@@ -5,8 +5,8 @@ import {GridLoader} from 'react-spinners'
 import axios from 'axios'
 
 class UploadImage extends Component{
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
             this.state={
                 imageURL: 'http://via.placeholder.com/450x450',
                 imageCaption: 'create a caption or leave blank.',
@@ -89,6 +89,8 @@ onCancel() {
 
 render(){
     let {imageURL, imageCaption, isUploading} = this.state
+    let {retrievingImages} = this.props
+    console.log(retrievingImages)
     return(
         <div className="img-block">
             <h3>Frame 1</h3>
