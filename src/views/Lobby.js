@@ -77,6 +77,13 @@ class Lobby extends Component {
 
     }
 
+    resetSearch = () => {
+        const search = document.querySelector('#lobby-searchbar')
+        search.value = ''
+        search.focus()
+        this.setState({ usersGalleries: [...this.state.galleryCopy], favoritedGalleries: [...this.state.favoritesCopy]})
+    }
+
     changeWindow = magicWord => {
         const { theMagicWord } = this.state
         if (magicWord === theMagicWord) return;
@@ -92,6 +99,7 @@ class Lobby extends Component {
                 break;
             case "Galleries":
                 this.pageTop(magicWord)
+                this.resetSearch()
                 this.setState({ theMagicWord: 'galleries' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
@@ -102,6 +110,7 @@ class Lobby extends Component {
                 break;
             case "Favorites":
                 this.pageTop(magicWord)
+                this.resetSearch()
                 this.setState({ theMagicWord: 'favorites' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
@@ -144,7 +153,7 @@ class Lobby extends Component {
 
     editGallery = id => {
 
-    }
+    }   
 
     deleteGallery = (id, galleryName) => {
         if (window.confirm('Are you sure you want to delete this gallery?')) {
@@ -266,7 +275,7 @@ class Lobby extends Component {
                         <span id='header-name'>VR<span className='lighttext'>ART GALLERY</span></span>
                     </div>
                     <div className='lobby-header_search'>
-                        <input onChange={e => this.handleSearch(theMagicWord, e.target.value)} type='text' placeholder={`Search ${theMagicWord.charAt(0).toUpperCase() + theMagicWord.slice(1)}`} />
+                        <input onChange={e => this.handleSearch(theMagicWord, e.target.value)} type='text' placeholder={`Search ${theMagicWord.charAt(0).toUpperCase() + theMagicWord.slice(1)}`} id='lobby-searchbar' />
                         <div className='center'>
                             <i className="fas fa-search"></i>
                         </div>
