@@ -181,6 +181,15 @@ module.exports={
             res.status(500).send(err)
         })
     },
+    getGalleryToEdit: (req, res, next) => {
+        const {id} = req.params
+        const db = req.app.get('db')
+        let images = [];
+        let galleryPresets = [];
+        db.get_gallery_to_edit(id).then(gallery => {
+        console.table(gallery)
+        })
+    },
     deleteGallery: (req, res, next) => {
         const {id} = req.params
         const db = req.app.get('db')
