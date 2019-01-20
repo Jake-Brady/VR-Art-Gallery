@@ -186,7 +186,7 @@ class LandingPage extends Component {
                   // pass in galleryId to adjust favorites number in server
                 axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Increase: 1}).then(res => {
                     // pass in galleryId as body to add into favorites table
-                    axios.post(`/api/addToFavorites`, {galleryId}).then(res => {
+                    axios.post(`/api/addToFavorites/`, {galleryId}).then(res => {
                         //popup saying galleryName has been added to favorites?
                         console.log('favorites successfully updated - increased.')
                             })

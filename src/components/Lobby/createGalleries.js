@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
-import UploadGalleryImages from './uploadImages'
-import { withRouter } from 'react-router-dom'
 import { v4 as randomStringGenerator } from 'uuid';
 import { GridLoader } from 'react-spinners'
 import axios from 'axios';
+import UploadGalleryImages from './GalleriesSubComponents/uploadImages'
+import GalleryPresets from './GalleriesSubComponents/galleryPresets'
+import BluePrint from './GalleriesSubComponents/blueprint'
+
 
 class CreateGalleries extends Component {
     constructor(props) {
@@ -15,7 +17,9 @@ class CreateGalleries extends Component {
             isPrivate: false,
             thumbnail: 'http://via.placeholder.com/450x450',
             numOfGalleries: 0,
-            maxLimit: false
+            maxLimit: false,
+            images: [],
+            isUploading: false
         }
     }
 
@@ -50,7 +54,7 @@ class CreateGalleries extends Component {
         this.setState({ isUploading: true });
         const fileName = `${randomStringGenerator()}-${file.name.replace(/\s/g, '-')}`;
         axios
-        .get('/api/amazons3/thumbnails', {params: {'file-name': fileName,'file-type': file.type},
+        .get('/api/amazons3/thumbnails/', {params: {'file-name': fileName,'file-type': file.type},
         })
         .then(res => {
           const { signedRequest, url } = res.data;
@@ -110,7 +114,7 @@ class CreateGalleries extends Component {
         const { galleryName, author, thumbnail, isPrivate } = this.state
         if (!galleryName || !author || !thumbnail) return;
         // Adds gallery to Database, as this is needed to generate a SPK id, to be used in next view so images and preset tables can reference it.
-        axios.post(`/api/createNewGallery`, {galleryName, author, thumbnail, isPrivate}).then(res => {
+        axios.post(`/api/createNewGallery/`, {galleryName, author, thumbnail, isPrivate}).then(res => {
             // Redirects user to EditGallery component to add their images and captions where they can actually create gallery
             this.props.history.push({pathname:`/gallery/${author}/${galleryName}/`, state:{galleryName, author, thumbnail, privacy: isPrivate}})
         })
@@ -118,7 +122,7 @@ class CreateGalleries extends Component {
 
     render(props) {
         console.log(this.state)
-        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit } = this.state
+        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
@@ -169,13 +173,18 @@ class CreateGalleries extends Component {
                                         fontSize: 28,
                                     }}>
                                         <input {...getInputProps()} />
-                                        <h3>Upload</h3>
+                                        { isUploading 
+                                         ?  <GridLoader />
+                                         : <p>Drop File or Click Here</p>
+                                        }
                                     </div>
                                 )}
                             </Dropzone>
                             <input placeholder="Image Address"></input>
                         </div>
                         <UploadGalleryImages />
+                        <GalleryPresets />
+                        <BluePrint />
                         <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
                     </div>
                 }
@@ -187,4 +196,4 @@ class CreateGalleries extends Component {
     }
 }
 
-export default withRouter(CreateGalleries)
+export default CreateGalleries

@@ -44,7 +44,7 @@ class Register extends Component {
         } else {
             if (username.split(' ').length === 1) {
                 if (email.indexOf('@') > -1) {
-                    axios.post(`/api/registerUser`, { firstName, lastName, username, password, email }).then(res => {
+                    axios.post(`/api/registerUser/`, { firstName, lastName, username, password, email }).then(res => {
                         if (res.data === 'email') {
                             //If email is already in use, inform user that email has been sent to their existing account's email address.
                             this.setState({ RegisterMsg: 'An account with that email exists. An email has been sent to that account with the proper login information.' }, () => alert('Email is taken.'))
