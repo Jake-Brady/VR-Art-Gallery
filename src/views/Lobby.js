@@ -22,7 +22,8 @@ class Lobby extends Component {
             loading: true,
             galleryCopy: [],
             favoritesCopy: [],
-            searchInput: ''
+            searchInput: '',
+            galleryId: 0
         }
     }
 
@@ -142,8 +143,12 @@ class Lobby extends Component {
         this.props.history.push(`/${author}/${galleryName}/`)
     }
 
-    editGallery = id => {
-
+    editGallery (id) {
+    this.setState({
+        galleryId: id
+    }, () => {
+        this.changeWindow('Create')
+    })
     }
 
     deleteGallery = (id, galleryName) => {
@@ -302,6 +307,7 @@ class Lobby extends Component {
                                     <CreateGalleries
                                         user={this.props.match.params.username}
                                         galleries={usersGalleries}
+                                        editGalleryId={this.state.galleryId}
                                     />
                                 </div>
                                 : theMagicWord === 'galleries' ?
