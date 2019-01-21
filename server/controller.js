@@ -202,6 +202,17 @@ module.exports={
         db.delete_gallery([id])
         res.sendStatus(200)
     },
+    getThoseWhoLiked: (req, res, next) => {
+        const {galleryIds} = req.params
+        console.log(galleryIds)
+        const db = req.app.get('db')
+        db.users_who_like_your_galleries().then(users => {
+            res.status(200).send(users)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
     logout: (req, res, next) => {
         req.session.destroy()
         res.sendStatus(200)
