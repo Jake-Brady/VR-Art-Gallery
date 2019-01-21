@@ -39,6 +39,8 @@ class ArtGallery extends Component {
     }
 
     componentDidMount() {
+        const stats = document.querySelector('.rs-base')
+        console.log(stats)
         let { username, galleryName } = this.props.match.params
         // Retrieve User's Images and Presets
         axios.get(`/api/getGalleryData/${username}/${galleryName}`).then(res => {
@@ -72,12 +74,12 @@ class ArtGallery extends Component {
 
     checkFPS = () => {
         const scene = document.querySelector('#scene'),
-            loading = document.querySelector('.gallery-loading')
+        loading = document.querySelector('#gallery-loading')
         const interval = setInterval(() => {
             let fps = document.querySelectorAll('.rs-counter-value')[1].innerText
             if (fps > 30) {
-                loading.style.visibility = 'hidden'
                 scene.style.visibility = 'visible'
+                loading.style.display = 'none'
                 clearInterval(interval)
             }
         }, 1000);
@@ -88,8 +90,15 @@ class ArtGallery extends Component {
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <>
-                <div className='gallery-loading center'>
-                    Loading...
+                <div className='lobby-loading center' id='gallery-loading'>
+                    <div className='lobby-loading_content center'>
+                        <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                        <div className='lobby-loading-grid center'>
+                            <div />
+                            <div />
+                            <div />
+                        </div>
+                    </div>
                 </div>
                 <Scene physics="debug: true" stats id='scene'>
                     <Assets

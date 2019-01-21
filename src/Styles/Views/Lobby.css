@@ -49,6 +49,18 @@
     }
 }
 
+@keyframes fade {
+    0% {
+        opacity: inherit;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: inherit;
+    }
+}
+
 .lobby {
    font-family: 'Oswald', sans-serif;
    width: 100vw;
@@ -343,6 +355,55 @@
     animation: leave 0.5s 1;
     animation-fill-mode: forwards;
 }
+
+.lobby-loading {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Oswald', sans-serif;
+    font-size: 45px;
+    color: rgb(110, 142, 254);
+}
+
+.lobby-loading_content {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.lobby-loading-grid {
+    display: flex;
+    width: 100%;
+}
+
+.lobby-loading-grid > div {
+    width: 75px;
+    height: 75px;
+    margin-top: 25px;
+}
+
+.lobby-loading-grid > div:first-child {
+    background: rgb(61, 111, 220);
+    animation: fade 2s infinite;
+}
+
+.lobby-loading-grid > div:nth-child(2) {
+    background: rgb(61, 111, 220);
+    margin-left: 20px;
+    margin-right: 20px;
+    animation: fade 2s infinite .3s;
+}
+
+.lobby-loading-grid > div:nth-child(3) {
+    background: rgb(61, 111, 220);
+    animation: fade 2s infinite .6s;
+}
+
+
+
+
 
 /* Queries to make card grid work on mobile */
 

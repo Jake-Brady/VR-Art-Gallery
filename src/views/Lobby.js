@@ -44,7 +44,7 @@ class Lobby extends Component {
                     this.setState({ usersGalleries: res.data, galleryCopy: res.data, usersGallery: res.data, user: this.props.match.params.username }, () => {
                         axios.get('/api/getFavorites/').then(res => {
                             this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
-                                this.simulateClick()
+
                             })
                         })
                     })
@@ -63,15 +63,17 @@ class Lobby extends Component {
     }
 
     checkSize = () => {
-        const image = document.querySelector('#header-image'),
-            name = document.querySelector('#header-name')
-        if (!window.matchMedia("(min-width: 620px)").matches && (this.state.theMagicWord === 'galleries' || this.state.theMagicWord === 'favorites')) {
-            image.classList.add('lobby-header_hidden')
-            name.classList.add('lobby-header_hidden')
-        }
-        else {
-            image.classList.remove('lobby-header_hidden')
-            name.classList.remove('lobby-header_hidden')
+        if (!this.state.loading) {
+            const image = document.querySelector('#header-image'),
+                name = document.querySelector('#header-name')
+            if (!window.matchMedia("(min-width: 620px)").matches && (this.state.theMagicWord === 'galleries' || this.state.theMagicWord === 'favorites')) {
+                image.classList.add('lobby-header_hidden')
+                name.classList.add('lobby-header_hidden')
+            }
+            else {
+                image.classList.remove('lobby-header_hidden')
+                name.classList.remove('lobby-header_hidden')
+            }
         }
     }
 
@@ -329,13 +331,19 @@ class Lobby extends Component {
                 />
             )
         })
-        console.log(this.state.queue)
         return (
             <>
                 {loading ?
-                    <div>
-                        loading
-                </div>
+                    <div className='lobby-loading center'>
+                        <div className='lobby-loading_content center'>
+                            <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                            <div className='lobby-loading-grid center'>
+                                <div />
+                                <div />
+                                <div />
+                            </div>
+                        </div>
+                    </div>
                     :
                     <div className='lobby'>
                         <div className='lobby-overlay' />
