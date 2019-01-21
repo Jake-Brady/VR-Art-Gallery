@@ -18,6 +18,49 @@
     }
 }
 
+@keyframes pop {
+    0% {
+        visibility: hidden;
+        bottom: -100px;
+    }
+    20% {
+        visibility: visible;
+        bottom: 10px;
+    }
+    80% {
+        visibility: visible;
+        bottom: 10px;
+    }
+    100% {
+        visibility: hidden;
+        bottom: -100px;
+    }
+}
+
+@keyframes leave {
+    0% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes fade {
+    0% {
+        opacity: inherit;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: inherit;
+    }
+}
+
 .lobby {
    font-family: 'Oswald', sans-serif;
    width: 100vw;
@@ -290,6 +333,77 @@
 .lobby-header_hidden {
     visibility: hidden;
 }
+
+.lobby-pop {
+    visibility: hidden;
+    position: fixed;
+    left: 10px;
+    bottom: -100px;
+    height: 40px;
+    background: rgb(238, 50, 50);
+    font-size: 12px;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.lobby-pop-anim {
+    animation: pop 2s 1;
+    animation-fill-mode: forwards;
+}
+
+.lobby-leave-anim {
+    animation: leave 0.5s 1;
+    animation-fill-mode: forwards;
+}
+
+.lobby-loading {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Oswald', sans-serif;
+    font-size: 45px;
+    color: rgb(110, 142, 254);
+}
+
+.lobby-loading_content {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.lobby-loading-grid {
+    display: flex;
+    width: 100%;
+}
+
+.lobby-loading-grid > div {
+    width: 75px;
+    height: 75px;
+    margin-top: 25px;
+}
+
+.lobby-loading-grid > div:first-child {
+    background: rgb(61, 111, 220);
+    animation: fade 2s infinite;
+}
+
+.lobby-loading-grid > div:nth-child(2) {
+    background: rgb(61, 111, 220);
+    margin-left: 20px;
+    margin-right: 20px;
+    animation: fade 2s infinite .3s;
+}
+
+.lobby-loading-grid > div:nth-child(3) {
+    background: rgb(61, 111, 220);
+    animation: fade 2s infinite .6s;
+}
+
+
+
+
 
 /* Queries to make card grid work on mobile */
 

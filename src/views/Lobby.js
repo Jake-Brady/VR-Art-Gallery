@@ -24,7 +24,10 @@ class Lobby extends Component {
             galleryCopy: [],
             favoritesCopy: [],
             searchInput: '',
-            galleryId: 0
+            galleryId: 0,
+            galleryName: '',
+            queue: [],
+            popping: false
         }
         this.editGallery = this.editGallery.bind(this)
     }
@@ -41,7 +44,7 @@ class Lobby extends Component {
                     this.setState({ usersGalleries: res.data, galleryCopy: res.data, usersGallery: res.data, user: this.props.match.params.username }, () => {
                         axios.get('/api/getFavorites/').then(res => {
                             this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
-                                this.simulateClick()
+
                             })
                         })
                     })
@@ -60,15 +63,17 @@ class Lobby extends Component {
     }
 
     checkSize = () => {
-        const image = document.querySelector('#header-image'),
-            name = document.querySelector('#header-name')
-        if (!window.matchMedia("(min-width: 620px)").matches && (this.state.theMagicWord === 'galleries' || this.state.theMagicWord === 'favorites')) {
-            image.classList.add('lobby-header_hidden')
-            name.classList.add('lobby-header_hidden')
-        }
-        else {
-            image.classList.remove('lobby-header_hidden')
-            name.classList.remove('lobby-header_hidden')
+        if (!this.state.loading) {
+            const image = document.querySelector('#header-image'),
+                name = document.querySelector('#header-name')
+            if (!window.matchMedia("(min-width: 620px)").matches && (this.state.theMagicWord === 'galleries' || this.state.theMagicWord === 'favorites')) {
+                image.classList.add('lobby-header_hidden')
+                name.classList.add('lobby-header_hidden')
+            }
+            else {
+                image.classList.remove('lobby-header_hidden')
+                name.classList.remove('lobby-header_hidden')
+            }
         }
     }
 
@@ -230,18 +235,54 @@ class Lobby extends Component {
         }
     }
 
-    removeFav = (galleryId) => {
+    removeFav = (galleryId, galleryName) => {
         const input = document.querySelector('#lobby-searchbar').value
-        const filtered = this.state.favoritesCopy.filter(gallery => gallery.id !== galleryId)
-        this.setState({ favoritesCopy: filtered }, () => this.handleSearch('favorites', input ))
-        axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Decrease: 1 }).then(res => {
-            // pass in ID to be deleted from favorites table
-            axios.delete(`/api/deleteFromFavorites/${galleryId}`)
+        const index = this.state.favoritedGalleries.findIndex(gallery => gallery.id === galleryId)
+        const card = document.querySelectorAll('#favorite-card')[index]
+        console.log(card)
+        card.classList.add('lobby-leave-anim')
+        setTimeout(() => {
+            const filtered = this.state.favoritesCopy.filter(gallery => gallery.id !== galleryId)
+            this.setState({ favoritesCopy: filtered, favoritedGalleries: filtered, galleryName }, () => {
+                this.handleSearch('favorites', input)
+                this.removeFavPop(galleryName)
+            })
+            axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Decrease: 1 }).then(res => {
+                // pass in ID to be deleted from favorites table
+                axios.delete(`/api/deleteFromFavorites/${galleryId}`)
+            })
+        }, 400);
+    }
+
+    removeFavPop = name => {
+        this.setState({ queue: [...this.state.queue, name] }, () => {
+            if (!this.state.popping) this.startInterval()
         })
     }
 
+    startInterval = () => {
+        this.playAnim(this.state.queue[0])
+        this.setState({ popping: true, queue: [...this.state.queue.slice(1)] }, () => {
+            let interval = setInterval(() => {
+                if (this.state.queue.length) {
+                    this.playAnim(this.state.queue[0])
+                    this.setState({ queue: [...this.state.queue.slice(1)] })
+                }
+                else this.setState({ popping: false }, () => clearInterval(interval))
+            }, 2050)
+        })
+    }
+
+    playAnim = name => {
+        const pop = document.querySelector('.lobby-pop')
+        pop.innerText = `Removed ${name} from favorites`
+        pop.classList.add('lobby-pop-anim')
+        setTimeout(() => {
+            pop.classList.remove('lobby-pop-anim')
+        }, 2000);
+    }
+
     render() {
-        console.log(this.state.favoritedGalleries)
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading } = this.state
         //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
         const listOfFavorites = favoritedGalleries.map((e) => {
@@ -293,9 +334,16 @@ class Lobby extends Component {
         return (
             <>
                 {loading ?
-                    <div>
-                        loading
-                </div>
+                    <div className='lobby-loading center'>
+                        <div className='lobby-loading_content center'>
+                            <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                            <div className='lobby-loading-grid center'>
+                                <div />
+                                <div />
+                                <div />
+                            </div>
+                        </div>
+                    </div>
                     :
                     <div className='lobby'>
                         <div className='lobby-overlay' />
@@ -370,6 +418,9 @@ class Lobby extends Component {
                                                         <Help />
                                                     </div>
                                 }
+                            </div>
+                            <div className='lobby-pop center'>
+
                             </div>
                         </main>
                     </div>

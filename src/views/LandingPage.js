@@ -21,42 +21,42 @@ class LandingPage extends Component {
     async componentDidMount() {
         const offset = this.state.galleries.length
         axios.get(`/api/getAllGalleries/${offset}`).then(res => {
-                this.setState({galleries: res.data})
+            this.setState({ galleries: res.data })
         })
         const user = await axios.get('/api/checkUser/')
         this.setState({ user: user.data }, () => this.setState({ loading: false }))
         window.addEventListener('scroll', this.handleScroll)
-        
+
         // Sees whether user is logged in. If true, it will store favorites in array to be compared with galleries array so addToFavorites/removeFromFavorites function will work.
         axios.get(`/api/getFavorites/`).then(res => {
-            this.setState({favorited: res.data}, () => {
+            this.setState({ favorited: res.data }, () => {
                 // Once favorited array has been set to state, trigger function that will loop through array for galleryID
                 this.identifyFavorites()
             })
         })
-    }  
-    
-    identifyFavorites(){
-    // Array of IDs shared in both galleries and favorited
-    let sharedIds = []
-    // Loop through all favorited galleries and for every id that matches those in galleries (nested for loop), color heart matching that id in galleries red. 
-    for(let i = 0; i < this.state.favorited.length; i++){
-        for(let v = 0; v < this.state.galleries.length; v++){
-            if(this.state.favorited[i].id === this.state.galleries[v].id){
-                sharedIds.push(this.state.favorited[i].id)
-            }
-        }
-    }
-    // Once Ids are collected into a single array, pass them to ColorHeartsRed function to color hearts on page
-    this.colorHeartsRed(sharedIds)
     }
 
-    colorHeartsRed(sharedIds){
+    identifyFavorites() {
+        // Array of IDs shared in both galleries and favorited
+        let sharedIds = []
+        // Loop through all favorited galleries and for every id that matches those in galleries (nested for loop), color heart matching that id in galleries red. 
+        for (let i = 0; i < this.state.favorited.length; i++) {
+            for (let v = 0; v < this.state.galleries.length; v++) {
+                if (this.state.favorited[i].id === this.state.galleries[v].id) {
+                    sharedIds.push(this.state.favorited[i].id)
+                }
+            }
+        }
+        // Once Ids are collected into a single array, pass them to ColorHeartsRed function to color hearts on page
+        this.colorHeartsRed(sharedIds)
+    }
+
+    colorHeartsRed(sharedIds) {
         // Need node array of all existing hearts on page to receive class '.make-red'
         const hearts = document.getElementsByClassName('fa-heart')
-        for(let i = 0; i < hearts.length; i++){
-            for(let v = 0; v < sharedIds.length; v++){
-                if(Number(hearts[i].getAttribute('data-id')) === sharedIds[v]){
+        for (let i = 0; i < hearts.length; i++) {
+            for (let v = 0; v < sharedIds.length; v++) {
+                if (Number(hearts[i].getAttribute('data-id')) === sharedIds[v]) {
                     hearts[i].classList.add('make-red')
                 }
             }
@@ -66,7 +66,7 @@ class LandingPage extends Component {
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll)
     }
-    
+
     //yoinked this from the interwebs 😂
     debounce = (func, wait, immediate) => {
         let timeout
@@ -103,18 +103,19 @@ class LandingPage extends Component {
         }
     }, 150)
 
-    smoothScroll(target){
-        if (target === 'gallery'){
-        const galleries = $('.landing-galleries').position().top;
-        $('html, body').animate({
-            scrollTop: galleries
-        }, 300)
-    } else if (target === 'home') {
-        const home = $('.home').position().top;
-        $('html, body').animate({
-            scrollTop: home
-        }, 500)
-    }}
+    smoothScroll(target) {
+        if (target === 'gallery') {
+            const galleries = $('.landing-galleries').position().top;
+            $('html, body').animate({
+                scrollTop: galleries
+            }, 300)
+        } else if (target === 'home') {
+            const home = $('.home').position().top;
+            $('html, body').animate({
+                scrollTop: home
+            }, 500)
+        }
+    }
 
 
     handleSign = type => {
@@ -124,14 +125,14 @@ class LandingPage extends Component {
     }
 
     addMore = () => {
-    // Needs offset variable from length of galleries. It accounts for number of galleries currently loaded on page, passes it on params, and uses that as an offset within the query so there are no duplicates/skipped galleries in the ordered retrieval by number of favorites.
-    const offset = this.state.galleries.length
+        // Needs offset variable from length of galleries. It accounts for number of galleries currently loaded on page, passes it on params, and uses that as an offset within the query so there are no duplicates/skipped galleries in the ordered retrieval by number of favorites.
+        const offset = this.state.galleries.length
         axios.get(`/api/getAllGalleries/${offset}`).then(res => {
             // join res.data with galleries array in state
             let arrayOfNewGalleries = res.data
             let joinedArray = this.state.galleries.concat(arrayOfNewGalleries)
-            this.setState({galleries: joinedArray}, () => {
-                if (this.state.user){
+            this.setState({ galleries: joinedArray }, () => {
+                if (this.state.user) {
                     this.identifyFavorites()
                 }
             })
@@ -144,71 +145,71 @@ class LandingPage extends Component {
         axios.put(`/api/incrementView/${galleryId}`)
     }
 
-    adjustFavorites(galleryId, timesFavorited){
-      //Check whether user is signed in first, otherwise cancel function
-      if (!this.state.user) return;
-      // Array of hearts on page and counters to be passed in axios calls
-      let galleries = this.state.galleries
-      let increaseFave = timesFavorited + 1;
-      let decreaseFave = timesFavorited - 1;
-      const hearts = document.getElementsByClassName('fa-heart')
-      for(let i = 0; i < hearts.length; i++){
-          if (Number(hearts[i].getAttribute('data-id')) === galleryId){
-            // if heart is already filled in as red, then remove class, decrement count on state for increased perceived loading time, decrement count on gallery's database, and then subsequently remove from favorites in user's database.
-            if(hearts[i].classList.contains('make-red')){
-            // remove color
-            hearts[i].classList.remove('make-red');
-            // loop through copy of existing galleries to find gallery matching the element where heart is located.
-            for(let i = 0; i < galleries.length; i++){
-            if(galleries[i].id === galleryId){
-            // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
-              galleries[i].times_favorited = decreaseFave
-              this.setState({galleries}, () => {
-                //   after State has been updated, update favorited number on gallery then remove from favorites list in db.
-                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Decrease: 1}).then(res => {
-                    // pass in ID to be deleted from favorites table
-                    axios.delete(`/api/deleteFromFavorites/${galleryId}`).then(res => {
-                        // popup saying galleryName has been removed from favorites?
-                        console.log('favorites successfully updated - decreased.')
-                    })
-                })
-              })
-            }
-            }
-            } else {
-            // add color
-            hearts[i].classList.add('make-red')
-            // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
-            for(let i = 0; i < galleries.length; i++){
-            if(galleries[i].id === galleryId){
-              galleries[i].times_favorited = increaseFave
-              this.setState({galleries}, () => {
-                  // pass in galleryId to adjust favorites number in server
-                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, {Increase: 1}).then(res => {
-                    // pass in galleryId as body to add into favorites table
-                    axios.post(`/api/addToFavorites/`, {galleryId}).then(res => {
-                        //popup saying galleryName has been added to favorites?
-                        console.log('favorites successfully updated - increased.')
+    adjustFavorites(galleryId, timesFavorited) {
+        //Check whether user is signed in first, otherwise cancel function
+        if (!this.state.user) return;
+        // Array of hearts on page and counters to be passed in axios calls
+        let galleries = this.state.galleries
+        let increaseFave = timesFavorited + 1;
+        let decreaseFave = timesFavorited - 1;
+        const hearts = document.getElementsByClassName('fa-heart')
+        for (let i = 0; i < hearts.length; i++) {
+            if (Number(hearts[i].getAttribute('data-id')) === galleryId) {
+                // if heart is already filled in as red, then remove class, decrement count on state for increased perceived loading time, decrement count on gallery's database, and then subsequently remove from favorites in user's database.
+                if (hearts[i].classList.contains('make-red')) {
+                    // remove color
+                    hearts[i].classList.remove('make-red');
+                    // loop through copy of existing galleries to find gallery matching the element where heart is located.
+                    for (let i = 0; i < galleries.length; i++) {
+                        if (galleries[i].id === galleryId) {
+                            // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
+                            galleries[i].times_favorited = decreaseFave
+                            this.setState({ galleries }, () => {
+                                //   after State has been updated, update favorited number on gallery then remove from favorites list in db.
+                                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Decrease: 1 }).then(res => {
+                                    // pass in ID to be deleted from favorites table
+                                    axios.delete(`/api/deleteFromFavorites/${galleryId}`).then(res => {
+                                        // popup saying galleryName has been removed from favorites?
+                                        console.log('favorites successfully updated - decreased.')
+                                    })
+                                })
                             })
-                    })
-                })
+                        }
+                    }
+                } else {
+                    // add color
+                    hearts[i].classList.add('make-red')
+                    // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
+                    for (let i = 0; i < galleries.length; i++) {
+                        if (galleries[i].id === galleryId) {
+                            galleries[i].times_favorited = increaseFave
+                            this.setState({ galleries }, () => {
+                                // pass in galleryId to adjust favorites number in server
+                                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Increase: 1 }).then(res => {
+                                    // pass in galleryId as body to add into favorites table
+                                    axios.post(`/api/addToFavorites/`, { galleryId }).then(res => {
+                                        //popup saying galleryName has been added to favorites?
+                                        console.log('favorites successfully updated - increased.')
+                                    })
+                                })
+                            })
+                        }
+                    }
+                }
             }
-            }   
-           }
         }
-      }
     }
 
-    shareGallery(galleryName, author){
-    const location = window.location
-    // Check for spaces in galleryName and author function - and replace with %20 for url to understand destination in url. May revise later so it doesn't look ugly.
-    const galleryDestination = galleryName.replace(/ /g, "%20");
-    const authorDestination = author.replace(/ /g, "%20");
-    let destination = `${location}${authorDestination}/${galleryDestination}`
-    console.log(destination)
+    shareGallery(galleryName, author) {
+        const location = window.location
+        // Check for spaces in galleryName and author function - and replace with %20 for url to understand destination in url. May revise later so it doesn't look ugly.
+        const galleryDestination = galleryName.replace(/ /g, "%20");
+        const authorDestination = author.replace(/ /g, "%20");
+        let destination = `${location}${authorDestination}/${galleryDestination}`
+        console.log(destination)
     }
 
-    urlSpaceCleaner(){
+    urlSpaceCleaner() {
         // if we want to clean up spaces into something else 
     }
 
@@ -274,11 +275,18 @@ class LandingPage extends Component {
                             </div>
                         </main>
                     </div>
-                    : 
-                    <div>
-                        Loading...
+                    :
+                    <div className='lobby-loading center'>
+                        <div className='lobby-loading_content center'>
+                            <span>VR<span className='lighttext'>ART GALLERY</span></span>
+                            <div className='lobby-loading-grid center'>
+                                <div />
+                                <div />
+                                <div />
+                            </div>
+                        </div>
                     </div>
-            }
+                }
 
             </>
         )
