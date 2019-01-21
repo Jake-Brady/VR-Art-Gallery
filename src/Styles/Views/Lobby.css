@@ -284,7 +284,6 @@
     flex-flow: row wrap;
     padding: 50px 80px;
     padding-bottom: 50px;
-    transition: all 0.3s ease;
 }
 
 .lobby-container_gallery > input {

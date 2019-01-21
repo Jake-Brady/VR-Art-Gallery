@@ -235,12 +235,13 @@ class Lobby extends Component {
 
     removeFav = (galleryId, galleryName) => {
         const input = document.querySelector('#lobby-searchbar').value
-        const index = this.state.favoritesCopy.findIndex(gallery => gallery.id === galleryId)
+        const index = this.state.favoritedGalleries.findIndex(gallery => gallery.id === galleryId)
         const card = document.querySelectorAll('#favorite-card')[index]
+        console.log(card)
         card.classList.add('lobby-leave-anim')
         setTimeout(() => {
             const filtered = this.state.favoritesCopy.filter(gallery => gallery.id !== galleryId)
-            this.setState({ favoritesCopy: filtered, galleryName }, () => {
+            this.setState({ favoritesCopy: filtered, favoritedGalleries: filtered, galleryName }, () => {
                 this.handleSearch('favorites', input)
                 this.removeFavPop(galleryName)
             })
