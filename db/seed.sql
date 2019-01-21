@@ -165,75 +165,75 @@ values
 
 -- Gallery Presets for test galleries
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 1 
+'marble', 'grey slate', 'wood', 'light blue', 'gymnopedie', 1 
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 2 
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 2 
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 3
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 3
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 4
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 4
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 5
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 5
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 6
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 6
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 7
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 7
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 8
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 8
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 9
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 9
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 10
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 10
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 11
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 11
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 12
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 12
 );
 
 -- Galleries for test2
@@ -272,21 +272,21 @@ values
 
 -- gallery_presets for test2 galleries
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 13
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 13
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 14
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 14
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 15
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 15
 );
 
 --  galleries for artsy_kid
@@ -329,21 +329,21 @@ image1, image2, image3, image4, image5, image6, image7, image8, image9, image10,
 
 -- gallery_presets for artsy_kids galleries
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 16
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 16
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 17
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 17
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 18
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 18
 );
 
 -- galleries for music_lover
@@ -387,21 +387,21 @@ image1, image2, image3, image4, image5, image6, image7, image8, image9, image10,
 
 -- gallery_presets for music_lovers galleries
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 19
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 19
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 20
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 20
 );
 
 insert into gallery_presets(
-wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
+ceiling_texture, wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 21
+'marble','grey slate', 'wood', 'light blue', 'gymnopedie', 21
 );
 
 
