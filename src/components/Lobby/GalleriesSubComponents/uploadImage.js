@@ -14,11 +14,15 @@ class UploadImage extends Component{
             }
     }
 
-componentDidMount(){
-    //Needs to check for existing images associated with gallery.
-    
+componentWillReceiveProps(props){
+    let {imageURL, imageCaption} = props
+    if (imageURL){
+        this.setState({imageURL, imageCaption}, () => {
+            console.log(this.state)
+        })
+    }
 }
-    
+
 onChangeHandler(e){
     this.setState({
         [e.target.name]: e.target.value
@@ -73,10 +77,6 @@ uploadFile = (file, signedRequest, url) => {
           alert(`ERROR: ${err.status}\n ${err.stack}`);
         }
       });
-      console.log(url)
-      console.log(url)
-      console.log(this.state.thumbnail)
-
   };
 
 
@@ -88,9 +88,9 @@ onCancel() {
 
 
 render(){
+    console.log(this.props)
     let {imageURL, imageCaption, isUploading} = this.state
     let {retrievingImages} = this.props
-    console.log(retrievingImages)
     return(
         <div className="img-block">
             <h3>Frame 1</h3>

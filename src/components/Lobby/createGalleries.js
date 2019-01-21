@@ -19,7 +19,11 @@ class CreateGalleries extends Component {
             numOfGalleries: 0,
             maxLimit: false,
             images: [],
-            isUploading: false
+            captions: [],
+            isUploading: false,
+            galleryPresets: [],
+            editMode: false,
+            galleryId: 0, 
         }
     }
 
@@ -27,7 +31,7 @@ class CreateGalleries extends Component {
         let { user, galleries, editGalleryId } = this.props
         const numOfGalleries = galleries.length
         if (editGalleryId){
-            this.setState({author: user, numOfGalleries}, ()=> {
+            this.setState({author: user, numOfGalleries, editMode: true, galleryId: editGalleryId}, ()=> {
                 this.editGallery(editGalleryId)
             })
         }
@@ -103,10 +107,6 @@ class CreateGalleries extends Component {
               alert(`ERROR: ${err.status}\n ${err.stack}`);
             }
           });
-          console.log(url)
-          console.log(url)
-          console.log(this.state.thumbnail)
-
       };
 
 
@@ -114,6 +114,17 @@ class CreateGalleries extends Component {
         this.setState({
             files: []
         });
+    }
+
+    updateGallery(){
+    // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
+    const {galleryName, author, thumbnail, isPrivate, galleryPresets, images} = this.state
+    if (!galleryName || !author || !thumbnail) return;
+
+    // axios request to update back end once all data has been received.
+    axios.put(`/api.updateGallery/:id`, {images, galleryPresets, isPrivate}).then(res => {
+        // notify user that gallery has been updated and redirect them to galleries.
+    })
     }
 
     createNewGallery = () => {
@@ -127,29 +138,39 @@ class CreateGalleries extends Component {
         })
     }
 
-    retrievingImages(image){
-    let images = []
-    images.push(image)
-    this.setState({images})
+    retrievingImageData(image, captions){
+    
+    
+    // this.setState({images, captions})
+    }
+
+    retrievingGalleryPresets(){
+    // let galleryPresets = [];
+    // this.setState({galleryPresets})
     }
 
     editGallery(id){
     // set State with gallery related info after retrieving gallery info.
+    let galleryPresets = []
     axios.get(`/api/editGallery/${id}`).then(res => {
-        // Set local State
-        
+    console.log(res.data)
+    let {image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, gallery_name, atmosphere_lighting, music, wall_texture, is_private, thumbnail, ceiling_texture, floor_texture, img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption} = res.data[0]
+    let images = [image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11,image12,image13,image14,image15]
+    let captions = [img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption]
+    let galleryPresets = [ceiling_texture, wall_texture, atmosphere_lighting, floor_texture, music]
+    this.setState({galleryName: gallery_name, isPrivate: is_private, thumbnail, images, captions, galleryPresets})
     })
-
     }
 
     render(props) {
         console.log(this.state)
-        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading } = this.state
+        let {author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
             <section className="create-galleries">
-                {maxLimit ?
+                {
+                    maxLimit ?
                     <div className='create-galleries_max center'>
                         You currently have reached the gallery amount cap.
                         You can either edit an existing gallery or delete one to continue.
@@ -204,12 +225,25 @@ class CreateGalleries extends Component {
                             </Dropzone>
                             <input placeholder="Image Address"></input>
                         </div>
-                        <UploadGalleryImages 
-                        retrievingImages={this.retrievingImages}
+
+                        <UploadGalleryImages
+                        existingImages={this.state.images}
+                        existingCaptions={this.state.captions}
+                        retrievingImageData={this.retrievingImageData}
                         />
-                        <GalleryPresets />
+
+                        <GalleryPresets 
+                        galleryPresets={this.state.galleryPresets}
+                        />
+
                         <BluePrint />
+                        
+                        {
+                        editMode ? 
+                        <span id="edit-gallery-btn" onClick={this.updateGallery(galleryId)}>Edit Gallery</span>
+                        :
                         <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
+                        }
                     </div>
                 }
                 <div className='create-galleries_bottom'>
