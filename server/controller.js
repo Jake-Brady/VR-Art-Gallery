@@ -50,7 +50,7 @@ module.exports={
     },
     adjustGalleryFavorites: (req, res, next) => {
         let {galleryId} = req.params
-        let {Increase, Decrease} = req.body
+        const {Increase, Decrease} = req.body
         const db = req.app.get('db')
         if (Increase){
         db.increase_gallery_favorites([galleryId]).then(gallery => {
@@ -186,9 +186,15 @@ module.exports={
         const db = req.app.get('db')
         let images = [];
         let galleryPresets = [];
-        db.get_gallery_to_edit(id).then(gallery => {
-        console.table(gallery)
+        db.get_gallery_to_edit(id).then(galleryData => {
+            res.status(200).send(galleryData)
+        }).catch(err => { 
+            console.log(err)
+            res.status(500).send(err)
         })
+    },
+    updateGallery: (req, res, next) => {
+
     },
     deleteGallery: (req, res, next) => {
         const {id} = req.params

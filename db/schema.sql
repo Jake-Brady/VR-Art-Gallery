@@ -82,6 +82,7 @@ create table captions (
 --Wall-Texture <TEXT>, Floor-Texture <TEXT>, Atmosphere-Lighting <TEXT>, User_id (foreign key to SPK of user)
 create table gallery_presets(
     id serial primary key,
+    ceiling_texture text,
     wall_texture text,
     floor_texture text,
     atmosphere_lighting text,
