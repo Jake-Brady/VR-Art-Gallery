@@ -13,6 +13,7 @@ class CreateGalleries extends Component {
         super(props)
         this.state = {
             galleryName: '',
+            imageAddress: '',
             author: '',
             isPrivate: false,
             thumbnail: 'http://via.placeholder.com/450x450',
@@ -173,9 +174,14 @@ class CreateGalleries extends Component {
         })
     }
 
+    handlePrivacy = bool => {
+        this.setState({ isPrivate: bool })
+    }
+
     render(props) {
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
+        console.log(this.state)
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
             <section className="create-galleries">
@@ -186,54 +192,75 @@ class CreateGalleries extends Component {
                         </div>
                     :
                     <>
+                        <div className='create-gallery-header center'>CARD</div>
                         <div className="create-gallery_card">
-                            <h2>Your Gallery Name</h2>
-                            <input name="galleryName" onChange={(e) => { this.handleChange(e) }}></input>
+                            <div className='create-gallery_cardleft'>
+                                <h1>Gallery Name (100 characters)</h1>
+                                <input name="galleryName" onChange={(e) => this.handleChange(e)} maxLength='100' />
+                                <h2>Privacy</h2>
+                                <div className='create-gallery-privacy'>
+                                    <div style={this.state.isPrivate ? { opacity: '.5' } : { opacity: '1' }} onClick={() => this.handlePrivacy(false)}>Public <i className="fas fa-unlock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
+                                    <div style={this.state.isPrivate ? { opacity: '1' } : { opacity: '.5' }} onClick={() => this.handlePrivacy(true)}>Private <i className="fas fa-lock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
+                                </div>
+                                <h1 style={{ marginTop: '10px' }}>Thumbnail</h1>
+                                <input name="imageAddress" onChange={(e) => this.handleChange(e)} />
+                                <h1>or</h1>
+                                <Dropzone
+                                    onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
+                                    onFileDialogCancel={this.onCancel.bind(this)}
+                                    accept="image/*"
+                                    multiple={false}
+                                >
+                                    {({ getRootProps, getInputProps }) => (
+                                        <div {...getRootProps()} style={{
+                                            width: '100px',
+                                            height: '40px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            background: 'rgb(119, 148, 253)',
+                                            marginTop: '15px',
+                                            fontSize: '15px',
+                                            color: 'white',
+                                            cursor: 'pointer'
+                                        }}>
+                                            <input {...getInputProps()} />
+                                            <p>UPLOAD</p>
+                                        </div>
+                                    )}
+                                </Dropzone>
+                            </div>
 
-                            <h2>Privacy</h2>
-                            <h3>Will your gallery be public or private?</h3>
-                            <h5>Must be public to share.</h5>
-                            {isPrivate ? "Private" : "Public"}
-                            <span onClick={() => this.setPrivacy('private')} id="private-span">Private</span>
-                            <span onClick={this.setPrivacy} id="public-span">Public</span>
-
-                            <h2>Gallery Thumbnail</h2>
-                            <Dropzone
-                                onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
-                                onFileDialogCancel={this.onCancel.bind(this)}
-                                accept="image/*"
-                                multiple={false}
-                            >
-                                {({ getRootProps, getInputProps }) => (
-                                    <div {...getRootProps()} style={{
-                                        position: 'relative',
-                                        width: 200,
-                                        height: 200,
-                                        borderWidth: 7,
-                                        borderColor: 'rgb(102, 102, 102)',
-                                        borderStyle: 'dashed',
-                                        borderRadius: 5,
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        fontSize: 28,
-                                    }}>
-                                        <input {...getInputProps()} />
-                                        {isUploading
-                                            ? <GridLoader />
-                                            : <p>Drop File or Click Here</p>
-                                        }
+                            <div className='create-gallery_cardright center'>
+                                <div className='gallery-container'>
+                                    <img src={thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
+                                    <div className='gallery-text'>
+                                        <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
+                                        <h3 className='gallery-author'>BY: {author}</h3>
+                                        <div className='gallery-stats'>
+                                            {isPrivate ? <><i className="fas fa-lock stat"></i> <span>Private</span></> : <><i className="fas fa-unlock stat"></i> <span>Public</span> </>}
+                                            <i className="fas fa-eye stat"></i><span>0</span>
+                                            <i className="fas fa-heart stat"></i><span>0</span>
+                                            <i className="fas fa-share stat"></i><span>0</span>
+                                            <div className='gallery-pop'>
+                                                <div className='center'>EDIT</div>
+                                                <div className='center'>DELETE</div>
+                                            </div>
+                                        </div>
+                                        <div className='gallery-view center'>Visit Gallery</div>
                                     </div>
-                                )}
-                            </Dropzone>
-                            <input placeholder="Image Address"></input>
+                                </div>
+                            </div>
                         </div>
+                        <div className='create-gallery-header center'>IMAGES</div>
 
                         <UploadGalleryImages
                             existingImages={this.state.images}
                             existingCaptions={this.state.captions}
                             retrievingImageData={this.retrievingImageData}
                         />
+
+                        <div className='create-gallery-header center'>GALLERY</div>
 
                         <GalleryPresets
                             galleryPresets={this.state.galleryPresets}
