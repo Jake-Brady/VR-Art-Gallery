@@ -61,6 +61,7 @@
     }
 }
 
+/* Lobby view container */
 .lobby {
    font-family: 'Oswald', sans-serif;
    width: 100vw;
@@ -68,6 +69,8 @@
    background-image: url('../Media/LobbyBackdrop.png');
    background-size: cover;
 }
+
+/* Overlay that is shown when the side meny is toggled*/
 
 .lobby-overlay {
     width: 100vw;
@@ -401,9 +404,23 @@
     animation: fade 2s infinite .6s;
 }
 
+.lobby-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.lobby-empty > h1 {
+    font-size: 60px;
+    color: rgba(248, 61, 61, 0.815);
+    margin-top: 50px;
+}
 
-
+.lobby-empty > h2 {
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 300;
+}
 
 /* Queries to make card grid work on mobile */
 

@@ -220,7 +220,7 @@ class LandingPage extends Component {
             const author = gallery.author
             let timesFavorited = gallery.times_favorited
             return (
-                <div id={galleryId} className='gallery-container'>
+                <div key={galleryId} className='gallery-container'>
                     <img src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                     <div className='gallery-text'>
                         <h1 className='gallery-title'>{galleryName}</h1>

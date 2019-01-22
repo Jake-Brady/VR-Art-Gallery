@@ -13,6 +13,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
 
     app.use(express.json())
     app.use(session)
+    app.use(express.static( `${__dirname}/../build` ))
 
     /* VR-Art-Gallery Endpoints */
     /* AWS Connecting Endpoints - Section 1 */
@@ -101,7 +102,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.post('/api/createNewGallery/', ctrl.createNewGallery)
     app.get('/api/editGallery/:id', ctrl.getGalleryToEdit)
     app.put('/api/updateGallery/:id', ctrl.updateGallery)
-    app.get('/api/getUsersWhoFavorited/:galleryIds', ctrl.getThoseWhoLiked)
+    app.get('/api/getUsersWhoFavorited/', ctrl.getThoseWhoLiked)
     
     //Art-Gallery
     app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)
