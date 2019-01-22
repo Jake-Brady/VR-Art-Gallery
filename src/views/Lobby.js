@@ -49,7 +49,7 @@ class Lobby extends Component {
                             this.setState({ usersWhoLiked }, () => {
                                 axios.get('/api/getFavorites/').then(res => {
                                     this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
-
+                                        this.changeWindow('Notifications')
                                     })
                                 })
                             })
@@ -92,16 +92,11 @@ class Lobby extends Component {
         })
     }
 
-    simulateClick = () => {
-        const tab = document.querySelectorAll('[data-tab]')[2]
-        tab.click()
-    }
-
     resetSearch = () => {
         const search = document.querySelector('#lobby-searchbar')
         search.value = ''
         search.focus()
-        this.setState({ usersGalleries: [...this.state.galleryCopy], favoritedGalleries: [...this.state.favoritesCopy] })
+        this.setState({ usersGalleries: [...this.state.galleryCopy], favoritedGalleries: [...this.state.favoritesCopy], searchInput: '' })
     }
 
     changeWindow = magicWord => {
@@ -419,17 +414,26 @@ class Lobby extends Component {
                                             </div>
                                             : theMagicWord === 'galleries' ?
                                                 <div className='lobby-container_gallery'>
-                                                    {!this.state.galleryCopy.length ?
-                                                        <h1></h1>
-                                                        :
+                                                    {this.state.usersGalleries.length ?
                                                         <div className='lobby-card-grid'>
                                                             {galleryContainers}
                                                         </div>
+                                                        :
+                                                        this.state.searchInput ?
+                                                            <div className='lobby-empty'>
+                                                                <h1 style={{ fontFamily: 'sans-serif', color: 'rgb(110, 142, 254)' }}>‾ \_(ツ)_/ ‾</h1>
+                                                                <h2>No results. Try broadening your search or checking your spelling.</h2>
+                                                            </div>
+                                                            :
+                                                            <div className='lobby-empty'>
+                                                                <h1 style={{ color: 'rgb(110, 142, 254)' }}>:/</h1>
+                                                                <h2>You don't have any galleries</h2>
+                                                            </div>
                                                     }
                                                 </div>
                                                 : theMagicWord === 'favorites' ?
                                                     <div className='lobby-container_gallery'>
-                                                        {this.state.favoritesCopy.length ?
+                                                        {this.state.favoritedGalleries.length ?
                                                             <div className='lobby-card-grid'>
                                                                 {listOfFavorites}
                                                             </div>

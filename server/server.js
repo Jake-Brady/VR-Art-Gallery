@@ -13,6 +13,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
 
     app.use(express.json())
     app.use(session)
+    app.use(express.static( `${__dirname}/../build` ))
 
     /* VR-Art-Gallery Endpoints */
     /* AWS Connecting Endpoints - Section 1 */

@@ -409,7 +409,7 @@
 
 .lobby-empty > h1 {
     font-size: 60px;
-    color: rgb(248, 61, 61);
+    color: rgba(248, 61, 61, 0.815);
     margin-top: 50px;
 }
 
