@@ -204,11 +204,12 @@ module.exports={
     },
     getThoseWhoLiked: (req, res, next) => {
         const {galleryIds} = req.params
-        console.log(galleryIds)
+        // converting strings into numeric values to be passed
+        let galleryIdsArray = galleryIds.split(',')
         const db = req.app.get('db')
-        db.users_who_like_your_galleries().then(users => {
-            res.status(200).send(users)
-        }).catch(err => {
+        db.users_who_like_your_galleries([galleryIdsArray]).then(followers => {
+            res.status(200).send(followers)
+        }).catch(err => { 
             console.log(err)
             res.status(500).send(err)
         })

@@ -46,12 +46,9 @@ class Lobby extends Component {
                 axios.get('/api/retrieveGalleries/').then(res => {
                     this.setState({ usersGalleries: res.data, galleryCopy: res.data, user: this.props.match.params.username }, () => {
                         let galleryIds = this.state.usersGalleries.map(a => a.id)
-                        console.log(galleryIds)
                         axios.get(`/api/getUsersWhoFavorited/${galleryIds}`).then(res => {
-                        console.log(res.data)
-                        let usersWhoLiked;
-                        let notifications;
-                        this.setState({usersWhoLiked, notifications}, ()=> {
+                        let usersWhoLiked = res.data;
+                        this.setState({usersWhoLiked}, ()=> {
                             axios.get('/api/getFavorites/').then(res => {
                                 this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
                                     this.simulateClick()
@@ -171,7 +168,6 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
-            
         }
     }
 
@@ -305,8 +301,9 @@ class Lobby extends Component {
     }
 
     render() {
-        const { favoritedGalleries, usersGalleries, theMagicWord, user, loading } = this.state
-        //Map over list of favorites and existing galleries, pass to separate components for styling them as distinct sections, 
+        console.log(this.state.usersWhoLiked)
+        const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked } = this.state
+        //Map over list of favorites, followers, and existing galleries, pass to separate components for styling them as distinct sections.
         const listOfFavorites = favoritedGalleries.map((e) => {
             const image = e.thumbnail,
                 key = e.id,
@@ -417,8 +414,12 @@ class Lobby extends Component {
                                             />
                                         </div>
                                         : theMagicWord === 'notifications' ?
-                                            <Notifications />
-                                    
+                                            <div>
+                                                 <Notifications 
+                                                 followersOfGalleries={this.state.usersWhoLiked}
+                                                 galleries={usersGalleries}
+                                                 />
+                                            </div>
                                         : theMagicWord === 'galleries' ?
                                             <div className='lobby-container_gallery'>
                                                 {!this.state.galleryCopy.length ?
