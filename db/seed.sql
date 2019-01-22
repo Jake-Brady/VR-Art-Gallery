@@ -415,6 +415,24 @@ user_id, favorited
 insert into gallery_favorites(
 user_id, favorited
 ) values (
+2, 1
+);
+
+insert into gallery_favorites(
+user_id, favorited
+) values (
+3, 1
+);
+
+insert into gallery_favorites(
+user_id, favorited
+) values (
+4, 1
+);
+
+insert into gallery_favorites(
+user_id, favorited
+) values (
 1, 2
 );
 
