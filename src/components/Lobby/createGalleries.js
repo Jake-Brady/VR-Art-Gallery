@@ -143,7 +143,7 @@ class CreateGalleries extends Component {
         })
     }
 
-    retrievingImageData(image, caption){
+    retrievingImageData = (image, caption) => {
     // Erasing current data in local state as each child's state may have changed then setting state with new info
     let images = [];
     let captions = [];
@@ -153,7 +153,7 @@ class CreateGalleries extends Component {
     console.log(this.state.images, this.state.captions)
     }
 
-    retrievingGalleryPresets(state){
+    retrievingGalleryPresets = (state) => {
     let {music, lighting, floorTexture, ceilingTexture, wallTexture} = state
     let galleryPresets = [];
     galleryPresets.push(music, lighting, floorTexture, ceilingTexture, wallTexture)

@@ -90,7 +90,6 @@ onCancel() {
 render(){
     console.log(this.props)
     let {imageURL, imageCaption, isUploading} = this.state
-    let {retrievingImageData} = this.props
     return(
         <div className="img-block">
             <h3>Frame 1</h3>
