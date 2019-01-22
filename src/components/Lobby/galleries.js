@@ -26,8 +26,8 @@ class Galleries extends Component {
                         <i className="fas fa-share stat"></i><span>{shares}</span>
                         <i className="fas fa-ellipsis-v gallery-option" onClick={() => this.toggleDrop(id)}></i>
                         <div className='gallery-pop' data-pop={id}>
-                            <div className='center' onClick={() => editGallery()}>EDIT</div>
-                            <div className='center' onClick={() => deleteGallery()}>DELETE</div>
+                            <div className='center' onClick={() => editGallery(id)}>EDIT</div>
+                            <div className='center' onClick={() => deleteGallery(id, galleryName)}>DELETE</div>
                         </div>
                     </div>
                     <div onClick={() => visitGallery(galleryName, author)} className='gallery-view center'>Visit Gallery</div>
