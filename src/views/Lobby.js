@@ -390,13 +390,11 @@ class Lobby extends Component {
                                 {/* Conditionally rendering based on magicWord */}
                                 {
                                     theMagicWord === 'create' ?
-                                        <div>
-                                            <CreateGalleries
-                                                user={this.props.match.params.username}
-                                                galleries={usersGalleries}
-                                                editGalleryId={this.state.galleryId}
-                                            />
-                                        </div>
+                                        <CreateGalleries
+                                            user={this.props.match.params.username}
+                                            galleries={usersGalleries}
+                                            editGalleryId={this.state.galleryId}
+                                        />
                                         : theMagicWord === 'notifications' ?
                                             <div>
                                                 <Notifications
