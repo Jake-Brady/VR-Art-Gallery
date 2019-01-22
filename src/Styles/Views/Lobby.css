@@ -61,6 +61,7 @@
     }
 }
 
+/* Lobby view container */
 .lobby {
    font-family: 'Oswald', sans-serif;
    width: 100vw;
@@ -68,6 +69,8 @@
    background-image: url('../Media/LobbyBackdrop.png');
    background-size: cover;
 }
+
+/* Overlay that is shown when the side meny is toggled*/
 
 .lobby-overlay {
     width: 100vw;
