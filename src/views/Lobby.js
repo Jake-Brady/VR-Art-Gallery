@@ -33,31 +33,25 @@ class Lobby extends Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //Validate User on Page as being logged in with session. If not, send back to landingPage; otherwise retrieve user's existing galleries and favorited galleries.
-        let user = this.props.match.params.username
-        axios.get(`/api/checkUser/`).then(res => {
-            if (res.data !== user) {
-                this.props.history.push('/')
-            } else {
-                //Retrieve user's galleries, those who favorited user's galleries, and then user's favorited galleries
-                axios.get('/api/retrieveGalleries/').then(res => {
-                    this.setState({ usersGalleries: res.data, galleryCopy: res.data, user: this.props.match.params.username }, () => {
-                        let galleryIds = this.state.usersGalleries.map(a => a.id)
-                        axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`).then(res => {
-                            let usersWhoLiked = res.data;
-                            this.setState({ usersWhoLiked }, () => {
-                                axios.get('/api/getFavorites/').then(res => {
-                                    this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
-                                        this.changeWindow('Notifications')
-                                    })
-                                })
-                            })
-                        })
+        const user = this.props.match.params.username,
+            userData = await axios.get(`/api/checkUser/`)
+        if (userData.data !== user) this.props.history.push('/')
+        else {
+            //Retrieve user's galleries, those who favorited user's galleries, and then user's favorited galleries
+            const userGalleries = await axios.get('/api/retrieveGalleries/')
+            this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data, user }, async () => {
+                const galleryIds = this.state.usersGalleries.map(a => a.id),
+                    otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
+                this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
+                    const userFavorites = await axios.get('/api/getFavorites/')
+                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, () => {
+                        this.changeWindow('Notifications')
                     })
                 })
-            }
-        })
+            })
+        }
         window.addEventListener('resize', this.checkSize)
     }
 
@@ -167,8 +161,7 @@ class Lobby extends Component {
 
     logout() {
         // destroys sessions and redirects user to landing page.
-        axios.post('/api/logout')
-            .then(this.props.history.push('/'))
+        axios.post('/api/logout').then(this.props.history.push('/'))
     }
 
     visitGallery = (galleryName, author) => {
@@ -247,10 +240,9 @@ class Lobby extends Component {
     }
 
     removeFav = (galleryId, galleryName) => {
-        const input = document.querySelector('#lobby-searchbar').value
-        const index = this.state.favoritedGalleries.findIndex(gallery => gallery.id === galleryId)
-        const card = document.querySelectorAll('#favorite-card')[index]
-        console.log(card)
+        const input = document.querySelector('#lobby-searchbar').value,
+            index = this.state.favoritedGalleries.findIndex(gallery => gallery.id === galleryId),
+            card = document.querySelectorAll('#favorite-card')[index]
         card.classList.add('lobby-leave-anim')
         setTimeout(() => {
             const filtered = this.state.favoritesCopy.filter(gallery => gallery.id !== galleryId)
@@ -398,13 +390,11 @@ class Lobby extends Component {
                                 {/* Conditionally rendering based on magicWord */}
                                 {
                                     theMagicWord === 'create' ?
-                                        <div>
-                                            <CreateGalleries
-                                                user={this.props.match.params.username}
-                                                galleries={usersGalleries}
-                                                editGalleryId={this.state.galleryId}
-                                            />
-                                        </div>
+                                        <CreateGalleries
+                                            user={this.props.match.params.username}
+                                            galleries={usersGalleries}
+                                            editGalleryId={this.state.galleryId}
+                                        />
                                         : theMagicWord === 'notifications' ?
                                             <div>
                                                 <Notifications

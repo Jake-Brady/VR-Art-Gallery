@@ -15,24 +15,21 @@ class LandingPage extends Component {
             favorited: [],
             favoriteNum: 0
         }
-        this.visitGallery = this.visitGallery.bind(this)
     }
 
     async componentDidMount() {
-        const offset = this.state.galleries.length
-        axios.get(`/api/getAllGalleries/${offset}`).then(res => {
-            this.setState({ galleries: res.data })
-        })
+        const offset = this.state.galleries.length,
+            galleries = await axios.get(`/api/getAllGalleries/${offset}`)
+        this.setState({ galleries: galleries.data })
         const user = await axios.get('/api/checkUser/')
         this.setState({ user: user.data }, () => this.setState({ loading: false }))
         window.addEventListener('scroll', this.handleScroll)
 
         // Sees whether user is logged in. If true, it will store favorites in array to be compared with galleries array so addToFavorites/removeFromFavorites function will work.
-        axios.get(`/api/getFavorites/`).then(res => {
-            this.setState({ favorited: res.data }, () => {
-                // Once favorited array has been set to state, trigger function that will loop through array for galleryID
-                this.identifyFavorites()
-            })
+        const favorites = await axios.get(`/api/getFavorites/`)
+        this.setState({ favorited: favorites.data }, () => {
+            // Once favorited array has been set to state, trigger function that will loop through array for galleryID
+            this.identifyFavorites()
         })
     }
 
@@ -139,7 +136,7 @@ class LandingPage extends Component {
         })
     }
 
-    visitGallery(galleryId, galleryName, author) {
+    visitGallery = (galleryId, galleryName, author) => {
         //Redirects user to gallery, then adds one view to gallery.
         this.props.history.push(`/${author}/${galleryName}/`)
         axios.put(`/api/incrementView/${galleryId}`)
