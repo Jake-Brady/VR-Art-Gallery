@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import CreateGalleries from '../components/Lobby/createGalleries'
 import Galleries from '../components/Lobby/galleries'
 import Favorites from '../components/Lobby/favorites'
+import Notifications from '../components/Lobby/notifications'
 import Account from '../components/Lobby/account'
 import Help from '../components/Lobby/help'
 import '../styles/Views/Lobby.css'
@@ -27,7 +28,9 @@ class Lobby extends Component {
             galleryId: 0,
             galleryName: '',
             queue: [],
-            popping: false
+            popping: false,
+            notifications: 0,
+            usersWhoLiked: []
         }
         this.editGallery = this.editGallery.bind(this)
     }
@@ -39,14 +42,23 @@ class Lobby extends Component {
             if (res.data !== user) {
                 this.props.history.push('/')
             } else {
-                //Retrieve user's galleries and then favorited galleries while setting the first middle window to 'Create'
+                //Retrieve user's galleries, those who favorited user's galleries, and then user's favorited galleries
                 axios.get('/api/retrieveGalleries/').then(res => {
-                    this.setState({ usersGalleries: res.data, galleryCopy: res.data, usersGallery: res.data, user: this.props.match.params.username }, () => {
-                        axios.get('/api/getFavorites/').then(res => {
-                            this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
-
+                    this.setState({ usersGalleries: res.data, galleryCopy: res.data, user: this.props.match.params.username }, () => {
+                        let galleryIds = this.state.usersGalleries.map(a => a.id)
+                        console.log(galleryIds)
+                        axios.get(`/api/getUsersWhoFavorited/${galleryIds}`).then(res => {
+                        console.log(res.data)
+                        let usersWhoLiked;
+                        let notifications;
+                        this.setState({usersWhoLiked, notifications}, ()=> {
+                            axios.get('/api/getFavorites/').then(res => {
+                                this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
+                                    this.simulateClick()
+                                })
                             })
                         })
+                        })  
                     })
                 })
             }
@@ -110,6 +122,15 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
+            case "Notifications":
+                this.setState({ theMagicWord: 'notifications' }, () => {
+                    const search = document.querySelector('.lobby-header_search')
+                    search.style.visibility = 'hidden'
+                    this.changeNav(magicWord)
+                    this.checkSize()
+                    this.toggleMenu()
+                })
+                break;
             case "Galleries":
                 this.pageTop(magicWord)
                 this.resetSearch()
@@ -150,6 +171,7 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
+            
         }
     }
 
@@ -373,6 +395,7 @@ class Lobby extends Component {
                                 </div>
                                 <span data-tab className="menu-btn menu-btn-first" onClick={() => this.props.history.push('/')}><i className="fas fa-home menu-icon"></i>Home</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}><i className="fas fa-plus menu-icon"></i>Create</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-user menu-icon"></i>Account</span>
@@ -393,6 +416,9 @@ class Lobby extends Component {
                                                 editGalleryId={this.state.galleryId}
                                             />
                                         </div>
+                                        : theMagicWord === 'notifications' ?
+                                            <Notifications />
+                                    
                                         : theMagicWord === 'galleries' ?
                                             <div className='lobby-container_gallery'>
                                                 {!this.state.galleryCopy.length ?
