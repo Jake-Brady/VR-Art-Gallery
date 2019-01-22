@@ -193,6 +193,7 @@
 
 .gallery-text {
     padding: 15px;
+    position: relative;
 }
 
 .gallery-title {
@@ -280,6 +281,40 @@
 .animate-fadeIn {
     animation: fadeIn 1s 1; 
     animation-fill-mode: forwards;
+}
+
+.gallery-option {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.39);
+}
+
+.gallery-pop {
+    visibility: hidden;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 60px;
+    height: 50px;
+    background: rgb(241, 241, 241);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.gallery-pop > div:first-child, .gallery-pop > div:nth-child(2) {
+    padding: 2px;
+    width: 100%;
+    height: 50%;
+}
+
+.gallery-pop > div:first-child:hover, .gallery-pop > div:nth-child(2):hover {
+    background: rgb(212, 212, 212);
+}
+
+.gallery-pop_show {
+    visibility: visible;
 }
 
 @media (max-width: 1300px) {

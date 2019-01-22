@@ -401,10 +401,6 @@
     animation: fade 2s infinite .6s;
 }
 
-
-
-
-
 /* Queries to make card grid work on mobile */
 
 @media (max-width: 1240px) {
