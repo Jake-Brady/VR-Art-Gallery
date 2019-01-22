@@ -7,6 +7,8 @@ import axios from 'axios'
 class UploadImage extends Component{
     constructor(props){
         super(props)
+        let {retrievingImageData} = this.props
+        console.log(retrievingImageData)
             this.state={
                 imageURL: 'http://via.placeholder.com/450x450',
                 imageCaption: 'create a caption or leave blank.',
@@ -17,9 +19,7 @@ class UploadImage extends Component{
 componentWillReceiveProps(props){
     let {imageURL, imageCaption} = props
     if (imageURL){
-        this.setState({imageURL, imageCaption}, () => {
-            console.log(this.state)
-        })
+        this.setState({imageURL, imageCaption})
     }
 }
 
@@ -90,7 +90,7 @@ onCancel() {
 render(){
     console.log(this.props)
     let {imageURL, imageCaption, isUploading} = this.state
-    let {retrievingImages} = this.props
+    let {retrievingImageData} = this.props
     return(
         <div className="img-block">
             <h3>Frame 1</h3>
