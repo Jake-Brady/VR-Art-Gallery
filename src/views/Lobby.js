@@ -9,7 +9,6 @@ import Account from '../components/Lobby/account'
 import Help from '../components/Lobby/help'
 import '../styles/Views/Lobby.css'
 import Icon from '../styles/Media/Icon.png'
-import EmptyGallery from '../styles/Media/emptyGallery.png'
 import Profile from '../styles/Media/defaultProfile.png'
 
 class Lobby extends Component {
@@ -32,7 +31,6 @@ class Lobby extends Component {
             notifications: 0,
             usersWhoLiked: []
         }
-        this.editGallery = this.editGallery.bind(this)
     }
 
     componentDidMount() {
@@ -46,16 +44,16 @@ class Lobby extends Component {
                 axios.get('/api/retrieveGalleries/').then(res => {
                     this.setState({ usersGalleries: res.data, galleryCopy: res.data, user: this.props.match.params.username }, () => {
                         let galleryIds = this.state.usersGalleries.map(a => a.id)
-                        axios.get(`/api/getUsersWhoFavorited/${galleryIds}`).then(res => {
-                        let usersWhoLiked = res.data;
-                        this.setState({usersWhoLiked}, ()=> {
-                            axios.get('/api/getFavorites/').then(res => {
-                                this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
-                                    this.simulateClick()
+                        axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`).then(res => {
+                            let usersWhoLiked = res.data;
+                            this.setState({ usersWhoLiked }, () => {
+                                axios.get('/api/getFavorites/').then(res => {
+                                    this.setState({ favoritedGalleries: res.data, favoritesCopy: res.data, loading: false }, () => {
+
+                                    })
                                 })
                             })
                         })
-                        })  
                     })
                 })
             }
@@ -130,10 +128,10 @@ class Lobby extends Component {
                 break;
             case "Galleries":
                 this.pageTop(magicWord)
-                this.resetSearch()
                 this.setState({ theMagicWord: 'galleries' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
+                    this.resetSearch()
                     this.changeNav(magicWord)
                     this.checkSize()
                     this.toggleMenu()
@@ -141,10 +139,10 @@ class Lobby extends Component {
                 break;
             case "Favorites":
                 this.pageTop(magicWord)
-                this.resetSearch()
                 this.setState({ theMagicWord: 'favorites' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'visible'
+                    this.resetSearch()
                     this.changeNav(magicWord)
                     this.checkSize()
                     this.toggleMenu()
@@ -182,7 +180,7 @@ class Lobby extends Component {
         this.props.history.push(`/${author}/${galleryName}/`)
     }
 
-    editGallery(id) {
+    editGallery = id => {
         this.setState({
             galleryId: id
         }, () => {
@@ -242,12 +240,12 @@ class Lobby extends Component {
     }
 
     handleSearch = (filter, target) => {
+        this.setState({ searchInput: target })
         if (filter === 'galleries') {
             const galleries = this.state.galleryCopy.filter(gallery => gallery.gallery_name.includes(target))
             this.setState({ usersGalleries: galleries })
         }
         else {
-            console.log('this bitch as hit joy emoji')
             const favorites = this.state.favoritesCopy.filter(gallery => gallery.gallery_name.includes(target))
             this.setState({ favoritedGalleries: favorites })
         }
@@ -301,7 +299,6 @@ class Lobby extends Component {
     }
 
     render() {
-        console.log(this.state.usersWhoLiked)
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked } = this.state
         //Map over list of favorites, followers, and existing galleries, pass to separate components for styling them as distinct sections.
         const listOfFavorites = favoritedGalleries.map((e) => {
@@ -415,39 +412,51 @@ class Lobby extends Component {
                                         </div>
                                         : theMagicWord === 'notifications' ?
                                             <div>
-                                                 <Notifications 
-                                                 followersOfGalleries={this.state.usersWhoLiked}
-                                                 galleries={usersGalleries}
-                                                 />
+                                                <Notifications
+                                                    followersOfGalleries={this.state.usersWhoLiked}
+                                                    galleries={usersGalleries}
+                                                />
                                             </div>
-                                        : theMagicWord === 'galleries' ?
-                                            <div className='lobby-container_gallery'>
-                                                {!this.state.galleryCopy.length ?
-                                                    <h1></h1>
-                                                    :
-                                                    <div className='lobby-card-grid'>
-                                                        {galleryContainers}
-                                                    </div>
-                                                }
-                                            </div>
-                                            : theMagicWord === 'favorites' ?
+                                            : theMagicWord === 'galleries' ?
                                                 <div className='lobby-container_gallery'>
-                                                    <div className='lobby-card-grid'>
-                                                        {listOfFavorites}
-                                                    </div>
+                                                    {!this.state.galleryCopy.length ?
+                                                        <h1></h1>
+                                                        :
+                                                        <div className='lobby-card-grid'>
+                                                            {galleryContainers}
+                                                        </div>
+                                                    }
                                                 </div>
-                                                : theMagicWord === 'account' ?
-                                                    <div>
-                                                        <Account />
+                                                : theMagicWord === 'favorites' ?
+                                                    <div className='lobby-container_gallery'>
+                                                        {this.state.favoritesCopy.length ?
+                                                            <div className='lobby-card-grid'>
+                                                                {listOfFavorites}
+                                                            </div>
+                                                            :
+                                                            this.state.searchInput ?
+                                                                <div className='lobby-empty'>
+                                                                    <h1 style={{ fontFamily: 'sans-serif', color: 'rgb(110, 142, 254)' }}>‾ \_(ツ)_/ ‾</h1>
+                                                                    <h2>No results. Try broadening your search or checking your spelling.</h2>
+                                                                </div>
+                                                                :
+                                                                <div className='lobby-empty'>
+                                                                    <h1>&lt;/3</h1>
+                                                                    <h2>You currently don't have any galleries favorited</h2>
+                                                                </div>
+                                                        }
                                                     </div>
-                                                    : theMagicWord === 'help' &&
-                                                    <div>
-                                                        <Help />
-                                                    </div>
+                                                    : theMagicWord === 'account' ?
+                                                        <div>
+                                                            <Account />
+                                                        </div>
+                                                        : theMagicWord === 'help' &&
+                                                        <div>
+                                                            <Help />
+                                                        </div>
                                 }
                             </div>
                             <div className='lobby-pop center'>
-
                             </div>
                         </main>
                     </div>
