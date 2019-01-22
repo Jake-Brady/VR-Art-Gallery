@@ -3,9 +3,9 @@ import Dropzone from 'react-dropzone'
 import { v4 as randomStringGenerator } from 'uuid';
 import { GridLoader } from 'react-spinners'
 import axios from 'axios';
-import UploadGalleryImages from './GalleriesSubComponents/uploadImages'
-import GalleryPresets from './GalleriesSubComponents/galleryPresets'
-import BluePrint from './GalleriesSubComponents/blueprint'
+import UploadGalleryImages from './CreateSubComponents/uploadImages'
+import GalleryPresets from './CreateSubComponents/galleryPresets'
+import BluePrint from './CreateSubComponents/blueprint'
 
 
 class CreateGalleries extends Component {
@@ -25,6 +25,8 @@ class CreateGalleries extends Component {
             editMode: false,
             galleryId: 0, 
         }
+        this.retrievingImageData = this.retrievingImageData.bind(this)
+        this.retrievingGalleryPresets = this.retrievingGalleryPresets.bind(this)
     }
 
     componentDidMount() {
@@ -120,33 +122,43 @@ class CreateGalleries extends Component {
     // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
     const {galleryName, author, thumbnail, isPrivate, galleryPresets, images} = this.state
     if (!galleryName || !author || !thumbnail) return;
-
-    // axios request to update back end once all data has been received.
-    axios.put(`/api.updateGallery/:id`, {images, galleryPresets, isPrivate}).then(res => {
-        // notify user that gallery has been updated and redirect them to galleries.
-    })
+    
+    // // axios request to update back end once all data has been received.
+    // axios.put(`/api.updateGallery/:id`, {images, galleryPresets, isPrivate}).then(res => {
+    //     // notify user that gallery has been updated and redirect them to galleries.
+    // })
     }
 
     createNewGallery = () => {
         // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
         const { galleryName, author, thumbnail, isPrivate } = this.state
         if (!galleryName || !author || !thumbnail) return;
-        // Adds gallery to Database, as this is needed to generate a SPK id, to be used in next view so images and preset tables can reference it.
+
+        const {images,captions, galleryPresets} = this.state
+
+        // Passes all relevant info to backend where separate queries will be made to populate galleries, gallery_preset, images, and captions tables.
         axios.post(`/api/createNewGallery/`, {galleryName, author, thumbnail, isPrivate}).then(res => {
             // Redirects user to EditGallery component to add their images and captions where they can actually create gallery
             this.props.history.push({pathname:`/gallery/${author}/${galleryName}/`, state:{galleryName, author, thumbnail, privacy: isPrivate}})
         })
     }
 
-    retrievingImageData(image, captions){
-    
-    
-    // this.setState({images, captions})
+    retrievingImageData(image, caption){
+    // Erasing current data in local state as each child's state may have changed then setting state with new info
+    let images = [];
+    let captions = [];
+    images.push(image)
+    captions.push(caption)
+    this.setState({images, captions})
+    console.log(this.state.images, this.state.captions)
     }
 
-    retrievingGalleryPresets(){
-    // let galleryPresets = [];
-    // this.setState({galleryPresets})
+    retrievingGalleryPresets(state){
+    let {music, lighting, floorTexture, ceilingTexture, wallTexture} = state
+    let galleryPresets = [];
+    galleryPresets.push(music, lighting, floorTexture, ceilingTexture, wallTexture)
+    this.setState({galleryPresets})
+    console.log(this.state.galleryPresets)
     }
 
     editGallery(id){
@@ -234,6 +246,7 @@ class CreateGalleries extends Component {
 
                         <GalleryPresets 
                         galleryPresets={this.state.galleryPresets}
+                        retrievingGalleryPresets={this.retrievingGalleryPresets}
                         />
 
                         <BluePrint />

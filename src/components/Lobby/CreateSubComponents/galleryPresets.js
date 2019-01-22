@@ -12,13 +12,10 @@ class GalleryPresets extends Component {
             }
     }
 
-componentDidMount(){
 
-}
 
 componentWillReceiveProps(props){
 let {galleryPresets} = props
-console.log(galleryPresets)
 if (galleryPresets){
 this.setState({ceilingTexture:galleryPresets[0], wallTexture: galleryPresets[1], lighting:galleryPresets[2], floorTexture:galleryPresets[3], music:galleryPresets[4]}, () => {
     console.log(this.state)
