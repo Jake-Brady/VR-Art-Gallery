@@ -49,8 +49,11 @@ class Login extends Component {
     }
 
     wrongPassword = () => {
-        const input = document.querySelector('#login-pass')
+        const input = document.querySelector('#login-pass'),
+        text = document.querySelector('.login-content > h4')
         input.focus()
+        input.style.borderColor = 'red'
+        text.style.visibility = 'visible'
     }
 
     login = () => {
@@ -80,8 +83,9 @@ class Login extends Component {
                 </div>
                 <div className='login-content'>
                     <h1>Log In</h1>
-                    <h3>Invalid username</h3>
+                    <h3>Invalid Username</h3>
                     <input id='login-focus' name="username" placeholder="Username" onChange={this.handleChange}></input>
+                    <h4>Invalid Password</h4>
                     <input id='login-pass' name="password" placeholder="Password" type="password" onChange={this.handleChange}></input>
                     <div onClick={() => this.login()}>Log In</div>
                     <h2>Forgot Password?</h2>

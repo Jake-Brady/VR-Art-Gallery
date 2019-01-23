@@ -57,8 +57,18 @@
 .login-content > h3 {
     visibility: hidden;
     position: absolute;
-    left: 40px;
-    top: 95px;
+    right: 50px;
+    top: 135px;
+    font-weight: 300;
+    font-size: 13px;
+    color: red;
+}
+
+.login-content > h4 {
+    visibility: hidden;
+    position: absolute;
+    right: 50px;
+    top: 200px;
     font-weight: 300;
     font-size: 13px;
     color: red;
