@@ -1,0 +1,145 @@
+{
+    "accessors": [
+        {
+            "bufferView": 0,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": 266715,
+            "max": [
+                -9.999999974752427e-07,
+                1.7837239503860474,
+                3.5
+            ],
+            "min": [
+                -1.73328697681427,
+                -9.999999974752427e-07,
+                -9.999999974752427e-07
+            ],
+            "name": "accessor_buffer_nymph_POSITION_0",
+            "type": "VEC3"
+        },
+        {
+            "bufferView": 1,
+            "byteOffset": 0,
+            "componentType": 5126,
+            "count": 266715,
+            "max": [
+                0.999995231628418,
+                0.9999985098838806,
+                1.0
+            ],
+            "min": [
+                -0.9999998807907104,
+                -0.9999991655349731,
+                -0.9999970197677612
+            ],
+            "name": "accessor_buffer_nymph_NORMAL_0",
+            "type": "VEC3"
+        },
+        {
+            "bufferView": 2,
+            "byteOffset": 0,
+            "componentType": 5125,
+            "count": 1600317,
+            "max": [
+                266714
+            ],
+            "min": [
+                0
+            ],
+            "name": "accessor_buffer_nymph_0",
+            "type": "SCALAR"
+        }
+    ],
+    "asset": {
+        "copyright": "",
+        "generator": "blendergltf v1.2.0",
+        "version": "2.0"
+    },
+    "bufferViews": [
+        {
+            "buffer": 0,
+            "byteLength": 3200580,
+            "byteOffset": 0,
+            "byteStride": 12,
+            "name": "bufferView_buffer_nymph_POSITION_0",
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteLength": 3200580,
+            "byteOffset": 3200580,
+            "byteStride": 12,
+            "name": "bufferView_buffer_nymph_NORMAL_0",
+            "target": 34962
+        },
+        {
+            "buffer": 0,
+            "byteLength": 6401272,
+            "byteOffset": 6401160,
+            "name": "bufferView_buffer_nymph_0",
+            "target": 34963
+        }
+    ],
+    "buffers": [
+        {
+            "byteLength": 12802432,
+            "name": "buffer_nymph",
+            "uri": "buffer_nymph.bin"
+        }
+    ],
+    "meshes": [
+        {
+            "name": "nymph",
+            "primitives": [
+                {
+                    "attributes": {
+                        "NORMAL": 1,
+                        "POSITION": 0
+                    },
+                    "indices": 2,
+                    "mode": 4
+                }
+            ]
+        }
+    ],
+    "nodes": [
+        {
+            "mesh": 0,
+            "name": "nymph",
+            "rotation": [
+                -0.7071068286895752,
+                0.0,
+                0.0,
+                0.7071067094802856
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ]
+        }
+    ],
+    "scene": 0,
+    "scenes": [
+        {
+            "extras": {
+                "background_color": [
+                    0.05087608844041824,
+                    0.05087608844041824,
+                    0.05087608844041824
+                ],
+                "frames_per_second": 24
+            },
+            "name": "Scene",
+            "nodes": [
+                0
+            ]
+        }
+    ]
+}
