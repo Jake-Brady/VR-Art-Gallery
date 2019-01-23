@@ -1,4 +1,4 @@
-import nymph from '../../../assets/3d_objs/gltf/Nymph.glb'
+import nymph from '../../../assets/3d_objs/gltf/smallNymph.glb'
 import 'aframe'
 import {Entity} from 'aframe-react'
 import React, {Component} from 'react'
