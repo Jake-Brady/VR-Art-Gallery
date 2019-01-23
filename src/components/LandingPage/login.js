@@ -9,8 +9,7 @@ class Login extends Component {
         super()
         this.state = {
             username: '',
-            password: '',
-            loginMsg: ''
+            password: ''
         }
     }
 
@@ -34,22 +33,39 @@ class Login extends Component {
         })
     }
 
+    wrongUsername = () => {
+        const input = document.querySelector('#login-focus'),
+        text = document.querySelector('.login-content > h3')
+        input.focus()
+        input.style.borderColor = 'red'
+        text.style.visibility = 'visible'
+    }
+
+    clearUsername = () => {
+        const input = document.querySelector('#login-focus'),
+        text = document.querySelector('.login-content > h3')
+        input.style.borderColor = 'rgba(0, 0, 0, 0.185)'
+        text.style.visibility = 'hidden'
+    }
+
+    wrongPassword = () => {
+        const input = document.querySelector('#login-pass')
+        input.focus()
+    }
+
     login = () => {
         let { username, password } = this.state
         axios.post(`/api/login/`, { username, password }).then(res => {
             //If username does not exist, inform user
             if (res.data === 'Wrong Username') {
-                this.setState({ loginMsg: 'This username does not exist.' }, () => {
-                    alert('This username does not exist.')
-                })
+                this.wrongUsername()
                 //If password does not match username, inform user
             } else if (res.data === 'Wrong Password') {
-                this.setState({ loginMsg: 'Incorrect password.' }, () => {
-                    alert('Password is incorrect.')
-                })
+                this.clearUsername()
+                this.wrongPassword()
                 //If all above is false, then username and password must match and user will be redirect to lobby view.
             } else {
-                let { username } = res.data
+                const { username } = res.data
                 this.props.history.push(`/lobby/${username}`)
             }
         })
@@ -59,13 +75,14 @@ class Login extends Component {
         return (
             <div className="login-container">
                 <div className='login-header'>
-                    <img src={logo} alt='VR Logo' />
+                    {/* <img src={logo} alt='VR Logo' /> */}
                     <span>VR<span className='lighttext'>ART GALLERY</span></span>
                 </div>
                 <div className='login-content'>
                     <h1>Log In</h1>
+                    <h3>Invalid username</h3>
                     <input id='login-focus' name="username" placeholder="Username" onChange={this.handleChange}></input>
-                    <input name="password" placeholder="Password" type="password" onChange={this.handleChange}></input>
+                    <input id='login-pass' name="password" placeholder="Password" type="password" onChange={this.handleChange}></input>
                     <div onClick={() => this.login()}>Log In</div>
                     <h2>Forgot Password?</h2>
                 </div>
