@@ -167,7 +167,7 @@ class ArtGallery extends Component {
                     {/* 3D Object Imports */}
                     {/* Chandelier */}
                     {/* <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model> */}
-                    <a-gltf-model src="#nymph" material="src:#marble-floor" scale='.75 .75 .75' position='3 5.5 7' rotation="-180 0 0"></a-gltf-model>
+                    <a-gltf-model src="#nymph" material="src:#marble-floor" scale='.75 .75 .75' position='3 8 7' rotation="-180 0 0"></a-gltf-model>
 
 
                     {/* Everything below here is part of the architecture */}
