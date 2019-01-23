@@ -107,19 +107,17 @@ class ArtGallery extends Component {
                     />
 
                     {/* World Outside */}
-                    <a-plane static-body color="green" rotation="-90 0 0" position="0 -0.01 0" height="100" width="100"></a-plane>
+                    <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="35" width="30"></a-plane>
                     {/* <a-sky material="src:#sky"></a-sky> */}
 
                     {/* Invisible Box Barriers to prevent players from leaving the room. */}
-                    <a-box material="visible:false" width="18" height="5" static-body position="9 0 8" rotation=" 0 270 0"></a-box>
+                    <a-box material="visible:true" width="18" height="10" static-body position="14 5 8" rotation=" 0 270 0"></a-box>
 
-                    <a-box material="visible:false" width="13" height="5" static-body position="-3 0 15" rotation=" 0 270 0"></a-box>
+                    <a-box material="visible:true" width="15" height="10" static-body position="-3 5 10" rotation=" 0 270 0"></a-box>
 
-                    <a-box material="visible:false" width="4" height="5" static-body position="-6 0 7" rotation=" 0 270 0"></a-box>
+                    <a-box material="visible:true" width="15" height="10" static-body position="5 5 -3" rotation=" 0 180 0"></a-box>
 
-                    <a-box material="visible:false" width="6" height="5" static-body position="5 0 -3" rotation=" 0 180 0"></a-box>
-
-                    <a-box material="visible:false" width="10" height="5" static-body position="2 0 19" rotation=" 0 180 0"></a-box>
+                    <a-box material="visible:true" width="15" height="10" static-body position="5 5 19" rotation=" 0 180 0"></a-box>
 
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
@@ -133,22 +131,22 @@ class ArtGallery extends Component {
                     </a-entity>
 
                     {/* Interior Walls and Pillars for added Decorations */}
-                    <a-box width="3" height="5" depth="1" static-body position="3 1 1"></a-box>
-                    <a-box width="3" height="5" depth="1" static-body position="3 1 5"></a-box>
-                    <a-box width="3" height="5" depth="1" static-body position="3 1 9"></a-box>
+                    <a-box width="8" height="7" depth="1" static-body position="2 2 -1.5"></a-box>
+                    <a-box width="8" height="7" depth="1" static-body position="2 2 4"></a-box>
+                    <a-box width="8" height="7" depth="1" static-body position="2 2 9.5"></a-box>
 
 
                     {/* User-Uploaded Images */}
-                    <a-image src={`${Portrait1}`} position="7.99 2 -1" rotation=" 0 270 0"></a-image>
-                    <a-image src={`${Portrait2}`} position="7.99 2 1" rotation=" 0 270 0"></a-image>
-                    <a-image height="2" width="2" src={`${Portrait3}`} position="7.99 2 3" rotation=" 0 270 0"></a-image>
-                    <a-image src={`${Portrait4}`} position="7.99 2 5" rotation=" 0 270 0"></a-image>
-                    <a-image height="2" width="2" src={`${Portrait5}`} position="7.99 2 7" rotation=" 0 270 0"></a-image>
-                    <a-image height="2" width="2" src={`${Portrait6}`} position="7.99 2 10" rotation=" 0 270 0"></a-image>
-                    <a-image src={`${Portrait7}`} position="7.99 2 11.8" rotation=" 0 270 0"></a-image>
-                    <a-image src={`${Portrait8}`} position="7.99 2 13" rotation=" 0 270 0"></a-image>
-                    <a-image height="2" width="2" src={`${Portrait9}`} position="7.99 2 15" rotation=" 0 270 0"></a-image>
-                    <a-image src={`${Portrait10}`} position="7.99 2 17" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait1}`} position="12.99 2 -1" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait2}`} position="12.99 2 1" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait3}`} height="2" width="2"  position="12.99 2 3" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait4}`} position="12.99 2 5" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait5}`} height="2" width="2"  position="12.99 2 7" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait6}`} height="2" width="2"  position="12.99 2 10" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait7}`} position="12.99 2 11.8" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait8}`} position="12.99 2 13" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait9}`} height="2" width="2"  position="12.99 2 15" rotation=" 0 270 0"></a-image>
+                    <a-image src={`${Portrait10}`} position="12.99 2 17" rotation=" 0 270 0"></a-image>
 
 
                     {/* Objects */}
@@ -157,7 +155,7 @@ class ArtGallery extends Component {
                         static-body
                         width="3"
                         geometry="primitive: sphere; radius: .5;"
-                        position="2 2 14"
+                        position="9 8 10"
                         material="color:#C0C0C0"
                         glow="color:#C0C0C0;intensity:.2"
                         sound="src:#music; on:click; rolloffFactor:.1"
@@ -166,72 +164,45 @@ class ArtGallery extends Component {
                     >
                     </a-entity>
 
-                    <a-light type="point" color="lightblue" intensity=".3" position="-1 1 0"></a-light>
-                    <a-light type="point" color="lightblue" intensity=".3" position="-1 1 12"></a-light>
-
+                    {/* 3D Object Imports */}
                     {/* Chandelier */}
                     {/* <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model> */}
+                    <a-obj-model src='#nymph' scale='1 1 1' position='3 9 7' rotation="-180 0 0"></a-obj-model>
 
 
                     {/* Everything below here is part of the architecture */}
-                    {/* Main Art Gallery */}
+                    {/* Main Art Gallery - 1st Floor */}
                     <rw-room position="-2 0 -2">
                         <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
-                        <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling>
-                        <rw-wall material="src:#wall; repeat:2" position="10 0 0" height="4m"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="10 0 20" height="4m"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="4m">
-                            <rw-doorhole id="holeB"></rw-doorhole>
-                        </rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="4m"></rw-wall>
+                        {/* <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling> */}
+                        <rw-wall material="src:#wall; repeat:2" position="15 0 0" height="10"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="15 0 20" height="10"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="10"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="10"></rw-wall>
                     </rw-room>
 
-                    {/* Enter/Exit Room */}
-                    <rw-room position="0 0 -3">
-                        <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling>
-                        <rw-floor material="src:#floor; repeat:2"></rw-floor>
-                        <rw-wall position="1 0 -1" material="src:#wall; repeat:2"></rw-wall>
-                        <rw-wall position="1 0  1" material="src:#wall; repeat:2">
-
-                        </rw-wall>
-                        <rw-wall position="-1 0  1" material="src:#wall; repeat:2"></rw-wall>
-                        <rw-wall position="-1 0 -1" material="src:#wall; repeat:2"></rw-wall>
-                    </rw-room>
-
-                    {/* Balcony */}
-                    <rw-room position="-3 0 7">
-                        <rw-floor material="src:#floor; repeat:2"></rw-floor>
-                        <rw-wall position="1 0 -1" material="src:#wall; repeat:2" height="1m">
-                            <rw-doorhole id="holeA"></rw-doorhole>
-                            <rw-doorlink from="#holeA" to="#holeB" position="1 0 0" width="2"></rw-doorlink>
-                        </rw-wall>
-                        <rw-wall mass="2" position="1 0  1" material="src:#wall; repeat:2" height="1m"></rw-wall>
-                        <rw-wall mass="2" position="-1 0  5" material="src:#wall; repeat:2" height="1m"></rw-wall>
-                        <rw-wall mass="2" position="-1 0 -5" material="src:#wall; repeat:2" height="1m"></rw-wall>
-                    </rw-room>
+                    {/* Stairwell to 2nd Floor */}
+                    {/* Stairs from firstfloor to platform */}
+                    <a-entity static-body geometry="primitive: box; height:1; width: 3.75" position="5.5 0 16.35" rotation="0 90 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:2; width: 3.75" position="4.5 0 16.35" rotation="0 90 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:2; width: 3.75" position="3.5 .5 16.35" rotation="0 90 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:3; width: 3.75" position="2.5 .5 16.35" rotation="0 90 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:4; width: 3.75" position="1.5 .5 16.35" rotation="0 90 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:5; width: 3.75" position="0.5 .5 16.35" rotation="0 90 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:5; width: 3.75; depth: 3.1" position="-.5 .51 16" rotation="0 90 0" material="src:#marble-floor"></a-entity>
+                    {/* Stairs from platform to 2nd floor */}
+                    <a-entity static-body geometry="primitive: box; height:5; width: 4.5; depth: 1" position="-1.199 1 14" rotation="0 0 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:5; width: 4.5; depth: 1" position="-1.200 1.5 13" rotation="0 0 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:5; width: 4.5; depth: 1" position="-1.200 2 12" rotation="0 0 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:5; width: 4.5; depth: 1" position="-1.200 2.5 11" rotation="0 0 0" material="src:#marble-floor"></a-entity>
+                    <a-entity static-body geometry="primitive: box; height:5.5; width: 4.5; depth: 1" position="-1.199 2.75 10.5" rotation="0 0 0" material="src:#marble-floor"></a-entity>
 
 
-                    {/* Outside Texture on Main Gallery */}
-                    <rw-room outside="true" position="-2 0 -2">
-                        <rw-floor material="src:#floor; repeat:2"></rw-floor>
-                        <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling>
-                        <rw-wall material="src:#wall; repeat:2" position="10 0 0" height="4m"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="10 0 20" height="4m"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="4m">
-                            <rw-doorhole id="holeA"></rw-doorhole>
-                        </rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="4m"></rw-wall>
-                    </rw-room>
-
-                    {/* Outside texture for Exit */}
-                    <rw-room outside="true" position="0 0 -3">
-                        <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling>
-                        <rw-floor material="src:#floor; repeat:2"></rw-floor>
-                        <rw-wall position="1 0 -1" material="src:#wall; repeat:2"></rw-wall>
-                        <rw-wall position="1 0  1" material="src:#wall; repeat:2"></rw-wall>
-                        <rw-wall position="-1 0  1" material="src:#wall; repeat:2"></rw-wall>
-                        <rw-wall position="-1 0 -1" material="src:#wall; repeat:2"></rw-wall>
-                    </rw-room>
+                    {/* 2nd Floor */}
+                    <a-entity geometry="primitive: plane; height: 12; width: 8"  position="2 5.5 4"
+            material="color: black; opacity: 0.5" rotation="90 0 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 12; width: 8"  position="2 5.501 4"
+            material="color: black; opacity: 0.5" rotation="-90 0 0"></a-entity>
                 </Scene>
             </>
         )
