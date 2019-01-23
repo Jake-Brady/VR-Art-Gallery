@@ -16,7 +16,7 @@
 }
 
 .create-gallery_card {
-    width: 1000px;
+    width: 1200px;
     display: flex;
 }
 
@@ -25,7 +25,6 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
 }
 
 .create-gallery_cardleft > h1 {
@@ -75,4 +74,8 @@
 
 .create-gallery_cardright {
     width: 50%;
+}
+
+.image-uploaders {
+    width: 1200px;
 }

@@ -181,7 +181,6 @@ class CreateGalleries extends Component {
     render(props) {
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
-        console.log(this.state)
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
             <section className="create-galleries">
