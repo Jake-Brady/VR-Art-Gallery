@@ -111,13 +111,13 @@ class ArtGallery extends Component {
                     {/* <a-sky material="src:#sky"></a-sky> */}
 
                     {/* Invisible Box Barriers to prevent players from leaving the room. */}
-                    <a-box material="visible:true" width="18" height="10" static-body position="14 5 8" rotation=" 0 270 0"></a-box>
+                    <a-plane material="visible:true" width="18" height="10" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
 
-                    <a-box material="visible:true" width="15" height="10" static-body position="-3 5 10" rotation=" 0 270 0"></a-box>
+                    <a-plane material="visible:true" width="16" height="10" static-body position="-3 5 10" rotation=" 0 270 0"></a-plane>
 
-                    <a-box material="visible:true" width="15" height="10" static-body position="5 5 -3" rotation=" 0 180 0"></a-box>
+                    <a-plane material="visible:true" width="16" height="10" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
 
-                    <a-box material="visible:true" width="15" height="10" static-body position="5 5 19" rotation=" 0 180 0"></a-box>
+                    <a-plane material="visible:true" width="16" height="10" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
 
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
@@ -155,7 +155,7 @@ class ArtGallery extends Component {
                         static-body
                         width="3"
                         geometry="primitive: sphere; radius: .5;"
-                        position="9 8 10"
+                        position="4 8 10"
                         material="color:#C0C0C0"
                         glow="color:#C0C0C0;intensity:.2"
                         sound="src:#music; on:click; rolloffFactor:.1"
@@ -167,7 +167,10 @@ class ArtGallery extends Component {
                     {/* 3D Object Imports */}
                     {/* Chandelier */}
                     {/* <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model> */}
-                    <a-gltf-model static-body src="#nymph" material="src:#marble-floor" scale='.75 .75 .75' position='3 6 7' rotation="-180 0 0"></a-gltf-model>
+                    <a-gltf-model static-body src="#nymph" scale='.75 .75 .75' position='3 6 7' rotation="-180 0 0"></a-gltf-model>
+                    
+                    <a-gltf-model static-body src="#moon" scale='2 2 2' position='3 15 7'></a-gltf-model>
+                   
 
 
                     {/* Everything below here is part of the architecture */}
@@ -197,6 +200,18 @@ class ArtGallery extends Component {
                     <a-entity static-body geometry="primitive: box; height:5; width: 4.5; depth: 1" position="-1.200 2.5 11" rotation="0 0 0" material="src:#marble-floor"></a-entity>
                     <a-entity static-body geometry="primitive: box; height:5.5; width: 4.5; depth: 1" position="-1.199 2.75 10.5" rotation="0 0 0" material="src:#marble-floor"></a-entity>
 
+                    {/* 2nd Floor Glass Barriers */}
+                    {/* Facing Large Walls */}
+                    <a-entity static-body geometry="primitive: plane; height: 1.2; width: 12"  position="6 6.1 4"
+            material="color: black; opacity: 0.5" rotation="0 90 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 1.2; width: 12"  position="5.99 6.1 4"
+            material="color: black; opacity: 0.5" rotation="0 -90 0"></a-entity>
+
+                    {/* Facing Stairwell */}
+                    <a-entity static-body geometry="primitive: plane; height: 1.2; width: 5"  position="3.5 6.1 10"
+            material="color: black; opacity: 0.5" rotation="0 0 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 1.2; width: 5"  position="3.5 6.1 10"
+            material="color: black; opacity: 0.5" rotation="0 180 0"></a-entity>
 
                     {/* 2nd Floor */}
                     <a-entity geometry="primitive: plane; height: 12; width: 8"  position="2 5.5 4"
