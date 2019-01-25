@@ -111,13 +111,13 @@ class ArtGallery extends Component {
                     {/* <a-sky material="src:#sky"></a-sky> */}
 
                     {/* Invisible Box Barriers to prevent players from leaving the room. */}
-                    <a-plane material="visible:true" width="18" height="10" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
+                    <a-plane material="visible:true" width="18" height="30" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="10" static-body position="-3 5 10" rotation=" 0 270 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="30" static-body position="-3 5 10" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="10" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="30" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="10" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="30" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
 
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
@@ -130,12 +130,7 @@ class ArtGallery extends Component {
                         </a-entity>
                     </a-entity>
 
-                    {/* Interior Walls and Pillars for added Decorations */}
-                    <a-box width="8" height="7" depth="1" static-body position="2 2 -1.5"></a-box>
-                    <a-box width="8" height="7" depth="1" static-body position="2 2 4"></a-box>
-                    <a-box width="8" height="7" depth="1" static-body position="2 2 9.5"></a-box>
-
-
+                    
                     {/* User-Uploaded Images */}
                     <a-image src={`${Portrait1}`} position="12.99 2 -1" rotation=" 0 270 0"></a-image>
                     <a-image src={`${Portrait2}`} position="12.99 2 1" rotation=" 0 270 0"></a-image>
@@ -160,16 +155,36 @@ class ArtGallery extends Component {
                         glow="color:#C0C0C0;intensity:.2"
                         sound="src:#music; on:click; rolloffFactor:.1"
                         light="color:lightblue;type: point; intensity: .7; decay: 2;"
-
                     >
                     </a-entity>
 
                     {/* 3D Object Imports */}
                     {/* Chandelier */}
-                    {/* <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model> */}
-                    <a-gltf-model static-body src="#nymph" scale='.75 .75 .75' position='3 6 7' rotation="-180 0 0"></a-gltf-model>
                     
-                    <a-gltf-model static-body src="#moon" scale='2 2 2' position='3 15 7'></a-gltf-model>
+                    <a-gltf-model 
+                    static-body 
+                    src="#nymph" 
+                    scale='.75 .75 .75' 
+                    position='3 6 7' 
+                    rotation="-180 0 0">
+                    </a-gltf-model>
+                    
+                    <a-gltf-model 
+                    static-body
+                    src="#moon" 
+                    scale='2 2 2' 
+                    position='3 35 7'
+                    ></a-gltf-model>
+
+                    <a-gltf-model 
+                    src="#carpet" 
+                    scale='.05 .05 .05' 
+                    position='7 .1 7'
+                    ></a-gltf-model>
+
+
+                    
+
                    
 
 
@@ -178,11 +193,16 @@ class ArtGallery extends Component {
                     <rw-room position="-2 0 -2">
                         <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
                         {/* <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling> */}
-                        <rw-wall material="src:#wall; repeat:2" position="15 0 0" height="10"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="15 0 20" height="10"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="10"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="10"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="15 0 0" height="30"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="15 0 20" height="30"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="30"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="30"></rw-wall>
                     </rw-room>
+
+                    {/* Interior Walls and Pillars for added Decorations */}
+                    <a-box width="8" height="7" depth="1" static-body position="2 2 -1.5"></a-box>
+                    <a-box width="8" height="7" depth="1" static-body position="2 2 4"></a-box>
+                    <a-box width="8" height="7" depth="1" static-body position="2 2 9.5"></a-box>
 
                     {/* Stairwell to 2nd Floor */}
                     {/* Stairs from firstfloor to platform */}
@@ -218,6 +238,25 @@ class ArtGallery extends Component {
             material="color: black; opacity: 0.5" rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 12; width: 8"  position="2 5.501 4"
             material="color: black; opacity: 0.5" rotation="-90 0 0"></a-entity>
+
+                    {/* Elevator from 2nd floor to 3rd floor */}
+                    <a-entity
+                    static-body
+                    geometry="primitive: box; height: .1; width: 4; depth: 4"
+                    material="src:#marble-floor"
+                    position="0 5.5 -.5"
+                    >
+                    <a-animation begin="click" attribute="position" from="0 5.5 -.5" to="0 14.2 -.5" dur="10000"></a-animation>
+                    <a-animation begin="click" attribute="position" from="0 14.2 -.5" to="0 5.5 -.5" delay="9000" dur="9000"></a-animation>
+                    </a-entity>
+
+                    <a-box 
+                    width="12" 
+                    height="1" 
+                    depth="4" 
+                    static-body 
+                    position="7 14 -.5">
+                    </a-box>
                 </Scene>
             </>
         )
