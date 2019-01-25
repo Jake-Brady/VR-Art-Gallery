@@ -111,13 +111,13 @@ class ArtGallery extends Component {
                     {/* <a-sky material="src:#sky"></a-sky> */}
 
                     {/* Invisible Box Barriers to prevent players from leaving the room. */}
-                    <a-plane material="visible:true" width="18" height="10" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
+                    <a-plane material="visible:true" width="18" height="30" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="10" static-body position="-3 5 10" rotation=" 0 270 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="30" static-body position="-3 5 10" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="10" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="30" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="10" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="30" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
 
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
@@ -160,16 +160,33 @@ class ArtGallery extends Component {
                         glow="color:#C0C0C0;intensity:.2"
                         sound="src:#music; on:click; rolloffFactor:.1"
                         light="color:lightblue;type: point; intensity: .7; decay: 2;"
-
                     >
                     </a-entity>
 
                     {/* 3D Object Imports */}
                     {/* Chandelier */}
-                    {/* <a-obj-model material="src:#glass" src='#CC' scale='.002 .002 .002' position='3 3.2 7'></a-obj-model> */}
-                    <a-gltf-model static-body src="#nymph" scale='.75 .75 .75' position='3 6 7' rotation="-180 0 0"></a-gltf-model>
                     
-                    <a-gltf-model static-body src="#moon" scale='2 2 2' position='3 15 7'></a-gltf-model>
+                    <a-gltf-model 
+                    static-body 
+                    src="#nymph" 
+                    scale='.75 .75 .75' 
+                    position='3 6 7' 
+                    rotation="-180 0 0">
+                    </a-gltf-model>
+                    
+                    <a-gltf-model 
+                    static-body
+                    src="#moon" 
+                    scale='2 2 2' 
+                    position='3 15 7'
+                    ></a-gltf-model>
+
+                    <a-gltf-model 
+                    src="#carpet" 
+                    scale='.05 .05 .05' 
+                    position='7 .1 7'
+                    ></a-gltf-model>
+
                    
 
 
@@ -178,10 +195,10 @@ class ArtGallery extends Component {
                     <rw-room position="-2 0 -2">
                         <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
                         {/* <rw-ceiling material="src:#ceiling; repeat:0"></rw-ceiling> */}
-                        <rw-wall material="src:#wall; repeat:2" position="15 0 0" height="10"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="15 0 20" height="10"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="10"></rw-wall>
-                        <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="10"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="15 0 0" height="30"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="15 0 20" height="30"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="0 0 20" height="30"></rw-wall>
+                        <rw-wall material="src:#wall; repeat:2" position="0 0 0" height="30"></rw-wall>
                     </rw-room>
 
                     {/* Stairwell to 2nd Floor */}
