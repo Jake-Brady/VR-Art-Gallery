@@ -150,7 +150,7 @@ class ArtGallery extends Component {
                         static-body
                         width="3"
                         geometry="primitive: sphere; radius: .5;"
-                        position="4 8 10"
+                        position="7 8 15"
                         material="color:#C0C0C0"
                         glow="color:#C0C0C0;intensity:.2"
                         sound="src:#music; on:click; rolloffFactor:.1"
@@ -182,10 +182,6 @@ class ArtGallery extends Component {
                     position='7 .1 7'
                     ></a-gltf-model>
 
-
-                    
-
-                   
 
 
                     {/* Everything below here is part of the architecture */}
