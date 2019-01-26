@@ -35,12 +35,21 @@ class Register extends Component {
         })
     }
 
+    highLightFields = () => {
+        const inputs = [...document.querySelectorAll('#register-inputs > input')]
+        inputs.map(input => input.style.borderColor = 'rgba(0, 0, 0, 0.185)')
+        const filtered = inputs.filter(input => !input.value)
+        filtered.map(input => input.style.borderColor = 'red')
+        const coochie = filtered.map(input => input.placeholder)
+        console.log(coochie)
+    }  
+
     registerUser = () => {
-        let { firstName, lastName, username, password, email, registerMsg } = this.state
+        const { firstName, lastName, username, password, email } = this.state
 
         // Check to make sure no fields were left blank
         if (firstName === "" || lastName === "" || username === "" || password === "" || email === "") {
-            alert('One of the fields were left blank. Please fill out all fields to register a new account.')
+            this.highLightFields()
         } else {
             if (username.split(' ').length === 1) {
                 if (email.indexOf('@') > -1) {
@@ -55,12 +64,12 @@ class Register extends Component {
                             //If all above is false, then registration is successful.
                             this.setState({ registerMsg: `Successfully registered ${username}! Login to access your lobby.` }, () => {
                                 axios.post(`/api/login`, { username, password })
-                                .then(() => this.props.history.push(`/lobby/${username}`))
+                                    .then(() => this.props.history.push(`/lobby/${username}`))
                             })
                         }
                     })
                 } else alert('Missing "@" symbol in email address.')
-                
+
             }
             else alert('Usernames cannot contain spaces')
         }
@@ -74,7 +83,7 @@ class Register extends Component {
                         <img src={logo} alt='VR Logo' />
                         <span>VR<span className='lighttext'>ART GALLERY</span></span>
                     </div>
-                    <div className='login-content'>
+                    <div className='login-content' id='register-inputs'>
                         <h1>Register</h1>
                         <input id='register-focus' placeholder="First Name" name="firstName" onChange={this.handleChange}></input>
                         <input placeholder="Last Name" name="lastName" onChange={this.handleChange}></input>
