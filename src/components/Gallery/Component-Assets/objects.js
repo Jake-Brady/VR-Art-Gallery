@@ -1,5 +1,5 @@
 import nymph from '../../../assets/gltfs/smallestNymph.glb'
-import moon from '../../../assets/gltfs/Moon.glb'
+import moon from '../../../assets/gltfs/moon.glb'
 import carpet from '../../../assets/gltfs/smallCarpet.glb'
 import emoji from '../../../assets/gltfs/joyemoji.glb'
 import 'aframe-extras'
