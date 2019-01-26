@@ -105,6 +105,10 @@
     cursor: pointer;
 }
 
+.register-highlight {
+    border: 1px solid red;
+}
+
 .login-content > div:hover {
     background: rgb(4, 179, 91);
 }

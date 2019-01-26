@@ -9,7 +9,8 @@ class Login extends Component {
         super()
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            checking: false
         }
     }
 
@@ -35,7 +36,7 @@ class Login extends Component {
 
     wrongUsername = () => {
         const input = document.querySelector('#login-focus'),
-        text = document.querySelector('.login-content > h3')
+            text = document.querySelector('.login-content > h3')
         input.focus()
         input.style.borderColor = 'red'
         text.style.visibility = 'visible'
@@ -43,14 +44,14 @@ class Login extends Component {
 
     clearUsername = () => {
         const input = document.querySelector('#login-focus'),
-        text = document.querySelector('.login-content > h3')
+            text = document.querySelector('.login-content > h3')
         input.style.borderColor = 'rgba(0, 0, 0, 0.185)'
         text.style.visibility = 'hidden'
     }
 
     wrongPassword = () => {
         const input = document.querySelector('#login-pass'),
-        text = document.querySelector('.login-content > h4')
+            text = document.querySelector('.login-content > h4')
         input.focus()
         input.style.borderColor = 'red'
         text.style.visibility = 'visible'
@@ -58,19 +59,25 @@ class Login extends Component {
 
     login = () => {
         let { username, password } = this.state
-        axios.post(`/api/login/`, { username, password }).then(res => {
-            //If username does not exist, inform user
-            if (res.data === 'Wrong Username') {
-                this.wrongUsername()
-                //If password does not match username, inform user
-            } else if (res.data === 'Wrong Password') {
-                this.clearUsername()
-                this.wrongPassword()
-                //If all above is false, then username and password must match and user will be redirect to lobby view.
-            } else {
-                const { username } = res.data
-                this.props.history.push(`/lobby/${username}`)
-            }
+        this.setState({ checking: true }, () => {
+            axios.post(`/api/login/`, { username, password }).then(res => {
+                //If username does not exist, inform user
+                if (res.data === 'Wrong Username') {
+                    this.setState({ checking: false }, () => {
+                        this.wrongUsername()
+                    })
+                    //If password does not match username, inform user
+                } else if (res.data === 'Wrong Password') {
+                    this.setState({ checking: false }, () => {
+                        this.clearUsername()
+                        this.wrongPassword()
+                    })
+                    //If all above is false, then username and password must match and user will be redirect to lobby view.
+                } else {
+                    const { username } = res.data
+                    this.props.history.push(`/lobby/${username}`)
+                }
+            })
         })
     }
 
