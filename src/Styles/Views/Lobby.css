@@ -464,3 +464,9 @@
         width: 50px;
     }
 }
+
+@media (max-width: 400px) {
+    .lobby-header_search {
+        width: 220px;
+    }
+}
