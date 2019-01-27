@@ -97,7 +97,6 @@
 }
 
 .lobby-header_left {
-    width: 200px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -419,6 +418,7 @@
     font-size: 25px;
     color: rgba(0, 0, 0, 0.5);
     font-weight: 300;
+    text-align: center;
 }
 
 /* Queries to make card grid work on mobile */
@@ -453,5 +453,14 @@
         padding: 50px 20px;
         width: 310px;
         padding-bottom: 25px;
+    }
+    .lobby-empty > h1 {
+        font-size: 45px;
+    }
+    .lobby-empty > h2 {
+        font-size: 17px;
+    }
+    .lobby-header_right {
+        width: 50px;
     }
 }
