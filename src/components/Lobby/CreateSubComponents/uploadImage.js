@@ -7,19 +7,26 @@ import axios from 'axios'
 class UploadImage extends Component {
     constructor(props) {
         super(props)
-        let { retrievingImageData } = this.props
         this.state = {
-            imageURL: 'http://via.placeholder.com/450x450',
-            imageCaption: 'create a caption or leave blank.',
-            isUploading: false
+            imageURL: 'https://www.rpnation.com/gallery/250-x-250-placeholder.30091/full',
+            newURL: '',
+            imageCaption: '',
+            isUploading: false,
+            finalCountdown: 2
         }
     }
 
+
     componentWillReceiveProps(props) {
-        let { imageURL, imageCaption } = props
-        if (imageURL) {
-            this.setState({ imageURL, imageCaption })
+        let { imageURL, imageCaption, retrievingImageData, finalCountdown} = props
+        if (this.state.finalCountdown === 2 && imageURL) {
+            this.setState({ imageURL, imageCaption}, () => {
+                this.setState({finalCountdown: 1})
+            })
         }
+        if (finalCountdown === 0){
+                retrievingImageData(this.state.newURL || this.state.imageURL, this.state.imageCaption) 
+            }
     }
 
     onChangeHandler(e) {
@@ -58,7 +65,7 @@ class UploadImage extends Component {
             .put(signedRequest, file, options)
             .then(res => {
                 console.log(url)
-                this.setState({ isUploading: false, imageURL: url })
+                this.setState({ isUploading: false, newURL: url })
             })
 
             .catch(err => {
@@ -85,37 +92,46 @@ class UploadImage extends Component {
     }
 
 
-    render() {
+    render(props) {
         let { imageURL, imageCaption, isUploading } = this.state
         return (
-            <div className="img-block">
-                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} placeholder="Image Caption (30 character limit"></input>
-                <input name="imageURL" onChange={(e) => this.onChangeHandler(e)} placeholder="Image Address"></input>
-                <Dropzone
-                    onDropAccepted={this.getSignedRequest.bind(this)}
-                    onFileDialogCancel={this.onCancel.bind(this)}
-                    accept="image/*"
-                    multiple={false}
-                >
-                    {({ getRootProps, getInputProps }) => (
-                        <div {...getRootProps()} style={{
-                            width: '100px',
-                            height: '40px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            background: 'rgb(119, 148, 253)',
-                            marginTop: '15px',
-                            fontSize: '15px',
-                            color: 'white',
-                            cursor: 'pointer'
-                        }}>
-                            <input {...getInputProps()} />
-                            <p>Upload</p>
-                        </div>
-                    )}
-                </Dropzone>
-            </div>
+            <section className="image-block">
+                <div className="upload-block">
+                    <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxlength="30" placeholder="Image Caption (30 character limit)"></input>
+                    <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxlength="100" placeholder="Image Address"></input>
+                    <Dropzone
+                        onDropAccepted={this.getSignedRequest.bind(this)}
+                        onFileDialogCancel={this.onCancel.bind(this)}
+                        accept="image/*"
+                        multiple={false}
+                    >
+                        {({ getRootProps, getInputProps }) => (
+                            <div {...getRootProps()} style={{
+                                width: '100px',
+                                height: '40px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                background: 'rgb(119, 148, 253)',
+                                marginTop: '15px',
+                                fontSize: '15px',
+                                color: 'white',
+                                cursor: 'pointer'
+                            }}>
+                                <input {...getInputProps()} />
+                                <p>Upload</p>
+                            </div>
+                        )}
+                    </Dropzone>
+                </div>
+
+                <div className="preview-image-box">
+                    <figure className="image-caption-container">
+                    <img className="preview-image" src={this.state.newURL || this.state.imageURL} alt="Preview" />
+                    <figcaption className="preview-caption">{this.state.imageCaption || '(Optional) Caption'}</figcaption>
+                    </figure>
+                </div>
+            </section>
         )
     }
 }
