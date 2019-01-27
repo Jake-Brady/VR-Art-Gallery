@@ -37,8 +37,6 @@ class Register extends Component {
     highLightFields = () => {
         const inputs = [...document.querySelectorAll('#register-inputs > input')],
             stars = [...document.querySelectorAll('#register-inputs > span')]
-        inputs.map(input => input.setAttribute('style', 'border-color: rgba(0, 0, 0, 0.185); padding-right: 15px;'))
-        stars.map(star => star.style.visibility = 'hidden')
         const filtered = inputs.filter(input => !input.value)
         filtered.map(input => {
             input.setAttribute('style', 'border-color: red; padding-right: 40px;')
@@ -54,25 +52,11 @@ class Register extends Component {
         input.setAttribute('style', 'border-color: red; padding-right: 90px;')
     }
 
-    clearSpace = () => {
-        const alert = document.querySelector('.register-space'),
-            input = document.querySelectorAll('#register-inputs > input')[3]
-        input.style.paddingRight = '15px'
-        alert.style.visibility = 'hidden'
-    }
-
     nameExists = () => {
         const alert = document.querySelector('.register-name'),
             input = document.querySelectorAll('#register-inputs > input')[3]
         alert.style.visibility = 'visible'
         input.setAttribute('style', 'border-color: red; padding-right: 110px;')
-    }
-
-    clearName = () => {
-        const alert = document.querySelector('.register-name'),
-            input = document.querySelectorAll('#register-inputs > input')[3]
-        input.style.paddingRight = '15px'
-        alert.style.visibility = 'hidden'
     }
 
     invalidEmail = () => {
@@ -82,13 +66,6 @@ class Register extends Component {
         input.setAttribute('style', 'border-color: red; padding-right: 90px;')
     }
 
-    clearEmail = () => {
-        const alert = document.querySelector('.register-at'),
-            input = document.querySelectorAll('#register-inputs > input')[2]
-        input.style.paddingRight = '15px'
-        alert.style.visibility = 'hidden'
-    }
-
     emailExists = () => {
         const alert = document.querySelector('.register-email'),
             input = document.querySelectorAll('#register-inputs > input')[2]
@@ -96,38 +73,46 @@ class Register extends Component {
         input.setAttribute('style', 'border-color: red; padding-right: 90px;')
     }
 
-    clearEmailExists = () => {
-        const alert = document.querySelector('.register-email'),
-            input = document.querySelectorAll('#register-inputs > input')[2]
-        input.style.paddingRight = '15px'
-        alert.style.visibility = 'hidden'
+    clearAll = () => {
+        const inputs = [...document.querySelectorAll('#register-inputs > input')],
+            stars = [...document.querySelectorAll('#register-inputs > span')],
+            spaceAlert = document.querySelector('.register-space'),
+            nameAlert = document.querySelector('.register-name'),
+            atAlert = document.querySelector('.register-at'),
+            emailAlert = document.querySelector('.register-email')
+        //clear required fields
+        inputs.map(input => input.setAttribute('style', 'border-color: rgba(0, 0, 0, 0.185); padding-right: 15px;'))
+        stars.map(star => star.style.visibility = 'hidden')
+        //clear username space error
+        inputs[3].style.paddingRight = '15px'
+        spaceAlert.style.visibility = 'hidden'
+        //clear invalid name error
+        nameAlert.style.visibility = 'hidden'
+        //clear @ error
+        inputs[2].style.paddingRight = '15px'
+        atAlert.style.visibility = 'hidden'
+        //clear invalid email alert
+        emailAlert.style.visibility = 'hidden'
     }
 
     registerUser = () => {
         const { firstName, lastName, username, password, email } = this.state
         // Check to make sure no fields were left blank
         if (firstName === "" || lastName === "" || username === "" || password === "" || email === "") {
-            this.clearSpace()
-            this.clearEmail()
-            this.clearEmailExists()
-            this.clearName()
+            this.clearAll()
             this.highLightFields()
         } else {
-            this.highLightFields()
+            this.clearAll()
             if (username.split(' ').length === 1) {
                 if (email.indexOf('@') > -1) {
                     axios.post(`/api/registerUser/`, { firstName, lastName, username, password, email }).then(res => {
                         if (res.data === 'email') {
                             //If email is already in use, inform user that email has been sent to their existing account's email address.
-                            this.clearSpace()
-                            this.clearEmail()
-                            this.clearName()
+                            this.clearAll()
                             this.emailExists()
                         } else if (res.data === 'username') {
                             //If username exists already, inform user to create a new one.
-                            this.clearSpace()
-                            this.clearEmail()
-                            this.clearEmailExists()
+                            this.clearAll()
                             this.nameExists()
                         } else if (res.data === 'success') {
                             //If all above is false, then registration is successful.
@@ -138,17 +123,13 @@ class Register extends Component {
                         }
                     })
                 } else {
-                    this.clearSpace()
-                    this.clearEmailExists()
-                    this.clearName()
+                    this.clearAll()
                     this.invalidEmail()
                 }
 
             }
             else {
-                this.clearEmail()
-                this.clearEmailExists()
-                this.clearName()
+                this.clearAll()
                 this.noSpaces()
             }
         }

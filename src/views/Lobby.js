@@ -66,14 +66,17 @@ class Lobby extends Component {
     checkSize = () => {
         if (!this.state.loading) {
             const image = document.querySelector('#header-image'),
-                name = document.querySelector('#header-name')
+                name = document.querySelector('#header-name'),
+                header = document.querySelector('.lobby-header_left')
             if (!window.matchMedia("(min-width: 620px)").matches && (this.state.theMagicWord === 'galleries' || this.state.theMagicWord === 'favorites')) {
                 image.classList.add('lobby-header_hidden')
                 name.classList.add('lobby-header_hidden')
+                header.style.width = '50px'
             }
             else {
                 image.classList.remove('lobby-header_hidden')
                 name.classList.remove('lobby-header_hidden')
+                header.style.width = 'auto'
             }
         }
     }
@@ -431,7 +434,8 @@ class Lobby extends Component {
                                                             this.state.searchInput ?
                                                                 <div className='lobby-empty'>
                                                                     <h1 style={{ fontFamily: 'sans-serif', color: 'rgb(110, 142, 254)' }}>‾ \_(ツ)_/ ‾</h1>
-                                                                    <h2>No results. Try broadening your search or checking your spelling.</h2>
+                                                                    <h2>No results</h2>
+                                                                    <h2>Try broadening your search or checking your spelling</h2>
                                                                 </div>
                                                                 :
                                                                 <div className='lobby-empty'>

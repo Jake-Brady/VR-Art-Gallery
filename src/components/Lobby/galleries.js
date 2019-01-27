@@ -17,7 +17,8 @@ class Galleries extends Component {
             <div key={id} className='gallery-container'>
                 <img src={image} alt='Card Thumbnail' className='gallery-thumbnail' />
                 <div className='gallery-text'>
-                    <h1 className='gallery-title'>{galleryName}</h1>
+                    <h1 className='gallery-title'>{galleryName.length > 15 ? galleryName.slice(0,15) + '...' : galleryName}</h1>
+                    <div className='gallery-title-hover'>{galleryName}</div>
                     <h3 className='gallery-author'>BY:{author}</h3>
                     <div className='gallery-stats'>
                         {isPrivate ? <><i className="fas fa-lock stat"></i> <span>Private</span></> : <><i className="fas fa-unlock stat"></i> <span>Public</span> </>}
