@@ -127,6 +127,48 @@
     font-weight: 400;
 }
 
+._1, ._2, ._3, ._4, ._5 {
+    color: red;
+    position: absolute;
+    font-size: 20px;
+    right: 60px;
+    visibility: hidden;
+}
+
+._1 {
+    top: 135px;
+}
+
+._2 {
+    top: 200px;
+}
+
+._3 {
+    top: 265px;
+}
+
+._4 {
+    top: 330px;
+}
+
+._5 {
+    top: 395px;
+}
+
+.register-space, .register-at, .register-email, .register-name {
+    position: absolute;
+    font-size: 15px;
+    color: red;
+    right: 60px;
+    top: 327px;
+    font-weight: 300;
+    visibility: hidden;
+}
+
+.register-at, .register-email {
+    top: 263px;
+}
+
 @media (max-width: 600px) {
     .login-header, .login-content {
         width: 300px;
