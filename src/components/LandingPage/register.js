@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import logo from '../../styles/Media/Icon.png'
 
 class Register extends Component {
     constructor() {
@@ -40,8 +39,6 @@ class Register extends Component {
         inputs.map(input => input.style.borderColor = 'rgba(0, 0, 0, 0.185)')
         const filtered = inputs.filter(input => !input.value)
         filtered.map(input => input.style.borderColor = 'red')
-        const coochie = filtered.map(input => input.placeholder)
-        console.log(coochie)
     }  
 
     registerUser = () => {
@@ -80,7 +77,6 @@ class Register extends Component {
             <div style={{ overflowX: 'hidden' }}>
                 <div className="login-container">
                     <div className='login-header'>
-                        <img src={logo} alt='VR Logo' />
                         <span>VR<span className='lighttext'>ART GALLERY</span></span>
                     </div>
                     <div className='login-content' id='register-inputs'>

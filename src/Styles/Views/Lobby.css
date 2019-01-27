@@ -93,7 +93,6 @@
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 0.80);
-    z-index: 1;
 }
 
 .lobby-header_left {
