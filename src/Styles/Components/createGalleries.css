@@ -78,4 +78,40 @@
 
 .image-uploaders {
     width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.image-block{
+    display: flex 2;
+    flex-direction: column;
+    margin: 3rem;
+}
+
+.upload-block{
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 200px;
+}
+
+.preview-image-block{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
+}
+
+.image-caption-container{
+    width: 250px;
+    height: auto;
+}
+
+.preview-image{
+    width: 250px;
+    height: 250px;
+    max-width:100%;
+}
+
+

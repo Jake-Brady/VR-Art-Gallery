@@ -101,7 +101,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.delete('/api/deleteGallery/:id', ctrl.deleteGallery)
     app.post('/api/createNewGallery/', ctrl.createNewGallery)
     app.get('/api/editGallery/:id', ctrl.getGalleryToEdit)
-    app.put('/api/updateGallery/:id', ctrl.updateGallery)
+    app.put('/api/updateGallery/:galleryId', ctrl.updateGallery)
     app.get('/api/getUsersWhoFavorited/', ctrl.getThoseWhoLiked)
     
     //Art-Gallery

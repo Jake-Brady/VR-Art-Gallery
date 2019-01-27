@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import '../../styles/Components/createGalleries.css'
 import Dropzone from 'react-dropzone'
 import { v4 as randomStringGenerator } from 'uuid';
@@ -13,19 +14,25 @@ class CreateGalleries extends Component {
         super(props)
         this.state = {
             galleryName: '',
-            imageAddress: '',
             author: '',
             isPrivate: false,
+            imageAddress: '',
             thumbnail: 'http://via.placeholder.com/450x450',
             numOfGalleries: 0,
             maxLimit: false,
             images: [],
+            finalImages: [],
             captions: [],
+            finalCaptions: [],
             isUploading: false,
             galleryPresets: [],
+            finalGalleryPresets: [],
             editMode: false,
             galleryId: 0,
+            finalCountdown: 1
         }
+        this.retrievingImageData = this.retrievingImageData.bind(this)
+        this.retrievingGalleryPresets = this.retrievingGalleryPresets.bind(this)
     }
 
     componentDidMount() {
@@ -90,7 +97,7 @@ class CreateGalleries extends Component {
             .put(signedRequest, file, options)
             .then(res => {
                 console.log(url)
-                this.setState({ isUploading: false, thumbnail: url })
+                this.setState({ isUploading: false, imageAddress: url })
                 // .then(console.log("this is the url",url))
                 // THEN DO SOMETHING WITH THE URL. SEND TO DB 
             })
@@ -118,52 +125,50 @@ class CreateGalleries extends Component {
         });
     }
 
-    updateGallery = () => {
-        // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
-        const { galleryName, author, thumbnail, isPrivate, galleryPresets, images } = this.state
-        if (!galleryName || !author || !thumbnail) return;
-
-        // // axios request to update back end once all data has been received.
-        // axios.put(`/api.updateGallery/:id`, {images, galleryPresets, isPrivate}).then(res => {
-        //     // notify user that gallery has been updated and redirect them to galleries.
-        // })
-    }
 
     createNewGallery = () => {
         // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
         const { galleryName, author, thumbnail, isPrivate } = this.state
         if (!galleryName || !author || !thumbnail) return;
 
-        const { images, captions, galleryPresets } = this.state
-
-        // Passes all relevant info to backend where separate queries will be made to populate galleries, gallery_preset, images, and captions tables.
-        axios.post(`/api/createNewGallery/`, { galleryName, author, thumbnail, isPrivate }).then(res => {
-            // Redirects user to EditGallery component to add their images and captions where they can actually create gallery
-            this.props.history.push({ pathname: `/gallery/${author}/${galleryName}/`, state: { galleryName, author, thumbnail, privacy: isPrivate } })
-        })
+        // this state object value is being passed down to galleryPresets and uploadImage components which are waiting for the value to turn to 0 before sending the final selections for presets, images, and captions back to this component to be shipped to database. Relevant functions: retrievingImageData, retrievingGalleryPresets, and finalizeGallery - all listed below.
+        this.setState({finalCountdown: 0})
     }
 
     retrievingImageData = (image, caption) => {
-        // Erasing current data in local state as each child's state may have changed then setting state with new info
-        let images = [];
-        let captions = [];
+        // Taking ImageURLs and ImageCaptions from each uploadImage component, pushing them into a copy of finalImages and finalCaptions arrays to be sent to the database
+        console.log(image, caption)
+        let images = this.state.finalImages
+        let captions = this.state.finalCaptions
         images.push(image)
         captions.push(caption)
-        this.setState({ images, captions })
-        console.log(this.state.images, this.state.captions)
+        this.setState({finalImages: images, finalCaptions: captions, finalCountdown: 1})
     }
 
     retrievingGalleryPresets = (state) => {
         let { music, lighting, floorTexture, ceilingTexture, wallTexture } = state
-        let galleryPresets = [];
-        galleryPresets.push(music, lighting, floorTexture, ceilingTexture, wallTexture)
-        this.setState({ galleryPresets })
-        console.log(this.state.galleryPresets)
+        let finalGalleryPresets = [music, lighting, floorTexture, ceilingTexture, wallTexture];
+        this.setState({ finalGalleryPresets }, () => {
+            this.finalizeGallery()
+        })
+    }
+
+    finalizeGallery(){
+    let {finalImages, finalCaptions, finalGalleryPresets, galleryName, author, imageAddress, thumbnail, isPrivate, galleryId} = this.state
+    // Passes all relevant info to backend where separate queries will be made to populate galleries, gallery_preset, images, and captions tables if this a a new gallery. If createGallery is in editMode, it will update existing gallery.
+        if (!this.state.editMode){
+        axios.post(`/api/createNewGallery/`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets}).then(res => {
+           console.log('Finished for creation?')
+        })
+        } else if (this.state.editMode){
+        axios.put(`/api/updateGallery/${galleryId}`, {galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets}).then(res => {
+            console.log('Finished?')
+        })
+        }
     }
 
     editGallery = id => {
         // set State with gallery related info after retrieving gallery info.
-        let galleryPresets = []
         axios.get(`/api/editGallery/${id}`).then(res => {
             console.log(res.data)
             let { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, gallery_name, atmosphere_lighting, music, wall_texture, is_private, thumbnail, ceiling_texture, floor_texture, img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption } = res.data[0]
@@ -178,8 +183,9 @@ class CreateGalleries extends Component {
         this.setState({ isPrivate: bool })
     }
 
+
     render(props) {
-        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId } = this.state
+        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress} = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
@@ -232,7 +238,7 @@ class CreateGalleries extends Component {
 
                             <div className='create-gallery_cardright center'>
                                 <div className='gallery-container'>
-                                    <img src={thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
+                                    <img src={imageAddress || thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
                                         <h3 className='gallery-author'>BY: {author}</h3>
@@ -257,6 +263,7 @@ class CreateGalleries extends Component {
                             existingImages={this.state.images}
                             existingCaptions={this.state.captions}
                             retrievingImageData={this.retrievingImageData}
+                            finalCountdown={this.state.finalCountdown}
                         />
 
                         <div className='create-gallery-header center'>GALLERY</div>
@@ -264,11 +271,12 @@ class CreateGalleries extends Component {
                         <GalleryPresets
                             galleryPresets={this.state.galleryPresets}
                             retrievingGalleryPresets={this.retrievingGalleryPresets}
+                            finalCountdown={this.state.finalCountdown}
                         />
 
                         {
                             editMode ?
-                                <span id="edit-gallery-btn" onClick={this.updateGallery(galleryId)}>Edit Gallery</span>
+                                <span id="edit-gallery-btn" onClick={this.createNewGallery}>Edit Gallery</span>
                                 :
                                 <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
                         }
