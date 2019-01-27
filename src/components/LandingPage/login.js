@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../../styles/Components/signIn.css'
-import logo from '../../styles/Media/Icon.png'
 import { withRouter } from 'react-router-dom'
 
 class Login extends Component {
@@ -38,14 +37,14 @@ class Login extends Component {
         const input = document.querySelector('#login-focus'),
             text = document.querySelector('.login-content > h3')
         input.focus()
-        input.style.borderColor = 'red'
+        input.setAttribute('style', 'border-color: red; padding-right: 90px;')
         text.style.visibility = 'visible'
     }
 
     clearUsername = () => {
         const input = document.querySelector('#login-focus'),
             text = document.querySelector('.login-content > h3')
-        input.style.borderColor = 'rgba(0, 0, 0, 0.185)'
+        input.setAttribute('style', 'border-color: rgba(0, 0, 0, 0.185); padding-right: 15px;')
         text.style.visibility = 'hidden'
     }
 
@@ -53,7 +52,7 @@ class Login extends Component {
         const input = document.querySelector('#login-pass'),
             text = document.querySelector('.login-content > h4')
         input.focus()
-        input.style.borderColor = 'red'
+        input.setAttribute('style', 'border-color: red; padding-right: 90px;')
         text.style.visibility = 'visible'
     }
 
@@ -85,7 +84,6 @@ class Login extends Component {
         return (
             <div className="login-container">
                 <div className='login-header'>
-                    {/* <img src={logo} alt='VR Logo' /> */}
                     <span>VR<span className='lighttext'>ART GALLERY</span></span>
                 </div>
                 <div className='login-content'>

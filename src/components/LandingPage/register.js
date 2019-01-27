@@ -173,7 +173,7 @@ class Register extends Component {
                         <h6 className='register-email'>Email Taken</h6>
                         <input placeholder="Username" name="username" onChange={this.handleChange}></input>
                         <span className='_4'>*</span>
-                        <h6 className='register-space'>No Spaces :)</h6>
+                        <h6 className='register-space'>No Spaces</h6>
                         <h6 className='register-name'>Username Taken</h6>
                         <input placeholder="Password" type="password" name="password" onChange={this.handleChange}></input>
                         <span className='_5'>*</span>
