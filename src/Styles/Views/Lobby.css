@@ -425,7 +425,7 @@
 
 @media (max-width: 1240px) {
     .lobby-card-grid {
-        padding: 100px 40px;
+        padding: 50px 40px;
         width: 1160px;
     }
 }
@@ -450,7 +450,7 @@
 
 @media (max-width: 620px) {
     .lobby-card-grid {
-        padding: 100px 20px;
+        padding: 50px 20px;
         width: 310px;
         padding-bottom: 25px;
     }
