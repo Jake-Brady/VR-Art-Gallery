@@ -6,7 +6,8 @@ const Favorites = (props) => {
       <div key={id} className="gallery-container" id='favorite-card'>
          <img src={image} alt="gallery thumbnail" className="gallery-thumbnail" />
          <div className='gallery-text'>
-            <h1 className='gallery-title'>{galleryName}</h1>
+            <h1 className='gallery-title'>{galleryName.length > 20 ? galleryName.slice(0,20) + '...' : galleryName}</h1>
+            <div className='gallery-title-hover'>{galleryName}</div>
             <h3 className='gallery-author'>BY: {author}</h3>
             <div className='gallery-stats'>
                <i className="fas fa-eye stat"></i>
