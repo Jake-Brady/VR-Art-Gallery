@@ -56,6 +56,14 @@ class Login extends Component {
         text.style.visibility = 'visible'
     }
 
+    clearPassword = () => {
+        const input = document.querySelector('#login-pass'),
+            text = document.querySelector('.login-content > h4')
+        input.focus()
+        input.setAttribute('style', 'border-color: rgba(0, 0, 0, 0.185); padding-right: 15px;')
+        text.style.visibility = 'hidden'
+    }
+
     login = () => {
         let { username, password } = this.state
         this.setState({ checking: true }, () => {
@@ -63,6 +71,7 @@ class Login extends Component {
                 //If username does not exist, inform user
                 if (res.data === 'Wrong Username') {
                     this.setState({ checking: false }, () => {
+                        this.clearPassword()
                         this.wrongUsername()
                     })
                     //If password does not match username, inform user
