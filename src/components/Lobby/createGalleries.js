@@ -132,7 +132,7 @@ class CreateGalleries extends Component {
         if (!galleryName || !author || !thumbnail) return;
 
         // this state object value is being passed down to galleryPresets and uploadImage components which are waiting for the value to turn to 0 before sending the final selections for presets, images, and captions back to this component to be shipped to database. Relevant functions: retrievingImageData, retrievingGalleryPresets, and finalizeGallery - all listed below.
-        this.setState({finalCountdown: 0})
+        this.setState({ finalCountdown: 0 })
     }
 
     retrievingImageData = (image, caption) => {
@@ -142,7 +142,7 @@ class CreateGalleries extends Component {
         let captions = this.state.finalCaptions
         images.push(image)
         captions.push(caption)
-        this.setState({finalImages: images, finalCaptions: captions, finalCountdown: 1})
+        this.setState({ finalImages: images, finalCaptions: captions, finalCountdown: 1 })
     }
 
     retrievingGalleryPresets = (state) => {
@@ -153,17 +153,17 @@ class CreateGalleries extends Component {
         })
     }
 
-    finalizeGallery(){
-    let {finalImages, finalCaptions, finalGalleryPresets, galleryName, author, imageAddress, thumbnail, isPrivate, galleryId} = this.state
-    // Passes all relevant info to backend where separate queries will be made to populate galleries, gallery_preset, images, and captions tables if this a a new gallery. If createGallery is in editMode, it will update existing gallery.
-        if (!this.state.editMode){
-        axios.post(`/api/createNewGallery/`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets}).then(res => {
-           console.log('Finished for creation?')
-        })
-        } else if (this.state.editMode){
-        axios.put(`/api/updateGallery/${galleryId}`, {galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets}).then(res => {
-            console.log('Finished?')
-        })
+    finalizeGallery() {
+        let { finalImages, finalCaptions, finalGalleryPresets, galleryName, author, imageAddress, thumbnail, isPrivate, galleryId } = this.state
+        // Passes all relevant info to backend where separate queries will be made to populate galleries, gallery_preset, images, and captions tables if this a a new gallery. If createGallery is in editMode, it will update existing gallery.
+        if (!this.state.editMode) {
+            axios.post(`/api/createNewGallery/`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets }).then(res => {
+                console.log('Finished for creation?')
+            })
+        } else if (this.state.editMode) {
+            axios.put(`/api/updateGallery/${galleryId}`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets }).then(res => {
+                console.log('Finished?')
+            })
         }
     }
 
@@ -185,7 +185,7 @@ class CreateGalleries extends Component {
 
 
     render(props) {
-        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress} = this.state
+        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
@@ -200,7 +200,8 @@ class CreateGalleries extends Component {
                         <div className='create-gallery-header center'>CARD</div>
                         <div className="create-gallery_card">
                             <div className='create-gallery_cardleft'>
-                                <h1>Gallery Name (100 characters)</h1>
+                                <h3>Gallery Info</h3>
+                                <h1>Gallery Name</h1>
                                 <input name="galleryName" onChange={(e) => this.handleChange(e)} maxLength='100' />
                                 <h2>Privacy</h2>
                                 <div className='create-gallery-privacy'>
@@ -237,7 +238,8 @@ class CreateGalleries extends Component {
                             </div>
 
                             <div className='create-gallery_cardright center'>
-                                <div className='gallery-container'>
+                                <h3>Preview</h3>
+                                <div className='gallery-container' style={{ marginBottom: '0px' }}>
                                     <img src={imageAddress || thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
