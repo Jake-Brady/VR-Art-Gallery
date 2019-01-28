@@ -415,7 +415,8 @@ class Lobby extends Component {
                                                         this.state.searchInput ?
                                                             <div className='lobby-empty'>
                                                                 <h1 style={{ fontFamily: 'sans-serif', color: 'rgb(110, 142, 254)' }}>‾ \_(ツ)_/ ‾</h1>
-                                                                <h2>No results. Try broadening your search or checking your spelling.</h2>
+                                                                <h2>No results</h2>
+                                                                <h2>Try broadening your search or checking your spelling</h2>
                                                             </div>
                                                             :
                                                             <div className='lobby-empty'>
