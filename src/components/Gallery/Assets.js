@@ -1,7 +1,11 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {imagesHaveLoaded} from '../../ducks/reducer'
+import Frame from '../../assets/gltfs/frame.glb'
 import Gymnopedie from '../../assets/audio/Gymnopedie_No_1.mp3'
+import SnowDrop from '../../assets/audio/Snow_Drop.mp3'
+import OnThePassingOfTime from '../../assets/audio/On_the_Passing_of_Time.mp3'
+import ImpromputInQuarterCommaMeantone from '../../assets/audio/Impromptu_in_Quarter_Comma_Meantone.mp3'
 import Granite from '../../assets/grey_granite_texture.jpg'
 import Nymph from '../../assets/gltfs/smallestNymph.glb'
 import Moon from '../../assets/gltfs/moon.glb'
@@ -63,13 +67,17 @@ render(){
         <img id="granite" src={Granite} alt="marble floor texture" />
        
         {/* Objects */}
+        <Entity id="frame" src={Frame} alt="Picture Frame" />,
         <Entity id="nymph" src={Nymph} alt="Nymph Statue Obj" />,
         <Entity id="moon" src={Moon} alt="Moon Obj" />,
         <Entity id="carpet" src={Carpet} alt="Carpet Obj" />,
         <Entity id="emoji" src={Emoji} alt="Emoji Entity" />
         
         {/* Music */}
-        <audio id="music" src={Gymnopedie}/>
+        <audio id="gymnopedie" src={Gymnopedie}/>
+        <audio id="impromptu" src={ImpromputInQuarterCommaMeantone}/>
+        <audio id="snowDrop" src={SnowDrop}/>
+        <audio id="passingTime" src={OnThePassingOfTime}/>
     </a-assets>
     )
 }

@@ -143,6 +143,98 @@ class ArtGallery extends Component {
                     <a-image src="#Portrait14" className="user-image" position="12.99 4 8" rotation=" 0 270 0"></a-image>
                     <a-image src="#Portrait15" className="user-image" position="12.99 4 5" rotation=" 0 270 0"></a-image>
 
+                    {/* Frames for user images */}
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 2 1' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 4 1' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 6 1' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 8 1' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 10 1' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 12 1' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 2 3' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 4 3' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 6 3' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 9 3' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 12 3' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 2 5' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 4 5' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 6 5' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+                    <a-gltf-model 
+                    src="#frame" 
+                    scale='.005 .005 .005' 
+                    position='12.99 8 5' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+
 
                     {/* Objects */}
                     {/* Sphere of Music */}
@@ -153,7 +245,7 @@ class ArtGallery extends Component {
                         position="7 8 15"
                         material="color:#C0C0C0"
                         glow="color:#C0C0C0;intensity:.2"
-                        sound="src:#music; on:click; rolloffFactor:.1"
+                        sound="src:#snowDrop; on:click; rolloffFactor:.1"
                         light="color:lightblue;type: point; intensity: .7; decay: 2;"
                     >
                     </a-entity>
