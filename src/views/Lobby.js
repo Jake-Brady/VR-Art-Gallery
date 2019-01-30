@@ -55,6 +55,19 @@ class Lobby extends Component {
         window.addEventListener('resize', this.checkSize)
     }
 
+    async refresh(){
+        const user = this.props.match.params.username
+        const userGalleries = await axios.get('/api/retrieveGalleries/')
+            this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data, user }, async () => {
+                const galleryIds = this.state.usersGalleries.map(a => a.id),
+                    otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
+                this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
+                    const userFavorites = await axios.get('/api/getFavorites/')
+                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false })
+                })
+            })
+    }
+
     componentWillUnmount() {
         const body = document.querySelector('html'),
             overlay = document.querySelector('.lobby-overlay')
@@ -96,12 +109,16 @@ class Lobby extends Component {
         this.setState({ usersGalleries: [...this.state.galleryCopy], favoritedGalleries: [...this.state.favoritesCopy], searchInput: '' })
     }
 
+    
+
     changeWindow = magicWord => {
         const { theMagicWord } = this.state
-        if (magicWord === theMagicWord) return;
+        if (theMagicWord === 'create' && this.state.galleryId) {
+            this.setState({galleryId: 0})
+        }
         switch (magicWord) {
             case "Create":
-                this.setState({ theMagicWord: 'create' }, () => {
+                this.setState({ theMagicWord: 'create'}, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
@@ -190,7 +207,7 @@ class Lobby extends Component {
             }
             if (index !== -1) {
                 galleries.splice(index, 1);
-                this.setState({ usersGalleries: galleries })
+                this.setState({ usersGalleries: galleries, galleryCopy: galleries })
             }
             axios.delete(`/api/deleteGallery/${id}`).then(res => {
                 this.setState({ deleteConfirm: `${galleryName} was successfully deleted.` })

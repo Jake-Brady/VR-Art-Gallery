@@ -3,8 +3,6 @@ import React from 'react'
 const Notifications = (props) => {
 let {followersOfGalleries, galleries} = props
 let galleryNames = galleries.map(e => e.gallery_name)
-console.log(galleryNames)
-
 // console.log(followersOfGalleries, galleries)
 // let galleriesWithFollowers = [];
 // for(let i = 0; i < galleries.length; i++){

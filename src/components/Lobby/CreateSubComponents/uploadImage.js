@@ -97,8 +97,8 @@ class UploadImage extends Component {
         return (
             <section className="image-block">
                 <div className="upload-block">
-                    <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxlength="30" placeholder="Image Caption (30 character limit)"></input>
-                    <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxlength="100" placeholder="Image Address"></input>
+                    <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder="Image Caption (30 character limit)"></input>
+                    <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxLength="100" placeholder="Image Address"></input>
                     <Dropzone
                         onDropAccepted={this.getSignedRequest.bind(this)}
                         onFileDialogCancel={this.onCancel.bind(this)}

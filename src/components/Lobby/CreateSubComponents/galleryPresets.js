@@ -17,16 +17,13 @@ class GalleryPresets extends Component {
 
 componentWillReceiveProps(props){
 let {galleryPresets, finalCountdown, retrievingGalleryPresets} = props
-
 if (this.state.finalCountdown === 2 && galleryPresets){
 this.setState({ceilingTexture:galleryPresets[0], wallTexture: galleryPresets[1], lighting:galleryPresets[2], floorTexture:galleryPresets[3], music:galleryPresets[4]}, () => {
     this.setState({finalCountdown: 1})
-    console.log(this.state, 'initial setup of edited Galleries.')
 })
 } else if (this.state.finalCountdown === 1 && galleryPresets){
     this.setState({ceilingTexture:galleryPresets[0], wallTexture: galleryPresets[1], lighting:galleryPresets[2], floorTexture:galleryPresets[3], music:galleryPresets[4]}, () => {
         this.setState({finalCountdown: 0})
-        console.log(this.state, 'initial setup of edited Galleries.')
     })
 }
 if (finalCountdown === 0){
