@@ -11,6 +11,7 @@ create table users(
     id serial primary key,
     username varchar (60) unique not null,
     password varchar (60) not null,
+    avatar_img text,
     email varchar (250),
     first_name varchar(60),
     last_name varchar(60)
