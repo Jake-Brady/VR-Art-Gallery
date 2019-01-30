@@ -95,6 +95,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
 
     //Lobby
     app.get('/api/checkUser/', ctrl.checkUser)
+    app.get('/api/getAccountInfo', ctrl.getAccountInfo)
     app.get('/api/retrieveGalleries/', ctrl.retrieveGalleries)
     app.get('/api/getFavorites/', ctrl.getFavorites)
     app.post('/api/logout/', ctrl.logout)

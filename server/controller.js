@@ -70,6 +70,16 @@ module.exports = {
         }
 
     },
+    getAccountInfo: (req,res,next) => {
+        let {user} = req.session
+        const db = req.app.get('db')
+        db.get_account_info([user]).then(accountInfo => {
+            res.status(200).send(accountInfo)
+        }).catch(err => {
+            console.log(err)
+            res.status(err)
+        })
+    },
     incrementView: (req, res, next) => {
         let { galleryId } = req.params
         console.log(galleryId)

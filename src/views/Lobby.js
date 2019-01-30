@@ -16,6 +16,7 @@ class Lobby extends Component {
         super()
         this.state = {
             user: '',
+            accountInfo: [],
             usersGalleries: [],
             favoritedGalleries: [],
             theMagicWord: '',
@@ -39,14 +40,17 @@ class Lobby extends Component {
             userData = await axios.get(`/api/checkUser/`)
         if (userData.data !== user) this.props.history.push('/')
         else {
-            //Retrieve user's galleries, those who favorited user's galleries, and then user's favorited galleries
+            //Retrieve user's galleries, those who favorited user's galleries, user's favorited galleries, and then account information
             const userGalleries = await axios.get('/api/retrieveGalleries/')
             this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data, user }, async () => {
                 const galleryIds = this.state.usersGalleries.map(a => a.id),
                     otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
                 this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
                     const userFavorites = await axios.get('/api/getFavorites/')
-                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, () => {
+                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
+                        const accountInfo = await axios.get('/api/getAccountInfo')
+                        this.setState({accountInfo: accountInfo.data})
+                        console.log(this.state.accountInfo)
                         this.changeWindow('Notifications')
                     })
                 })
@@ -306,8 +310,9 @@ class Lobby extends Component {
     }
 
     render() {
-        const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked } = this.state
+        const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked, accountInfo } = this.state
         //Map over list of favorites, followers, and existing galleries, pass to separate components for styling them as distinct sections.
+        
         const listOfFavorites = favoritedGalleries.map((e) => {
             const image = e.thumbnail,
                 key = e.id,
@@ -464,7 +469,9 @@ class Lobby extends Component {
                                                     </div>
                                                     : theMagicWord === 'account' ?
                                                         <div>
-                                                            <Account />
+                                                            <Account 
+                                                            accountInfo={this.state.accountInfo}
+                                                            />
                                                         </div>
                                                         : theMagicWord === 'help' &&
                                                         <div>
