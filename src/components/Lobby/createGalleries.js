@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import Placeholder from '../../styles/Media/Placeholder.png'
 import '../../styles/Components/createGalleries.css'
 import Dropzone from 'react-dropzone'
 import { v4 as randomStringGenerator } from 'uuid';
-import { GridLoader } from 'react-spinners'
 import axios from 'axios';
 import UploadGalleryImages from './CreateSubComponents/uploadImages'
 import GalleryPresets from './CreateSubComponents/galleryPresets'
@@ -52,11 +52,11 @@ class CreateGalleries extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-    if (nextProps.editGalleryId === 0){
-        this.setState({images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: ''})
-    }
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        if (nextProps.editGalleryId === 0) {
+            this.setState({ images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: '' })
+        }
     }
 
     handleChange = e => {
@@ -215,7 +215,7 @@ class CreateGalleries extends Component {
                                 </div>
                                 <h1 style={{ marginTop: '10px' }}>Thumbnail</h1>
                                 <input name="imageAddress" onChange={(e) => this.handleChange(e)} />
-                                <h1>or</h1>
+                                <h1 style={{ margin: '10px 0px' }}>or</h1>
                                 <Dropzone
                                     onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
                                     onFileDialogCancel={this.onCancel.bind(this)}
@@ -245,7 +245,7 @@ class CreateGalleries extends Component {
                             <div className='create-gallery_cardright center'>
                                 <h3>Preview</h3>
                                 <div className='gallery-container' style={{ marginBottom: '0px' }}>
-                                    <img src={imageAddress || thumbnail || 'http://via.placeholder.com/450x450'} alt='Card Thumbnail' className='gallery-thumbnail' />
+                                    <img src={imageAddress || thumbnail || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = Placeholder} />
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
                                         <div className='gallery-title-hover'>{galleryName.split(' ')[0] ? galleryName : 'Sample Text'}</div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
+import Placeholder from '../../../styles/Media/Placeholder.png'
 import { v4 as randomStringGenerator } from 'uuid';
-import { GridLoader } from 'react-spinners'
 import axios from 'axios'
 
 class UploadImage extends Component {
@@ -18,17 +18,17 @@ class UploadImage extends Component {
 
 
     componentWillReceiveProps(nextProps) {
-        let { imageURL, imageCaption, retrievingImageData, finalCountdown} = nextProps
+        let { imageURL, imageCaption, retrievingImageData, finalCountdown } = nextProps
         if (this.state.finalCountdown === 2 && imageURL) {
-            this.setState({ imageURL, imageCaption}, () => {
-                this.setState({finalCountdown: 1})
+            this.setState({ imageURL, imageCaption }, () => {
+                this.setState({ finalCountdown: 1 })
             })
         }
-        if (finalCountdown === 0){
-                retrievingImageData(this.state.newURL || this.state.imageURL, this.state.imageCaption) 
-            }
-        if (!imageURL){
-            this.setState({imageURL:'', imageCaption: ''})
+        if (finalCountdown === 0) {
+            retrievingImageData(this.state.newURL || this.state.imageURL, this.state.imageCaption)
+        }
+        if (!imageURL) {
+            this.setState({ imageURL: '', imageCaption: '' })
         }
     }
 
@@ -99,9 +99,14 @@ class UploadImage extends Component {
         let { imageURL, imageCaption, isUploading } = this.state
         return (
             <section className="image-block">
+                <div className="preview-image-box">
+                    <figure className="image-caption-container center">
+                        <img className="preview-image" src={this.state.newURL || this.state.imageURL || Placeholder} alt="Preview" onError={(e) => e.target.src = Placeholder} />
+                    </figure>
+                </div>
+                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder="Image Caption (30 character limit)"></input>
+                <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxLength="200" placeholder="Image Address"></input>
                 <div className="upload-block">
-                    <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder="Image Caption (30 character limit)"></input>
-                    <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxLength="100" placeholder="Image Address"></input>
                     <Dropzone
                         onDropAccepted={this.getSignedRequest.bind(this)}
                         onFileDialogCancel={this.onCancel.bind(this)}
@@ -110,7 +115,7 @@ class UploadImage extends Component {
                     >
                         {({ getRootProps, getInputProps }) => (
                             <div {...getRootProps()} style={{
-                                width: '100px',
+                                width: '100%',
                                 height: '40px',
                                 display: 'flex',
                                 justifyContent: 'center',
@@ -126,13 +131,6 @@ class UploadImage extends Component {
                             </div>
                         )}
                     </Dropzone>
-                </div>
-
-                <div className="preview-image-box">
-                    <figure className="image-caption-container">
-                    <img className="preview-image" src={this.state.newURL || this.state.imageURL || 'https://www.rpnation.com/gallery/250-x-250-placeholder.30091/full'} alt="Preview" />
-                    <figcaption className="preview-caption">{this.state.imageCaption || '(Optional) Caption'}</figcaption>
-                    </figure>
                 </div>
             </section>
         )
