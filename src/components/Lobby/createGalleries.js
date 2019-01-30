@@ -290,9 +290,6 @@ class CreateGalleries extends Component {
                         }
                     </>
                 }
-                <div className='create-galleries_bottom'>
-                    {12 - numOfGalleries} {spellingGallery} available
-                </div>
             </section>
         )
     }
