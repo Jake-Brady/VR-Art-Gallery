@@ -8,7 +8,7 @@ class UploadImage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            imageURL: 'https://www.rpnation.com/gallery/250-x-250-placeholder.30091/full',
+            imageURL: '',
             newURL: '',
             imageCaption: '',
             isUploading: false,
@@ -17,8 +17,8 @@ class UploadImage extends Component {
     }
 
 
-    componentWillReceiveProps(props) {
-        let { imageURL, imageCaption, retrievingImageData, finalCountdown} = props
+    componentWillReceiveProps(nextProps) {
+        let { imageURL, imageCaption, retrievingImageData, finalCountdown} = nextProps
         if (this.state.finalCountdown === 2 && imageURL) {
             this.setState({ imageURL, imageCaption}, () => {
                 this.setState({finalCountdown: 1})
@@ -27,6 +27,9 @@ class UploadImage extends Component {
         if (finalCountdown === 0){
                 retrievingImageData(this.state.newURL || this.state.imageURL, this.state.imageCaption) 
             }
+        if (!imageURL){
+            this.setState({imageURL:'', imageCaption: ''})
+        }
     }
 
     onChangeHandler(e) {
@@ -127,7 +130,7 @@ class UploadImage extends Component {
 
                 <div className="preview-image-box">
                     <figure className="image-caption-container">
-                    <img className="preview-image" src={this.state.newURL || this.state.imageURL} alt="Preview" />
+                    <img className="preview-image" src={this.state.newURL || this.state.imageURL || 'https://www.rpnation.com/gallery/250-x-250-placeholder.30091/full'} alt="Preview" />
                     <figcaption className="preview-caption">{this.state.imageCaption || '(Optional) Caption'}</figcaption>
                     </figure>
                 </div>

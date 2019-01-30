@@ -17,7 +17,7 @@ class CreateGalleries extends Component {
             author: '',
             isPrivate: false,
             imageAddress: '',
-            thumbnail: 'http://via.placeholder.com/450x450',
+            thumbnail: '',
             numOfGalleries: 0,
             maxLimit: false,
             images: [],
@@ -55,7 +55,7 @@ class CreateGalleries extends Component {
     componentWillReceiveProps(nextProps){
     console.log(nextProps)
     if (nextProps.editGalleryId === 0){
-        this.setState({images: [], captions: [], galleryName: ''})
+        this.setState({images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: ''})
     }
     }
 
@@ -245,7 +245,7 @@ class CreateGalleries extends Component {
                             <div className='create-gallery_cardright center'>
                                 <h3>Preview</h3>
                                 <div className='gallery-container' style={{ marginBottom: '0px' }}>
-                                    <img src={imageAddress || thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
+                                    <img src={imageAddress || thumbnail || 'http://via.placeholder.com/450x450'} alt='Card Thumbnail' className='gallery-thumbnail' />
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
                                         <div className='gallery-title-hover'>{galleryName.split(' ')[0] ? galleryName : 'Sample Text'}</div>
