@@ -19,7 +19,8 @@
     width: 1200px;
     display: flex;
     justify-content: space-evenly;
-    height: 450px;
+    height: 475px;
+    position: relative;
 }
 
 .create-gallery_cardleft {
@@ -29,11 +30,13 @@
     flex-direction: column;
     background: rgb(248, 248, 248);
     border: 1px solid rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 19px 38px rgba(0, 0, 0, 0.055), 0 15px 12px rgba(0, 0, 0, 0.055); */
+
 }
 
 .create-gallery_cardleft > h3 {
     font-weight: 300;
-    font-size: 35px;
+    font-size: 30px;
     transform: translateX(-50%);
     margin-left: 50%;
     text-align: center;
@@ -57,7 +60,7 @@
     width: 100%;
     height: 40px;
     margin-top: 15px;
-    border: 2px solid rgba(0, 0, 0, 0.185);
+    border: 1px solid rgba(0, 0, 0, 0.185);
     border-radius: 3px;
     padding: 10px;
     font-size: 18px;
@@ -88,6 +91,17 @@
     width: 40%;
     background: rgb(248, 248, 248);
     border: 1px solid rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 19px 38px rgba(0, 0, 0, 0.055), 0 15px 12px rgba(0, 0, 0, 0.055); */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.create-gallery_cardright > h3 {
+    font-weight: 300;
+    font-size: 30px;
+    margin-bottom: 10px;
 }
 
 .image-uploaders {
