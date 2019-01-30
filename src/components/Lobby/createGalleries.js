@@ -243,6 +243,7 @@ class CreateGalleries extends Component {
                                     <img src={imageAddress || thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
+                                        <div className='gallery-title-hover'>{galleryName.split(' ')[0] ? galleryName : 'Sample Text'}</div>
                                         <h3 className='gallery-author'>BY: {author}</h3>
                                         <div className='gallery-stats'>
                                             {isPrivate ? <><i className="fas fa-lock stat"></i> <span>Private</span></> : <><i className="fas fa-unlock stat"></i> <span>Public</span> </>}
