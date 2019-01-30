@@ -32,7 +32,7 @@ username, password, email, first_name, last_name
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'test gallery', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
+'testestbitchbitchweedweedpussyslayingcockgoblin', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
