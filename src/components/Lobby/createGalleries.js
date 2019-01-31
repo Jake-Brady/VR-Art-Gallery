@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import '../../styles/Components/createGalleries.css'
 import Dropzone from 'react-dropzone'
 import { v4 as randomStringGenerator } from 'uuid';
-import { GridLoader } from 'react-spinners'
 import axios from 'axios';
 import UploadGalleryImages from './CreateSubComponents/uploadImages'
 import GalleryPresets from './CreateSubComponents/galleryPresets'
