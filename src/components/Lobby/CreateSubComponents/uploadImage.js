@@ -67,8 +67,9 @@ class UploadImage extends Component {
         axios
             .put(signedRequest, file, options)
             .then(res => {
-                console.log(url)
-                this.setState({ isUploading: false, newURL: url })
+                this.setState({ newURL: url }, () => {
+                    this.setState({ isUploading: false })
+                })
             })
 
             .catch(err => {
@@ -97,11 +98,39 @@ class UploadImage extends Component {
 
     render(props) {
         let { imageURL, imageCaption, isUploading } = this.state
+        console.log(isUploading)
         return (
             <section className="image-block">
                 <div className="preview-image-box">
                     <figure className="image-caption-container center">
                         <img className="preview-image" src={this.state.newURL || this.state.imageURL || Placeholder} alt="Preview" onError={(e) => e.target.src = Placeholder} />
+                        <span>UPLOAD OR DRAG</span>
+                        <div />
+                        <Dropzone
+                            onDropAccepted={this.getSignedRequest.bind(this)}
+                            onFileDialogCancel={this.onCancel.bind(this)}
+                            accept="image/*"
+                            multiple={false}
+                        >
+                            {({ getRootProps, getInputProps }) => (
+                                <div {...getRootProps()} style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    fontSize: '15px',
+                                    color: 'white',
+                                    cursor: 'pointer',
+                                    position: 'absolute',
+                                    opacity: '0',
+                                    border: 'none',
+                                    background: 'red'
+                                }}>
+                                    <input {...getInputProps()} style={{ width: '1px', height: '1px' }} />
+                                </div>
+                            )}
+                        </Dropzone>
                     </figure>
                 </div>
                 <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder="Image Caption (30 character limit)"></input>

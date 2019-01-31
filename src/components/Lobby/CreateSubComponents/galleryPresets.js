@@ -8,7 +8,8 @@ class GalleryPresets extends Component {
             lighting: '',
             floor: '',
             wall: '',
-            finalCountdown: 2
+            finalCountdown: 2,
+            down: false
         }
     }
 
@@ -34,6 +35,13 @@ class GalleryPresets extends Component {
         document.querySelectorAll(`#${section} > img`).forEach(option => option.style.opacity = '.2')
         target.style.opacity = '1'
         this.setState({ [section]: target.src })
+    }
+
+    handleHSL = e => {
+        if (this.state.down) {
+            const lighting = document.querySelector('#lighting')
+            lighting.style.background = `hsl(${e.clientX}, 80%, 80%)`
+        }
     }
 
     render() {
@@ -63,9 +71,12 @@ class GalleryPresets extends Component {
                     <img onClick={(e) => this.setTexture('music', e.target)} src='https://images-na.ssl-images-amazon.com/images/I/81mTgAm-P0L._SX425_.jpg' alt='' />
                     <img onClick={(e) => this.setTexture('music', e.target)} src='https://www.textures.com/system/gallery/photos/Brick/Modern/Painted/121401/BrickSmallPainted0216_2_350.jpg' alt='' />
                 </div>
-                <div>
+                {/* <div id='lighting'>
                     <h1>Lighting</h1>
-                </div>
+                    <div style={{ width: '1038px', height: '100px' }} onMouseDown={() => this.setState({ down: true })} onMouseUp={() => this.setState({ down: false })} onMouseMove={e => this.handleHSL(e)}>
+
+                    </div>
+                </div> */}
             </section>
         )
     }

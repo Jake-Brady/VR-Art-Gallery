@@ -215,7 +215,7 @@ class CreateGalleries extends Component {
                                 </div>
                                 <h1 style={{ marginTop: '10px' }}>Thumbnail</h1>
                                 <input name="imageAddress" onChange={(e) => this.handleChange(e)} />
-                                <h1 style={{ margin: '10px 0px' }}>or</h1>
+                                <h1 style={{ margin: '5px 0px' }}>or</h1>
                                 <Dropzone
                                     onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
                                     onFileDialogCancel={this.onCancel.bind(this)}
