@@ -24,7 +24,7 @@ export default function (props) {
                     </p>
                 </div>
                 <div className="question-div">
-                    <h2>Why won't my audio preset play?</h2>
+                    <h2>Why will my music not play?</h2>
                     <p>
                     Make sure your cursor is directly over the vinyl player and left-click to play your song selection.
                     </p>

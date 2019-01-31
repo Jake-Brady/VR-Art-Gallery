@@ -1,4 +1,4 @@
-.account_page {
+.account-page {
     padding-top: 50px;
     width: 100vw;
     display: flex;
@@ -8,9 +8,15 @@
     position: relative;
 }
 
-.account_information{
+.account-information{
     display: flex;
     flex-direction: column;
     background: rgb(248, 248, 248);
     border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.avatar-thumbnail{
+    width: 250px;
+    height: 250px;
+    max-width:100%;
 }

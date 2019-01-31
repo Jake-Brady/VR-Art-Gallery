@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../../styles/Components/account.css'
 import axios from 'axios'
 import { v4 as randomStringGenerator } from 'uuid';
+import Dropzone from 'react-dropzone'
 
 class Account extends Component {
     constructor(props){
@@ -70,30 +71,52 @@ uploadFile = (file, signedRequest, url) => {
         });
 };
 
-
 onCancel() {
     this.setState({
         files: []
     });
 }
 
-
-
 render() {
     console.log(this.state)
     return (
-        <section className="account_page">
+        <section className="account-page">
             <h1>Account Settings</h1>
-            <div className="account_information">
-                <h3>Hello, _____</h3>
-                <div className="account_avatar_img">
+            <div className="account-information">
+                <h3>Hello, {this.state.firstName}</h3>
+                <div className="account-avatar-img">
                     <h4>Current:</h4>
-                    <img src={this.state.avatarURL || 'http://via.placeholder.com/450x450'}></img>
+                    <img className="avatar-thumbnail" src={this.state.avatarURL || 'http://via.placeholder.com/450x450'}></img>
                 </div>
-                <div>
+                <div className="account-details">
                     
                 </div>
-                
+            </div>
+            <div className="change-avatar-thumbnail">
+            <Dropzone
+                                    onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
+                                    onFileDialogCancel={this.onCancel.bind(this)}
+                                    accept="image/*"
+                                    multiple={false}
+                                >
+                                    {({ getRootProps, getInputProps }) => (
+                                        <div {...getRootProps()} style={{
+                                            width: '100px',
+                                            height: '40px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            background: 'rgb(119, 148, 253)',
+                                            marginTop: '15px',
+                                            fontSize: '15px',
+                                            color: 'white',
+                                            cursor: 'pointer'
+                                        }}>
+                                            <input {...getInputProps()} />
+                                            <p>UPLOAD</p>
+                                        </div>
+                                    )}
+                                </Dropzone>
             </div>
         </section>
     )
