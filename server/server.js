@@ -104,6 +104,12 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.get('/api/editGallery/:id', ctrl.getGalleryToEdit)
     app.put('/api/updateGallery/:galleryId', ctrl.updateGallery)
     app.get('/api/getUsersWhoFavorited/', ctrl.getThoseWhoLiked)
+    app.get('/api/confirmPassword/:passwordConfirm/:username', ctrl.confirmPassword)
+    app.put('/api/changeUsername/', ctrl.changeUsername)
+    app.put('/api/changeEmail/', ctrl.changeEmail)
+    app.put('/api/changePassword', ctrl.changePassword)
+    app.put('/api/changeAvatar/', ctrl.changeAvatar)
+
     
     //Art-Gallery
     app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)

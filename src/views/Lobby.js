@@ -47,7 +47,9 @@ class Lobby extends Component {
                     otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
                 this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
                     const userFavorites = await axios.get('/api/getFavorites/')
-                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, () => {
+                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
+                        const accountInfo = await axios.get('/api/getAccountInfo')
+                        this.setState({accountInfo: accountInfo.data[0]})
                         this.changeWindow('Notifications')
                     })
                 })
