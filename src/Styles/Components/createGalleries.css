@@ -206,7 +206,7 @@
     background: rgb(248, 248, 248);
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 25px;
-    padding: 20px;
+    padding: 50px 20px 20px 20px;
     position: relative;
     display: flex;
     justify-content: space-evenly;
@@ -217,11 +217,10 @@
     font-weight: 300;
     color: rgba(0, 0, 0, 0.5);
     position: absolute;
-    left: 10px;
-    top: 50px;
-    writing-mode: tb-rl;
-    transform: rotate(180deg);
-    display: none;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 11px;
+    text-transform: uppercase;
 }
 
 .gallery-presets img {

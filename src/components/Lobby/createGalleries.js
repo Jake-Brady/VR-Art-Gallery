@@ -213,7 +213,7 @@ class CreateGalleries extends Component {
                                     <div style={this.state.isPrivate ? { opacity: '.5' } : { opacity: '1' }} onClick={() => this.handlePrivacy(false)}>Public <i className="fas fa-unlock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                     <div style={this.state.isPrivate ? { opacity: '1' } : { opacity: '.5' }} onClick={() => this.handlePrivacy(true)}>Private <i className="fas fa-lock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                 </div>
-                                <h1 style={{ marginTop: '10px' }}>Thumbnail</h1>
+                                <h1 style={{ marginTop: '10px' }}>Thumbnail URL</h1>
                                 <input name="imageAddress" onChange={(e) => this.handleChange(e)} />
                                 <h1 style={{ margin: '5px 0px' }}>or</h1>
                                 <Dropzone
