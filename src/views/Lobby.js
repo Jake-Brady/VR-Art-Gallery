@@ -6,7 +6,7 @@ import Galleries from '../components/Lobby/galleries'
 import Favorites from '../components/Lobby/favorites'
 import Notifications from '../components/Lobby/notifications'
 import Account from '../components/Lobby/account'
-import Help from '../components/Lobby/help'
+import About from '../components/Lobby/about'
 import '../styles/Views/Lobby.css'
 import Icon from '../styles/Media/Icon.png'
 import Profile from '../styles/Media/defaultProfile.png'
@@ -49,8 +49,7 @@ class Lobby extends Component {
                     const userFavorites = await axios.get('/api/getFavorites/')
                     this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
                         const accountInfo = await axios.get('/api/getAccountInfo')
-                        this.setState({accountInfo: accountInfo.data})
-                        console.log(this.state.accountInfo)
+                        this.setState({accountInfo: accountInfo.data[0]})
                         this.changeWindow('Notifications')
                     })
                 })
@@ -404,8 +403,8 @@ class Lobby extends Component {
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-user menu-icon"></i>Account</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>Help</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-cog menu-icon"></i>Settings</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>About</span>
                                 <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
                             </div>
                         </section>
@@ -475,7 +474,7 @@ class Lobby extends Component {
                                                         </div>
                                                         : theMagicWord === 'help' &&
                                                         <div>
-                                                            <Help />
+                                                            <About />
                                                         </div>
                                 }
                             </div>

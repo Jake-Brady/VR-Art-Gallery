@@ -1,0 +1,37 @@
+.about-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-container{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width:75%;
+}
+
+.citation-section{
+    display: flex;
+    flex-direction: column;
+    background: rgb(248, 248, 248);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.citation-list-item{
+    display: list-item;  
+    list-style-type: disc;       
+    list-style-position: inside;
+}
+
+.question-div{
+    margin: 9px;
+}
+
+.question-div > p{
+    font-size: 18px;
+}
