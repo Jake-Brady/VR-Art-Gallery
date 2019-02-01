@@ -18,20 +18,6 @@
     }
 }
 
-@keyframes splat {
-    0% {
-        transform: scale(0,0);
-    }
-    40% {
-        transform: scale(2,2);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(2,2);
-        opacity: 0;
-    }
-}
-
 .home {
     display: flex;
     flex-direction: column;

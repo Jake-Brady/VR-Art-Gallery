@@ -78,7 +78,7 @@
     background: black;
     position: fixed;
     opacity: .2;
-    z-index: 2;
+    z-index: 3;
     visibility: hidden;
 }
 
@@ -93,7 +93,7 @@
     align-items: center;
     justify-content: center;
     color: rgba(255, 255, 255, 0.80);
-    z-index: 1;
+    z-index: 2;
 }
 
 .lobby-header_left {
@@ -178,7 +178,7 @@
     left: 0;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.155), 0 15px 12px rgba(0, 0, 0, 0.155);
     visibility: hidden;
-    z-index: 3;
+    z-index: 4;
 }
 
 .menu-column {
