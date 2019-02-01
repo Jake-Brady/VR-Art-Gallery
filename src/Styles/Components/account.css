@@ -1,18 +1,100 @@
 .account-page {
     padding-top: 50px;
+    padding-left: 30px;
     width: 100vw;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     position: relative;
 }
 
 .account-information{
+    width: 50%;
     display: flex;
     flex-direction: column;
     background: rgb(248, 248, 248);
     border: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: center;
+    align-items: center;
+}
+
+.changing-section{
+    width: 35%;
+}
+
+#account-change-buttons-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.change-username-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.username-container{
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+.change-username-inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.change-email-div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.change-password-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputbar{
+    width: 100%;
+    height: 40px;
+    margin-top: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.185);
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 18px;
+    font-family: 'Oswald', sans-serif;
+    background: rgb(252, 252, 252);
+    color: rgba(0, 0, 0, 0.472);
+}
+
+.button {
+    margin: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(119, 148, 253);
+    width: 100px;
+    height: 40px;
+    margin-top: 15px;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+.change-avatar-thumbnail{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .avatar-thumbnail{
@@ -20,3 +102,4 @@
     height: 250px;
     max-width:100%;
 }
+

@@ -22,8 +22,6 @@ module.exports = {
             console.log(err)
             res.status(500).send(err)
         })
-
-
     },
     addToFavorites: (req, res, next) => {
         let { galleryId } = req.body
@@ -196,8 +194,6 @@ module.exports = {
     getGalleryToEdit: (req, res, next) => {
         const { id } = req.params
         const db = req.app.get('db')
-        let images = [];
-        let galleryPresets = [];
         db.get_gallery_to_edit(id).then(galleryData => {
             res.status(200).send(galleryData)
         }).catch(err => {
@@ -208,7 +204,6 @@ module.exports = {
     updateGallery: (req, res, next) => {
         const {galleryId} = req.params
         const {isPrivate, galleryName, thumbnail, finalImages, finalCaptions, finalGalleryPresets} = req.body
-        console.log('fired once, please!')
         const db = req.app.get('db')
         db.update_gallery([galleryId, isPrivate, galleryName, thumbnail, finalGalleryPresets[0], finalGalleryPresets[1], finalGalleryPresets[2], finalGalleryPresets[3], finalGalleryPresets[4], finalImages[0], finalImages[1], finalImages[2], finalImages[3], finalImages[4], finalImages[5], finalImages[6], finalImages[7], finalImages[8], finalImages[9], finalImages[10], finalImages[11], finalImages[12], finalImages[13], finalImages[14], finalCaptions[0], finalCaptions[1], finalCaptions[2], finalCaptions[3], finalCaptions[4], finalCaptions[5], finalCaptions[6], finalCaptions[7], finalCaptions[8], finalCaptions[9], finalCaptions[10], finalCaptions[11], finalCaptions[12], finalCaptions[13], finalCaptions[14]]).then(redirect => {
             res.status(200).send(redirect)
@@ -222,6 +217,72 @@ module.exports = {
         const db = req.app.get('db')
         db.delete_gallery([id])
         res.sendStatus(200)
+    },
+    confirmPassword: (req, res, next) => {
+        const {passwordConfirm, username} = req.params
+        const db = req.app.get('db')
+        db.confirm_password([username]).then(password => {
+        if(bcrypt.compareSync(passwordConfirm, password[0].password)){
+            res.sendStatus(200)
+        } else {
+            res.status(200).send('incorrect')
+        }
+        })
+    },
+    changeUsername: (req, res, next) => {
+        const {newUsername, username} = req.body
+        const db = req.app.get('db')
+        db.check_username([newUsername]).then(user => {
+            if (user[0]) {
+                res.status(200).send('username')
+            } else {
+            db.change_username([username, newUsername]).then(changedUsername =>{
+                console.log(changedUsername, 'has it changed tho?')
+                res.status(200).send(changedUsername)
+            }).catch(err => {
+                console.log(err)
+                res.status(500).send(err)
+            })
+            }
+    })
+    },
+    changeEmail: (req, res, next) => {
+        const {newEmail, username} = req.body
+        const db = req.app.get('db')
+        db.check_email([newEmail]).then(email => {
+            if (email[0]) {
+                res.status(200).send('email')
+            } else {
+            db.change_email([username, newEmail]).then(changedEmail => {
+                res.status(200).send(changedEmail)
+            }).catch(err => {
+                console.log(err)
+                res.status(500).send(err)
+            })
+        }})
+    },
+    changePassword: (req, res, next) => {
+        const {newPassword, username} = req.body
+        const salt = bcrypt.genSaltSync(10)
+        const passwordHashed = bcrypt.hashSync(newPassword, salt)
+        const { user } = req.session
+        const db = req.app.get('db')
+        db.change_password([username, passwordHashed]).then(success => {
+            res.sendStatus(200)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
+    changeAvatar: (req, res, next) => {
+        const {imageAddress, username} = req.body
+        const db = req.app.get('db')
+        db.change_avatar([username, imageAddress]).then(changedAvatar => {
+            res.status(200).send(changedAvatar)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
     },
     getThoseWhoLiked: (req, res, next) => {
         const { galleryIds } = req.query
