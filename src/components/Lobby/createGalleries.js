@@ -284,9 +284,9 @@ class CreateGalleries extends Component {
 
                         {
                             editMode ?
-                                <span id="edit-gallery-btn" onClick={this.createNewGallery}>Edit Gallery</span>
+                                <span id="edit-gallery-btn" className='center' onClick={this.createNewGallery}>Save Changes</span>
                                 :
-                                <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
+                                <span id="create-gallery-btn" className='center' onClick={this.createNewGallery}>Create Gallery</span>
                         }
                     </>
                 }
