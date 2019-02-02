@@ -192,28 +192,37 @@
     visibility: hidden;
 }
 
+.preview-loading {
+    width: 100%;
+    min-height: 210px;
+    max-height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .preview-drop:hover .gallery-upload-fade, .preview-drop:hover span {
     visibility: visible;
 }
 
-.image-upload > div {
+.image-upload > div, .preview-loading > div {
     width: 40px;
     height: 40px;
     background: rgb(61, 111, 220);
     margin: 0px 10px 0px 10px;
 }
 
-.image-upload > div:first-child {
+.image-upload > div:first-child, .preview-loading > div:first-child {
     animation: fade 2s infinite;
 }
 
-.image-upload > div:nth-child(2) {
+.image-upload > div:nth-child(2), .preview-loading > div:nth-child(2) {
     margin-left: 20px;
     margin-right: 20px;
     animation: fade 2s infinite .3s;
 }
 
-.image-upload > div:nth-child(3) {
+.image-upload > div:nth-child(3), .preview-loading > div:nth-child(3) {
     animation: fade 2s infinite .6s;
 }
 

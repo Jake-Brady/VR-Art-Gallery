@@ -173,7 +173,8 @@
 
 .gallery-thumbnail {
     width: 100%;
-    height: 60%;
+    min-height: 210px;
+    max-height: 210px;
     object-fit: cover;
 }
 

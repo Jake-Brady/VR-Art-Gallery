@@ -276,7 +276,15 @@ class CreateGalleries extends Component {
                                 </div>
                                 <h3>Preview</h3>
                                 <div className='gallery-container' style={{ marginBottom: '0px' }}>
-                                    <img src={imageAddress || thumbnail || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = Placeholder} />
+                                    {isUploading ?
+                                        <div className='preview-loading'>
+                                            <div />
+                                            <div />
+                                            <div />
+                                        </div>
+                                        :
+                                        <img src={imageAddress || thumbnail || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = Placeholder} />
+                                    }
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
                                         <div className='gallery-title-hover'>{galleryName.split(' ')[0] ? galleryName : 'Sample Text'}</div>
