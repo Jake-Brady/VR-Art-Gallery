@@ -59,7 +59,6 @@
     height: 40px;
     margin-top: 15px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    /* border-color:rgba(0, 0, 255, 0.3); */
     border-radius: 3px;
     padding: 10px;
     font-size: 18px;
@@ -127,7 +126,7 @@
 .image-block {
     display: flex;
     flex-direction: column;
-    margin: 37px;
+    margin: 37px 37px 10px 37px;
 }
 
 .image-block > input {
@@ -192,6 +191,22 @@
     visibility: hidden;
 }
 
+.image-add {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    top: -10px;
+    right: -10px;
+    color: rgba(0, 0, 0, 0.582);
+    font-size: 12px;
+    z-index: 1;
+    pointer-events: none;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
 .preview-loading {
     width: 100%;
     min-height: 210px;
@@ -203,7 +218,9 @@
 
 .preview-drop:hover .gallery-upload-fade, .preview-drop:hover span {
     visibility: visible;
+    pointer-events: none;
 }
+
 
 .image-upload > div, .preview-loading > div {
     width: 40px;
@@ -239,6 +256,7 @@
     z-index: 1;
     visibility: hidden;
     font-size: 18px;
+    pointer-events: none;
 }
 
 .image-caption-hover {

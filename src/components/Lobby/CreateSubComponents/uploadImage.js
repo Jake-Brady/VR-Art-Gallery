@@ -111,6 +111,9 @@ class UploadImage extends Component {
                         </figure>
                         :
                         <figure className="image-caption-container center">
+                            <div className='image-add center'>
+                                <i className="fas fa-plus"></i>
+                            </div>
                             <img className="preview-image" src={this.state.newURL || this.state.imageURL || Placeholder} alt="Preview" onError={(e) => e.target.src = Placeholder} />
                             <span>UPLOAD OR DRAG</span>
                             <div className='image-caption-hover' />

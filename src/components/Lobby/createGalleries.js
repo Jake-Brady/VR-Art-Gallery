@@ -17,6 +17,7 @@ class CreateGalleries extends Component {
             author: '',
             isPrivate: false,
             imageAddress: '',
+            imageAddressInput: '',
             thumbnail: '',
             numOfGalleries: 0,
             maxLimit: false,
@@ -216,7 +217,7 @@ class CreateGalleries extends Component {
                                     <div style={this.state.isPrivate ? { opacity: '1' } : { opacity: '.5' }} onClick={() => this.handlePrivacy(true)}>Private <i className="fas fa-lock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                 </div>
                                 <h1 style={{ marginTop: '10px' }}>Thumbnail URL</h1>
-                                <input name="imageAddress" onChange={(e) => this.handleChange(e)} />
+                                <input name="imageAddressInput" onChange={(e) => this.handleChange(e)} />
                                 <h1 style={{ margin: '5px 0px' }}>or</h1>
                                 <Dropzone
                                     onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
@@ -283,7 +284,7 @@ class CreateGalleries extends Component {
                                             <div />
                                         </div>
                                         :
-                                        <img src={imageAddress || thumbnail || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = Placeholder} />
+                                        <img src={this.state.imageAddressInput || imageAddress || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = imageAddress || Placeholder} />
                                     }
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
