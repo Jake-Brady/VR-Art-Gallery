@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
+import Placeholder from '../../styles/Media/Placeholder.png'
 import '../../styles/Components/createGalleries.css'
 import Dropzone from 'react-dropzone'
 import { v4 as randomStringGenerator } from 'uuid';
@@ -16,6 +17,7 @@ class CreateGalleries extends Component {
             author: '',
             isPrivate: false,
             imageAddress: '',
+            imageAddressInput: '',
             thumbnail: '',
             numOfGalleries: 0,
             maxLimit: false,
@@ -51,11 +53,11 @@ class CreateGalleries extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-    if (nextProps.editGalleryId === 0){
-        this.setState({images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: ''})
-    }
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps)
+        if (nextProps.editGalleryId === 0) {
+            this.setState({ images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: '' })
+        }
     }
 
     handleChange = e => {
@@ -102,7 +104,9 @@ class CreateGalleries extends Component {
             .put(signedRequest, file, options)
             .then(res => {
                 console.log(url)
-                this.setState({ isUploading: false, imageAddress: url })
+                this.setState({ imageAddress: url }, () => {
+                    this.setState({ isUploading: false })
+                })
                 // .then(console.log("this is the url",url))
                 // THEN DO SOMETHING WITH THE URL. SEND TO DB 
             })
@@ -212,9 +216,9 @@ class CreateGalleries extends Component {
                                     <div style={this.state.isPrivate ? { opacity: '.5' } : { opacity: '1' }} onClick={() => this.handlePrivacy(false)}>Public <i className="fas fa-unlock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                     <div style={this.state.isPrivate ? { opacity: '1' } : { opacity: '.5' }} onClick={() => this.handlePrivacy(true)}>Private <i className="fas fa-lock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                 </div>
-                                <h1 style={{ marginTop: '10px' }}>Thumbnail</h1>
-                                <input name="imageAddress" onChange={(e) => this.handleChange(e)} />
-                                <h1>or</h1>
+                                <h1 style={{ marginTop: '10px' }}>Thumbnail URL</h1>
+                                <input name="imageAddressInput" onChange={(e) => this.handleChange(e)} />
+                                <h1 style={{ margin: '5px 0px' }}>or</h1>
                                 <Dropzone
                                     onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
                                     onFileDialogCancel={this.onCancel.bind(this)}
@@ -242,9 +246,46 @@ class CreateGalleries extends Component {
                             </div>
 
                             <div className='create-gallery_cardright center'>
+                                <div className='preview-drop'>
+                                    <span className='gallery-upload-text'>UPLOAD OR DRAG</span>
+                                    <div className='gallery-upload-fade' />
+                                    <Dropzone
+                                        onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
+                                        onFileDialogCancel={this.onCancel.bind(this)}
+                                        accept="image/*"
+                                        multiple={false}
+                                    >
+                                        {({ getRootProps, getInputProps }) => (
+                                            <div {...getRootProps()} style={{
+                                                width: '250px',
+                                                height: '210px',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                marginTop: '15px',
+                                                fontSize: '15px',
+                                                color: 'white',
+                                                cursor: 'pointer',
+                                                position: 'absolute',
+                                                top: '70px',
+                                                left: '114px'
+                                            }}>
+                                                <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
+                                            </div>
+                                        )}
+                                    </Dropzone>
+                                </div>
                                 <h3>Preview</h3>
                                 <div className='gallery-container' style={{ marginBottom: '0px' }}>
-                                    <img src={imageAddress || thumbnail || 'http://via.placeholder.com/450x450'} alt='Card Thumbnail' className='gallery-thumbnail' />
+                                    {isUploading ?
+                                        <div className='preview-loading'>
+                                            <div />
+                                            <div />
+                                            <div />
+                                        </div>
+                                        :
+                                        <img src={this.state.imageAddressInput || imageAddress || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = imageAddress || Placeholder} />
+                                    }
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
                                         <div className='gallery-title-hover'>{galleryName.split(' ')[0] ? galleryName : 'Sample Text'}</div>
@@ -283,15 +324,12 @@ class CreateGalleries extends Component {
 
                         {
                             editMode ?
-                                <span id="edit-gallery-btn" onClick={this.createNewGallery}>Edit Gallery</span>
+                                <span id="edit-gallery-btn" className='center' onClick={this.createNewGallery}>Save Changes</span>
                                 :
-                                <span id="create-gallery-btn" onClick={this.createNewGallery}>Create Gallery</span>
+                                <span id="create-gallery-btn" className='center' onClick={this.createNewGallery}>Create Gallery</span>
                         }
                     </>
                 }
-                <div className='create-galleries_bottom'>
-                    {12 - numOfGalleries} {spellingGallery} available
-                </div>
             </section>
         )
     }
