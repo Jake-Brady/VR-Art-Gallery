@@ -103,7 +103,9 @@ class CreateGalleries extends Component {
             .put(signedRequest, file, options)
             .then(res => {
                 console.log(url)
-                this.setState({ isUploading: false, imageAddress: url })
+                this.setState({ imageAddress: url }, () => {
+                    this.setState({ isUploading: false })
+                })
                 // .then(console.log("this is the url",url))
                 // THEN DO SOMETHING WITH THE URL. SEND TO DB 
             })
@@ -243,6 +245,35 @@ class CreateGalleries extends Component {
                             </div>
 
                             <div className='create-gallery_cardright center'>
+                                <div className='preview-drop'>
+                                    <span className='gallery-upload-text'>UPLOAD OR DRAG</span>
+                                    <div className='gallery-upload-fade' />
+                                    <Dropzone
+                                        onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
+                                        onFileDialogCancel={this.onCancel.bind(this)}
+                                        accept="image/*"
+                                        multiple={false}
+                                    >
+                                        {({ getRootProps, getInputProps }) => (
+                                            <div {...getRootProps()} style={{
+                                                width: '250px',
+                                                height: '210px',
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                marginTop: '15px',
+                                                fontSize: '15px',
+                                                color: 'white',
+                                                cursor: 'pointer',
+                                                position: 'absolute',
+                                                top: '70px',
+                                                left: '114px'
+                                            }}>
+                                                <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
+                                            </div>
+                                        )}
+                                    </Dropzone>
+                                </div>
                                 <h3>Preview</h3>
                                 <div className='gallery-container' style={{ marginBottom: '0px' }}>
                                     <img src={imageAddress || thumbnail || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = Placeholder} />

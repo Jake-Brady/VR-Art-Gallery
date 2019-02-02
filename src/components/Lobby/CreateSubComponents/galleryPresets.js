@@ -37,13 +37,6 @@ class GalleryPresets extends Component {
         this.setState({ [section]: target.src })
     }
 
-    handleHSL = e => {
-        if (this.state.down) {
-            const lighting = document.querySelector('#lighting')
-            lighting.style.background = `hsl(${e.clientX}, 80%, 80%)`
-        }
-    }
-
     render() {
         return (
             <section className="gallery-presets">
