@@ -139,10 +139,8 @@ module.exports = {
     },
     getGalleryData: (req, res, next) => {
         let { username, galleryName } = req.params
-        console.log(username, galleryName)
         const db = req.app.get('db')
         db.get_gallery_data([galleryName, username]).then(images => {
-            console.log(images)
             res.status(200).send(images)
         })
     },
