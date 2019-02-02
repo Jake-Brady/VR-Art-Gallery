@@ -4,19 +4,9 @@ module.exports = {
     getAllGalleries: (req, res, next) => {
         // offset variable destructured from params to be passed as offset in query
         const { offset } = req.params
-        const { userId } = req.session
         // get all galleries for non-registered users.
         const db = req.app.get('db')
         db.get_all_public_galleries([offset]).then(galleries => {
-            // Checks to see whether user is logged in to retrieve favorites along with galleries to compare on client side.
-            if (userId) {
-                db.get_favorites([userId]).then(favorited => {
-                    res.status(200).send(favorited)
-                }).catch(err => {
-                    console.log(err)
-                    res.status(500).send(err)
-                })
-            }
             res.status(200).send(galleries)
         }).catch(err => {
             console.log(err)
@@ -149,8 +139,10 @@ module.exports = {
     },
     getGalleryData: (req, res, next) => {
         let { username, galleryName } = req.params
+        console.log(username, galleryName)
         const db = req.app.get('db')
-        db.get_gallery_images([galleryName, username]).then(images => {
+        db.get_gallery_data([galleryName, username]).then(images => {
+            console.log(images)
             res.status(200).send(images)
         })
     },
@@ -305,8 +297,4 @@ module.exports = {
         req.session.destroy()
         res.sendStatus(200)
     }
-    // login handle,
-    // getUserImages based on username -> Portrait images that are uploaded by users
-    // User_Presets -> These refer largely to textures that the user chooses for their art gallery
-    //
 }

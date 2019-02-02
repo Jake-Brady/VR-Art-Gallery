@@ -18,6 +18,9 @@ class LandingPage extends Component {
     }
 
     async componentDidMount() {
+        if (document.querySelector('html').classList.contains('a-html')){
+            window.location.reload(true)
+        }
         const offset = this.state.galleries.length,
             galleries = await axios.get(`/api/getAllGalleries/${offset}`)
         this.setState({ galleries: galleries.data })
