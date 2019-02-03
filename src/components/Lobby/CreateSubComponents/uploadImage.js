@@ -145,7 +145,7 @@ class UploadImage extends Component {
                     }
                 </div>
                 <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder="Image Caption (30 character limit)"></input>
-                <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxLength="200" placeholder="Image Address"></input>
+                {/* <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxLength="200" placeholder="Image Address"></input>
                 <div className="upload-block">
                     <Dropzone
                         onDropAccepted={this.getSignedRequest.bind(this)}
@@ -171,7 +171,7 @@ class UploadImage extends Component {
                             </div>
                         )}
                     </Dropzone>
-                </div>
+                </div> */}
             </section>
         )
     }

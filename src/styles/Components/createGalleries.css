@@ -259,6 +259,12 @@
     pointer-events: none;
 }
 
+.create-drag-container {
+    width: 200px;
+    height: 200px;
+    background: red;
+}
+
 .image-caption-hover {
     position: absolute;
     width: 100%;
