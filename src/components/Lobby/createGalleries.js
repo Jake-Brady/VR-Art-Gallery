@@ -217,6 +217,9 @@ class CreateGalleries extends Component {
                                     <div style={this.state.isPrivate ? { opacity: '1' } : { opacity: '.5' }} onClick={() => this.handlePrivacy(true)}>Private <i className="fas fa-lock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                 </div>
                                 <h1 style={{ marginTop: '30px' }}>Thumbnail</h1>
+                                <div className='image-add2 center'>
+                                    <i className="fas fa-plus"></i>
+                                </div>
                                 <Dropzone
                                     onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
                                     onFileDialogCancel={this.onCancel.bind(this)}
@@ -235,8 +238,11 @@ class CreateGalleries extends Component {
                                             fontSize: '15px',
                                             color: 'white',
                                             cursor: 'pointer',
+                                            position: 'relative'
                                         }}>
                                             <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
+                                            <span style={{fontSize: '18px'}}>UPLOAD OR DRAG</span>
+                                            <div className='main-upload-cover' />
                                         </div>
                                     )}
                                 </Dropzone>
