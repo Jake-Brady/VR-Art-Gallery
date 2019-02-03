@@ -1,7 +1,9 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {imagesHaveLoaded} from '../../ducks/reducer'
+import Hibiscus from '../../assets/gltfs/hibiscus.glb'
 import Door from '../../assets/gltfs/door.glb'
+import Table from '../../assets/gltfs/table.glb'
 import WallLight from '../../assets/gltfs/wallLight.glb'
 import Frame from '../../assets/gltfs/frame.glb'
 import Gymnopedie from '../../assets/audio/Gymnopedie_No_1.mp3'
@@ -77,6 +79,8 @@ render(){
         <Entity id="emoji" src={Emoji} alt="Emoji Entity" />
         <Entity id="wallLight" src={WallLight} alt="Wall Light Obj" />
         <Entity id="door" src={Door} alt="Door Obj" />
+        <Entity id="table" src={Table} alt="Table Obj" />
+        <Entity id="hibiscus" src={Hibiscus} alt="Plant Obj" />
         
         {/* Music */}
         <audio id="gymnopedie" src={Gymnopedie}/>

@@ -402,6 +402,22 @@ class ArtGallery extends Component {
 
                     <a-gltf-model 
                     static-body 
+                    src="#table" 
+                    scale='.0015 .003 .0015' 
+                    position='-6.15 .05 .5' 
+                    rotation="0 0 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#hibiscus" 
+                    scale='.0015 .003 .0015' 
+                    position='-6.15 5.5 .5' 
+                    rotation="0 0 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
                     src="#nymph" 
                     scale='.85 .85 .85' 
                     position='9.9 .7 -.1' 
@@ -433,10 +449,10 @@ class ArtGallery extends Component {
                     {/* Main Art Gallery - 1st Floor */}
                     <rw-room position="-2 0 -2">
                         <rw-floor material="src:#wood; repeat:2"></rw-floor>
-                        <rw-wall material="src:#granite; repeat:2" position="15 0 0" height="15"></rw-wall>
-                        <rw-wall material="src:#granite; repeat:2" position="15 0 20" height="15"></rw-wall>
-                        <rw-wall material="src:#granite; repeat:2" position="-5 0 20" height="15"></rw-wall>
-                        <rw-wall material="src:#granite; repeat:2" position="-5 0 0" height="15"></rw-wall>
+                        <rw-wall material="src:#granite; repeat:2" position="15 0 0" height="12"></rw-wall>
+                        <rw-wall material="src:#granite; repeat:2" position="15 0 20" height="12"></rw-wall>
+                        <rw-wall material="src:#granite; repeat:2" position="-5 0 20" height="12"></rw-wall>
+                        <rw-wall material="src:#granite; repeat:2" position="-5 0 0" height="12"></rw-wall>
                     </rw-room>
                      {/* Invisible Box Barriers to prevent players from leaving the room. */}
                      <a-plane material="visible:true" width="18" height="30" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
@@ -478,6 +494,34 @@ class ArtGallery extends Component {
             <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 5.5 16.5"
                         material="color: gray" rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 5.501 16.5"
+            material="color: gray" rotation="-90 0 0"></a-entity>
+
+            {/* Ceiling Floor */}
+                    {/* Glass Floor - Center */}
+                    <a-entity geometry="primitive: plane; height: 14; width: 11"  position="3 12 8"
+            material="color: black; opacity: 0.5" rotation="90 0 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 14; width: 11"  position="3 12.001 8"
+            material="color: black; opacity: 0.5" rotation="-90 0 0"></a-entity>
+
+                    {/* Flooring for outter sections of 2nd floor */}
+            <a-entity geometry="primitive: plane; height: 20; width: 5"  position="-5 12 8"
+                        material="color: gray" rotation="90 0 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="-5 12.001 8"
+            material="color: gray" rotation="-90 0 0"></a-entity>
+
+            <a-entity geometry="primitive: plane; height: 20; width: 5"  position="11 12 8"
+                        material="color: gray" rotation="90 0 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="11 12.001 8"
+            material="color: gray" rotation="-90 0 0"></a-entity>
+
+            <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 12 -.5"
+                        material="color: gray" rotation="90 0 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 12.001 -.5"
+            material="color: gray" rotation="-90 0 0"></a-entity>
+
+            <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 12 16.5"
+                        material="color: gray" rotation="90 0 0"></a-entity>
+                    <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 12.001 16.5"
             material="color: gray" rotation="-90 0 0"></a-entity>
 
                     {/* Elevator from 2nd floor to 3rd floor */}
