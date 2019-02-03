@@ -216,9 +216,7 @@ class CreateGalleries extends Component {
                                     <div style={this.state.isPrivate ? { opacity: '.5' } : { opacity: '1' }} onClick={() => this.handlePrivacy(false)}>Public <i className="fas fa-unlock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                     <div style={this.state.isPrivate ? { opacity: '1' } : { opacity: '.5' }} onClick={() => this.handlePrivacy(true)}>Private <i className="fas fa-lock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
                                 </div>
-                                <h1 style={{ marginTop: '10px' }}>Thumbnail URL</h1>
-                                <input name="imageAddressInput" onChange={(e) => this.handleChange(e)} />
-                                <h1 style={{ margin: '5px 0px' }}>or</h1>
+                                <h1 style={{ marginTop: '30px' }}>Thumbnail</h1>
                                 <Dropzone
                                     onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
                                     onFileDialogCancel={this.onCancel.bind(this)}
@@ -227,8 +225,8 @@ class CreateGalleries extends Component {
                                 >
                                     {({ getRootProps, getInputProps }) => (
                                         <div {...getRootProps()} style={{
-                                            width: '100px',
-                                            height: '40px',
+                                            width: '100%',
+                                            height: '300px',
                                             display: 'flex',
                                             justifyContent: 'center',
                                             alignItems: 'center',
@@ -236,10 +234,9 @@ class CreateGalleries extends Component {
                                             marginTop: '15px',
                                             fontSize: '15px',
                                             color: 'white',
-                                            cursor: 'pointer'
+                                            cursor: 'pointer',
                                         }}>
-                                            <input {...getInputProps()} />
-                                            <p>UPLOAD</p>
+                                            <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
                                         </div>
                                     )}
                                 </Dropzone>
