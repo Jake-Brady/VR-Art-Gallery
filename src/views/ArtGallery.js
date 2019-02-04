@@ -85,7 +85,7 @@ class ArtGallery extends Component {
     }
 
     render() {
-        let { wallTexture, floorTexture, atmosphereLighting, music } = this.state
+        let { wallTexture, floorTexture, atmosphereLighting, music, captions } = this.state
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <>
@@ -119,13 +119,6 @@ class ArtGallery extends Component {
                     {/* Frames for user images */}
                     {/* Frames on Central Walls - First Floor */}
                     {/* Walls closest to Exit Point */}
-                    <a-light
-                    color='white'
-                    intensity="1"
-                    position="4 2 2"
-                    type="ambient"
-                    >
-                    </a-light>
                     {/* User Images */}
                     <a-image src="#Portrait6" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 2.01" rotation=" 0 0 0"></a-image>
                     <a-image src="#Portrait7" height="2.5" width="3.5" className="user-image" position="2.99 2.5 7.48" rotation=" 0 180 0"></a-image>
@@ -142,6 +135,18 @@ class ArtGallery extends Component {
                     position='2.99 2.5 7.5' 
                     rotation="0 0 0">
                     </a-gltf-model>
+                    {/* Captions */}
+                    <a-text 
+                    value={captions[5] || null}
+                    position='2.3 1.13 2.09'
+                    >
+                    </a-text>
+                    <a-text 
+                    value={captions[6] || null}
+                    position='3.5 1.13 7.42'
+                    rotation="0 180 0"
+                    >
+                    </a-text>
                     {/* light */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -174,6 +179,17 @@ class ArtGallery extends Component {
                     position='2.99 2.5 14' 
                     rotation="0 0 0">
                     </a-gltf-model>
+                    {/* Captions */}
+                    <a-text 
+                    value={captions[7] || null}
+                    position='2.3 1.13 8.58'
+                    >
+                    </a-text>
+                    <a-text 
+                    value={captions[8] || null}
+                    position='3.5 1.13 13.92'
+                    rotation="0 180 0"
+                    ></a-text>
                     {/* Lights */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -199,6 +215,12 @@ class ArtGallery extends Component {
                     position='2.99 2.5 1' 
                     rotation="0 0 0">
                     </a-gltf-model>
+                    {/* Caption */}
+                    <a-text 
+                    value={captions[9] || null}
+                    position='3.5 1.13 .92'
+                    rotation="0 180 0"
+                    ></a-text>
                     {/* Wall Light */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -218,6 +240,12 @@ class ArtGallery extends Component {
                     position='2.99 2.5 15' 
                     rotation="0 180 0">
                     </a-gltf-model>
+                    {/* Caption */}
+                    <a-text 
+                    value={captions[10] || null}
+                    position='2.3 1.13 15.08'
+                    rotation="0 0 0"
+                    ></a-text>
                     {/* Wall Light */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -244,6 +272,17 @@ class ArtGallery extends Component {
                     position='-7 2.5 11' 
                     rotation="0 -90 0">
                     </a-gltf-model>
+                    {/* Captions */}
+                    <a-text 
+                    value={captions[11] || null}
+                    position='-6.92 1.13 5.5'
+                    rotation="0 90 0"
+                    ></a-text>
+                    <a-text 
+                    value={captions[12] || null}
+                    position='-6.92 1.13 11.7'
+                    rotation="0 90 0"
+                    ></a-text>
                     {/* Lights */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -277,8 +316,18 @@ class ArtGallery extends Component {
                     position='12.99 2.5 11' 
                     rotation="0 90 0">
                     </a-gltf-model>
+                    {/* Captions */}
+                    <a-text 
+                    value={captions[13] || null}
+                    position='12.91 1.13 4'
+                    rotation="0 -90 0"
+                    ></a-text>
+                    <a-text 
+                    value={captions[14] || null }
+                    position='12.91 1.13 10.3'
+                    rotation="0 -90 0"
+                    ></a-text>
                     {/* Lights */}
-                    {/* light */}
                     <a-gltf-model 
                     src="#wallLight" 
                     scale='.05 .05 .05' 
@@ -310,6 +359,17 @@ class ArtGallery extends Component {
                     position='-7 7.75 11' 
                     rotation="0 -90 0">
                     </a-gltf-model>
+                    {/* Captions */}
+                    <a-text 
+                    value={captions[1] || null}
+                    position='-6.92 6.4 5.5'
+                    rotation="0 90 0"
+                    ></a-text>
+                    <a-text 
+                    value={captions[2] || null}
+                    position='-6.92 6.4 11.7'
+                    rotation="0 90 0"
+                    ></a-text>
                     {/* Wall Lights */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -341,6 +401,18 @@ class ArtGallery extends Component {
                     position='12.99 7.75 11' 
                     rotation="0 90 0">
                     </a-gltf-model>
+                    {/* Captions */}
+                    <a-text 
+                    value={captions[3] || null}
+                    position='12.92 6.4 4'
+                    rotation="0 -90 0"
+                    >
+                    </a-text>
+                    <a-text 
+                    value={captions[4] || null}
+                    position='12.92 6.4 10.3'
+                    rotation="0 -90 0"
+                    ></a-text>
                     {/* Lights */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -365,6 +437,12 @@ class ArtGallery extends Component {
                     position='2.99 7.75 -2' 
                     rotation="0 -180 0">
                     </a-gltf-model>
+                    {/* Caption */}
+                    <a-text 
+                    value={captions[0] || null}
+                    position='2.3 6.4 -1.92'
+                    rotation="0 0 0"
+                    ></a-text>
                     {/* Wall Light */}
                     <a-gltf-model 
                     src="#wallLight" 
@@ -377,19 +455,6 @@ class ArtGallery extends Component {
                     
 
                     {/* Objects */}
-                    {/* Sphere of Music */}
-                    <a-entity
-                        static-body
-                        width="3"
-                        geometry="primitive: sphere; radius: .5;"
-                        position="7 8 15"
-                        material="color:#C0C0C0"
-                        glow="color:#C0C0C0;intensity:.2"
-                        sound="src:#snowDrop; on:click; rolloffFactor:.1"
-                        light="color:lightblue;type: point; intensity: .7; decay: 2;"
-                    >
-                    </a-entity>
-
                     {/* 3D Object Imports */}
                     <a-gltf-model
                     onClick={() => this.exit()}
@@ -410,9 +475,43 @@ class ArtGallery extends Component {
 
                     <a-gltf-model 
                     static-body 
+                    src="#stereo" 
+                    scale='.05 .05 .05' 
+                    position='-6.45 1.35 -.4' 
+                    rotation="0 90 0"
+                    sound="src:#gymnopedie; on:click; rolloffFactor:.1"
+                    >
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
                     src="#hibiscus" 
-                    scale='.0015 .003 .0015' 
-                    position='-6.15 5.5 .5' 
+                    scale='.004 .004 .004' 
+                    position='-3.15 5.51 -.8' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#hibiscus" 
+                    scale='.004 .004 .004' 
+                    position='9.15 5.51 -.8' 
+                    rotation="0 90 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#bench" 
+                    scale='.002 .002 .002' 
+                    position='7.15 5.51 17.5' 
+                    rotation="0 0 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#bench" 
+                    scale='.002 .002 .002' 
+                    position='2.15 5.51 17.5' 
                     rotation="0 0 0">
                     </a-gltf-model>
 
@@ -428,8 +527,32 @@ class ArtGallery extends Component {
                     static-body 
                     src="#marsStatue" 
                     scale='1 1 1' 
-                    position='12.5 3.6 16.5' 
-                    rotation="-180 0 0">
+                    position='11.5 3.6 7.1' 
+                    rotation="-180 90 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#penelope" 
+                    scale='.0023 .0023 .0023' 
+                    position='-6.1 0 7.8' 
+                    rotation="0 0 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#marblePlayer" 
+                    scale='.5 .5 .5' 
+                    position='12 3.3 16.2' 
+                    rotation="-180 45 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pedestal" 
+                    scale='.003 .002 .003' 
+                    position='12 .1 17.2' 
+                    rotation="0 0 0">
                     </a-gltf-model>
                     
                     <a-gltf-model 
@@ -455,13 +578,13 @@ class ArtGallery extends Component {
                         <rw-wall material="src:#granite; repeat:2" position="-5 0 0" height="12"></rw-wall>
                     </rw-room>
                      {/* Invisible Box Barriers to prevent players from leaving the room. */}
-                     <a-plane material="visible:true" width="18" height="30" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
+                     <a-plane material="visible:true" width="18" height="15" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="30" static-body position="-8 5 10" rotation=" 0 270 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="15" static-body position="-8 5 10" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="30" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="15" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="30" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
+                    <a-plane material="visible:true" width="16" height="15" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
 
                     {/* Interior Walls and Pillars for added Decorations */}
                     <a-box width="8" height="7" depth="1" static-body position="3 2 1.5"></a-box>
