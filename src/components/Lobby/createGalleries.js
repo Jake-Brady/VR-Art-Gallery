@@ -199,10 +199,10 @@ class CreateGalleries extends Component {
         return (
             <section className="create-galleries">
                 {maxLimit ?
-                    <div className='create-galleries_max center'>
-                        You currently have reached the gallery amount cap.
-                        You can either edit an existing gallery or delete one to continue.
-                        </div>
+                    <div className='lobby-empty'>
+                        <h1 style={{ color: 'rgb(110, 142, 254)'}} className='lobby-empty-header'>You currently have reached the gallery amount cap.</h1>
+                        <h2>You can either edit an existing gallery or delete one to continue.</h2>
+                    </div>
                     :
                     <>
                         <div className='create-gallery-header center'>CARD</div>
@@ -241,7 +241,7 @@ class CreateGalleries extends Component {
                                             position: 'relative'
                                         }}>
                                             <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
-                                            <span style={{fontSize: '18px'}}>UPLOAD OR DRAG</span>
+                                            <span style={{ fontSize: '18px' }}>UPLOAD OR DRAG</span>
                                             <div className='main-upload-cover' />
                                         </div>
                                     )}

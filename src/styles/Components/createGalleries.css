@@ -277,6 +277,11 @@
     pointer-events: none;
 }
 
+.lobby-empty-header {
+    font-size: 40px !important;
+    margin-bottom: 10px;
+}
+
 .create-drag-container {
     width: 200px;
     height: 200px;
@@ -349,4 +354,23 @@
 
 #edit-gallery-btn:hover, #create-gallery-btn:hover {
     background: rgb(52, 95, 189);
+}
+
+@media (max-width: 800px) {
+    .lobby-empty-header {
+        font-size: 35px !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .lobby-empty-header {
+        font-size: 28px !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .lobby-empty-header {
+        font-size: 20px !important;
+        text-align: center;
+    }
 }
