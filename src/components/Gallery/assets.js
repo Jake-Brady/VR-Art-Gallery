@@ -18,6 +18,11 @@ import Carpet from '../../assets/gltfs/smallCarpet.glb'
 import Emoji from '../../assets/gltfs/joyemoji.glb'
 import Wood from '../../assets/laminate-floor.jpg'
 import Marble from '../../assets/marble_texture.jpg'
+import Stereo from '../../assets/gltfs/stereo.glb'
+import MarblePlayer from '../../assets/gltfs/marblePlayer.glb'
+import Penelope from '../../assets/gltfs/penelope.glb'
+import Pedestal from '../../assets/gltfs/pedestal.glb'
+import Bench from '../../assets/gltfs/bench.glb'
 import 'aframe'
 import {Entity} from 'aframe-react'
 
@@ -81,6 +86,11 @@ render(){
         <Entity id="door" src={Door} alt="Door Obj" />
         <Entity id="table" src={Table} alt="Table Obj" />
         <Entity id="hibiscus" src={Hibiscus} alt="Plant Obj" />
+        <Entity id="stereo" src={Stereo} alt="Stereo Obj" />
+        <Entity id="marblePlayer" src={MarblePlayer} alt="Marble Player Obj" />
+        <Entity id="pedestal" src={Pedestal} alt="pedestal Obj" />
+        <Entity id="penelope" src={Penelope} alt="Marble Player Obj" />
+        <Entity id="bench" src={Bench} alt="Bench Obj" />
         
         {/* Music */}
         <audio id="gymnopedie" src={Gymnopedie}/>

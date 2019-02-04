@@ -703,6 +703,114 @@ insert into images
 values
 ('https://lovinlife.com/wp-content/uploads/2018/09/Dog.jpg', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpsAzFOuzE07HdIByvXNGeBeflF-9wRpdDHAYKfkQQQjS1AiOZ', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/450px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg', 'https://upload.wikimedia.org/wikipedia/commons/f/f4/The_Scream.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/David_-_The_Death_of_Socrates.jpg/1280px-David_-_The_Death_of_Socrates.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Nighthawks_by_Edward_Hopper_1942.jpg/1920px-Nighthawks_by_Edward_Hopper_1942.jpg', 'https://upload.wikimedia.org/wikipedia/commons/5/53/Angers%2C_La_Maine%2C_Pays_de_la_Loire%2C_France_-_panoramio.jpg', 'https://uploads5.wikiart.org/images/edvard-munch/cupid-and-psyche-1907.jpg!Large.jpg', 'https://uploads2.wikiart.org/00198/images/pablo-picasso/old-guitarist-chicago.jpg!Large.jpg', 'https://a.1stdibscdn.com/e2-kleinveld-and-julien-photography-ode-to-wyeths-christinas-world-for-sale/a_1052/a_35080321541535432771/Ode_to_Wyeths_Christinas_World_E2_JonathanFerraraGalleryNewOrleans_master.jpg?width=768', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Meisje_met_de_parel.jpg/768px-Meisje_met_de_parel.jpg', 'http://www.moma.org/media/W1siZiIsIjM4NjQ3MCJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=f6522ef85554762b', 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg/800px-Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Caspar_David_Friedrich_-_Mondaufgang_am_Meer_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_Mondaufgang_am_Meer_-_Google_Art_Project.jpg', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Caspar_David_Friedrich_-_Der_einsame_Baum_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_Der_einsame_Baum_-_Google_Art_Project.jpg', 15);
 
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+13
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+14
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+15
+);
+
 -- gallery_presets for test2 galleries
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
@@ -758,6 +866,114 @@ insert into images (
 image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, gallery_id
 ) values (
 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 'https://images.genius.com/24afdee8d5f93e026131602e5b86d7c3.422x422x1.jpg', 18
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+16
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+17
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+18
 );
 
 -- gallery_presets for artsy_kids galleries
@@ -816,6 +1032,114 @@ insert into images (
 image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, gallery_id
 ) values (
 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 'http://www.moma.org/media/W1siZiIsIjMwNTQ1NiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDIwMDB4MjAwMFx1MDAzZSJdXQ.jpg?sha=5a021fd15b7f069f', 21
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+19
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+20
+);
+
+insert into captions(
+img1_caption,
+img2_caption,
+img3_caption,
+img4_caption,
+img5_caption,
+img6_caption,
+img7_caption,
+img8_caption,
+img9_caption,
+img10_caption,
+img11_caption,
+img12_caption,
+img13_caption,
+img14_caption,
+img15_caption,
+images_id 
+) VALUES (
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+'test Caption',
+21
 );
 
 -- gallery_presets for music_lovers galleries
