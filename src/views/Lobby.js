@@ -308,6 +308,10 @@ class Lobby extends Component {
         }, 2000);
     }
 
+    clearPop = () => {
+        document.querySelectorAll('[data-pop]').forEach(pop => pop.classList.remove('gallery-pop_show'))
+    }
+
     render() {
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked, accountInfo } = this.state
         //Map over list of favorites, followers, and existing galleries, pass to separate components for styling them as distinct sections.
@@ -427,7 +431,7 @@ class Lobby extends Component {
                                                 />
                                             </div>
                                             : theMagicWord === 'galleries' ?
-                                                <div className='lobby-container_gallery'>
+                                                <div className='lobby-container_gallery' onClick={() => this.clearPop()}>
                                                     {this.state.usersGalleries.length ?
                                                         <div className='lobby-card-grid'>
                                                             {galleryContainers}

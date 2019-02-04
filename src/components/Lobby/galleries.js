@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 class Galleries extends Component {
 
-    toggleDrop = id => {
+    toggleDrop = (id, e) => {
+        e.stopPropagation()
         const pop = [...document.querySelectorAll('[data-pop]')],
         index = pop.map(pop => pop.dataset.pop).findIndex(index => index == id),
         filtered = pop.filter(pop => pop.dataset.pop != id),
@@ -25,7 +26,7 @@ class Galleries extends Component {
                         <i className="fas fa-eye stat"></i><span>{views}</span>
                         <i className="fas fa-heart stat"></i><span>{favoriteNum}</span>
                         <i className="fas fa-share stat"></i><span>{shares}</span>
-                        <i className="fas fa-ellipsis-v gallery-option" onClick={() => this.toggleDrop(id)}></i>
+                        <i className="fas fa-ellipsis-v gallery-option" onClick={e => this.toggleDrop(id, e)}></i>
                         <div className='gallery-pop' data-pop={id}>
                             <div className='center' onClick={() => editGallery(id)}>EDIT</div>
                             <div className='center' onClick={() => deleteGallery(id, galleryName)}>DELETE</div>
