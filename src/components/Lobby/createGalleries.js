@@ -17,7 +17,6 @@ class CreateGalleries extends Component {
             author: '',
             isPrivate: false,
             imageAddress: '',
-            imageAddressInput: '',
             thumbnail: '',
             numOfGalleries: 0,
             maxLimit: false,
@@ -183,7 +182,7 @@ class CreateGalleries extends Component {
             let images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
             let captions = [img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption]
             let galleryPresets = [ceiling_texture, wall_texture, atmosphere_lighting, floor_texture, music]
-            this.setState({ galleryName: gallery_name, isPrivate: is_private, thumbnail, images, captions, galleryPresets })
+            this.setState({ galleryName: gallery_name, isPrivate: is_private, imageAddress: thumbnail, images, captions, galleryPresets })
         })
     }
 
@@ -193,7 +192,8 @@ class CreateGalleries extends Component {
 
 
     render(props) {
-        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress } = this.state
+        console.log(this.state)
+        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress, finalCountdown } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
@@ -287,7 +287,7 @@ class CreateGalleries extends Component {
                                             <div />
                                         </div>
                                         :
-                                        <img src={this.state.imageAddressInput || imageAddress || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = imageAddress || Placeholder} />
+                                        <img src={imageAddress || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = imageAddress || Placeholder} />
                                     }
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>
@@ -314,7 +314,7 @@ class CreateGalleries extends Component {
                             existingImages={this.state.images}
                             existingCaptions={this.state.captions}
                             retrievingImageData={this.retrievingImageData}
-                            finalCountdown={this.state.finalCountdown}
+                            finalCountdown={finalCountdown}
                         />
 
                         <div className='create-gallery-header center'>GALLERY</div>
@@ -322,7 +322,7 @@ class CreateGalleries extends Component {
                         <GalleryPresets
                             galleryPresets={this.state.galleryPresets}
                             retrievingGalleryPresets={this.retrievingGalleryPresets}
-                            finalCountdown={this.state.finalCountdown}
+                            finalCountdown={finalCountdown}
                         />
 
                         {
