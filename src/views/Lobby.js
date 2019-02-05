@@ -32,6 +32,7 @@ class Lobby extends Component {
             notifications: 0,
             usersWhoLiked: []
         }
+        this.refresh = this.refresh.bind(this)
     }
 
     async componentDidMount() {
@@ -59,16 +60,22 @@ class Lobby extends Component {
     }
 
     async refresh(){
-        const user = this.props.match.params.username
         const userGalleries = await axios.get('/api/retrieveGalleries/')
-            this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data, user }, async () => {
+            this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data}, async () => {
                 const galleryIds = this.state.usersGalleries.map(a => a.id),
                     otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
                 this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
                     const userFavorites = await axios.get('/api/getFavorites/')
-                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false })
+                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
+                        const accountInfo = await axios.get('/api/getAccountInfo')
+                        this.setState({accountInfo: accountInfo.data[0]})
+                    }
+                )})
                 })
-            })
+    }
+
+    resettingGalleryId(){
+        this.setState({galleryId: 0})
     }
 
     componentWillUnmount() {
@@ -112,12 +119,10 @@ class Lobby extends Component {
         this.setState({ usersGalleries: [...this.state.galleryCopy], favoritedGalleries: [...this.state.favoritesCopy], searchInput: '' })
     }
 
-    
-
     changeWindow = magicWord => {
         const { theMagicWord } = this.state
         if (theMagicWord === 'create' && this.state.galleryId) {
-            this.setState({galleryId: 0})
+            this.resettingGalleryId()
         }
         switch (magicWord) {
             case "Create":
@@ -422,6 +427,8 @@ class Lobby extends Component {
                                             user={this.props.match.params.username}
                                             galleries={usersGalleries}
                                             editGalleryId={this.state.galleryId}
+                                            changeWindow={this.changeWindow}
+                                            refresh={this.refresh}
                                         />
                                         : theMagicWord === 'notifications' ?
                                             <div>
