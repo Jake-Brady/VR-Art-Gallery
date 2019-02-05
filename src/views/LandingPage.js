@@ -202,15 +202,23 @@ class LandingPage extends Component {
 
     shareGallery(galleryName, author) {
         const location = window.location
-        // Check for spaces in galleryName and author function - and replace with %20 for url to understand destination in url. May revise later so it doesn't look ugly.
-        const galleryDestination = galleryName.replace(/ /g, "%20");
-        const authorDestination = author.replace(/ /g, "%20");
-        let destination = `${location}${authorDestination}/${galleryDestination}`
-        console.log(destination)
+        let destination = `${location}${author}/${galleryName}`
+        let textField = document.createElement('textarea')
+        textField.innerText = destination
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
+        this.copiedToClipboard(galleryName)
     }
 
-    urlSpaceCleaner() {
-        // if we want to clean up spaces into something else 
+    copiedToClipboard = name => {
+        const pop = document.querySelector('.copyToClip-pop')
+        pop.innerText = `Copied ${name} to Clipboard`
+        pop.classList.add('copy-pop-anim')
+        setTimeout(() => {
+            pop.classList.remove('copy-pop-anim')
+        }, 2000);
     }
 
     render() {
@@ -274,6 +282,8 @@ class LandingPage extends Component {
                             <div className='landing-back center' onClick={() => this.smoothScroll('home')}>
                                 <i className="fas fa-arrow-up"></i>
                             </div>
+                        <div className="copyToClip-pop center">
+                        </div>
                         </main>
                     </div>
                     :

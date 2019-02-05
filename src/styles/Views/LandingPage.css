@@ -1,3 +1,22 @@
+@keyframes pop {
+    0% {
+        visibility: hidden;
+        bottom: -100px;
+    }
+    20% {
+        visibility: visible;
+        bottom: 10px;
+    }
+    80% {
+        visibility: visible;
+        bottom: 10px;
+    }
+    100% {
+        visibility: hidden;
+        bottom: -100px;
+    }
+}
+
 @keyframes fadeOut {
     0% {
         opacity: 1;
@@ -16,6 +35,23 @@
         opacity: 1;
         visibility: visible;
     }
+}
+
+.copyToClip-pop {
+    visibility: hidden;
+    position: fixed;
+    left: 10px;
+    bottom: -100px;
+    height: 40px;
+    background: #829DFB;
+    font-size: 12px;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.copy-pop-anim {
+    animation: pop 2s 1;
+    animation-fill-mode: forwards;
 }
 
 .home {
