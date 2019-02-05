@@ -16,6 +16,24 @@
     }
 }
 
+@keyframes drop2 {
+    0% {
+        max-height: 0px;
+    }
+    100% {
+        max-height: 275px;
+    }
+}
+
+@keyframes up2 {
+    0% {
+        max-height: 275px;
+    }
+    100% {
+        max-height: 0px;
+    }
+}
+
 .about-container {
     width: 100vw;
     min-height: calc(100vh - 50px);
@@ -32,7 +50,8 @@
 }
 
 .about-question {
-    width: 700px;
+    max-width: 700px;
+    width: 80%;
     height: 60px;
     background: rgb(245, 245, 245);
     margin-top: 10px;
@@ -57,10 +76,11 @@
 }
 
 .about-dropdown {
-    width: 700px;
+    max-width: 700px;
+    width: 80%;
     background: rgb(245, 245, 245);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-    color: rgba(0, 0, 0, 0.4);
+    color: rgb(147, 147, 147);
     font-weight: 300;
     max-height: 0px;
     overflow: hidden;
@@ -77,6 +97,21 @@
     color: rgb(110, 142, 254);
 }
 
+.center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center-column > p:first-child {
+    margin: 15px 0px;
+}
+
+.center-column > p {
+    width: 95%;
+    margin: 0px;
+}
+
 .drop-anim {
     animation: drop .5s 1;
     animation-fill-mode: forwards;
@@ -85,4 +120,32 @@
 .up-anim {
     animation: up .5s 1;
     animation-fill-mode: forwards;
+}
+
+.drop-anim2 {
+    animation: drop2 .5s 1;
+    animation-fill-mode: forwards;
+}
+
+.up-anim2 {
+    animation: up2 .5s 1;
+    animation-fill-mode: forwards;
+}
+
+@media (max-width: 750px) {
+    .about-dropdown > p, .about-question {
+        font-size: 14px;
+    }
+    .about-container > h1 {
+        font-size: 35px;
+    }
+}
+
+@media (max-width: 600px) {
+    .about-dropdown > p {
+        font-size: 12px;
+    }
+    .about-container > h1 {
+        font-size: 20px;
+    }
 }
