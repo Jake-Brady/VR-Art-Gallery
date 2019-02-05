@@ -138,12 +138,12 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[5] || null}
-                    position='2.3 1.13 2.09'
+                    position='1.9 1.13 2.09'
                     >
                     </a-text>
                     <a-text 
                     value={captions[6] || null}
-                    position='3.5 1.13 7.42'
+                    position='3.8 1.13 7.42'
                     rotation="0 180 0"
                     >
                     </a-text>
@@ -182,12 +182,12 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[7] || null}
-                    position='2.3 1.13 8.58'
+                    position='1.9 1.13 8.58'
                     >
                     </a-text>
                     <a-text 
                     value={captions[8] || null}
-                    position='3.5 1.13 13.92'
+                    position='3.8 1.13 13.92'
                     rotation="0 180 0"
                     ></a-text>
                     {/* Lights */}
@@ -218,7 +218,7 @@ class ArtGallery extends Component {
                     {/* Caption */}
                     <a-text 
                     value={captions[9] || null}
-                    position='3.5 1.13 .92'
+                    position='3.8 1.13 .92'
                     rotation="0 180 0"
                     ></a-text>
                     {/* Wall Light */}
@@ -243,7 +243,7 @@ class ArtGallery extends Component {
                     {/* Caption */}
                     <a-text 
                     value={captions[10] || null}
-                    position='2.3 1.13 15.08'
+                    position='1.9 1.13 15.08'
                     rotation="0 0 0"
                     ></a-text>
                     {/* Wall Light */}
@@ -275,12 +275,12 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[11] || null}
-                    position='-6.92 1.13 5.5'
+                    position='-6.92 1.13 5.7'
                     rotation="0 90 0"
                     ></a-text>
                     <a-text 
                     value={captions[12] || null}
-                    position='-6.92 1.13 11.7'
+                    position='-6.92 1.13 11.9'
                     rotation="0 90 0"
                     ></a-text>
                     {/* Lights */}
