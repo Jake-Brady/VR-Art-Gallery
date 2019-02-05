@@ -50,7 +50,7 @@
 }
 
 .about-question {
-    max-width: 700px;
+    max-width: 800px;
     width: 80%;
     height: 60px;
     background: rgb(245, 245, 245);
@@ -76,7 +76,7 @@
 }
 
 .about-dropdown {
-    max-width: 700px;
+    max-width: 800px;
     width: 80%;
     background: rgb(245, 245, 245);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
