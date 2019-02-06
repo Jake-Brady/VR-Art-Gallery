@@ -92,6 +92,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.post('/api/addToFavorites/', ctrl.addToFavorites)
     app.delete('/api/deleteFromFavorites/:galleryId', ctrl.deleteFromFavorites)
     app.put('/api/adjustGalleryFavorites/:galleryId', ctrl.adjustGalleryFavorites)
+    app.put('/api/increaseShare/:galleryId', ctrl.incrementShare)
 
     //Lobby
     app.get('/api/checkUser/', ctrl.checkUser)
