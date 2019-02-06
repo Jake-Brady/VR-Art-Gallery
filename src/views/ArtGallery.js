@@ -20,7 +20,6 @@ class ArtGallery extends Component {
             captions: [],
             wallTexture: '',
             floorTexture: '',
-            atmosphereLighting: '',
             music: '',
             imagesHaveLoaded: false
         }
@@ -42,23 +41,56 @@ class ArtGallery extends Component {
             // Floor Texture Assignments
             switch (floor_texture) {
                 case "wood":
-                    floor_texture = '#wood-floor'
+                    floor_texture = '#wood'
                     break;
-                case "marble":
-                    floor_texture = '#marble-floor';
+                case "porcelainTiles":
+                    floor_texture = '#porcelainTiles'
+                    break;
+                case "streetPaved":
+                    floor_texture = "#streetPaved"
+                    break;
+                case "seamlessStone":
+                    floor_texture = '#seamlessStone'
+                    break;
+                case "stoneTiles":
+                    floor_texture = '#stoneTiles'
                     break;
             }
             // Wall Texture Assignments
             switch (wall_texture) {
-
-            }
-            // Lighting Color Assignments
-            switch (atmosphere_lighting) {
-
+                case "granite":
+                    wall_texture = '#granite'
+                    break;
+                case "brickPavement":
+                    wall_texture = '#brickPavement'
+                    break;
+                case "redBrick":
+                    wall_texture = '#redBrick'
+                    break;
+                case "cork":
+                    wall_texture = '#cork'
+                    break;
+                case "cobblestone":
+                    wall_texture = "#cobblestone"
+                    break;
             }
             // Music Selection Assignments
             switch (music) {
-
+                case "gymnopedie":
+                    music = '#gymnopedie'
+                    break;
+                case "calmant":
+                    music = '#calmant'
+                    break;
+                case "snowDrop":
+                    music = '#snowDrop'
+                    break;
+                case "impromptu":
+                    music = '#impromptu'
+                    break;
+                case "onThePassingOfTime":
+                    music = '#passingTime'
+                    break;
             }
             this.setState({wallTexture: wall_texture, floorTexture: floor_texture, atmosphereLighting: atmosphere_lighting, music}, () => {
                 this.checkFPS()
@@ -85,7 +117,8 @@ class ArtGallery extends Component {
     }
 
     render() {
-        let { wallTexture, floorTexture, atmosphereLighting, music, captions } = this.state
+        let { wallTexture, floorTexture, music, captions } = this.state
+        console.log(this.state, 'state of gallery')
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <>
@@ -479,7 +512,7 @@ class ArtGallery extends Component {
                     scale='.05 .05 .05' 
                     position='-6.45 1.35 -.4' 
                     rotation="0 90 0"
-                    sound="src:#gymnopedie; on:click; rolloffFactor:.1"
+                    sound={`src:${music}; on:click; rolloffFactor:.1`}
                     >
                     </a-gltf-model>
 
@@ -571,11 +604,11 @@ class ArtGallery extends Component {
                     {/* Everything below here is part of the architecture */}
                     {/* Main Art Gallery - 1st Floor */}
                     <rw-room position="-2 0 -2">
-                        <rw-floor material="src:#wood; repeat:2"></rw-floor>
-                        <rw-wall material="src:#granite; repeat:2" position="15 0 0" height="12"></rw-wall>
-                        <rw-wall material="src:#granite; repeat:2" position="15 0 20" height="12"></rw-wall>
-                        <rw-wall material="src:#granite; repeat:2" position="-5 0 20" height="12"></rw-wall>
-                        <rw-wall material="src:#granite; repeat:2" position="-5 0 0" height="12"></rw-wall>
+                        <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
+                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 0" height="12"></rw-wall>
+                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 20" height="12"></rw-wall>
+                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="-5 0 20" height="12"></rw-wall>
+                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="-5 0 0" height="12"></rw-wall>
                     </rw-room>
                      {/* Invisible Box Barriers to prevent players from leaving the room. */}
                      <a-plane material="visible:true" width="18" height="15" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>

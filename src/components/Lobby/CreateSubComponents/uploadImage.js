@@ -29,7 +29,7 @@ class UploadImage extends Component {
             retrievingImageData(this.state.newURL || this.state.imageURL, this.state.imageCaption)
         }
         if (!imageURL) {
-            this.setState({ imageURL: '', imageCaption: '' })
+            this.setState({ imageURL: '', imageCaption: ''})
         }
     }
 
