@@ -54,7 +54,7 @@ class CreateGalleries extends Component {
 
     componentWillReceiveProps(nextProps) {
         console.log(nextProps)
-        if (nextProps.editGalleryId === 0) {
+        if (nextProps.editGalleryId === 0 ) {
             this.setState({ images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: '' })
         }
     }
@@ -155,8 +155,8 @@ class CreateGalleries extends Component {
     }
 
     retrievingGalleryPresets = (state) => {
-        let { music, lighting, floorTexture, wallTexture } = state
-        let finalGalleryPresets = [music, lighting, floorTexture, wallTexture];
+        let { music, lighting, floor, wall } = state
+        let finalGalleryPresets = [music, lighting, floor, wall];
         this.setState({ finalGalleryPresets }, () => {
             this.finalizeGallery()
         })
@@ -199,6 +199,7 @@ class CreateGalleries extends Component {
 
 
     render(props) {
+        console.log(this.state)
         console.log(props)
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress, finalCountdown } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.

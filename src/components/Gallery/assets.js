@@ -10,12 +10,21 @@ import Gymnopedie from '../../assets/audio/Gymnopedie_No_1.mp3'
 import SnowDrop from '../../assets/audio/Snow_Drop.mp3'
 import OnThePassingOfTime from '../../assets/audio/On_the_Passing_of_Time.mp3'
 import ImpromputInQuarterCommaMeantone from '../../assets/audio/Impromptu_in_Quarter_Comma_Meantone.mp3'
+import Calmant from '../../assets/audio/Calmant.mp3'
 import Granite from '../../assets/grey_granite_texture.jpg'
 import Nymph from '../../assets/gltfs/smallestNymph.glb'
 import Mars from '../../assets/gltfs/marsStatue.glb'
 import Moon from '../../assets/gltfs/moon.glb'
 import Carpet from '../../assets/gltfs/smallCarpet.glb'
 import Emoji from '../../assets/gltfs/joyemoji.glb'
+import StreetPaved from '../../assets/StreetPaved.jpg'
+import TerrazzoPocelainTiles from '../../assets/TerrazzoPocelainTiles.jpg'
+import brickPavement from '../../assets/brickpavementtexture.jpg'
+import seamlessStone from '../../assets/repeatingSeamlessStone.jpg'
+import redBrick from '../../assets/repeatingRedBrick.jpg'
+import cobblestone from '../../assets/cobblestone.jpg'
+import stoneTiles from '../../assets/stoneTiles.jpg'
+import corkwall from '../../assets/corkwall.jpg'
 import Wood from '../../assets/laminate-floor.jpg'
 import Marble from '../../assets/marble_texture.jpg'
 import Stereo from '../../assets/gltfs/stereo.glb'
@@ -73,7 +82,15 @@ render(){
         {/* Textures */}
         <img id="wood" src={Wood} alt="wood floor texture" />
         <img id="marble" src={Marble} alt="marble floor texture" />
-        <img id="granite" src={Granite} alt="marble floor texture" />
+        <img id="granite" src={Granite} alt="granite texture" />
+        <img id="streetPaved" src={StreetPaved} alt="street paved texture" />
+        <img id="porcelainTiles" src={TerrazzoPocelainTiles} alt="terrazzo tiles texture" />
+        <img id="brickPavement" src={brickPavement} alt="brick pavement texture" />
+        <img id="cobblestone" src={cobblestone} alt="cobblestone texture" />
+        <img id="stoneTiles" src={stoneTiles} alt="stone tiles texture" />
+        <img id="cork" src={corkwall} alt="corkwall texture" />
+        <img id="redBrick" src={redBrick} alt="red brick texture" />
+        <img id="seamlessStone" src={seamlessStone} alt="seamless stone texture" />
        
         {/* Objects */}
         <Entity id="frame" src={Frame} alt="Picture Frame" />
@@ -97,6 +114,7 @@ render(){
         <audio id="impromptu" src={ImpromputInQuarterCommaMeantone}/>
         <audio id="snowDrop" src={SnowDrop}/>
         <audio id="passingTime" src={OnThePassingOfTime}/>
+        <audio id="calmant" src={Calmant} />
     </a-assets>
     )
 }

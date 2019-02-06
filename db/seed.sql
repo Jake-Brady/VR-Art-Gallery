@@ -32,7 +32,7 @@ username, password, email, first_name, last_name
 insert into galleries(
 gallery_name, thumbnail, is_private, views, times_favorited, shares, author, user_id
 ) values (
-'testestbitchbitchweedweedpussyslayingcockgoblin', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
+'another gallery', 'https://cdn-images-1.medium.com/max/2000/1*AnmQd3T5y_k9M0e0rAfxYQ.jpeg', false, 0, 1, 0, 'test', 1
 );
 
 insert into galleries(
@@ -600,73 +600,73 @@ images_id
 insert into gallery_presets(
 wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 1 
+'granite', 'wood', null, 'gymnopedie', 1 
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 2 
+'granite', 'wood', null, 'gymnopedie', 2 
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 3
+'granite', 'wood', null, 'gymnopedie', 3
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 4
+'granite', 'wood', null, 'gymnopedie', 4
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 5
+'granite', 'wood', null, 'gymnopedie', 5
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 6
+'granite', 'wood', null, 'gymnopedie', 6
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 7
+'granite', 'wood', null, 'gymnopedie', 7
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 8
+'granite', 'wood', null, 'gymnopedie', 8
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 9
+'granite', 'wood', null, 'gymnopedie', 9
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 10
+'granite', 'wood', null, 'gymnopedie', 10
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 11
+'granite', 'wood', null, 'gymnopedie', 11
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 12
+'granite', 'wood', null, 'gymnopedie', 12
 );
 
 -- Galleries for test2
@@ -815,19 +815,19 @@ images_id
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 13
+'granite', 'wood', null, 'gymnopedie', 13
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 14
+'granite', 'wood', null, 'gymnopedie', 14
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 15
+'granite', 'wood', null, 'gymnopedie', 15
 );
 
 --  galleries for artsy_kid
@@ -980,19 +980,19 @@ images_id
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 16
+'granite', 'wood', null, 'gymnopedie', 16
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 17
+'granite', 'wood', null, 'gymnopedie', 17
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 18
+'granite', 'wood', null, 'gymnopedie', 18
 );
 
 -- galleries for music_lover
@@ -1146,19 +1146,19 @@ images_id
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 19
+'granite', 'wood', null, 'gymnopedie', 19
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 20
+'granite', 'wood', null, 'gymnopedie', 20
 );
 
 insert into gallery_presets(
  wall_texture, floor_texture, atmosphere_lighting, music, gallery_id
 ) values (
-'grey slate', 'wood', 'light blue', 'gymnopedie', 21
+'granite', 'wood', null, 'gymnopedie', 21
 );
 
 
