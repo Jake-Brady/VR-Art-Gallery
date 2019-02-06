@@ -49,6 +49,18 @@
     }
 }
 
+@keyframes in {
+    0% {
+        transform: scale(0);
+    }
+    80% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 @keyframes fade {
     0% {
         opacity: inherit;
@@ -282,7 +294,7 @@
     width: 100vw;
     height: 100vh;
     background: black;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     opacity: .2;
     visibility: hidden;
@@ -305,7 +317,7 @@
 .delete-header {
     width: 100%;
     height: 50px;
-    background: rgb(238, 50, 50);
+    background: rgb(255, 107, 107);
     padding: 5px 15px;
     display: flex;
     align-items: center;
@@ -328,7 +340,7 @@
 
 .delete-content > i {
     font-size: 32px;
-    color: rgb(238, 50, 50);
+    color: rgb(255, 107, 107);
     position: absolute;
     left: 20px;
     top: 25px;
@@ -354,7 +366,7 @@
 .delete-options > div:nth-child(2) {
     width: 120px;
     height: 70%;
-    background: rgb(238, 50, 50);
+    background: rgb(255, 107, 107);
     position: absolute;
     right: 40px;
     color: rgba(255, 255, 255, 0.80);
@@ -503,6 +515,16 @@
     color: rgba(0, 0, 0, 0.5);
     font-weight: 300;
     text-align: center;
+}
+
+.pop-in {
+    animation: in 1s 1;
+    animation-fill-mode: forwards;
+}
+
+.pop-out {
+    animation: leave 1s 1;
+    animation-fill-mode: forwards;
 }
 
 /* Queries to make card grid work on mobile */

@@ -35,6 +35,7 @@ class Lobby extends Component {
             name: '',
             usersWhoLiked: []
         }
+        this.refresh = this.refresh.bind(this)
     }
 
     async componentDidMount() {
@@ -62,16 +63,23 @@ class Lobby extends Component {
     }
 
     async refresh() {
-        const user = this.props.match.params.username
         const userGalleries = await axios.get('/api/retrieveGalleries/')
-        this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data, user }, async () => {
+        this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data }, async () => {
             const galleryIds = this.state.usersGalleries.map(a => a.id),
                 otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
             this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
                 const userFavorites = await axios.get('/api/getFavorites/')
-                this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false })
+                this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
+                    const accountInfo = await axios.get('/api/getAccountInfo')
+                    this.setState({ accountInfo: accountInfo.data[0] })
+                }
+                )
             })
         })
+    }
+
+    resettingGalleryId() {
+        this.setState({ galleryId: 0 })
     }
 
     componentWillUnmount() {
@@ -118,7 +126,7 @@ class Lobby extends Component {
     changeWindow = magicWord => {
         const { theMagicWord } = this.state
         if (theMagicWord === 'create' && this.state.galleryId) {
-            this.setState({ galleryId: 0 })
+            this.resettingGalleryId()
         }
         switch (magicWord) {
             case "Create":
@@ -202,36 +210,45 @@ class Lobby extends Component {
 
     closeDelete = () => {
         const pop = document.querySelector('.gallery-delete'),
-            overlay = document.querySelector('.gallery-dim')
+            overlay = document.querySelector('.gallery-dim'),
+            body = document.querySelector('html')
+        body.classList.remove('lobby-main-hide')
         overlay.style.visibility = 'hidden'
         pop.style.visibility = 'hidden'
     }
 
     deleteGallery = (id, galleryName) => {
         const pop = document.querySelector('.gallery-delete'),
-            overlay = document.querySelector('.gallery-dim')
+            overlay = document.querySelector('.gallery-dim'),
+            body = document.querySelector('html')
         overlay.style.visibility = 'visible'
         pop.style.visibility = 'visible'
+        body.classList.add('lobby-main-hide')
         this.setState({ id, name: galleryName })
     }
 
     confirmDelete = (id, galleryName) => {
-        let galleries = [...this.state.usersGalleries];
-        let index;
-        for (let i = 0; i < galleries.length; i++) {
-            if (galleries[i].id === id) {
-                index = i
-            }
-        }
-        if (index !== -1) {
-            galleries.splice(index, 1);
-            this.setState({ usersGalleries: galleries, galleryCopy: galleries })
-        }
-        axios.delete(`/api/deleteGallery/${id}`).then(res => {
-            this.setState({ deleteConfirm: `${galleryName} was successfully deleted.` })
-        })
         this.closeDelete()
-        this.removeFavPop({ name: galleryName, type: 'delete' })
+        const index = this.state.usersGalleries.findIndex(gallery => gallery.id === id),
+            card = document.querySelectorAll('.gallery-card-anim')[index]
+        card.classList.add('lobby-leave-anim')
+        setTimeout(() => {
+            let galleries = [...this.state.usersGalleries];
+            let index;
+            for (let i = 0; i < galleries.length; i++) {
+                if (galleries[i].id === id) {
+                    index = i
+                }
+            }
+            if (index !== -1) {
+                galleries.splice(index, 1);
+                this.setState({ usersGalleries: galleries, galleryCopy: galleries })
+            }
+            axios.delete(`/api/deleteGallery/${id}`).then(res => {
+                this.setState({ deleteConfirm: `${galleryName} was successfully deleted.` })
+            })
+            this.removeFavPop({ name: galleryName, type: 'delete' })
+        }, 400);
     }
 
     toggleMenu = command => {
@@ -392,6 +409,7 @@ class Lobby extends Component {
                     :
                     <div className='lobby'>
                         <div className='lobby-overlay' />
+                        <div className='gallery-dim' onClick={() => this.closeDelete()} />
                         <header className='lobby-header'>
                             <div className='lobby-header_left'>
                                 <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
@@ -436,6 +454,8 @@ class Lobby extends Component {
                                             user={this.props.match.params.username}
                                             galleries={usersGalleries}
                                             editGalleryId={this.state.galleryId}
+                                            changeWindow={this.changeWindow}
+                                            refresh={this.refresh}
                                         />
                                         : theMagicWord === 'notifications' ?
                                             <div>
@@ -446,7 +466,6 @@ class Lobby extends Component {
                                             </div>
                                             : theMagicWord === 'galleries' ?
                                                 <div className='lobby-container_gallery' onClick={() => this.clearPop()}>
-                                                    <div className='gallery-dim' onClick={() => this.closeDelete()} />
                                                     {this.state.usersGalleries.length ?
                                                         <div className='lobby-card-grid'>
                                                             <div className='gallery-delete'>

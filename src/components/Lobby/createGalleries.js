@@ -103,7 +103,7 @@ class CreateGalleries extends Component {
             .put(signedRequest, file, options)
             .then(res => {
                 console.log(url)
-                this.setState({ imageAddress: url }, () => {
+                this.setState({ thumbnail: url }, () => {
                     this.setState({ isUploading: false })
                 })
                 // .then(console.log("this is the url",url))
@@ -138,6 +138,7 @@ class CreateGalleries extends Component {
         // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
         const { galleryName, author, thumbnail, isPrivate } = this.state
         if (!galleryName || !author || !thumbnail) return;
+        console.log(galleryName, author, thumbnail)
 
         // this state object value is being passed down to galleryPresets and uploadImage components which are waiting for the value to turn to 0 before sending the final selections for presets, images, and captions back to this component to be shipped to database. Relevant functions: retrievingImageData, retrievingGalleryPresets, and finalizeGallery - all listed below.
         this.setState({ finalCountdown: 0 })
@@ -154,23 +155,29 @@ class CreateGalleries extends Component {
     }
 
     retrievingGalleryPresets = (state) => {
-        let { music, lighting, floorTexture, ceilingTexture, wallTexture } = state
-        let finalGalleryPresets = [music, lighting, floorTexture, ceilingTexture, wallTexture];
+        let { music, lighting, floorTexture, wallTexture } = state
+        let finalGalleryPresets = [music, lighting, floorTexture, wallTexture];
         this.setState({ finalGalleryPresets }, () => {
             this.finalizeGallery()
         })
     }
 
-    finalizeGallery() {
+    finalizeGallery(props) {
         let { finalImages, finalCaptions, finalGalleryPresets, galleryName, author, imageAddress, thumbnail, isPrivate, galleryId } = this.state
         // Passes all relevant info to backend where separate queries will be made to populate galleries, gallery_preset, images, and captions tables if this a a new gallery. If createGallery is in editMode, it will update existing gallery.
         if (!this.state.editMode) {
             axios.post(`/api/createNewGallery/`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets }).then(res => {
                 console.log('Finished for creation?')
+                // Changes to Galleries Tab = Where newly created gallery will be among the previous ones.
+                this.props.changeWindow('Galleries')
+                this.props.refresh()
             })
         } else if (this.state.editMode) {
             axios.put(`/api/updateGallery/${galleryId}`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets }).then(res => {
                 console.log('Finished?')
+                // Changes to Galleries Tab - Where edited gallery will be.
+                this.props.changeWindow('Galleries')
+                this.props.refresh()
             })
         }
     }
@@ -182,7 +189,7 @@ class CreateGalleries extends Component {
             let images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
             let captions = [img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption]
             let galleryPresets = [ceiling_texture, wall_texture, atmosphere_lighting, floor_texture, music]
-            this.setState({ galleryName: gallery_name, isPrivate: is_private, imageAddress: thumbnail, images, captions, galleryPresets })
+            this.setState({ galleryName: gallery_name, isPrivate: is_private, thumbnail, images, captions, galleryPresets })
         })
     }
 
@@ -192,7 +199,7 @@ class CreateGalleries extends Component {
 
 
     render(props) {
-        console.log(this.state)
+        console.log(props)
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress, finalCountdown } = this.state
         // If there are multiple galleries, the spelling should reflect that correctly.
         let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
@@ -287,7 +294,7 @@ class CreateGalleries extends Component {
                                             <div />
                                         </div>
                                         :
-                                        <img src={imageAddress || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = imageAddress || Placeholder} />
+                                        <img src={thumbnail || Placeholder} alt='Card Thumbnail' className='gallery-thumbnail' onError={(e) => e.target.src = thumbnail || Placeholder} />
                                     }
                                     <div className='gallery-text'>
                                         <h1 className='gallery-title'>{galleryName.split(' ')[0] ? galleryName.length > 15 ? galleryName.slice(0, 15) + '...' : galleryName : 'Sample Text'}</h1>

@@ -14,6 +14,7 @@ class UploadImage extends Component {
             isUploading: false,
             finalCountdown: 2
         }
+        this.delete = this.delete.bind(this)
     }
 
 
@@ -95,8 +96,13 @@ class UploadImage extends Component {
         });
     }
 
+    delete(){
+        console.log('this firing?')
+        this.setState({newURL: '', imageURL: ''})
+    }
 
     render(props) {
+        console.log(this.state)
         let { imageURL, imageCaption, isUploading } = this.state
         return (
             <section className="image-block">
@@ -144,34 +150,8 @@ class UploadImage extends Component {
                         </figure>
                     }
                 </div>
-                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder="Image Caption (30 character limit)"></input>
-                {/* <input name="newURL" onChange={(e) => this.onChangeHandler(e)} maxLength="200" placeholder="Image Address"></input>
-                <div className="upload-block">
-                    <Dropzone
-                        onDropAccepted={this.getSignedRequest.bind(this)}
-                        onFileDialogCancel={this.onCancel.bind(this)}
-                        accept="image/*"
-                        multiple={false}
-                    >
-                        {({ getRootProps, getInputProps }) => (
-                            <div {...getRootProps()} style={{
-                                width: '100%',
-                                height: '40px',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                background: 'rgb(119, 148, 253)',
-                                marginTop: '15px',
-                                fontSize: '15px',
-                                color: 'white',
-                                cursor: 'pointer'
-                            }}>
-                                <input {...getInputProps()} />
-                                <p>Upload</p>
-                            </div>
-                        )}
-                    </Dropzone>
-                </div> */}
+                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder={imageCaption ? imageCaption : "Image Caption (30 character limit)"}></input>
+                <span className="delete-btn" onClick={(e) => this.delete(e)}>Delete Image</span>
             </section>
         )
     }
