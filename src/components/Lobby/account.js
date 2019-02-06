@@ -3,6 +3,7 @@ import '../../styles/Components/account.css'
 import axios from 'axios'
 import { v4 as randomStringGenerator } from 'uuid';
 import Placeholder from '../../styles/Media/Placeholder.png'
+import Dropzone from 'react-dropzone'
 
 class Account extends Component {
     constructor(props) {
@@ -14,13 +15,13 @@ class Account extends Component {
             avatarURL: '',
             imageAddress: '',
             isUploading: false,
-            theMagicWord: '',
             newPassword: '',
             newPasswordAgain: '',
             passwordConfirm: '',
             newUsername: '',
             newEmail: '',
-            edit: false
+            edit: false,
+            pass: false
         }
     }
 
@@ -33,23 +34,6 @@ class Account extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
-    }
-
-    changeSetting(magicWord) {
-        switch (magicWord) {
-            case "username":
-                this.setState({ theMagicWord: 'username' })
-                break;
-            case "email":
-                this.setState({ theMagicWord: 'email' })
-                break;
-            case "avatar":
-                this.setState({ theMagicWord: 'avatar' })
-                break;
-            case "password":
-                this.setState({ theMagicWord: 'password' })
-                break;
-        }
     }
 
     async changeUsername() {
@@ -166,7 +150,21 @@ class Account extends Component {
     }
 
     handleEdit = () => {
-        this.setState({ edit: !this.state.edit })
+        this.setState({ edit: !this.state.edit }, () => {
+            const inputs = document.querySelectorAll('.account-edit-inputs > input')
+            inputs[0].value = this.state.username
+            inputs[1].value = this.state.email
+        })
+    }
+
+    cancelEdit = () => {
+        this.setState({ edit: !this.state.edit, pass: false })
+    }
+
+    addPass = () => {
+        // const body = document.querySelector('account-edit-inputs')
+        // body.style.height = ''
+        this.setState({ pass: true })
     }
 
     render() {
@@ -175,7 +173,7 @@ class Account extends Component {
                 <h1>My Account</h1>
                 {!this.state.edit ?
                     <div className='account-overview'>
-                        <img src={this.state.avatarURL || Placeholder} alt='User Image' />
+                        <img src={this.state.avatarURL || Placeholder} alt='User Image' onError={(e) => e.target.src = Placeholder} />
                         <div className='account-text'>
                             <h1>USERNAME</h1>
                             <h2>{this.state.username}</h2>
@@ -189,12 +187,54 @@ class Account extends Component {
                         <div className='account-upload center'>
                             <i className="fas fa-plus"></i>
                         </div>
-                        <img src={this.state.avatarURL || Placeholder} alt='User Image' style={{cursor: 'pointer'}} />
-                        <div className='account-text'>
+                        <Dropzone
+                            onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
+                            onFileDialogCancel={this.onCancel.bind(this)}
+                            accept="image/*"
+                            multiple={false}
+                        >
+                            {({ getRootProps, getInputProps }) => (
+                                <div {...getRootProps()}
+                                    style={{
+                                        width: '150px',
+                                        height: '150px',
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        marginTop: '15px',
+                                        fontSize: '15px',
+                                        color: 'white',
+                                        cursor: 'pointer',
+                                        borderRadius: '50%',
+                                        position: 'absolute',
+                                        top: '10px',
+                                        border: 'none',
+                                        zIndex: '1'
+                                    }}>
+                                    <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
+                                </div>
+                            )}
+                        </Dropzone>
+                        <img src={this.state.imageAddress || this.state.avatarURL || Placeholder} alt='User Image' style={{ cursor: 'pointer' }} onError={(e) => e.target.src = Placeholder} />
+                        <div className='account-edit-inputs'>
                             <h1>USERNAME</h1>
-                            <h2>{this.state.username}</h2>
+                            <input />
                             <h1>EMAIL</h1>
-                            <h2>{this.state.email}</h2>
+                            <input />
+                            <h1>CURRENT PASSWORD</h1>
+                            <input />
+                            {this.state.pass ?
+                                <>
+                                    <h1>NEW PASSWORD</h1>
+                                    <input />
+                                </>
+                                :
+                                <h2 onClick={() => this.addPass()}>Change Password?</h2>
+                            }
+                        </div>
+                        <div className='edit-bottom'>
+                            <h2 onClick={() => this.cancelEdit()}>Cancel</h2>
+                            <h1 className='center'>Save</h1>
                         </div>
                     </div>
                 }
@@ -206,27 +246,6 @@ class Account extends Component {
 export default Account
 
 {/* <div className="account-information">
-                <h3>Hello {this.state.firstName}.</h3>
-                <div className="account-avatar-img">
-                    <img className="avatar-thumbnail" src={`${this.state.avatarURL}` || 'http://via.placeholder.com/450x450'} />
-                </div>
-                <div id="account-change-buttons-div">
-                    <h1>Account Setting Changes</h1>
-                    <div className="button-div">
-                        <span className="button" onClick={() => this.changeSetting('username')}>Username</span>
-                        <span className="button" onClick={() => this.changeSetting('email')}>Email</span>
-                        <span className="button" onClick={() => this.changeSetting('avatar')}>Avatar Thumbnail</span>
-                        <span className="button" onClick={() => this.changeSetting('password')}>Password</span>
-                    </div>
-                </div>
-            </div>
-            <div className="changing-section">
-                 {
-                    theMagicWord === 'username' ?
-                    <div className="change-username-div">
-                        <div className="username-container">
-                            <h2>{this.state.username}</h2>
-                        </div>
                         <div className="change-username-inputs">
                             <h2>Password</h2>
                             <input value={`${this.state.passwordConfirm}`} type="password" className="inputbar" name="passwordConfirm" onChange={(e) => this.handleChange(e)}></input>
@@ -264,30 +283,6 @@ export default Account
                     </div>
                     <input value={`${this.state.imageAddress}`} className="inputbar" name="imageAddress" onChange={(e) => this.handleChange(e)} />
                     <h1>or</h1>
-                    <Dropzone
-                        onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
-                        onFileDialogCancel={this.onCancel.bind(this)}
-                        accept="image/*"
-                        multiple={false}
-                    >
-                        {({ getRootProps, getInputProps }) => (
-                            <div {...getRootProps()} style={{
-                                width: '100px',
-                                height: '40px',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                background: 'rgb(119, 148, 253)',
-                                marginTop: '15px',
-                                fontSize: '15px',
-                                color: 'white',
-                                cursor: 'pointer'
-                            }}>
-                                <input {...getInputProps()} />
-                                <p>UPLOAD</p>
-                            </div>
-                        )}
-                     </Dropzone>
                      <span onClick={() => this.changeAvatar()} className="button">Submit</span>
                  </div>
                     }

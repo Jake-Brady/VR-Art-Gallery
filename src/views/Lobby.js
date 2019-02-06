@@ -111,6 +111,7 @@ class Lobby extends Component {
     changeNav = current => {
         document.querySelectorAll('[data-tab]').forEach(tab => {
             const title = tab.innerText.split(' ')
+            console.log(title[0], current)
             if (title[0] === current) tab.classList.add('menu-back')
             else tab.classList.remove('menu-back')
         })
@@ -169,8 +170,8 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
-            case 'Account':
-                this.setState({ theMagicWord: 'account' }, () => {
+            case 'Settings':
+                this.setState({ theMagicWord: 'settings' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
@@ -178,8 +179,8 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
-            case 'Help':
-                this.setState({ theMagicWord: 'help' }, () => {
+            case 'About':
+                this.setState({ theMagicWord: 'about' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
@@ -439,8 +440,8 @@ class Lobby extends Component {
                                 {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span> */}
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-cog menu-icon"></i>Settings</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>About</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('About')}><i className="fas fa-question menu-icon"></i>About</span>
                                 <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
                             </div>
                         </section>
@@ -521,13 +522,13 @@ class Lobby extends Component {
                                                                 </div>
                                                         }
                                                     </div>
-                                                    : theMagicWord === 'account' ?
+                                                    : theMagicWord === 'settings' ?
                                                         <div>
                                                             <Account
                                                                 accountInfo={this.state.accountInfo}
                                                             />
                                                         </div>
-                                                        : theMagicWord === 'help' &&
+                                                        : theMagicWord === 'about' &&
                                                         <div>
                                                             <About />
                                                         </div>
