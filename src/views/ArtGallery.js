@@ -117,7 +117,7 @@ class ArtGallery extends Component {
     }
 
     render() {
-        let { wallTexture, floorTexture, music, captions } = this.state
+        let { wallTexture, floorTexture, music, captions, position } = this.state
         console.log(this.state, 'state of gallery')
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (

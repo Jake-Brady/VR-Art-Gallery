@@ -152,7 +152,9 @@ class LandingPage extends Component {
 
     adjustFavorites(galleryId, timesFavorited) {
         //Check whether user is signed in first, otherwise cancel function
-        if (!this.state.user) return;
+        if (!this.state.user) {
+            this.notification(null, 'signin')
+        } else {
         // Array of hearts on page and counters to be passed in axios calls
         let galleries = this.state.galleries
         let increaseFave = timesFavorited + 1;
@@ -202,6 +204,7 @@ class LandingPage extends Component {
             }
         }
     }
+    }
 
     shareGallery(galleryName, author, galleryId, galleryShares) {
         this.notification(galleryName, 'share')
@@ -239,6 +242,11 @@ class LandingPage extends Component {
             
             
     notification = (name, type) => {
+        if (!name && type === 'signin'){
+            const pop = document.querySelector('.add-favorites-pop')
+            pop.innerText = `Sign in to add to favorites`
+            this.startNotification(pop)
+        }
         if (name && type === 'share'){
             const pop = document.querySelector('.clipboard-pop')
             pop.innerText = `Copied ${name} to Clipboard`
