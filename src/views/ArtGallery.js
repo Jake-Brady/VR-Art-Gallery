@@ -138,7 +138,18 @@ class ArtGallery extends Component {
                     {/* World Outside */}
                     <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
                     {/* <a-sky material="src:#sky"></a-sky> */}
-                    <a-entity position="0 1 0" clock="font: sourcecodepro; color: #191;"></a-entity>
+                    <a-entity
+                    position="5 3 -1.99"
+                    geometry="primitive: plane"
+                    material="color:black"
+                    scale="4 2 2"
+                    >
+                    </a-entity>
+                    <a-entity 
+                    scale="2 2 2" 
+                    position="3.75 3.10 -1.98" 
+                    clock="font: sourcecodepro; color: #191;">
+                    </a-entity>
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
                     <a-entity id="rig" movement-controls kinematic-body rotation="0 -90 0">
@@ -154,8 +165,8 @@ class ArtGallery extends Component {
                     {/* Frames on Central Walls - First Floor */}
                     {/* Walls closest to Exit Point */}
                     {/* User Images */}
-                    <a-image src="#Portrait6" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 2.01" rotation=" 0 0 0"></a-image>
-                    <a-image src="#Portrait7" height="2.5" width="3.5" className="user-image" position="2.99 2.5 7.48" rotation=" 0 180 0"></a-image>
+                    <a-image id="portrait6" src="#Portrait6" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 2.01" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait7" src="#Portrait7" height="2.5" width="3.5" className="user-image" position="2.99 2.5 7.48" rotation=" 0 180 0"></a-image>
                     {/* frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -187,19 +198,38 @@ class ArtGallery extends Component {
                     scale='.05 .05 .05' 
                     position='2.99 4.5 2.5' 
                     rotation="0 -90 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait6" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     <a-gltf-model 
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='2.99 4.5 7'
                     rotation="0 90 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait7" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
+            
                     
 
                     {/* Centrals Walls - First Floor */}
                     {/* User Images */}
-                    <a-image src="#Portrait8" height="2.5" width="3.5" className="user-image" position="2.99 2.5 8.52" rotation=" 0 0 0"></a-image>
-                    <a-image src="#Portrait9" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 13.98" rotation=" 0 180 0"></a-image>
+                    <a-image id="portrait8" src="#Portrait8" height="2.5" width="3.5" className="user-image" position="2.99 2.5 8.52" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait9" src="#Portrait9" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 13.98" rotation=" 0 180 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -230,18 +260,36 @@ class ArtGallery extends Component {
                     scale='.05 .05 .05' 
                     position='2.99 4.5 9' 
                     rotation="0 -90 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait8" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     <a-gltf-model 
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='2.99 4.5 13.5'
                     rotation="0 90 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait9" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
 
                     {/* Outer Side of Inner-Walls - First Floor */}
                     {/* Near Player Spawn */}
                     {/* User Images */}
-                    <a-image src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .99" rotation=" 0 -180 0"></a-image>
+                    <a-image id="portrait10" src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .99" rotation=" 0 -180 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -260,13 +308,23 @@ class ArtGallery extends Component {
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='2.99 4.5 .5'
-                    rotation="0 90 0">
+                    rotation="0 90 0"
+                    >
+                        <a-light
+                         type="spot"
+                         target="#portrait10" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     
 
                     {/* Near Elevator */}
                     {/* User Image */}
-                    <a-image src="#Portrait11" height="2.5" width="3.5" className="user-image" position="2.99 2.5 15.01" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait11" src="#Portrait11" height="2.5" width="3.5" className="user-image" position="2.99 2.5 15.01" rotation=" 0 0 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -286,13 +344,22 @@ class ArtGallery extends Component {
                     scale='.05 .05 .05' 
                     position='2.99 4.5 15.5'
                     rotation="0 -90 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait11" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     
 
                     {/* Wall - Elevator Side - First Floor */}
                     {/* User Images */}
-                    <a-image src="#Portrait12" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 4.75" rotation=" 0 -270 0"></a-image>
-                    <a-image src="#Portrait13" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 11" rotation=" 0 -270 0"></a-image>
+                    <a-image id="portrait12" src="#Portrait12" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 4.75" rotation=" 0 -270 0"></a-image>
+                    <a-image id="portrait13" src="#Portrait13" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 11" rotation=" 0 -270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -323,20 +390,38 @@ class ArtGallery extends Component {
                     scale='.05 .05 .05' 
                     position='-6.5 4.5 4.75' 
                     rotation="0 0 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait12" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     <a-gltf-model 
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='-6.5 4.5 11'
                     rotation="0 0 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait13" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
 
                     
 
                     {/* Wall - Opposite Side of Elevator - First Floor */}
                     {/* User Images */}
-                    <a-image src="#Portrait14" height="2.5" width="3.5" className="user-image" position="12.99 2.5 4.75" rotation=" 0 270 0"></a-image>
-                    <a-image src="#Portrait15" height="2.5" width="3.5" className="user-image" position="12.99 2.5 11" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait14" src="#Portrait14" height="2.5" width="3.5" className="user-image" position="12.99 2.5 4.75" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait15" src="#Portrait15" height="2.5" width="3.5" className="user-image" position="12.99 2.5 11" rotation=" 0 270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -367,19 +452,37 @@ class ArtGallery extends Component {
                     scale='.05 .05 .05' 
                     position='12.5 4.5 4.75' 
                     rotation="0 180 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait14" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     <a-gltf-model 
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='12.5 4.5 11'
                     rotation="0 180 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait15" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
 
 
                     {/* 2nd Floor Images - Outer Wall on side of elevator */}
                     {/* User Images */}
-                    <a-image src="#Portrait2" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 4.75" rotation=" 0 -270 0"></a-image>
-                    <a-image src="#Portrait3" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 11" rotation="0 -270 0"></a-image>
+                    <a-image id="portrait2" src="#Portrait2" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 4.75" rotation=" 0 -270 0"></a-image>
+                    <a-image id="portrait3" src="#Portrait3" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 11" rotation="0 -270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -410,18 +513,36 @@ class ArtGallery extends Component {
                     scale='.05 .05 .05' 
                     position='-6.5 9.75 4.75'
                     rotation="0 0 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait2" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     <a-gltf-model 
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='-6.5 9.75 11'
                     rotation="0 0 0">
+                        <a-light
+                         type="spot"
+                         target="#portrait3" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
 
                     {/* 2nd Floor Images - Outer Wall opposite of elevator */}
                     {/* User-Images */}
-                    <a-image src="#Portrait4" height="2.5" width="3.5" className="user-image" position="12.99 7.75 4.75" rotation=" 0 270 0"></a-image>
-                    <a-image src="#Portrait5" height="2.5" width="3.5" className="user-image" position="12.99 7.75 11" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait4" src="#Portrait4" height="2.5" width="3.5" className="user-image" position="12.99 7.75 4.75" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait5" src="#Portrait5" height="2.5" width="3.5" className="user-image" position="12.99 7.75 11" rotation=" 0 270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -452,18 +573,38 @@ class ArtGallery extends Component {
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='12.5 9.75 4.75'
-                    rotation="0 180 0">
+                    rotation="0 180 0"
+                    >
+                        <a-light
+                         type="spot"
+                         target="#portrait4" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
                     <a-gltf-model 
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='12.5 9.75 11'
-                    rotation="0 180 0">
+                    rotation="0 180 0"
+                    >
+                        <a-light
+                         type="spot"
+                         target="#portrait5" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
 
                     {/* Opposite of Elevator - 2nd Floor */}
                     {/* User-Image */}
-                    <a-image src="#Portrait1" height="2.5" width="3.5" className="user-image"  position="2.99 7.75 -1.98" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait1" src="#Portrait1" height="2.5" width="3.5" className="user-image"  position="2.99 7.75 -1.98" rotation=" 0 0 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -482,11 +623,18 @@ class ArtGallery extends Component {
                     src="#wallLight" 
                     scale='.05 .05 .05' 
                     position='2.99 9.75 -1.5'
-                    rotation="0 -90 0">
+                    rotation="0 -90 0"
+                    >
+                        <a-light
+                         type="spot"
+                         target="#portrait1" 
+                         angle="50" 
+                         intensity="1" 
+                         color="lightblue"
+                         penumbra=".4"
+                        >
+                        </a-light>
                     </a-gltf-model>
-
-                    
-                    
 
                     {/* Objects */}
                     {/* 3D Object Imports */}
@@ -605,7 +753,7 @@ class ArtGallery extends Component {
 
                     {/* Everything below here is part of the architecture */}
                     {/* Main Art Gallery - 1st Floor */}
-                    <rw-room position="-2 0 -2">
+                    <rw-room id="room-floor" position="-2 0 -2">
                         <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
                         <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 0" height="12"></rw-wall>
                         <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 20" height="12"></rw-wall>
