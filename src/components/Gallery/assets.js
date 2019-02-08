@@ -35,6 +35,7 @@ import Bench from '../../assets/gltfs/bench.glb'
 import 'aframe'
 import {Entity} from 'aframe-react'
 
+
 class Assets extends Component {
     constructor(props){
         super(props)
@@ -55,6 +56,7 @@ componentWillReceiveProps(nextProps) {
         })
     }
   }
+
 
 
 render(){
@@ -103,7 +105,7 @@ render(){
         <Entity id="door" src={Door} alt="Door Obj" />
         <Entity id="table" src={Table} alt="Table Obj" />
         <Entity id="hibiscus" src={Hibiscus} alt="Plant Obj" />
-        <Entity id="stereo" src={Stereo} alt="Stereo Obj" />
+        <Entity id="stereo" src={Stereo} alt="Stereo Obj" change-size/>
         <Entity id="marblePlayer" src={MarblePlayer} alt="Marble Player Obj" />
         <Entity id="pedestal" src={Pedestal} alt="pedestal Obj" />
         <Entity id="penelope" src={Penelope} alt="Marble Player Obj" />
