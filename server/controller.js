@@ -70,10 +70,19 @@ module.exports = {
     },
     incrementView: (req, res, next) => {
         let { galleryId } = req.params
-        console.log(galleryId)
         const db = req.app.get('db')
         db.increment_view([galleryId]).then(view => {
             res.status(200).send(view)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
+    incrementShare: (req,res,next) => {
+        const {galleryId} = req.params
+        const db = req.app.get('db')
+        db.increment_share([galleryId]).then(share => {
+            res.status(200).send(share)
         }).catch(err => {
             console.log(err)
             res.status(500).send(err)

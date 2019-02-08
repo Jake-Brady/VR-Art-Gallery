@@ -12,6 +12,7 @@
     "aframe-react": "^4.4.0",
     "aframe-react-assets": "^2.0.5",
     "aframe-room-component": "^0.3.0",
+    "aframe-sharedspace-component": "^1.0.1",
     "attr-accept": "^1.1.3",
     "aws-sdk": "^2.387.0",
     "axios": "^0.18.0",
@@ -32,6 +33,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
     "redux": "^4.0.1",
+    "socket.io": "^2.2.0",
     "uuid": "^3.3.2"
   },
   "alias": {

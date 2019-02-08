@@ -10,6 +10,7 @@ import 'aframe-physics-system'
 import 'aframe-extras'
 import 'aframe-physics-extras'
 import axios from 'axios'
+import '../components/Gallery/aframeFunctions'
 
 
 
@@ -117,7 +118,7 @@ class ArtGallery extends Component {
     }
 
     render() {
-        let { wallTexture, floorTexture, music, captions } = this.state
+        let { wallTexture, floorTexture, music, captions, position } = this.state
         console.log(this.state, 'state of gallery')
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
@@ -137,7 +138,7 @@ class ArtGallery extends Component {
                     {/* World Outside */}
                     <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
                     {/* <a-sky material="src:#sky"></a-sky> */}
-
+                    <a-entity position="0 1 0" clock="font: sourcecodepro; color: #191;"></a-entity>
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
                     <a-entity id="rig" movement-controls kinematic-body rotation="0 -90 0">
@@ -506,7 +507,8 @@ class ArtGallery extends Component {
                     rotation="0 0 0">
                     </a-gltf-model>
 
-                    <a-gltf-model 
+                    <a-gltf-model
+                    change-sizes
                     static-body 
                     src="#stereo" 
                     scale='.05 .05 .05' 

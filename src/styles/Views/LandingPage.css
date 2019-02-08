@@ -37,7 +37,7 @@
     }
 }
 
-.copyToClip-pop {
+.clipboard-pop {
     visibility: hidden;
     position: fixed;
     left: 10px;
@@ -47,9 +47,35 @@
     font-size: 12px;
     padding: 10px;
     color: rgba(255, 255, 255, 0.80);
+    z-index: 2;
 }
 
-.copy-pop-anim {
+.add-favorites-pop {
+    visibility: hidden;
+    position: fixed;
+    left: 10px;
+    bottom: -100px;
+    height: 40px;
+    background: rgb(247, 60, 46);
+    font-size: 12px;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.80);
+    z-index: 1;
+}
+
+.remove-favorites-pop {
+    visibility: hidden;
+    position: fixed;
+    left: 10px;
+    bottom: -100px;
+    height: 40px;
+    background: rgb(247, 60, 46);
+    font-size: 12px;
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.80);
+}
+
+.notification-pop-anim {
     animation: pop 2s 1;
     animation-fill-mode: forwards;
 }
