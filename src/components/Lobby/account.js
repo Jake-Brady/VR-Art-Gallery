@@ -36,6 +36,15 @@ class Account extends Component {
         })
     }
 
+    checkChanges = () => {
+        const { imageAddress, newUsername, newEmail, newPassword } = this.state
+        console.log(this.state)
+        if (imageAddress) this.changeAvatar()
+        if (newUsername) this.changeUsername()
+        if (newEmail) this.changeEmail()
+        if (newPassword) this.changePassword()
+    }
+
     async changeUsername() {
         const { newUsername, passwordConfirm, username } = this.state
         console.log(passwordConfirm)
@@ -162,8 +171,6 @@ class Account extends Component {
     }
 
     addPass = () => {
-        // const body = document.querySelector('account-edit-inputs')
-        // body.style.height = ''
         this.setState({ pass: true })
     }
 
@@ -218,15 +225,15 @@ class Account extends Component {
                         <img src={this.state.imageAddress || this.state.avatarURL || Placeholder} alt='User Image' style={{ cursor: 'pointer' }} onError={(e) => e.target.src = Placeholder} />
                         <div className='account-edit-inputs'>
                             <h1>USERNAME</h1>
-                            <input />
+                            <input name="newUsername" onChange={(e) => this.handleChange(e)} />
                             <h1>EMAIL</h1>
-                            <input />
+                            <input name="newEmail" onChange={(e) => this.handleChange(e)} />
                             <h1>CURRENT PASSWORD</h1>
-                            <input />
+                            <input name="passwordConfirm" onChange={e => this.handleChange(e)} />
                             {this.state.pass ?
                                 <>
                                     <h1>NEW PASSWORD</h1>
-                                    <input />
+                                    <input name="newPassword" onChange={e => this.handleChange(e)} />
                                 </>
                                 :
                                 <h2 onClick={() => this.addPass()}>Change Password?</h2>
@@ -234,7 +241,7 @@ class Account extends Component {
                         </div>
                         <div className='edit-bottom'>
                             <h2 onClick={() => this.cancelEdit()}>Cancel</h2>
-                            <h1 className='center'>Save</h1>
+                            <h1 className='center' onClick={() => this.checkChanges()}>Save</h1>
                         </div>
                     </div>
                 }
