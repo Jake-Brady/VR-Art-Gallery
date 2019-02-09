@@ -31,7 +31,7 @@ import Stereo from '../../assets/gltfs/stereo.glb'
 import MarblePlayer from '../../assets/gltfs/marblePlayer.glb'
 import Penelope from '../../assets/gltfs/penelope.glb'
 import Pedestal from '../../assets/gltfs/pedestal.glb'
-import Bench from '../../assets/gltfs/bench.glb'
+import Bench from '../../assets/gltfs/canapea.glb'
 import 'aframe'
 import {Entity} from 'aframe-react'
 
