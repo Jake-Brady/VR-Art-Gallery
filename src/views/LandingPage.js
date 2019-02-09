@@ -206,7 +206,8 @@ class LandingPage extends Component {
         }
     }
 
-    shareGallery(galleryName, author, galleryId, galleryShares) {
+    shareGallery(galleryName, author, galleryId, galleryShares, {target}) {
+        target.style.color = 'rgb(110, 142, 254)'
         this.notification(galleryName, 'share')
         this.increaseShare(galleryId, galleryShares)
         const location = window.location
@@ -303,7 +304,7 @@ class LandingPage extends Component {
                         <div className='gallery-stats'>
                             <i className="fas fa-eye stat"></i><span>{gallery.views}</span>
                             <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><span>{timesFavorited}</span>
-                            <i onClick={() => this.shareGallery(galleryName, author, galleryId, gallery.shares)} className="fas fa-share stat"></i><span>{gallery.shares}</span>
+                            <i onClick={(e) => this.shareGallery(galleryName, author, galleryId, gallery.shares, e)} className="fas fa-share stat"></i><span>{gallery.shares}</span>
                         </div>
                         <div onClick={() => this.visitGallery(galleryId, galleryName, author)} className='gallery-view center'>Visit Gallery</div>
                     </div>
