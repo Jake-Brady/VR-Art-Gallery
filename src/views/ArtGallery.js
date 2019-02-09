@@ -9,6 +9,7 @@ import 'aframe-room-component'
 import 'aframe-physics-system'
 import 'aframe-extras'
 import 'aframe-physics-extras'
+import 'aframe-star-system-component'
 import axios from 'axios'
 import '../components/Gallery/aframeFunctions'
 
@@ -133,12 +134,24 @@ class ArtGallery extends Component {
                         </div>
                     </div>
                 </div>
-                <Scene physics="debug: true" stats id='scene'>
+                <Scene physics="debug: false" stats id='scene'>
                 <Assets />
-                    {/* World Outside */}
-                    <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
-                    {/* <a-sky material="src:#sky"></a-sky> */}
-                    <a-entity position="0 1 0" clock="font: sourcecodepro; color: #191;"></a-entity>
+                    {/* World Outside - Star System outside skylight */}
+                <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
+                <a-sky color="#000"></a-sky>
+                <a-entity star-system></a-entity>
+                    <a-entity
+                    position="5 3 -1.99"
+                    geometry="primitive: plane"
+                    material="color:black"
+                    scale="4 2 2"
+                    >
+                    </a-entity>
+                    <a-entity 
+                    scale="2 2 2" 
+                    position="3.75 3.10 -1.98" 
+                    clock="font: sourcecodepro; color: #191;">
+                    </a-entity>
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
                     <a-entity id="rig" movement-controls kinematic-body rotation="0 -90 0">
@@ -154,8 +167,8 @@ class ArtGallery extends Component {
                     {/* Frames on Central Walls - First Floor */}
                     {/* Walls closest to Exit Point */}
                     {/* User Images */}
-                    <a-image src="#Portrait6" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 2.01" rotation=" 0 0 0"></a-image>
-                    <a-image src="#Portrait7" height="2.5" width="3.5" className="user-image" position="2.99 2.5 7.48" rotation=" 0 180 0"></a-image>
+                    <a-image id="portrait6" src="#Portrait6" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 2.01" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait7" src="#Portrait7" height="2.5" width="3.5" className="user-image" position="2.99 2.5 7.48" rotation=" 0 180 0"></a-image>
                     {/* frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -181,25 +194,13 @@ class ArtGallery extends Component {
                     rotation="0 180 0"
                     >
                     </a-text>
-                    {/* light */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='2.99 4.5 2.5' 
-                    rotation="0 -90 0">
-                    </a-gltf-model>
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='2.99 4.5 7'
-                    rotation="0 90 0">
-                    </a-gltf-model>
+            
                     
 
                     {/* Centrals Walls - First Floor */}
                     {/* User Images */}
-                    <a-image src="#Portrait8" height="2.5" width="3.5" className="user-image" position="2.99 2.5 8.52" rotation=" 0 0 0"></a-image>
-                    <a-image src="#Portrait9" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 13.98" rotation=" 0 180 0"></a-image>
+                    <a-image id="portrait8" src="#Portrait8" height="2.5" width="3.5" className="user-image" position="2.99 2.5 8.52" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait9" src="#Portrait9" height="2.5" width="3.5" className="user-image"  position="2.99 2.5 13.98" rotation=" 0 180 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -224,24 +225,11 @@ class ArtGallery extends Component {
                     position='3.8 1.13 13.92'
                     rotation="0 180 0"
                     ></a-text>
-                    {/* Lights */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='2.99 4.5 9' 
-                    rotation="0 -90 0">
-                    </a-gltf-model>
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='2.99 4.5 13.5'
-                    rotation="0 90 0">
-                    </a-gltf-model>
 
                     {/* Outer Side of Inner-Walls - First Floor */}
                     {/* Near Player Spawn */}
                     {/* User Images */}
-                    <a-image src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .99" rotation=" 0 -180 0"></a-image>
+                    <a-image id="portrait10" src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .99" rotation=" 0 -180 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -255,18 +243,12 @@ class ArtGallery extends Component {
                     position='3.8 1.13 .92'
                     rotation="0 180 0"
                     ></a-text>
-                    {/* Wall Light */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='2.99 4.5 .5'
-                    rotation="0 90 0">
-                    </a-gltf-model>
+                   
                     
 
                     {/* Near Elevator */}
                     {/* User Image */}
-                    <a-image src="#Portrait11" height="2.5" width="3.5" className="user-image" position="2.99 2.5 15.01" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait11" src="#Portrait11" height="2.5" width="3.5" className="user-image" position="2.99 2.5 15.01" rotation=" 0 0 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -280,19 +262,13 @@ class ArtGallery extends Component {
                     position='1.9 1.13 15.08'
                     rotation="0 0 0"
                     ></a-text>
-                    {/* Wall Light */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='2.99 4.5 15.5'
-                    rotation="0 -90 0">
-                    </a-gltf-model>
+                    
                     
 
                     {/* Wall - Elevator Side - First Floor */}
                     {/* User Images */}
-                    <a-image src="#Portrait12" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 4.75" rotation=" 0 -270 0"></a-image>
-                    <a-image src="#Portrait13" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 11" rotation=" 0 -270 0"></a-image>
+                    <a-image id="portrait12" src="#Portrait12" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 4.75" rotation=" 0 -270 0"></a-image>
+                    <a-image id="portrait13" src="#Portrait13" height="2.5" width="3.5" className="user-image" position="-6.98 2.5 11" rotation=" 0 -270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -317,26 +293,14 @@ class ArtGallery extends Component {
                     position='-6.92 1.13 11.9'
                     rotation="0 90 0"
                     ></a-text>
-                    {/* Lights */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='-6.5 4.5 4.75' 
-                    rotation="0 0 0">
-                    </a-gltf-model>
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='-6.5 4.5 11'
-                    rotation="0 0 0">
-                    </a-gltf-model>
+                    
 
                     
 
                     {/* Wall - Opposite Side of Elevator - First Floor */}
                     {/* User Images */}
-                    <a-image src="#Portrait14" height="2.5" width="3.5" className="user-image" position="12.99 2.5 4.75" rotation=" 0 270 0"></a-image>
-                    <a-image src="#Portrait15" height="2.5" width="3.5" className="user-image" position="12.99 2.5 11" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait14" src="#Portrait14" height="2.5" width="3.5" className="user-image" position="12.99 2.5 4.75" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait15" src="#Portrait15" height="2.5" width="3.5" className="user-image" position="12.99 2.5 11" rotation=" 0 270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -361,25 +325,13 @@ class ArtGallery extends Component {
                     position='12.91 1.13 10.3'
                     rotation="0 -90 0"
                     ></a-text>
-                    {/* Lights */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='12.5 4.5 4.75' 
-                    rotation="0 180 0">
-                    </a-gltf-model>
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='12.5 4.5 11'
-                    rotation="0 180 0">
-                    </a-gltf-model>
+                   
 
 
                     {/* 2nd Floor Images - Outer Wall on side of elevator */}
                     {/* User Images */}
-                    <a-image src="#Portrait2" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 4.75" rotation=" 0 -270 0"></a-image>
-                    <a-image src="#Portrait3" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 11" rotation="0 -270 0"></a-image>
+                    <a-image id="portrait2" src="#Portrait2" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 4.75" rotation=" 0 -270 0"></a-image>
+                    <a-image id="portrait3" src="#Portrait3" height="2.5" width="3.5" className="user-image" position="-6.98 7.75 11" rotation="0 -270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -404,24 +356,12 @@ class ArtGallery extends Component {
                     position='-6.92 6.4 11.7'
                     rotation="0 90 0"
                     ></a-text>
-                    {/* Wall Lights */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='-6.5 9.75 4.75'
-                    rotation="0 0 0">
-                    </a-gltf-model>
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='-6.5 9.75 11'
-                    rotation="0 0 0">
-                    </a-gltf-model>
+                    
 
                     {/* 2nd Floor Images - Outer Wall opposite of elevator */}
                     {/* User-Images */}
-                    <a-image src="#Portrait4" height="2.5" width="3.5" className="user-image" position="12.99 7.75 4.75" rotation=" 0 270 0"></a-image>
-                    <a-image src="#Portrait5" height="2.5" width="3.5" className="user-image" position="12.99 7.75 11" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait4" src="#Portrait4" height="2.5" width="3.5" className="user-image" position="12.99 7.75 4.75" rotation=" 0 270 0"></a-image>
+                    <a-image id="portrait5" src="#Portrait5" height="2.5" width="3.5" className="user-image" position="12.99 7.75 11" rotation=" 0 270 0"></a-image>
                     {/* Frames */}
                     <a-gltf-model 
                     src="#frame" 
@@ -447,23 +387,11 @@ class ArtGallery extends Component {
                     position='12.92 6.4 10.3'
                     rotation="0 -90 0"
                     ></a-text>
-                    {/* Lights */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='12.5 9.75 4.75'
-                    rotation="0 180 0">
-                    </a-gltf-model>
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='12.5 9.75 11'
-                    rotation="0 180 0">
-                    </a-gltf-model>
+                  
 
                     {/* Opposite of Elevator - 2nd Floor */}
                     {/* User-Image */}
-                    <a-image src="#Portrait1" height="2.5" width="3.5" className="user-image"  position="2.99 7.75 -1.98" rotation=" 0 0 0"></a-image>
+                    <a-image id="portrait1" src="#Portrait1" height="2.5" width="3.5" className="user-image"  position="2.99 7.75 -1.98" rotation=" 0 0 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -477,22 +405,12 @@ class ArtGallery extends Component {
                     position='2.3 6.4 -1.92'
                     rotation="0 0 0"
                     ></a-text>
-                    {/* Wall Light */}
-                    <a-gltf-model 
-                    src="#wallLight" 
-                    scale='.05 .05 .05' 
-                    position='2.99 9.75 -1.5'
-                    rotation="0 -90 0">
-                    </a-gltf-model>
-
-                    
                     
 
                     {/* Objects */}
                     {/* 3D Object Imports */}
                     <a-gltf-model
                     onClick={() => this.exit()}
-                    static-body 
                     src="#door" 
                     scale='.0015 .0015 .0015' 
                     position='-4.5 0 -1.99' 
@@ -508,11 +426,9 @@ class ArtGallery extends Component {
                     </a-gltf-model>
 
                     <a-gltf-model
-                    change-sizes
-                    static-body 
                     src="#stereo" 
-                    scale='.05 .05 .05' 
-                    position='-6.45 1.35 -.4' 
+                    scale='2.5 2.5 2.5' 
+                    position='-6.65 1.57 .52' 
                     rotation="0 90 0"
                     sound={`src:${music}; on:click; rolloffFactor:.1`}
                     >
@@ -537,17 +453,17 @@ class ArtGallery extends Component {
                     <a-gltf-model 
                     static-body 
                     src="#bench" 
-                    scale='.002 .002 .002' 
-                    position='7.15 5.51 17.5' 
-                    rotation="0 0 0">
+                    scale='21 21 21' 
+                    position='9.15 9.51 20.5' 
+                    rotation="0 180 0">
                     </a-gltf-model>
 
                     <a-gltf-model 
                     static-body 
                     src="#bench" 
-                    scale='.002 .002 .002' 
-                    position='2.15 5.51 17.5' 
-                    rotation="0 0 0">
+                    scale='21 21 21' 
+                    position='4.15 9.51 20.5' 
+                    rotation="0 180 0">
                     </a-gltf-model>
 
                     <a-gltf-model 
@@ -605,26 +521,26 @@ class ArtGallery extends Component {
 
                     {/* Everything below here is part of the architecture */}
                     {/* Main Art Gallery - 1st Floor */}
-                    <rw-room position="-2 0 -2">
+                    <rw-room id="room-floor" position="-2 0 -2">
                         <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
                         <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 0" height="12"></rw-wall>
                         <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 20" height="12"></rw-wall>
                         <rw-wall material={`src:${wallTexture}; repeat: 2`} position="-5 0 20" height="12"></rw-wall>
                         <rw-wall material={`src:${wallTexture}; repeat: 2`} position="-5 0 0" height="12"></rw-wall>
                     </rw-room>
-                     {/* Invisible Box Barriers to prevent players from leaving the room. */}
-                     <a-plane material="visible:true" width="18" height="15" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
+                     {/* Invisible Plane Barriers to prevent players from leaving the room. */}
+                     <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="15" static-body position="-8 5 10" rotation=" 0 270 0"></a-plane>
+                    <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="-8 5 10" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="15" static-body position="5 5 -3" rotation=" 0 180 0"></a-plane>
+                    <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="3 5 -3" rotation=" 0 180 0"></a-plane>
 
-                    <a-plane material="visible:true" width="16" height="15" static-body position="5 5 19" rotation=" 0 180 0"></a-plane>
+                    <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="3 5 19" rotation=" 0 180 0"></a-plane>
 
                     {/* Interior Walls and Pillars for added Decorations */}
-                    <a-box width="8" height="7" depth="1" static-body position="3 2 1.5"></a-box>
-                    <a-box width="8" height="7" depth="1" static-body position="3 2 8"></a-box>
-                    <a-box width="8" height="7" depth="1" static-body position="3 2 14.5"></a-box>
+                    <a-box material="src:#marble; side:front" width="8" height="7" depth="1" static-body position="3 2 1.5"></a-box>
+                    <a-box material="src:#marble" width="8" height="7" depth="1" static-body position="3 2 8"></a-box>
+                    <a-box material="src:#marble" width="8" height="7" depth="1" static-body position="3 2 14.5"></a-box>
 
                     {/* 2nd Floor */}
                     {/* Glass Floor - Center */}
