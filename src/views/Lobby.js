@@ -347,7 +347,6 @@ class Lobby extends Component {
     render() {
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked, accountInfo } = this.state
         //Map over list of favorites, followers, and existing galleries, pass to separate components for styling them as distinct sections.
-
         const listOfFavorites = favoritedGalleries.map((e) => {
             const image = e.thumbnail,
                 key = e.id,

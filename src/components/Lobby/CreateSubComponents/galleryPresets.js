@@ -17,6 +17,8 @@ import calmant from '../../../assets/Calmant.jpg'
 import impromptu from '../../../assets/Impromptu.jpg'
 import onThePassingOfTime from '../../../assets/onThePassingOfTime.jpg'
 import snowDrop from '../../../assets/SnowDrop.jpg'
+//Audio
+import gymnopediaPreview from '../../../assets/audio/Gymnopedie_No_1.mp3'
 
 class GalleryPresets extends Component {
     constructor() {
@@ -27,7 +29,8 @@ class GalleryPresets extends Component {
             floor: '',
             wall: '',
             finalCountdown: 2,
-            down: false
+            down: false,
+            audio: ''
         }
     }
 
@@ -50,41 +53,101 @@ class GalleryPresets extends Component {
     }
 
     setTexture = (section, target) => {
-        document.querySelectorAll(`#${section} > img`).forEach(option => option.style.opacity = '.2')
+        document.querySelectorAll(`#${section} img`).forEach(option => option.style.opacity = '.2')
         target.style.opacity = '1'
-        // wood, stoneTiles, seamlessStone, streetPaved, porcleainTiles
-        // granite, brickPavement, cork, redwallBrick, cobblestone
-        console.log(target.getAttribute('data'))
         this.setState({ [section]: target.getAttribute('data') })
     }
 
+    audioPreview = file => {
+        const audio = new Audio(file)
+    }
+
     render() {
-        console.log(this.state)
         return (
             <section className="gallery-presets">
                 <div id='wall'>
                     <h1>Wall Texture</h1>
-                    <img onClick={(e) => this.setTexture('wall', e.target)} data="granite" src={granite} alt='granite texture' />
-                    <img onClick={(e) => this.setTexture('wall', e.target)} data="brickPavement" src={brickPavement} alt='brick pavement texture' />
-                    <img onClick={(e) => this.setTexture('wall', e.target)} data="redBrick" src={redBrick} alt='red brick texture' />
-                    <img onClick={(e) => this.setTexture('wall', e.target)} data="cork" src={corkwall} alt='cork texture' />
-                    <img onClick={(e) => this.setTexture('wall', e.target)} data="cobblestone" src={cobblestone} alt='cobblestone texture' />
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('wall', e.target)} data="granite" src={granite} alt='granite texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>GRANITE</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('wall', e.target)} data="brickPavement" src={brickPavement} alt='brick pavement texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>PAVEMENT</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('wall', e.target)} data="redBrick" src={redBrick} alt='red brick texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>BRICK</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('wall', e.target)} data="cork" src={corkwall} alt='cork texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>CORK</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('wall', e.target)} data="cobblestone" src={cobblestone} alt='cobblestone texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>COBBLESTONE</span>
+                    </div>
                 </div>
                 <div id='floor'>
                     <h1>Floor Texture</h1>
-                    <img onClick={(e) => this.setTexture('floor', e.target)} data="wood" src={wood} alt='laminate wood flooring texture' />
-                    <img onClick={(e) => this.setTexture('floor', e.target)} data="porcelainTiles" src={terrazzoPorcelainTiles} alt='terrazzo porcelain tiles flooring texture' />
-                    <img onClick={(e) => this.setTexture('floor', e.target)} data="streetPaved" src={streetPaved} alt='street paved texture' />
-                    <img onClick={(e) => this.setTexture('floor', e.target)} data="seamlessStone" src={seamlessStone} alt='seamless stone texture' />
-                    <img onClick={(e) => this.setTexture('floor', e.target)} data-type="stoneTiles" src={stoneTiles} alt='stone tiles texture' />
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('floor', e.target)} data="wood" src={wood} alt='laminate wood flooring texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>WOOD</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('floor', e.target)} data="porcelainTiles" src={terrazzoPorcelainTiles} alt='terrazzo porcelain tiles flooring texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>PORCELAIN</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('floor', e.target)} data="streetPaved" src={streetPaved} alt='street paved texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>PAVED</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('floor', e.target)} data="seamlessStone" src={seamlessStone} alt='seamless stone texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>STONE</span>
+                    </div>
+                    <div className='center gallery-preset'>
+                        <img onClick={(e) => this.setTexture('floor', e.target)} data-type="stoneTiles" src={stoneTiles} alt='stone tiles texture' />
+                        <div className='gallery-preset-overlay' />
+                        <span className='gallery-preset-name'>TILES</span>
+                    </div>
                 </div>
                 <div id='music'>
                     <h1>Music Selection</h1>
-                    <img onClick={(e) => this.setTexture('music', e.target)} data='gymnopedie' src={gymnopedie} alt='Gymnopedie by Kevin Macleod' />
-                    <img onClick={(e) => this.setTexture('music', e.target)} data="calmant" src={calmant} alt='Calmant by Kevin Macleod' />
+                    <div className='center gallery-preset gallery-music-box' onClick={() => this.audioPreview(gymnopediaPreview)} >
+                        <div className='gallery-preset-overlay' />
+                        GYMNOPEDIE
+                    </div>
+                    <div className='center gallery-preset gallery-music-box'>
+                        <div className='gallery-preset-overlay' />
+                        CALMANT
+                    </div>
+                    <div className='center gallery-preset gallery-music-box'>
+                        <div className='gallery-preset-overlay' />
+                        SNOW DROP
+                    </div>
+                    <div className='center gallery-preset gallery-music-box'>
+                        <div className='gallery-preset-overlay' />
+                        IMPROMPTU IN QUARTER COMMA MEANTONE
+                    </div>
+                    <div className='center gallery-preset gallery-music-box'>
+                        <div className='gallery-preset-overlay' />
+                        ON THE PASSING OF TIME
+                    </div>
+                    {/* <img onClick={(e) => this.setTexture('music', e.target)} data='gymnopedie' src={gymnopedie} alt='Gymnopedie by Kevin Macleod' /> */}
+                    {/* <img onClick={(e) => this.setTexture('music', e.target)} data="calmant" src={calmant} alt='Calmant by Kevin Macleod' />
                     <img onClick={(e) => this.setTexture('music', e.target)} data="snowDrop" src={snowDrop} alt='Snow Drop by Kevin Macleod' />
                     <img onClick={(e) => this.setTexture('music', e.target)} data="impromptu" src={impromptu} alt='Impromptu in Quarter Comma Meantone by Kevin Macleod' />
-                    <img onClick={(e) => this.setTexture('music', e.target)} data="onThePassingOfTime" src={onThePassingOfTime} alt='On The Passing of Time by Kevin Macleod' />
+                    <img onClick={(e) => this.setTexture('music', e.target)} data="onThePassingOfTime" src={onThePassingOfTime} alt='On The Passing of Time by Kevin Macleod' /> */}
                 </div>
             </section>
         )

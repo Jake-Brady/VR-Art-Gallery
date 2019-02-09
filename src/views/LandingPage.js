@@ -7,20 +7,20 @@ import $ from 'jquery'
 class LandingPage extends Component {
     constructor(props) {
         super(props)
-            this.state = {
-                mobileToggle: false,
-                user: '',
-                loading: true,
-                galleries: [],
-                favorited: [],
-                favoriteNum: 0,
-                notificationType: '',
-                sharedGalleries: [],
-            }
+        this.state = {
+            mobileToggle: false,
+            user: '',
+            loading: true,
+            galleries: [],
+            favorited: [],
+            favoriteNum: 0,
+            notificationType: '',
+            sharedGalleries: [],
+        }
     }
 
     async componentDidMount() {
-        if (document.querySelector('html').classList.contains('a-html')){
+        if (document.querySelector('html').classList.contains('a-html')) {
             window.location.reload(true)
         }
         const offset = this.state.galleries.length,
@@ -32,7 +32,7 @@ class LandingPage extends Component {
         this.getFavorites()
     }
 
-    async getFavorites(){
+    async getFavorites() {
         // Sees whether user is logged in. If true, it will store favorites in array to be compared with galleries array so addToFavorites/removeFromFavorites function will work.
         const favorites = await axios.get(`/api/getFavorites/`)
         this.setState({ favorited: favorites.data }, () => {
@@ -138,7 +138,7 @@ class LandingPage extends Component {
             let joinedArray = this.state.galleries.concat(arrayOfNewGalleries)
             this.setState({ galleries: joinedArray }, () => {
                 if (this.state.user) {
-                   this.getFavorites()
+                    this.getFavorites()
                 }
             })
         })
@@ -155,55 +155,55 @@ class LandingPage extends Component {
         if (!this.state.user) {
             this.notification(null, 'signin')
         } else {
-        // Array of hearts on page and counters to be passed in axios calls
-        let galleries = this.state.galleries
-        let increaseFave = timesFavorited + 1;
-        let decreaseFave = timesFavorited - 1;
-        const hearts = document.getElementsByClassName('fa-heart')
-        for (let i = 0; i < hearts.length; i++) {
-            if (Number(hearts[i].getAttribute('data-id')) === galleryId) {
-                // if heart is already filled in as red, then remove class, decrement count on state for increased perceived loading time, decrement count on gallery's database, and then subsequently remove from favorites in user's database.
-                if (hearts[i].classList.contains('make-red')) {
-                    // remove color
-                    hearts[i].classList.remove('make-red');
-                    // loop through copy of existing galleries to find gallery matching the element where heart is located.
-                    for (let i = 0; i < galleries.length; i++) {
-                        if (galleries[i].id === galleryId) {
-                            // popup saying galleryName has been removed from favorites
-                            this.notification(galleries[i].gallery_name, 'removed')
-                            // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
-                            galleries[i].times_favorited = decreaseFave
-                            this.setState({ galleries }, () => {
-                                //   after State has been updated, update favorited number on gallery then remove from favorites list in db.
-                                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Decrease: 1 }).then(res => {
-                                    // pass in ID to be deleted from favorites table
-                                    axios.delete(`/api/deleteFromFavorites/${galleryId}`)
+            // Array of hearts on page and counters to be passed in axios calls
+            let galleries = this.state.galleries
+            let increaseFave = timesFavorited + 1;
+            let decreaseFave = timesFavorited - 1;
+            const hearts = document.getElementsByClassName('fa-heart')
+            for (let i = 0; i < hearts.length; i++) {
+                if (Number(hearts[i].getAttribute('data-id')) === galleryId) {
+                    // if heart is already filled in as red, then remove class, decrement count on state for increased perceived loading time, decrement count on gallery's database, and then subsequently remove from favorites in user's database.
+                    if (hearts[i].classList.contains('make-red')) {
+                        // remove color
+                        hearts[i].classList.remove('make-red');
+                        // loop through copy of existing galleries to find gallery matching the element where heart is located.
+                        for (let i = 0; i < galleries.length; i++) {
+                            if (galleries[i].id === galleryId) {
+                                // popup saying galleryName has been removed from favorites
+                                this.notification(galleries[i].gallery_name, 'removed')
+                                // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
+                                galleries[i].times_favorited = decreaseFave
+                                this.setState({ galleries }, () => {
+                                    //   after State has been updated, update favorited number on gallery then remove from favorites list in db.
+                                    axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Decrease: 1 }).then(res => {
+                                        // pass in ID to be deleted from favorites table
+                                        axios.delete(`/api/deleteFromFavorites/${galleryId}`)
+                                    })
                                 })
-                            })
+                            }
                         }
-                    }
-                } else {
-                    //popup saying galleryName has been added to favorites
-                    this.notification(galleries[i].gallery_name, 'favorited')
-                    // add color
-                    hearts[i].classList.add('make-red')
-                    // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
-                    for (let i = 0; i < galleries.length; i++) {
-                        if (galleries[i].id === galleryId) {
-                            galleries[i].times_favorited = increaseFave
-                            this.setState({ galleries }, () => {
-                                // pass in galleryId to adjust favorites number in server
-                                axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Increase: 1 }).then(res => {
-                                    // pass in galleryId as body to add into favorites table
-                                    axios.post(`/api/addToFavorites/`, { galleryId })
+                    } else {
+                        //popup saying galleryName has been added to favorites
+                        this.notification(galleries[i].gallery_name, 'favorited')
+                        // add color
+                        hearts[i].classList.add('make-red')
+                        // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
+                        for (let i = 0; i < galleries.length; i++) {
+                            if (galleries[i].id === galleryId) {
+                                galleries[i].times_favorited = increaseFave
+                                this.setState({ galleries }, () => {
+                                    // pass in galleryId to adjust favorites number in server
+                                    axios.put(`/api/adjustGalleryFavorites/${galleryId}`, { Increase: 1 }).then(res => {
+                                        // pass in galleryId as body to add into favorites table
+                                        axios.post(`/api/addToFavorites/`, { galleryId })
+                                    })
                                 })
-                            })
+                            }
                         }
                     }
                 }
             }
         }
-    }
     }
 
     shareGallery(galleryName, author, galleryId, galleryShares) {
@@ -219,44 +219,44 @@ class LandingPage extends Component {
         textField.remove()
     }
 
-    increaseShare(galleryId, galleryShares){
+    increaseShare(galleryId, galleryShares) {
         // To prevent spamming of shared, it'll keep a record of which galleries are being shared and not update the client or database, but still allow the user to see the notification and paste the URL.
         let sharedGalleries = this.state.sharedGalleries,
             galleries = this.state.galleries,
             gallerySharesIncrement = galleryShares + 1,
             hasSomeoneSharedThisAlready = sharedGalleries.includes(galleryId)
-            // Needs to check whether value is in sharedGalleries
-            // if true, return nothing.  if false, perform the loop below:
-            if(!hasSomeoneSharedThisAlready){
+        // Needs to check whether value is in sharedGalleries
+        // if true, return nothing.  if false, perform the loop below:
+        if (!hasSomeoneSharedThisAlready) {
             sharedGalleries.push(galleryId)
-            for(let i = 0; i < galleries.length; i++){
-                if(galleries[i].id === galleryId){
+            for (let i = 0; i < galleries.length; i++) {
+                if (galleries[i].id === galleryId) {
                     galleries[i].shares = gallerySharesIncrement
-                    this.setState({galleries}, async () => {
-                    const shareIncrement = await axios.put(`/api/increaseShare/${galleryId}`)
-                        })
-                    } 
+                    this.setState({ galleries }, async () => {
+                        const shareIncrement = await axios.put(`/api/increaseShare/${galleryId}`)
+                    })
                 }
             }
+        }
     }
-            
-            
+
+
     notification = (name, type) => {
-        if (!name && type === 'signin'){
+        if (!name && type === 'signin') {
             const pop = document.querySelector('.add-favorites-pop')
             pop.innerText = `Sign in to add to favorites`
             this.startNotification(pop)
         }
-        if (name && type === 'share'){
+        if (name && type === 'share') {
             const pop = document.querySelector('.clipboard-pop')
             pop.innerText = `Copied ${name} to Clipboard`
             this.startNotification(pop)
-        } else if (name && type === 'removed'){
+        } else if (name && type === 'removed') {
             const pop = document.querySelector('.remove-favorites-pop')
             pop.innerText = `Removed ${name} from favorites`
             pop.classList.add('notification-pop-anim')
             this.startNotification(pop)
-        } else if (name && type === 'favorited'){
+        } else if (name && type === 'favorited') {
             const pop = document.querySelector('.add-favorites-pop')
             pop.innerText = `Added ${name} to favorites`
             pop.classList.add('notification-pop-anim')
@@ -264,11 +264,27 @@ class LandingPage extends Component {
         }
     }
 
-    startNotification(pop){
-    pop.classList.add('notification-pop-anim')
-    setTimeout(() => {
-        pop.classList.remove('notification-pop-anim')
-    }, 2000);
+    startNotification(pop) {
+        pop.classList.add('notification-pop-anim')
+        setTimeout(() => {
+            pop.classList.remove('notification-pop-anim')
+        }, 2000);
+    }
+
+    handleVideo = ({ target }) => {
+        const play = document.querySelector('.video-icons'),
+            pause = document.querySelector('.video-icons2')
+        if (!target.paused) {
+            play.classList.remove('video-anim')
+            play.style.opacity = '0'
+            pause.classList.add('video-anim')
+            target.pause()
+        }
+        else {
+            pause.classList.remove('video-anim')
+            play.classList.add('video-anim')
+            target.play()
+        }
     }
 
     render() {
@@ -281,7 +297,7 @@ class LandingPage extends Component {
                 <div key={galleryId} className='gallery-container'>
                     <img src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                     <div className='gallery-text'>
-                        <h1 className='gallery-title'>{galleryName.length > 20 ? galleryName.slice(0,20) + '...' : galleryName}</h1>
+                        <h1 className='gallery-title'>{galleryName.length > 20 ? galleryName.slice(0, 20) + '...' : galleryName}</h1>
                         <div className='gallery-title-hover'>{galleryName}</div>
                         <h3 className='gallery-author'>BY:{author}</h3>
                         <div className='gallery-stats'>
@@ -320,7 +336,13 @@ class LandingPage extends Component {
                                     <h3>Make your own or browse other galleries</h3>
                                     <div className='center' onClick={() => this.smoothScroll('gallery')}>VIEW GALLERIES</div>
                                     <div className='video-container center'>
-                                        <video controls src={VRVideo} alt="trailer of VR-Art-Gallery"></video>
+                                        <div className='video-icons center'>
+                                            <i className="fas fa-play"></i>
+                                        </div>
+                                        <div className='video-icons2 center'>
+                                            <i className="fas fa-pause"></i>
+                                        </div>
+                                        <video src={VRVideo} alt="trailer of VR-Art-Gallery" onClick={e => this.handleVideo(e)}></video>
                                     </div>
                                 </div>
                             </div>
@@ -332,9 +354,9 @@ class LandingPage extends Component {
                             <div className='landing-back center' onClick={() => this.smoothScroll('home')}>
                                 <i className="fas fa-arrow-up"></i>
                             </div>
-                        <div className="clipboard-pop center"></div>
-                        <div className="add-favorites-pop center"></div>
-                        <div className="remove-favorites-pop center"></div>
+                            <div className="clipboard-pop center"></div>
+                            <div className="add-favorites-pop center"></div>
+                            <div className="remove-favorites-pop center"></div>
                         </main>
                     </div>
                     :

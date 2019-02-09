@@ -370,6 +370,48 @@
     font-weight: 300;
 }
 
+.gallery-preset {
+    position: relative;
+    cursor: pointer;
+}
+
+.gallery-preset:hover span, .gallery-preset:hover > div {
+    visibility: visible;
+}
+
+.gallery-preset-overlay {
+    position: absolute;
+    left: 0px;
+    width: 170px;
+    height: 150px;
+    background: black;
+    opacity: .2;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.gallery-preset-name {
+    position: absolute;
+    left: 50%;
+    top: 43%;
+    color: white;
+    transform: translate(-50%);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.gallery-music-box {
+    background: rgb(204, 202, 202);
+    width: 170px;
+    height: 150px;
+    text-align: center;
+    opacity: .2;
+}
+
+.gallery-music-box:hover {
+    opacity: .6;
+}
+
 #edit-gallery-btn:hover, #create-gallery-btn:hover {
     background: rgb(52, 95, 189);
 }
