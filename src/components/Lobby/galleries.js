@@ -15,7 +15,7 @@ class Galleries extends Component {
     render() {
         let { id, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery, isPrivate } = this.props
         return (
-            <div key={id} className='gallery-container'>
+            <div key={id} className='gallery-container gallery-card-anim'>
                 <img src={image} alt='Card Thumbnail' className='gallery-thumbnail' />
                 <div className='gallery-text'>
                     <h1 className='gallery-title'>{galleryName.length > 15 ? galleryName.slice(0,15) + '...' : galleryName}</h1>

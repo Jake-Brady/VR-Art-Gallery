@@ -115,23 +115,21 @@
     margin-bottom: 10px;
 }
 
-.delete-btn{
+.delete-btn {
     width: 100%;
     height: 40px;
-    border: 1px solid rgba(0, 0, 0, 0.185);
-    padding: 5px;
     font-size: 15px;
     font-family: 'Oswald', sans-serif;
-    background: url('../Media/Placeholder.png');
-    color: rgba(0, 0, 0, 0.472);
-    margin-bottom: 5px;
+    background: rgb(110, 142, 254);
+    color: rgba(255, 255, 255, 0.8);
     text-align: center;
+    transition-duration: .5s;
 }
 
 .delete-btn:hover{
     cursor: pointer;
-    transition-duration: .7s;
-    background: red;
+    transition-duration: .5s;
+    background: rgb(255, 107, 107);
 }
 
 .image-uploaders {
@@ -158,7 +156,7 @@
     font-family: 'Oswald', sans-serif;
     background: rgb(252, 252, 252);
     color: rgba(0, 0, 0, 0.472);
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -370,6 +368,48 @@
     cursor: pointer;
     margin-bottom: 30px;
     font-weight: 300;
+}
+
+.gallery-preset {
+    position: relative;
+    cursor: pointer;
+}
+
+.gallery-preset:hover span, .gallery-preset:hover > div {
+    visibility: visible;
+}
+
+.gallery-preset-overlay {
+    position: absolute;
+    left: 0px;
+    width: 170px;
+    height: 150px;
+    background: black;
+    opacity: .2;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.gallery-preset-name {
+    position: absolute;
+    left: 50%;
+    top: 43%;
+    color: white;
+    transform: translate(-50%);
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.gallery-music-box {
+    background: rgb(204, 202, 202);
+    width: 170px;
+    height: 150px;
+    text-align: center;
+    opacity: .2;
+}
+
+.gallery-music-box:hover {
+    opacity: .6;
 }
 
 #edit-gallery-btn:hover, #create-gallery-btn:hover {

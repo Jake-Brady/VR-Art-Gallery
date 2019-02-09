@@ -30,6 +30,9 @@ class Lobby extends Component {
             queue: [],
             popping: false,
             notifications: 0,
+            galleryId: '',
+            id: 0,
+            name: '',
             usersWhoLiked: []
         }
         this.refresh = this.refresh.bind(this)
@@ -50,8 +53,8 @@ class Lobby extends Component {
                     const userFavorites = await axios.get('/api/getFavorites/')
                     this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
                         const accountInfo = await axios.get('/api/getAccountInfo')
-                        this.setState({accountInfo: accountInfo.data[0]})
-                        this.changeWindow('Notifications')
+                        this.setState({ accountInfo: accountInfo.data[0] })
+                        this.changeWindow('Galleries')
                     })
                 })
             })
@@ -59,23 +62,24 @@ class Lobby extends Component {
         window.addEventListener('resize', this.checkSize)
     }
 
-    async refresh(){
+    async refresh() {
         const userGalleries = await axios.get('/api/retrieveGalleries/')
-            this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data}, async () => {
-                const galleryIds = this.state.usersGalleries.map(a => a.id),
-                    otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
-                this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
-                    const userFavorites = await axios.get('/api/getFavorites/')
-                    this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
-                        const accountInfo = await axios.get('/api/getAccountInfo')
-                        this.setState({accountInfo: accountInfo.data[0]})
-                    }
-                )})
-                })
+        this.setState({ usersGalleries: userGalleries.data, galleryCopy: userGalleries.data }, async () => {
+            const galleryIds = this.state.usersGalleries.map(a => a.id),
+                otherFavorites = await axios.get(`/api/getUsersWhoFavorited/?galleryIds=${galleryIds}`)
+            this.setState({ usersWhoLiked: otherFavorites.data }, async () => {
+                const userFavorites = await axios.get('/api/getFavorites/')
+                this.setState({ favoritedGalleries: userFavorites.data, favoritesCopy: userFavorites.data, loading: false }, async () => {
+                    const accountInfo = await axios.get('/api/getAccountInfo')
+                    this.setState({ accountInfo: accountInfo.data[0] })
+                }
+                )
+            })
+        })
     }
 
-    resettingGalleryId(){
-        this.setState({galleryId: 0})
+    resettingGalleryId() {
+        this.setState({ galleryId: 0 })
     }
 
     componentWillUnmount() {
@@ -107,6 +111,7 @@ class Lobby extends Component {
     changeNav = current => {
         document.querySelectorAll('[data-tab]').forEach(tab => {
             const title = tab.innerText.split(' ')
+            console.log(title[0], current)
             if (title[0] === current) tab.classList.add('menu-back')
             else tab.classList.remove('menu-back')
         })
@@ -126,7 +131,7 @@ class Lobby extends Component {
         }
         switch (magicWord) {
             case "Create":
-                this.setState({ theMagicWord: 'create'}, () => {
+                this.setState({ theMagicWord: 'create' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
@@ -165,8 +170,8 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
-            case 'Account':
-                this.setState({ theMagicWord: 'account' }, () => {
+            case 'Settings':
+                this.setState({ theMagicWord: 'settings' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
@@ -174,8 +179,8 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
-            case 'Help':
-                this.setState({ theMagicWord: 'help' }, () => {
+            case 'About':
+                this.setState({ theMagicWord: 'about' }, () => {
                     const search = document.querySelector('.lobby-header_search')
                     search.style.visibility = 'hidden'
                     this.changeNav(magicWord)
@@ -204,8 +209,31 @@ class Lobby extends Component {
         })
     }
 
+    closeDelete = () => {
+        const pop = document.querySelector('.gallery-delete'),
+            overlay = document.querySelector('.gallery-dim'),
+            body = document.querySelector('html')
+        body.classList.remove('lobby-main-hide')
+        overlay.style.visibility = 'hidden'
+        pop.style.visibility = 'hidden'
+    }
+
     deleteGallery = (id, galleryName) => {
-        if (window.confirm('Are you sure you want to delete this gallery?')) {
+        const pop = document.querySelector('.gallery-delete'),
+            overlay = document.querySelector('.gallery-dim'),
+            body = document.querySelector('html')
+        overlay.style.visibility = 'visible'
+        pop.style.visibility = 'visible'
+        body.classList.add('lobby-main-hide')
+        this.setState({ id, name: galleryName })
+    }
+
+    confirmDelete = (id, galleryName) => {
+        this.closeDelete()
+        const index = this.state.usersGalleries.findIndex(gallery => gallery.id === id),
+            card = document.querySelectorAll('.gallery-card-anim')[index]
+        card.classList.add('lobby-leave-anim')
+        setTimeout(() => {
             let galleries = [...this.state.usersGalleries];
             let index;
             for (let i = 0; i < galleries.length; i++) {
@@ -220,9 +248,8 @@ class Lobby extends Component {
             axios.delete(`/api/deleteGallery/${id}`).then(res => {
                 this.setState({ deleteConfirm: `${galleryName} was successfully deleted.` })
             })
-        } else {
-            this.setState({ deleteConfirm: `${galleryName} was not deleted.` })
-        }
+            this.removeFavPop({ name: galleryName, type: 'delete' })
+        }, 400);
     }
 
     toggleMenu = command => {
@@ -306,7 +333,7 @@ class Lobby extends Component {
 
     playAnim = name => {
         const pop = document.querySelector('.lobby-pop')
-        pop.innerText = `Removed ${name} from favorites`
+        pop.innerText = typeof name === 'object' ? `Deleted ${name.name} from galleries` : `Removed ${name} from favorites`
         pop.classList.add('lobby-pop-anim')
         setTimeout(() => {
             pop.classList.remove('lobby-pop-anim')
@@ -320,7 +347,6 @@ class Lobby extends Component {
     render() {
         const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked, accountInfo } = this.state
         //Map over list of favorites, followers, and existing galleries, pass to separate components for styling them as distinct sections.
-        
         const listOfFavorites = favoritedGalleries.map((e) => {
             const image = e.thumbnail,
                 key = e.id,
@@ -383,6 +409,7 @@ class Lobby extends Component {
                     :
                     <div className='lobby'>
                         <div className='lobby-overlay' />
+                        <div className='gallery-dim' onClick={() => this.closeDelete()} />
                         <header className='lobby-header'>
                             <div className='lobby-header_left'>
                                 <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
@@ -409,11 +436,11 @@ class Lobby extends Component {
                                 </div>
                                 <span data-tab className="menu-btn menu-btn-first" onClick={() => this.props.history.push('/')}><i className="fas fa-home menu-icon"></i>Home</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Create')}><i className="fas fa-plus menu-icon"></i>Create ({12 - usersGalleries.length} Available)</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span>
+                                {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span> */}
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Account')}><i className="fas fa-cog menu-icon"></i>Settings</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Help')}><i className="fas fa-question menu-icon"></i>About</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span>
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('About')}><i className="fas fa-question menu-icon"></i>About</span>
                                 <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
                             </div>
                         </section>
@@ -441,7 +468,24 @@ class Lobby extends Component {
                                                 <div className='lobby-container_gallery' onClick={() => this.clearPop()}>
                                                     {this.state.usersGalleries.length ?
                                                         <div className='lobby-card-grid'>
-                                                            {galleryContainers}
+                                                            <div className='gallery-delete'>
+                                                                <div className='delete-header'>
+                                                                    <span>Confirm</span>
+                                                                    <i className="fas fa-times" onClick={() => this.closeDelete()}></i>
+                                                                </div>
+                                                                <div className='delete-content'>
+                                                                    <p>Are you sure that you want to delete this gallery?</p>
+                                                                    <p>You can't undo this action.</p>
+                                                                    <i className="fas fa-exclamation-triangle"></i>
+                                                                </div>
+                                                                <div className='delete-options'>
+                                                                    <div className='center' onClick={() => this.closeDelete()}>NO</div>
+                                                                    <div className='center' onClick={() => this.confirmDelete(this.state.id, this.state.name)}>YES</div>
+                                                                </div>
+                                                            </div>
+                                                            <>
+                                                                {galleryContainers}
+                                                            </>
                                                         </div>
                                                         :
                                                         this.state.searchInput ?
@@ -477,13 +521,13 @@ class Lobby extends Component {
                                                                 </div>
                                                         }
                                                     </div>
-                                                    : theMagicWord === 'account' ?
+                                                    : theMagicWord === 'settings' ?
                                                         <div>
-                                                            <Account 
-                                                            accountInfo={this.state.accountInfo}
+                                                            <Account
+                                                                accountInfo={this.state.accountInfo}
                                                             />
                                                         </div>
-                                                        : theMagicWord === 'help' &&
+                                                        : theMagicWord === 'about' &&
                                                         <div>
                                                             <About />
                                                         </div>

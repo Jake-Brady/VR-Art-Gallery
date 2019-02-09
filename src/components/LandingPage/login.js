@@ -102,7 +102,7 @@ class Login extends Component {
                     <h4>Invalid Password</h4>
                     <input id='login-pass' name="password" placeholder="Password" type="password" onChange={this.handleChange}></input>
                     <div onClick={() => this.login()}>Log In</div>
-                    <h2>Forgot Password?</h2>
+                    <h2 style={{opacity: '0'}}>Forgot Password?</h2>
                 </div>
                 <h1>Don't have an account? <span className='login-sign' onClick={() => this.props.history.push('/register')}>Sign Up.</span></h1>
             </div>

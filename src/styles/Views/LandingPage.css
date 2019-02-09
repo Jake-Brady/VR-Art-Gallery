@@ -37,6 +37,17 @@
     }
 }
 
+@keyframes videoPop {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
 .clipboard-pop {
     visibility: hidden;
     position: fixed;
@@ -172,8 +183,24 @@
 }
 
 .video-container > video {
+    cursor: pointer;
     width: 450px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.video-icons, .video-icons2 {
+    position: absolute;
+    bottom: 0px;
+    width: 50px;
+    height: 50px;
+    background: white;
+    opacity: .8;
+    color: rgb(131, 152, 230);
+    border-radius: 50%;
+}
+
+.video-icons2 {
+    opacity: 0;
 }
 
 .landing-main {
@@ -381,6 +408,11 @@
 
 .gallery-pop_show {
     visibility: visible;
+}
+
+.video-anim {
+    animation: videoPop 1s 1;
+    animation-fill-mode: forwards;
 }
 
 @media (max-width: 1300px) {
