@@ -13,6 +13,7 @@
     "aframe-react-assets": "^2.0.5",
     "aframe-room-component": "^0.3.0",
     "aframe-sharedspace-component": "^1.0.1",
+    "aframe-star-system-component": "^1.0.0",
     "attr-accept": "^1.1.3",
     "aws-sdk": "^2.387.0",
     "axios": "^0.18.0",
