@@ -111,9 +111,11 @@ render(){
         <Entity id="penelope" src={Penelope} alt="Marble Player Obj" />
         <Entity id="bench" src={Bench} alt="Bench Obj" />
 
-        <a-mixin id="shooting-star"
-                 geometry="primitive: sphere; radius: .5"
-                 light="color: lightblue; distance: 180; type:point; intensity:3"
+        <a-mixin 
+        id="shooting-star"
+        light="color: lightblue; distance: 180; type:point; intensity:3"
+        geometry="primitive:sphere; radius:.5;"
+        material="color:#DCF3FF;"
                  >
         </a-mixin>
         

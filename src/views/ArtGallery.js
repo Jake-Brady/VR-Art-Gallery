@@ -138,16 +138,20 @@ class ArtGallery extends Component {
                 <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
                 <a-sky color="#000"></a-sky>
                 <a-entity star-system></a-entity>
-                <a-entity light="type: ambient;"></a-entity>
+                <a-entity light="type: ambient"></a-entity>
 
                 {/* Shooting Stars - Animation */}
-                <a-entity mixin="shooting-star" position="-500 100 13.5">
+                <a-entity 
+                mixin="shooting-star" 
+                position="-500 100 13.5"
+                scale="1 1 15"
+                rotation="0 90 0"
+                >
                     <a-animation direction="alternate" begin="3000" attribute="position" from="-500 100 33.5" to="500 100 -13.5"  dur="9000" repeat="indefinite"></a-animation>
                     <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -33.5" to="500 100 13.5" delay="9000"  dur="9000" repeat="indefinite"></a-animation>
                     <a-animation direction="alternate" attribute="position" from="-500 100 63.5" to="500 100 -13.5"  delay="18000" dur="9000" repeat="indefinite"></a-animation>
                     <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -53.5" to="500 100 13.5"  delay="27000" dur="9000" repeat="indefinite"></a-animation>
                 </a-entity>
-
                 
                     {/* Wall Digital Clock */}
                     <a-entity
@@ -165,7 +169,7 @@ class ArtGallery extends Component {
 
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
-                    <a-entity id="rig" movement-controls kinematic-body rotation="0 -90 0">
+                    <a-entity id="rig" movement-controls kinematic-body rotation="0 195 0" position="-4.2 0 -1.5">
                         <a-entity id="camera"
                             camera
                             position="0 1.6 0"
@@ -522,7 +526,9 @@ class ArtGallery extends Component {
                     src="#moon" 
                     scale='2 2 2' 
                     position='3 50 7'
-                    ></a-gltf-model>
+                    >
+                    <a-animation to='0 360 360' easing='linear' dur='30000' repeat='indefinite'/>
+                    </a-gltf-model>
 
                     <a-gltf-model 
                     src="#carpet" 
@@ -562,63 +568,63 @@ class ArtGallery extends Component {
 
                     {/* Flooring for outter sections of 2nd floor */}
             <a-entity geometry="primitive: plane; height: 18; width: 5"  position="-5 5.5 6"
-                        material="color: gray" rotation="90 0 0"></a-entity>
+                         material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 18; width: 5"  position="-5 5.501 6"
-            material="color: gray" rotation="-90 0 0"></a-entity>
+             material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 20; width: 5"  position="11 5.5 8"
-                        material="color: gray" rotation="90 0 0"></a-entity>
+                         material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="11 5.501 8"
-            material="color: gray" rotation="-90 0 0"></a-entity>
+             material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 5.5 -.5"
-                        material="color: gray" rotation="90 0 0"></a-entity>
+                         material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 5.501 -.5"
-            material="color: gray" rotation="-90 0 0"></a-entity>
+             material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 5.5 16.5"
-                        material="color: gray" rotation="90 0 0"></a-entity>
+                         material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 5.501 16.5"
-            material="color: gray" rotation="-90 0 0"></a-entity>
+             material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
 
             {/* Ceiling Floor */}
-                    {/* Glass Floor - Center */}
-                    <a-entity geometry="primitive: plane; height: 14; width: 11"  position="3 12 8"
+                <a-entity geometry="primitive: plane; height: 14; width: 11"  position="3 12 8"
             material="color: black; opacity: 0.5" rotation="90 0 0"></a-entity>
-                    <a-entity static-body geometry="primitive: plane; height: 14; width: 11"  position="3 12.001 8"
+                <a-entity static-body geometry="primitive: plane; height: 14; width: 11"  position="3 12.001 8"
             material="color: black; opacity: 0.5" rotation="-90 0 0"></a-entity>
 
-                    {/* Flooring for outter sections of 2nd floor */}
+                    {/* 3rd layer - ceiling */}
             <a-entity geometry="primitive: plane; height: 20; width: 5"  position="-5 12 8"
-                        material="color: gray" rotation="90 0 0"></a-entity>
-                    <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="-5 12.001 8"
+            material="color: gray" rotation="90 0 0"></a-entity>
+            <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="-5 12.001 8"
             material="color: gray" rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 20; width: 5"  position="11 12 8"
-                        material="color: gray" rotation="90 0 0"></a-entity>
-                    <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="11 12.001 8"
+            material="color: gray" rotation="90 0 0"></a-entity>
+            <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="11 12.001 8"
             material="color: gray" rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 12 -.5"
-                        material="color: gray" rotation="90 0 0"></a-entity>
-                    <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 12.001 -.5"
+            material="color: gray" rotation="90 0 0"></a-entity>
+            <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 12.001 -.5"
             material="color: gray" rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 12 16.5"
-                        material="color: gray" rotation="90 0 0"></a-entity>
-                    <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 12.001 16.5"
+            material="color: gray" rotation="90 0 0"></a-entity>
+            <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 12.001 16.5"
             material="color: gray" rotation="-90 0 0"></a-entity>
 
                     {/* Elevator from 2nd floor to 3rd floor */}
                     <a-entity
                     static-body
-                    geometry="primitive: box; height: .1; width: 4; depth: 4"
+                    geometry="primitive: plane; height: 3; width: 5;"
                     material="src:#marble"
-                    position="-6 .1 16.5"
+                    position="-5 .185 16.5"
+                    rotation="-90 0 0"
                     >
-                        <a-animation begin="click" attribute="position" from="-6 .1 16.5" to="-6 5.5 16.5" dur="10000"></a-animation>
-                        <a-animation begin="click" attribute="position" from="-6 5.5 16.5" to="-6 .1 16.5" delay="9000" dur="9000"></a-animation>
-                    </a-entity>
+                        <a-animation begin="click" attribute="position" from="-5 .185 16.5" to="-5 5.5 16.5" dur="10000"></a-animation>
+                        <a-animation begin="click" attribute="position" from="-5 5.5 16.5" to="-5 .185 16.5" delay="9000" dur="9000"></a-animation>   
+                        </a-entity>
                 </Scene>
             </>
         )
