@@ -110,6 +110,12 @@ render(){
         <Entity id="pedestal" src={Pedestal} alt="pedestal Obj" />
         <Entity id="penelope" src={Penelope} alt="Marble Player Obj" />
         <Entity id="bench" src={Bench} alt="Bench Obj" />
+
+        <a-mixin id="shooting-star"
+                 geometry="primitive: sphere; radius: .5"
+                 light="color: lightblue; distance: 180; type:point; intensity:3"
+                 >
+        </a-mixin>
         
         {/* Music */}
         <audio id="gymnopedie" src={Gymnopedie}/>

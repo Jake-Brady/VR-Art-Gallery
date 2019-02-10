@@ -13,8 +13,6 @@ import 'aframe-star-system-component'
 import axios from 'axios'
 import '../components/Gallery/aframeFunctions'
 
-
-
 class ArtGallery extends Component {
     constructor(props) {
         super(props)
@@ -140,6 +138,18 @@ class ArtGallery extends Component {
                 <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
                 <a-sky color="#000"></a-sky>
                 <a-entity star-system></a-entity>
+                <a-entity light="type: ambient;"></a-entity>
+
+                {/* Shooting Stars - Animation */}
+                <a-entity mixin="shooting-star" position="-500 100 13.5">
+                    <a-animation direction="alternate" begin="3000" attribute="position" from="-500 100 33.5" to="500 100 -13.5"  dur="9000" repeat="indefinite"></a-animation>
+                    <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -33.5" to="500 100 13.5" delay="9000"  dur="9000" repeat="indefinite"></a-animation>
+                    <a-animation direction="alternate" attribute="position" from="-500 100 63.5" to="500 100 -13.5"  delay="18000" dur="9000" repeat="indefinite"></a-animation>
+                    <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -53.5" to="500 100 13.5"  delay="27000" dur="9000" repeat="indefinite"></a-animation>
+                </a-entity>
+
+                
+                    {/* Wall Digital Clock */}
                     <a-entity
                     position="5 3 -1.99"
                     geometry="primitive: plane"
@@ -152,6 +162,7 @@ class ArtGallery extends Component {
                     position="3.75 3.10 -1.98" 
                     clock="font: sourcecodepro; color: #191;">
                     </a-entity>
+
                     {/*Entities Inside of Main Gallery  */}
                     {/* Player Camera and Cursor */}
                     <a-entity id="rig" movement-controls kinematic-body rotation="0 -90 0">
@@ -510,7 +521,7 @@ class ArtGallery extends Component {
                     static-body
                     src="#moon" 
                     scale='2 2 2' 
-                    position='3 35 7'
+                    position='3 50 7'
                     ></a-gltf-model>
 
                     <a-gltf-model 
@@ -605,8 +616,8 @@ class ArtGallery extends Component {
                     material="src:#marble"
                     position="-6 .1 16.5"
                     >
-                    <a-animation begin="click" attribute="position" from="-6 .1 16.5" to="-6 5.5 16.5" dur="10000"></a-animation>
-                    <a-animation begin="click" attribute="position" from="-6 5.5 16.5" to="-6 .1 16.5" delay="9000" dur="9000"></a-animation>
+                        <a-animation begin="click" attribute="position" from="-6 .1 16.5" to="-6 5.5 16.5" dur="10000"></a-animation>
+                        <a-animation begin="click" attribute="position" from="-6 5.5 16.5" to="-6 .1 16.5" delay="9000" dur="9000"></a-animation>
                     </a-entity>
                 </Scene>
             </>
