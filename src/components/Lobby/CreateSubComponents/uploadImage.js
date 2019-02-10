@@ -150,7 +150,7 @@ class UploadImage extends Component {
                         </figure>
                     }
                 </div>
-                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="30" placeholder={imageCaption ? imageCaption : "Image Caption (30 character limit)"}></input>
+                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="15" placeholder={imageCaption ? imageCaption : "Image Caption (15 character limit)"}></input>
                 <span className="delete-btn center" onClick={(e) => this.delete(e)}>Delete Image</span>
             </section>
         )
