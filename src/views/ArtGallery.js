@@ -8,7 +8,6 @@ import 'aframe'
 import 'aframe-room-component'
 import 'aframe-physics-system'
 import 'aframe-extras'
-import 'aframe-physics-extras'
 import 'aframe-star-system-component'
 import axios from 'axios'
 import '../components/Gallery/aframeFunctions'
@@ -118,7 +117,6 @@ class ArtGallery extends Component {
 
     render() {
         let { wallTexture, floorTexture, music, captions, position } = this.state
-        console.log(this.state, 'state of gallery')
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <>
@@ -141,7 +139,7 @@ class ArtGallery extends Component {
                 <a-entity light="type: ambient; color: #BBB"></a-entity>
                 <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
 
-                {/* Shooting Stars - Animation */}
+                     {/* Shooting Stars - Animation */}
                 <a-entity 
                 mixin="shooting-star" 
                 position="-500 100 13.5"
@@ -245,7 +243,7 @@ class ArtGallery extends Component {
                     {/* Outer Side of Inner-Walls - First Floor */}
                     {/* Near Player Spawn */}
                     {/* User Images */}
-                    <a-image id="portrait10" src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .99" rotation=" 0 -180 0"></a-image>
+                    <a-image id="portrait10" src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .98" rotation=" 0 -180 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -542,7 +540,7 @@ class ArtGallery extends Component {
                     static-body 
                     src="#penelope" 
                     scale='.0032 .0032 .0032' 
-                    position='8.8 5.51 -1.2' 
+                    position='8.8 5.511 -1.2' 
                     rotation="0 180 0">
                     </a-gltf-model>
 
