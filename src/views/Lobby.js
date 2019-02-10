@@ -284,12 +284,13 @@ class Lobby extends Component {
 
     handleSearch = (filter, target) => {
         this.setState({ searchInput: target })
+        target = target.toLowerCase()
         if (filter === 'galleries') {
-            const galleries = this.state.galleryCopy.filter(gallery => gallery.gallery_name.includes(target))
+            const galleries = this.state.galleryCopy.filter(gallery => gallery.gallery_name.toLowerCase().includes(target))
             this.setState({ usersGalleries: galleries })
         }
         else {
-            const favorites = this.state.favoritesCopy.filter(gallery => gallery.gallery_name.includes(target))
+            const favorites = this.state.favoritesCopy.filter(gallery => gallery.gallery_name.toLowerCase().includes(target))
             this.setState({ favoritedGalleries: favorites })
         }
     }
