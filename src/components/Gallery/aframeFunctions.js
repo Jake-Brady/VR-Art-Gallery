@@ -1,4 +1,5 @@
 const AFRAME = require('aframe')
+const THREE = require('three')
 
 AFRAME.registerComponent('clock', {
   schema: {
@@ -20,25 +21,5 @@ AFRAME.registerComponent('clock', {
   }  
 });
 
-// AFRAME.registerComponent('shooting-star', {
-//   schema:{
-//     color: {type: 'color', default:'#fff'},
-//     width: {type: 'number', default: 1},
-//     height: {type: 'number', default: 1},
-//     depth: {type: 'number', default: 1},
-//     lightColor: {type: 'color', default: '#E6B304'},
-//     emissiveIntensity: {type: 'number', default: 1}
-//   },
-//   init: function() {
-//     this.starEl = document.createElement('a-sphere');
-//     this.el.append(this.starEl)
-
-//     this.starEl.setAttribute('color', this.data.color);
-//     this.starEl.setAttribute('width', this.data.width);
-//     this.starEl.setAttribute('height', this.data.height);
-//     this.starEl.setAttribute('depth', this.data.depth);
-//     this.starEl.setAttribute('lightColor', this.data.lightColor);
-//   }
-// })
 
 
