@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import Placeholder from '../../styles/Media/Placeholder.png'
 import '../../styles/Components/createGalleries.css'
 import Dropzone from 'react-dropzone'
