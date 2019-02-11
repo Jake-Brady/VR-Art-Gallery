@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import Placeholder from '../../styles/Media/Placeholder.png'
 import '../../styles/Components/createGalleries.css'
 import Dropzone from 'react-dropzone'
@@ -53,7 +52,6 @@ class CreateGalleries extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
         if (nextProps.editGalleryId === 0 ) {
             this.setState({ images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: '' })
         }
@@ -74,8 +72,6 @@ class CreateGalleries extends Component {
     }
 
     getSignedRequestThumbnails = ([file]) => {
-        console.log(this.state.url)
-        console.log(file)
         this.setState({ isUploading: true });
         const fileName = `${randomStringGenerator()}-${file.name.replace(/\s/g, '-')}`;
         axios
@@ -84,7 +80,6 @@ class CreateGalleries extends Component {
             })
             .then(res => {
                 const { signedRequest, url } = res.data;
-                console.log(url)
                 this.uploadFile(file, signedRequest, url);
             })
             .catch(err => {
@@ -92,7 +87,6 @@ class CreateGalleries extends Component {
             });
     }
     uploadFile = (file, signedRequest, url) => {
-        console.log(url)
         const options = {
             headers: {
                 'Content-Type': file.type,
@@ -138,7 +132,6 @@ class CreateGalleries extends Component {
         // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
         const { galleryName, author, thumbnail, isPrivate } = this.state
         if (!galleryName || !author || !thumbnail) return;
-        console.log(galleryName, author, thumbnail)
 
         // this state object value is being passed down to galleryPresets and uploadImage components which are waiting for the value to turn to 0 before sending the final selections for presets, images, and captions back to this component to be shipped to database. Relevant functions: retrievingImageData, retrievingGalleryPresets, and finalizeGallery - all listed below.
         this.setState({ finalCountdown: 0 })
@@ -146,7 +139,6 @@ class CreateGalleries extends Component {
 
     retrievingImageData = (image, caption) => {
         // Taking ImageURLs and ImageCaptions from each uploadImage component, pushing them into a copy of finalImages and finalCaptions arrays to be sent to the database
-        console.log(image, caption)
         let images = this.state.finalImages
         let captions = this.state.finalCaptions
         images.push(image)
@@ -167,14 +159,12 @@ class CreateGalleries extends Component {
         // Passes all relevant info to backend where separate queries will be made to populate galleries, gallery_preset, images, and captions tables if this a a new gallery. If createGallery is in editMode, it will update existing gallery.
         if (!this.state.editMode) {
             axios.post(`/api/createNewGallery/`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets }).then(res => {
-                console.log('Finished for creation?')
                 // Changes to Galleries Tab = Where newly created gallery will be among the previous ones.
                 this.props.changeWindow('Galleries')
                 this.props.refresh()
             })
         } else if (this.state.editMode) {
             axios.put(`/api/updateGallery/${galleryId}`, { galleryName, author, thumbnail: imageAddress || thumbnail, isPrivate, finalImages, finalCaptions, finalGalleryPresets }).then(res => {
-                console.log('Finished?')
                 // Changes to Galleries Tab - Where edited gallery will be.
                 this.props.changeWindow('Galleries')
                 this.props.refresh()
@@ -185,6 +175,7 @@ class CreateGalleries extends Component {
     editGallery = id => {
         // set State with gallery related info after retrieving gallery info.
         axios.get(`/api/editGallery/${id}`).then(res => {
+            console.log(res.data[0])
             let { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, gallery_name, atmosphere_lighting, music, wall_texture, is_private, thumbnail, ceiling_texture, floor_texture, img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption } = res.data[0]
             let images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
             let captions = [img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption]
@@ -199,11 +190,8 @@ class CreateGalleries extends Component {
 
 
     render(props) {
-        console.log(this.state)
-        console.log(props)
+        console.log("PRESETS", this.state.galleryPresets)
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress, finalCountdown } = this.state
-        // If there are multiple galleries, the spelling should reflect that correctly.
-        let spellingGallery = numOfGalleries === 1 ? 'gallery' : 'galleries'
         return (
             <section className="create-galleries">
                 {maxLimit ?

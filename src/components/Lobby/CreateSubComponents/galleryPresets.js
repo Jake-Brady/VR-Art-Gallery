@@ -19,6 +19,10 @@ import onThePassingOfTime from '../../../assets/onThePassingOfTime.jpg'
 import snowDrop from '../../../assets/SnowDrop.jpg'
 //Audio
 import gymnopediaPreview from '../../../assets/audio/Gymnopedie_No_1.mp3'
+import calmantPreview from '../../../assets/audio/Calmant.mp3'
+import snowDropPreview from '../../../assets/audio/Snow_Drop.mp3'
+import impromptuPreview from '../../../assets/audio/Impromptu_in_Quarter_Comma_Meantone.mp3'
+import timePreview from '../../../assets/audio/On_the_Passing_of_Time.mp3'
 
 class GalleryPresets extends Component {
     constructor() {
@@ -30,21 +34,21 @@ class GalleryPresets extends Component {
             wall: '',
             finalCountdown: 2,
             down: false,
-            audio: ''
+            file: ''
         }
     }
-
-
 
     componentWillReceiveProps(props) {
         let { galleryPresets, finalCountdown, retrievingGalleryPresets } = props
         if (this.state.finalCountdown === 2 && galleryPresets) {
-            this.setState({ ceilingTexture: galleryPresets[0], wallTexture: galleryPresets[1], lighting: galleryPresets[2], floorTexture: galleryPresets[3], music: galleryPresets[4] }, () => {
+            this.setState({  wall: galleryPresets[1], floor: galleryPresets[3], music: galleryPresets[4] }, () => {
                 this.setState({ finalCountdown: 1 })
             })
         } else if (this.state.finalCountdown === 1 && galleryPresets) {
-            this.setState({ ceilingTexture: galleryPresets[0], wallTexture: galleryPresets[1], lighting: galleryPresets[2], floorTexture: galleryPresets[3], music: galleryPresets[4] }, () => {
-                this.setState({ finalCountdown: 0 })
+            this.setState({ ceilingTexture: galleryPresets[0], wallTexture: galleryPresets[1], wall: galleryPresets[1], lighting: galleryPresets[2], floorTexture: galleryPresets[3], floor: galleryPresets[3], music: galleryPresets[4] }, () => {
+                this.setState({ finalCountdown: 0 }, () => {
+                    this.highlightPresets()
+                })
             })
         }
         if (finalCountdown === 0) {
@@ -53,18 +57,40 @@ class GalleryPresets extends Component {
     }
 
     setTexture = (section, target) => {
-        document.querySelectorAll(`#${section} img`).forEach(option => option.style.opacity = '.2')
+        if (section === 'music') document.querySelectorAll(`#${section} > div`).forEach(option => option.style.opacity = '.2')
+        else document.querySelectorAll(`#${section} img`).forEach(option => option.style.opacity = '.2')
         target.style.opacity = '1'
         this.setState({ [section]: target.getAttribute('data') })
     }
 
-    audioPreview = file => {
-        const audio = new Audio(file)
+    highlightPresets = () => {
+        const { wallTexture, floorTexture, music } = this.state
+        const wallTarget = [...document.querySelectorAll('#wall img')].filter(wall => wall.getAttribute('data') === wallTexture)[0],
+            floorTarget = [...document.querySelectorAll('#floor img')].filter(floor => floor.getAttribute('data') === floorTexture)[0],
+            musicTarget = [...document.querySelectorAll('#music > div')].filter(musicPreset => musicPreset.getAttribute('data') === music)[0]
+        if (this.state.wall) this.setTexture('wall', wallTarget)
+        if (this.state.floor) this.setTexture('floor', floorTarget)
+        if (this.state.music) this.setTexture('music', musicTarget)
+    }
+
+    audioPreview = (file, e) => {
+        e.stopPropagation()
+        const audio = document.querySelector('.gallery-audio-tag')
+        const src = audio.getAttribute('src')
+        if (src === file && audio.paused) audio.play()
+        else if (audio.duration > 0 && src === file) audio.pause()
+        else {
+            audio.setAttribute('src', file)
+            audio.load()
+            audio.play()
+        }
     }
 
     render() {
+        console.log('RENDER', this.state)
         return (
             <section className="gallery-presets">
+                <audio className='gallery-audio-tag' />
                 <div id='wall'>
                     <h1>Wall Texture</h1>
                     <div className='center gallery-preset'>
@@ -116,38 +142,48 @@ class GalleryPresets extends Component {
                         <span className='gallery-preset-name'>STONE</span>
                     </div>
                     <div className='center gallery-preset'>
-                        <img onClick={(e) => this.setTexture('floor', e.target)} data-type="stoneTiles" src={stoneTiles} alt='stone tiles texture' />
+                        <img onClick={(e) => this.setTexture('floor', e.target)} data="stoneTiles" src={stoneTiles} alt='stone tiles texture' />
                         <div className='gallery-preset-overlay' />
                         <span className='gallery-preset-name'>TILES</span>
                     </div>
                 </div>
                 <div id='music'>
                     <h1>Music Selection</h1>
-                    <div className='center gallery-preset gallery-music-box' onClick={() => this.audioPreview(gymnopediaPreview)} >
+                    <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data='gymnopedie'>
                         <div className='gallery-preset-overlay' />
                         GYMNOPEDIE
+                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(gymnopediaPreview, e)}>
+                            <i className="fas fa-music"></i>
+                        </div>
                     </div>
-                    <div className='center gallery-preset gallery-music-box'>
+                    <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="calmant">
                         <div className='gallery-preset-overlay' />
                         CALMANT
+                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(calmantPreview, e)}>
+                            <i className="fas fa-music"></i>
+                        </div>
                     </div>
-                    <div className='center gallery-preset gallery-music-box'>
+                    <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="snowDrop">
                         <div className='gallery-preset-overlay' />
                         SNOW DROP
+                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(snowDropPreview, e)}>
+                            <i className="fas fa-music"></i>
+                        </div>
                     </div>
-                    <div className='center gallery-preset gallery-music-box'>
+                    <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="impromptu">
                         <div className='gallery-preset-overlay' />
                         IMPROMPTU IN QUARTER COMMA MEANTONE
+                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(impromptuPreview, e)}>
+                            <i className="fas fa-music"></i>
+                        </div>
                     </div>
-                    <div className='center gallery-preset gallery-music-box'>
+                    <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="onThePassingOfTime">
                         <div className='gallery-preset-overlay' />
                         ON THE PASSING OF TIME
+                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(timePreview, e)}>
+                            <i className="fas fa-music"></i>
+                        </div>
                     </div>
-                    {/* <img onClick={(e) => this.setTexture('music', e.target)} data='gymnopedie' src={gymnopedie} alt='Gymnopedie by Kevin Macleod' /> */}
-                    {/* <img onClick={(e) => this.setTexture('music', e.target)} data="calmant" src={calmant} alt='Calmant by Kevin Macleod' />
-                    <img onClick={(e) => this.setTexture('music', e.target)} data="snowDrop" src={snowDrop} alt='Snow Drop by Kevin Macleod' />
-                    <img onClick={(e) => this.setTexture('music', e.target)} data="impromptu" src={impromptu} alt='Impromptu in Quarter Comma Meantone by Kevin Macleod' />
-                    <img onClick={(e) => this.setTexture('music', e.target)} data="onThePassingOfTime" src={onThePassingOfTime} alt='On The Passing of Time by Kevin Macleod' /> */}
                 </div>
             </section>
         )
