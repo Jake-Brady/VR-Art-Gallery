@@ -1306,4 +1306,3 @@ user_id, favorited
 ) values (
 1, 21
 );
-

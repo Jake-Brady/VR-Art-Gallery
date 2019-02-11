@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import {connect} from 'react-redux'
 import {setImages} from '../ducks/reducer'
 import { Scene } from 'aframe-react'
@@ -20,16 +22,18 @@ class ArtGallery extends Component {
             wallTexture: '',
             floorTexture: '',
             music: '',
-            imagesHaveLoaded: false
+            imagesHaveLoaded: false,
+            randomGallery: '/bl4ck4ndwhite/bl4ck4ndwhite%20gallery%204/'
         }
+        this.exit = this.exit.bind(this)
     }
 
     componentDidMount(props) {
+        console.log(this.props)
         let { username, galleryName } = this.props.match.params
         // Retrieve User's Images and Presets
         console.log(username, galleryName)
         axios.get(`/api/getGalleryData/${username}/${galleryName}`).then(res => {
-            console.log(res)
             let { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption, wall_texture, floor_texture, atmosphere_lighting, music } = res.data[0]
             // Putting all images in array to be sent to Reducer Store which is connected to Asset file
             const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
@@ -115,6 +119,13 @@ class ArtGallery extends Component {
         this.props.history.push('/')
     }
 
+    portalHop(direction){
+        let author = 'bl4ck4ndwhite'
+        let galleryName = 'bl4ck4ndwhite gallery 4'
+        this.props.history.push(`/${author}/${galleryName}/`)
+        window.location.reload()
+    }
+
     render() {
         let { wallTexture, floorTexture, music, captions, position } = this.state
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
@@ -179,6 +190,22 @@ class ArtGallery extends Component {
                             <a-cursor color="red"></a-cursor>
                         </a-entity>
                     </a-entity>
+
+                    {/* <a-entity 
+                    position="5 2 -1.8" 
+                    link="title:Random Gallery; image: #portalPreview" 
+                    >
+                    </a-entity> */}
+
+                    
+                    <a-circle
+                    scale="1 1.7 1"
+                    position="5 2 -1.8" 
+                    material="shader:portal;pano:#portalPreview"
+                    onClick={() => this.portalHop('random')}
+                    >
+                    </a-circle>
+                    
 
                     {/* Frames for user images */}
                     {/* Frames on Central Walls - First Floor */}
@@ -708,4 +735,4 @@ return{
 }
 }
 
-export default connect (mapStateToProps, {setImages}) (ArtGallery)
+export default withRouter(connect (mapStateToProps, {setImages}) (ArtGallery))

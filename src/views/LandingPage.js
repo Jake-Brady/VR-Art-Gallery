@@ -20,6 +20,7 @@ class LandingPage extends Component {
     }
 
     async componentDidMount() {
+        console.log(window.location.pathname)
         if (document.querySelector('html').classList.contains('a-html')) {
             window.location.reload(true)
         }
