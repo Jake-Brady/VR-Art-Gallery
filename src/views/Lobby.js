@@ -39,6 +39,9 @@ class Lobby extends Component {
     }
 
     async componentDidMount() {
+        if (document.querySelector('html').classList.contains('a-html')) {
+            window.location.reload(true)
+        }
         //Validate User on Page as being logged in with session. If not, send back to landingPage; otherwise retrieve user's existing galleries and favorited galleries.
         const user = this.props.match.params.username,
             userData = await axios.get(`/api/checkUser/`)

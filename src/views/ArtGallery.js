@@ -8,7 +8,6 @@ import 'aframe'
 import 'aframe-room-component'
 import 'aframe-physics-system'
 import 'aframe-extras'
-import 'aframe-physics-extras'
 import 'aframe-star-system-component'
 import axios from 'axios'
 import '../components/Gallery/aframeFunctions'
@@ -104,7 +103,7 @@ class ArtGallery extends Component {
         loading = document.querySelector('#gallery-loading')
         const interval = setInterval(() => {
             let fps = document.querySelectorAll('.rs-counter-value')[1].innerText
-            if (fps > 30) {
+            if (fps > 20) {
                 scene.style.visibility = 'visible'
                 loading.style.display = 'none'
                 clearInterval(interval)
@@ -118,7 +117,6 @@ class ArtGallery extends Component {
 
     render() {
         let { wallTexture, floorTexture, music, captions, position } = this.state
-        console.log(this.state, 'state of gallery')
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <>
@@ -138,9 +136,10 @@ class ArtGallery extends Component {
                 <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
                 <a-sky color="#000"></a-sky>
                 <a-entity star-system></a-entity>
-                <a-entity light="type: ambient"></a-entity>
+                <a-entity light="type: ambient; color: #BBB"></a-entity>
+                <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
 
-                {/* Shooting Stars - Animation */}
+                     {/* Shooting Stars - Animation */}
                 <a-entity 
                 mixin="shooting-star" 
                 position="-500 100 13.5"
@@ -153,18 +152,21 @@ class ArtGallery extends Component {
                     <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -53.5" to="500 100 13.5"  delay="27000" dur="9000" repeat="indefinite"></a-animation>
                 </a-entity>
                 
-                    {/* Wall Digital Clock */}
+                    {/* Wall Digital Clock - Author/GalleryName */}
                     <a-entity
-                    position="5 3 -1.99"
+                    position="5 9 17.99"
                     geometry="primitive: plane"
                     material="color:black"
-                    scale="4 2 2"
+                    scale="6 4 4"
+                    rotation="0 180 0"
                     >
                     </a-entity>
                     <a-entity 
                     scale="2 2 2" 
-                    position="3.75 3.10 -1.98" 
-                    clock="font: sourcecodepro; color: #191;">
+                    position="6.25 9.1 17.98" 
+                    clock="font: sourcecodepro; color: #191;"
+                    rotation="0 180 0"
+                    >
                     </a-entity>
 
                     {/*Entities Inside of Main Gallery  */}
@@ -244,7 +246,7 @@ class ArtGallery extends Component {
                     {/* Outer Side of Inner-Walls - First Floor */}
                     {/* Near Player Spawn */}
                     {/* User Images */}
-                    <a-image id="portrait10" src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .99" rotation=" 0 -180 0"></a-image>
+                    <a-image id="portrait10" src="#Portrait10" height="2.5" width="3.5" className="user-image" position="2.99 2.5 .98" rotation=" 0 -180 0"></a-image>
                     {/* Frame */}
                     <a-gltf-model 
                     src="#frame" 
@@ -434,42 +436,90 @@ class ArtGallery extends Component {
 
                     <a-gltf-model 
                     static-body 
+                    src="#pillar" 
+                    scale='.025 .0185 .025' 
+                    position='-6.25 5.51 7.9' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
+                    scale='.025 .0185 .025' 
+                    position='12.25 5.51 7.9' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
+                    scale='.025 .0159 .025' 
+                    position='-6.25 0 7.9' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
+                    scale='.025 .0159 .025' 
+                    position='12.25 0 7.9' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
+                    scale='.025 .0185 .025' 
+                    position='-6.25 5.51 0.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
+                    scale='.025 .0159 .025' 
+                    position='-6.25 0 0.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
+                    scale='.025 .0185 .025' 
+                    position='12.25 5.51 0.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
+                    scale='.025 .0159 .025' 
+                    position='12.25 0 0.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
                     src="#table" 
                     scale='.0015 .003 .0015' 
-                    position='-6.15 .05 .5' 
+                    position='-1.7 .05 .5' 
                     rotation="0 0 0">
                     </a-gltf-model>
 
                     <a-gltf-model
                     src="#stereo" 
                     scale='2.5 2.5 2.5' 
-                    position='-6.65 1.57 .52' 
-                    rotation="0 90 0"
+                    position='-1.3 1.58 .52' 
+                    rotation="0 -90 0"
                     sound={`src:${music}; on:click; rolloffFactor:.1`}
                     >
                     </a-gltf-model>
 
                     <a-gltf-model 
                     static-body 
-                    src="#hibiscus" 
-                    scale='.004 .004 .004' 
-                    position='-3.15 5.51 -.8' 
-                    rotation="0 90 0">
-                    </a-gltf-model>
-
-                    <a-gltf-model 
-                    static-body 
-                    src="#hibiscus" 
-                    scale='.004 .004 .004' 
-                    position='9.15 5.51 -.8' 
-                    rotation="0 90 0">
-                    </a-gltf-model>
-
-                    <a-gltf-model 
-                    static-body 
                     src="#bench" 
                     scale='21 21 21' 
-                    position='9.15 9.51 20.5' 
+                    position='11 9.51 20.5' 
                     rotation="0 180 0">
                     </a-gltf-model>
 
@@ -477,40 +527,48 @@ class ArtGallery extends Component {
                     static-body 
                     src="#bench" 
                     scale='21 21 21' 
-                    position='4.15 9.51 20.5' 
+                    position='7 9.51 20.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#bench" 
+                    scale='21 21 21' 
+                    position='3 9.51 20.5' 
                     rotation="0 180 0">
                     </a-gltf-model>
 
                     <a-gltf-model 
                     static-body 
                     src="#nymph" 
-                    scale='.85 .85 .85' 
-                    position='9.9 .7 -.1' 
-                    rotation="-180 -90 0">
+                    scale='.95 .95 .95' 
+                    position='11 6.35 14.8' 
+                    rotation="-180 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#kore" 
+                    scale='.001 .001 .001' 
+                    position='12 1.67 17.3' 
+                    rotation="0 45 0">
                     </a-gltf-model>
 
                     <a-gltf-model 
                     static-body 
                     src="#marsStatue" 
-                    scale='1 1 1' 
-                    position='11.5 3.6 7.1' 
-                    rotation="-180 90 0">
+                    scale='1.25 1.25 1.25' 
+                    position='-3.8 9.9 -.5' 
+                    rotation="-180 180 0">
                     </a-gltf-model>
 
                     <a-gltf-model 
                     static-body 
                     src="#penelope" 
-                    scale='.0023 .0023 .0023' 
-                    position='-6.1 0 7.8' 
-                    rotation="0 0 0">
-                    </a-gltf-model>
-
-                    <a-gltf-model 
-                    static-body 
-                    src="#marblePlayer" 
-                    scale='.5 .5 .5' 
-                    position='12 3.3 16.2' 
-                    rotation="-180 45 0">
+                    scale='.0032 .0032 .0032' 
+                    position='8.8 5.511 -1.2' 
+                    rotation="0 180 0">
                     </a-gltf-model>
 
                     <a-gltf-model 
@@ -555,9 +613,19 @@ class ArtGallery extends Component {
                     <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="3 5 19" rotation=" 0 180 0"></a-plane>
 
                     {/* Interior Walls and Pillars for added Decorations */}
-                    <a-box material="src:#marble; side:front" width="8" height="7" depth="1" static-body position="3 2 1.5"></a-box>
-                    <a-box material="src:#marble" width="8" height="7" depth="1" static-body position="3 2 8"></a-box>
-                    <a-box material="src:#marble" width="8" height="7" depth="1" static-body position="3 2 14.5"></a-box>
+                    <a-box material="src:#marble;" width="8" height="7" depth="1" static-body position="3 2 1.5"></a-box>
+                    <a-box material="src:#marble;" width="8" height="7" depth="1" static-body position="3 2 8"></a-box>
+                    <a-box material="src:#marble;" width="8" height="7" depth="1" static-body position="3 2 14.5"></a-box>
+
+                    {/* Plane to cover bad texture on side of walls. */}
+                    <a-plane material="color: #F2F4F3" rotation="0 -90 0" position="-1.001 2 1.5" height="7"></a-plane>
+                    <a-plane material="color: #F2F4F3" rotation="0 90 0" position="7.001 2 1.5" height="7"></a-plane>
+
+                    <a-plane material="color: #F2F4F3" rotation="0 -90 0" position="-1.001 2 8" height="7"></a-plane>
+                    <a-plane material="color: #F2F4F3" rotation="0 90 0" position="7.001 2 8" height="7"></a-plane>
+
+                    <a-plane material="color: #F2F4F3" rotation="0 -90 0" position="-1.001 2 14.5" height="7"></a-plane>
+                    <a-plane material="color: #F2F4F3" rotation="0 90 0" position="7.001 2 14.5" height="7"></a-plane>
 
                     {/* 2nd Floor */}
                     {/* Glass Floor - Center */}
@@ -624,7 +692,9 @@ class ArtGallery extends Component {
                     >
                         <a-animation begin="click" attribute="position" from="-5 .185 16.5" to="-5 5.5 16.5" dur="10000"></a-animation>
                         <a-animation begin="click" attribute="position" from="-5 5.5 16.5" to="-5 .185 16.5" delay="9000" dur="9000"></a-animation>   
-                        </a-entity>
+                    </a-entity>
+
+                    
                 </Scene>
             </>
         )

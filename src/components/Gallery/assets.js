@@ -28,10 +28,11 @@ import corkwall from '../../assets/corkwall.jpg'
 import Wood from '../../assets/laminate-floor.jpg'
 import Marble from '../../assets/marble_texture.jpg'
 import Stereo from '../../assets/gltfs/stereo.glb'
-import MarblePlayer from '../../assets/gltfs/marblePlayer.glb'
 import Penelope from '../../assets/gltfs/penelope.glb'
 import Pedestal from '../../assets/gltfs/pedestal.glb'
 import Bench from '../../assets/gltfs/canapea.glb'
+import Pillar from '../../assets/gltfs/pillar.glb'
+import Kore from '../../assets/gltfs/kore.glb'
 import 'aframe'
 import {Entity} from 'aframe-react'
 
@@ -104,12 +105,12 @@ render(){
         <Entity id="wallLight" src={WallLight} alt="Wall Light Obj" />
         <Entity id="door" src={Door} alt="Door Obj" />
         <Entity id="table" src={Table} alt="Table Obj" />
-        <Entity id="hibiscus" src={Hibiscus} alt="Plant Obj" />
         <Entity id="stereo" src={Stereo} alt="Stereo Obj" change-size/>
-        <Entity id="marblePlayer" src={MarblePlayer} alt="Marble Player Obj" />
         <Entity id="pedestal" src={Pedestal} alt="pedestal Obj" />
-        <Entity id="penelope" src={Penelope} alt="Marble Player Obj" />
+        <Entity id="penelope" src={Penelope} alt="Penelope Obj" />
         <Entity id="bench" src={Bench} alt="Bench Obj" />
+        <Entity id="pillar" src={Pillar} alt="Pillar Obj" />
+        <Entity id="kore" src={Kore} alt="Kore Obj" />
 
         <a-mixin 
         id="shooting-star"
