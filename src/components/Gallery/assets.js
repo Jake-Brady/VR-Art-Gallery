@@ -32,6 +32,7 @@ import Penelope from '../../assets/gltfs/penelope.glb'
 import Pedestal from '../../assets/gltfs/pedestal.glb'
 import Bench from '../../assets/gltfs/canapea.glb'
 import Pillar from '../../assets/gltfs/pillar.glb'
+import Kore from '../../assets/gltfs/kore.glb'
 import 'aframe'
 import {Entity} from 'aframe-react'
 
@@ -109,6 +110,7 @@ render(){
         <Entity id="penelope" src={Penelope} alt="Penelope Obj" />
         <Entity id="bench" src={Bench} alt="Bench Obj" />
         <Entity id="pillar" src={Pillar} alt="Pillar Obj" />
+        <Entity id="kore" src={Kore} alt="Kore Obj" />
 
         <a-mixin 
         id="shooting-star"

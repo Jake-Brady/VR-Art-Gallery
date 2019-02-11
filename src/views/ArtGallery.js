@@ -152,18 +152,21 @@ class ArtGallery extends Component {
                     <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -53.5" to="500 100 13.5"  delay="27000" dur="9000" repeat="indefinite"></a-animation>
                 </a-entity>
                 
-                    {/* Wall Digital Clock */}
+                    {/* Wall Digital Clock - Author/GalleryName */}
                     <a-entity
-                    position="5 3 -1.99"
+                    position="5 9 17.99"
                     geometry="primitive: plane"
                     material="color:black"
-                    scale="4 2 2"
+                    scale="6 4 4"
+                    rotation="0 180 0"
                     >
                     </a-entity>
                     <a-entity 
                     scale="2 2 2" 
-                    position="3.75 3.10 -1.98" 
-                    clock="font: sourcecodepro; color: #191;">
+                    position="6.25 9.1 17.98" 
+                    clock="font: sourcecodepro; color: #191;"
+                    rotation="0 180 0"
+                    >
                     </a-entity>
 
                     {/*Entities Inside of Main Gallery  */}
@@ -435,14 +438,6 @@ class ArtGallery extends Component {
                     static-body 
                     src="#pillar" 
                     scale='.025 .0185 .025' 
-                    position='4.15 5.51 17.3' 
-                    rotation="0 180 0">
-                    </a-gltf-model>
-
-                    <a-gltf-model 
-                    static-body 
-                    src="#pillar" 
-                    scale='.025 .0185 .025' 
                     position='-6.25 5.51 7.9' 
                     rotation="0 180 0">
                     </a-gltf-model>
@@ -458,7 +453,7 @@ class ArtGallery extends Component {
                     <a-gltf-model 
                     static-body 
                     src="#pillar" 
-                    scale='.025 .016 .025' 
+                    scale='.025 .0159 .025' 
                     position='-6.25 0 7.9' 
                     rotation="0 180 0">
                     </a-gltf-model>
@@ -466,7 +461,7 @@ class ArtGallery extends Component {
                     <a-gltf-model 
                     static-body 
                     src="#pillar" 
-                    scale='.025 .016 .025' 
+                    scale='.025 .0159 .025' 
                     position='12.25 0 7.9' 
                     rotation="0 180 0">
                     </a-gltf-model>
@@ -482,6 +477,14 @@ class ArtGallery extends Component {
                     <a-gltf-model 
                     static-body 
                     src="#pillar" 
+                    scale='.025 .0159 .025' 
+                    position='-6.25 0 0.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#pillar" 
                     scale='.025 .0185 .025' 
                     position='12.25 5.51 0.5' 
                     rotation="0 180 0">
@@ -489,17 +492,25 @@ class ArtGallery extends Component {
 
                     <a-gltf-model 
                     static-body 
+                    src="#pillar" 
+                    scale='.025 .0159 .025' 
+                    position='12.25 0 0.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
                     src="#table" 
                     scale='.0015 .003 .0015' 
-                    position='-6.15 .05 .5' 
+                    position='-1.7 .05 .5' 
                     rotation="0 0 0">
                     </a-gltf-model>
 
                     <a-gltf-model
                     src="#stereo" 
                     scale='2.5 2.5 2.5' 
-                    position='-6.65 1.57 .52' 
-                    rotation="0 90 0"
+                    position='-1.3 1.58 .52' 
+                    rotation="0 -90 0"
                     sound={`src:${music}; on:click; rolloffFactor:.1`}
                     >
                     </a-gltf-model>
@@ -516,6 +527,14 @@ class ArtGallery extends Component {
                     static-body 
                     src="#bench" 
                     scale='21 21 21' 
+                    position='7 9.51 20.5' 
+                    rotation="0 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#bench" 
+                    scale='21 21 21' 
                     position='3 9.51 20.5' 
                     rotation="0 180 0">
                     </a-gltf-model>
@@ -523,9 +542,17 @@ class ArtGallery extends Component {
                     <a-gltf-model 
                     static-body 
                     src="#nymph" 
-                    scale='.85 .85 .85' 
-                    position='9.9 .7 -.1' 
-                    rotation="-180 -90 0">
+                    scale='.95 .95 .95' 
+                    position='11 6.35 14.8' 
+                    rotation="-180 180 0">
+                    </a-gltf-model>
+
+                    <a-gltf-model 
+                    static-body 
+                    src="#kore" 
+                    scale='.001 .001 .001' 
+                    position='12 1.67 17.3' 
+                    rotation="0 45 0">
                     </a-gltf-model>
 
                     <a-gltf-model 
