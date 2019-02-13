@@ -127,6 +127,12 @@ class Lobby extends Component {
         this.setState({ usersGalleries: [...this.state.galleryCopy], favoritedGalleries: [...this.state.favoritesCopy], searchInput: '' })
     }
 
+    clearPresets = () => {
+        document.querySelectorAll(`#wall img`).forEach(option => option.style.opacity = '.2')
+        document.querySelectorAll(`#floor img`).forEach(option => option.style.opacity = '.2')
+        document.querySelectorAll(`#music > div`).forEach(option => option.style.opacity = '.2')
+    }
+
     changeWindow = magicWord => {
         const { theMagicWord } = this.state
         if (theMagicWord === 'create' && this.state.galleryId) {
@@ -140,6 +146,7 @@ class Lobby extends Component {
                     this.changeNav(magicWord)
                     this.checkSize()
                     this.toggleMenu()
+                    this.clearPresets()
                 })
                 break;
             case "Notifications":
@@ -418,16 +425,13 @@ class Lobby extends Component {
                             <div className='lobby-header_left'>
                                 <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
                                 <img id='header-image' src={Icon} onClick={() => this.props.history.push('/')} />
-                                <span id='header-name'>VR<span className='lighttext'>ART GALLERY</span></span>
+                                <span id='header-name' onClick={() => this.props.history.push('/')}>VR<span className='lighttext'>ART GALLERY</span></span>
                             </div>
                             <div className='lobby-header_search'>
                                 <input onChange={e => this.handleSearch(theMagicWord, e.target.value)} type='text' placeholder={`Search ${theMagicWord.charAt(0).toUpperCase() + theMagicWord.slice(1)}`} id='lobby-searchbar' />
                                 <div className='center'>
                                     <i className="fas fa-search"></i>
                                 </div>
-                            </div>
-                            <div className='lobby-header_right center'>
-                                <img src={Profile} alt='User Picture' />
                             </div>
                         </header>
 
@@ -443,7 +447,7 @@ class Lobby extends Component {
                                 {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span> */}
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span>
+                                {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span> */}
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('About')}><i className="fas fa-question menu-icon"></i>About</span>
                                 <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
                             </div>

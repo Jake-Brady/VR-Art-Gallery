@@ -577,6 +577,9 @@
     .lobby-header_right {
         width: 50px;
     }
+    .side-menu {
+        width: 100vw;
+    }
 }
 
 @media (max-width: 400px) {
