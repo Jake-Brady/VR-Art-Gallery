@@ -122,6 +122,7 @@ render(){
         material="color:#DCF3FF;"
                  >
         </a-mixin>
+
         
         {/* Music */}
         <audio id="gymnopedie" src={Gymnopedie}/>

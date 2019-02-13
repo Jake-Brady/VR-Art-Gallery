@@ -11,6 +11,8 @@ import 'aframe-room-component'
 import 'aframe-physics-system'
 import 'aframe-extras'
 import 'aframe-star-system-component'
+import 'aframe-animation-component'
+import 'aframe-animation-timeline-component'
 import axios from 'axios'
 import '../components/Gallery/aframeFunctions'
 
@@ -23,7 +25,9 @@ class ArtGallery extends Component {
             floorTexture: '',
             music: '',
             imagesHaveLoaded: false,
-            randomGallery: '/bl4ck4ndwhite/bl4ck4ndwhite%20gallery%204/'
+            galleryName: '',
+            author: '',
+            randomGallery: []
         }
         this.exit = this.exit.bind(this)
     }
@@ -32,7 +36,6 @@ class ArtGallery extends Component {
         console.log(this.props)
         let { username, galleryName } = this.props.match.params
         // Retrieve User's Images and Presets
-        console.log(username, galleryName)
         axios.get(`/api/getGalleryData/${username}/${galleryName}`).then(res => {
             let { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption, wall_texture, floor_texture, atmosphere_lighting, music } = res.data[0]
             // Putting all images in array to be sent to Reducer Store which is connected to Asset file
@@ -95,7 +98,9 @@ class ArtGallery extends Component {
                     music = '#passingTime'
                     break;
             }
-            this.setState({wallTexture: wall_texture, floorTexture: floor_texture, atmosphereLighting: atmosphere_lighting, music}, () => {
+            this.setState({wallTexture: wall_texture, floorTexture: floor_texture, atmosphereLighting: atmosphere_lighting, music, galleryName, author: username}, async () => {
+                const randomGallery = await axios.get(`/api/randomGallery/`)
+                this.setState({randomGallery: randomGallery.data[0]})
                 this.checkFPS()
             })
         })
@@ -119,15 +124,18 @@ class ArtGallery extends Component {
         this.props.history.push('/')
     }
 
-    portalHop(direction){
-        let author = 'bl4ck4ndwhite'
-        let galleryName = 'bl4ck4ndwhite gallery 4'
-        this.props.history.push(`/${author}/${galleryName}/`)
+    portalHop(){
+        const {randomGallery} = this.state
+        const {author, gallery_name} = randomGallery
+        this.props.history.push(`/${author}/${gallery_name}/`)
         window.location.reload()
     }
 
+    
+
     render() {
-        let { wallTexture, floorTexture, music, captions, position } = this.state
+        console.log(this.state)
+        let { wallTexture, floorTexture, music, captions, author, galleryName, randomGallery } = this.state
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <>
@@ -141,7 +149,7 @@ class ArtGallery extends Component {
                         </div>
                     </div>
                 </div>
-                <Scene physics="debug: false" stats id='scene'>
+                <Scene cursor="rayOrigin:mouse" physics="debug: false" stats id='scene'>
                 <Assets />
                     {/* World Outside - Star System outside skylight */}
                 <a-plane static-body rotation="-90 0 0" position="0 -0.01 0" height="50" width="50"></a-plane>
@@ -163,18 +171,25 @@ class ArtGallery extends Component {
                     <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -53.5" to="500 100 13.5"  delay="27000" dur="9000" repeat="indefinite"></a-animation>
                 </a-entity>
                 
-                    {/* Wall Digital Clock - Author/GalleryName */}
+                    {/* Wall Digital Clock - Gallery Author/Gallery Name */}
                     <a-entity
                     position="5 9 17.99"
                     geometry="primitive: plane"
                     material="color:black"
-                    scale="6 4 4"
+                    scale="5 3 3"
                     rotation="0 180 0"
+                    text={`
+                    font: sourcecodepro; 
+                    color: #191; 
+                    value: Welcome to ${galleryName}
+
+                    By ${author}
+                    ; align: center;`}
                     >
                     </a-entity>
                     <a-entity 
-                    scale="2 2 2" 
-                    position="6.25 9.1 17.98" 
+                    scale="1 1 1" 
+                    position="5.75 8 17.98" 
                     clock="font: sourcecodepro; color: #191;"
                     rotation="0 180 0"
                     >
@@ -187,24 +202,38 @@ class ArtGallery extends Component {
                             camera
                             position="0 1.6 0"
                             look-controls>
-                            <a-cursor color="red"></a-cursor>
                         </a-entity>
                     </a-entity>
 
-                    {/* <a-entity 
-                    position="5 2 -1.8" 
-                    link="title:Random Gallery; image: #portalPreview" 
+                    {/* Portal to Random Gallery */}
+                    {/* Panel */}
+                    <a-entity
+                    position="9 4.6 -1.9" 
+                    geometry="primitive: circle"
+                    material="color:black"
+                    scale="1.5 .75 1.5"
+                    rotation="0 0 0"
+                    text={`
+                    font: sourcecodepro; 
+                    color: #191; 
+                    value: ${randomGallery.gallery_name}; 
+                    align: center;
+                    width:2.8;
+                    `}
                     >
-                    </a-entity> */}
-
-                    
+                    </a-entity>
+                    {/* Portal */}
                     <a-circle
-                    scale="1 1.7 1"
-                    position="5 2 -1.8" 
+                    scale="1.5 1.8 1.5"
+                    position="9 2 -1.9" 
                     material="shader:portal;pano:#portalPreview"
-                    onClick={() => this.portalHop('random')}
+                    onClick={() => this.portalHop()}
+                    animation__onhover="property: scale; dir: alternate; startEvents: mouseenter; easing: easeInSine; from:1.5 1.8 1.5; to:1.8 1.8 1.8; dur: 250; loop: 1"
+                    >
                     >
                     </a-circle>
+
+                    
                     
 
                     {/* Frames for user images */}
@@ -453,12 +482,30 @@ class ArtGallery extends Component {
 
                     {/* Objects */}
                     {/* 3D Object Imports */}
+                    <a-entity
+                    position="-4.5 3.8 -1.9" 
+                    geometry="primitive: plane"
+                    material="color:black"
+                    scale="1.5 1 1.5"
+                    rotation="0 0 0"
+                    text={`
+                    font: sourcecodepro; 
+                    color: #191; 
+                    value: EXIT; 
+                    align: center;
+                    width: 7
+                    `
+                    }
+                    >
+                    </a-entity>
                     <a-gltf-model
                     onClick={() => this.exit()}
                     src="#door" 
                     scale='.0015 .0015 .0015' 
                     position='-4.5 0 -1.99' 
-                    rotation="0 90 0">
+                    rotation="0 90 0"
+                    animation__onhover="property: scale; dir: alternate; startEvents: mouseenter; easing: easeInSine; from:.0015 .0015 .0015; to:.00158 .00152 .00158; dur: 250; loop: 1"
+                    >
                     </a-gltf-model>
 
                     <a-gltf-model 
@@ -534,11 +581,12 @@ class ArtGallery extends Component {
                     </a-gltf-model>
 
                     <a-gltf-model
-                    src="#stereo" 
+                    src="#stereo"
                     scale='2.5 2.5 2.5' 
                     position='-1.3 1.58 .52' 
                     rotation="0 -90 0"
                     sound={`src:${music}; on:click; rolloffFactor:.1`}
+                    animation__onhover="property: scale; dir: alternate; startEvents: mouseenter; easing: easeInSine; from:2.5 2.5 2.5; to:2.54 2.58 2.54; dur: 250; loop: 1"
                     >
                     </a-gltf-model>
 
@@ -682,7 +730,7 @@ class ArtGallery extends Component {
                     <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 5.501 16.5"
              material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
 
-            {/* Ceiling Floor */}
+                    {/* Ceiling Floor */}
                 <a-entity geometry="primitive: plane; height: 14; width: 11"  position="3 12 8"
             material="color: black; opacity: 0.5" rotation="90 0 0"></a-entity>
                 <a-entity static-body geometry="primitive: plane; height: 14; width: 11"  position="3 12.001 8"
@@ -710,18 +758,62 @@ class ArtGallery extends Component {
             material="color: gray" rotation="-90 0 0"></a-entity>
 
                     {/* Elevator from 2nd floor to 3rd floor */}
-                    <a-entity
-                    static-body
-                    geometry="primitive: plane; height: 3; width: 5;"
-                    material="src:#marble"
-                    position="-5 .185 16.5"
-                    rotation="-90 0 0"
-                    >
-                        <a-animation begin="click" attribute="position" from="-5 .185 16.5" to="-5 5.5 16.5" dur="10000"></a-animation>
-                        <a-animation begin="click" attribute="position" from="-5 5.5 16.5" to="-5 .185 16.5" delay="9000" dur="9000"></a-animation>   
-                    </a-entity>
+                    {/* <a-entity id="elevatorContainer"> */}
+                        <a-entity
+                        id="elevator-floor"
+                        static-body
+                        geometry="primitive: box; height: 3; width: 4.5; depth:7"
+                        material="src:#marble"
+                        animation="property: position; dir: alternate; from:-4.75 -3.3 16.5; to:-4.75 2 16.5; easing: easeInSine; dur:7000; loop: true"
+                        rotation="90 0 0"
+                        ></a-entity>
+                    {/* </a-entity> */}
 
-                    
+                    {/* <a-box
+                    id="elevatorButton"
+                    position="-4.75 .185 14"
+                    scale="1 1 1"
+                    emit-on-click="target:#elevator-floor; event: click"
+                    >
+                    </a-box> */}
+
+                        <a-entity
+                        className="elevatorElement"
+                        geometry="primitive:plane"
+                        position="-4.74 2.2 17.99"
+                        rotation="0 -180 0"
+                        scale="4.49 20 4.49"
+                        material="color: black; opacity: 0.5"
+                        >
+                        </a-entity>
+                        <a-entity
+                        className="elevatorElement"
+                        geometry="primitive:plane"
+                        position="-6.99 2.2 16.5"
+                        rotation="0 90 0"
+                        scale="3 20 3"
+                        material="color: black; opacity: 0.5"
+                        >
+                        </a-entity>
+                        <a-entity
+                        className="elevatorElement"
+                        static-body
+                        geometry="primitive:plane"
+                        position="-2.5 2.2 16.5"
+                        rotation="0 -90 0"
+                        scale="3 20 3"
+                        material="color: black; opacity: 0.5"
+                        >
+                        </a-entity>
+                        <a-entity
+                        className="elevatorElement"
+                        geometry="primitive:plane"
+                        position="-2.5 2.2 16.5"
+                        rotation="0 90 0"
+                        scale="3 20 3"
+                        material="color: black; opacity: 0.5"
+                        >
+                        </a-entity>
                 </Scene>
             </>
         )

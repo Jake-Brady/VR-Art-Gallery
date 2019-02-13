@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "aframe": "^0.8.2",
+    "aframe-animation-component": "^5.1.2",
+    "aframe-animation-timeline-component": "^1.6.0",
     "aframe-extras": "^5.0.1",
     "aframe-physics-system": "^3.3.0",
     "aframe-react": "^4.4.0",
