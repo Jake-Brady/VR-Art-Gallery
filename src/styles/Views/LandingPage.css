@@ -204,7 +204,7 @@
 }
 
 .landing-main {
-    margin-top: 150px;
+    margin-top: 200px;
     width: 1240px;
     font-family: 'Oswald', sans-serif;
 }
@@ -413,6 +413,38 @@
 .video-anim {
     animation: videoPop 1s 1;
     animation-fill-mode: forwards;
+}
+
+
+#landing-search {
+    width: 250px;
+    height: 40px;
+    position: absolute;
+    border-radius: 3px;
+    bottom: -200px;
+    display: flex;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+#landing-search > input {
+    width: 80%;
+    height: 100%;
+    padding: 0px 10px;
+    font-family: 'Oswald';
+    border: none;
+    color: rgb(133, 133, 133);
+    font-size: 14px;
+}
+
+#landing-search > i {
+    width: 20%;
+    height: 100%;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#landing-search > i:hover {
+    color: rgb(76, 103, 201);
 }
 
 @media (max-width: 1300px) {

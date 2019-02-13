@@ -9,7 +9,6 @@ import Account from '../components/Lobby/account'
 import About from '../components/Lobby/about'
 import '../styles/Views/Lobby.css'
 import Icon from '../styles/Media/Icon.png'
-import Profile from '../styles/Media/defaultProfile.png'
 
 class Lobby extends Component {
     constructor() {

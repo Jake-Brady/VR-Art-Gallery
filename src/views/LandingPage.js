@@ -16,11 +16,11 @@ class LandingPage extends Component {
             favoriteNum: 0,
             notificationType: '',
             sharedGalleries: [],
+            galleriesFiltered: []
         }
     }
 
     async componentDidMount() {
-        console.log(window.location.pathname)
         if (document.querySelector('html').classList.contains('a-html')) {
             window.location.reload(true)
         }
@@ -30,7 +30,24 @@ class LandingPage extends Component {
         const user = await axios.get('/api/checkUser/')
         this.setState({ user: user.data }, () => this.setState({ loading: false }))
         window.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('keypress', this.checkKey)
         this.getFavorites()
+    }
+
+    checkKey = e => {
+        if (e.code === 'Enter') this.handleSearch()
+    }
+
+    handleSearch = () => {
+        const input = document.querySelector('#landing-search > input')
+        if (input.value) this.searchResults(input.value)
+        else this.setState({ galleriesFiltered: [] })
+        input.value = ''
+    }
+
+    async searchResults(keywords) {
+        const searchResults = await axios.get(`/api/galleries?search=${keywords}`)
+        this.setState({ galleriesFiltered: searchResults.data }, () => console.log(this.state.galleries))
     }
 
     async getFavorites() {
@@ -71,6 +88,7 @@ class LandingPage extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll)
+        window.removeEventListener('keypress', this.checkKey)
     }
 
     //yoinked this from the interwebs 😂
@@ -111,7 +129,7 @@ class LandingPage extends Component {
 
     smoothScroll(target) {
         if (target === 'gallery') {
-            const galleries = $('.landing-galleries').position().top;
+            const galleries = $('#landing-search').position().top;
             $('html, body').animate({
                 scrollTop: galleries
             }, 300)
@@ -207,7 +225,7 @@ class LandingPage extends Component {
         }
     }
 
-    shareGallery(galleryName, author, galleryId, galleryShares, {target}) {
+    shareGallery(galleryName, author, galleryId, galleryShares, { target }) {
         target.style.color = 'rgb(110, 142, 254)'
         this.notification(galleryName, 'share')
         this.increaseShare(galleryId, galleryShares)
@@ -312,6 +330,28 @@ class LandingPage extends Component {
                 </div>
             )
         })
+        const filteredArray = this.state.galleriesFiltered.map(gallery => {
+            const galleryId = gallery.id
+            const galleryName = gallery.gallery_name
+            const author = gallery.author
+            let timesFavorited = gallery.times_favorited
+            return (
+                <div key={galleryId} className='gallery-container'>
+                    <img src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
+                    <div className='gallery-text'>
+                        <h1 className='gallery-title'>{galleryName.length > 20 ? galleryName.slice(0, 20) + '...' : galleryName}</h1>
+                        <div className='gallery-title-hover'>{galleryName}</div>
+                        <h3 className='gallery-author'>BY:{author}</h3>
+                        <div className='gallery-stats'>
+                            <i className="fas fa-eye stat"></i><span>{gallery.views}</span>
+                            <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><span>{timesFavorited}</span>
+                            <i onClick={(e) => this.shareGallery(galleryName, author, galleryId, gallery.shares, e)} className="fas fa-share stat"></i><span>{gallery.shares}</span>
+                        </div>
+                        <div onClick={() => this.visitGallery(galleryId, galleryName, author)} className='gallery-view center'>Visit Gallery</div>
+                    </div>
+                </div>
+            )
+        })
         return (
             <>
                 {!this.state.loading ?
@@ -346,13 +386,27 @@ class LandingPage extends Component {
                                         </div>
                                         <video src={VRVideo} alt="trailer of VR-Art-Gallery" onClick={e => this.handleVideo(e)}></video>
                                     </div>
+                                    <div id='landing-search'>
+                                        <input placeholder='Search by Gallery or Author' />
+                                        {this.state.galleriesFiltered.length ?
+                                            <i className="fas fa-times center" onClick={() => this.handleSearch()}></i>
+                                            :
+                                            <i className="fas fa-search center" onClick={() => this.handleSearch()}></i>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <main className='landing-main'>
-                            <div className='landing-galleries'>
-                                {galleryArray}
-                            </div>
+                            {this.state.galleriesFiltered.length ?
+                                <div className='landing-galleries'>
+                                    {filteredArray}
+                                </div>
+                                :
+                                <div className='landing-galleries'>
+                                    {galleryArray}
+                                </div>
+                            }
                             <div className='landing-back center' onClick={() => this.smoothScroll('home')}>
                                 <i className="fas fa-arrow-up"></i>
                             </div>
