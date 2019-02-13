@@ -38,7 +38,6 @@ class Account extends Component {
 
     checkChanges = () => {
         const { imageAddress, newUsername, newEmail, newPassword } = this.state
-        console.log(this.state)
         if (imageAddress) this.changeAvatar()
         if (newUsername) this.changeUsername()
         if (newEmail) this.changeEmail()
@@ -47,15 +46,13 @@ class Account extends Component {
 
     async changeUsername() {
         const { newUsername, passwordConfirm, username } = this.state
-        console.log(passwordConfirm)
         const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-        console.log(checkPassword.data)
         if (checkPassword.data === 'incorrect') {
-            alert('Sorry, but that password is incorrect.  Your username will remain unchanged.')
+            this.wrongPass()
         } else {
             const updatedUsername = await axios.put(`/api/changeUsername/`, { newUsername, username })
             if (updatedUsername.data === 'username') {
-                alert('Username is already taken.')
+                this.userTaken()
             } else {
                 this.setState({ username: updatedUsername.data[0].username, passwordConfirm: '' })
             }
@@ -78,14 +75,9 @@ class Account extends Component {
     }
 
     async changeAvatar() {
-        const { passwordConfirm, imageAddress, username } = this.state
-        const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-        if (checkPassword.data[0] === 'incorrect') {
-            alert('Sorry, but that password is incorrect.  Your email will remain unchanged.')
-        } else {
-            const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
-            this.setState({ avatarURL: updatedAvatar.data[0].avatar_img, passwordConfirm: '', imageAddress: '' })
-        }
+        const { imageAddress, username } = this.state
+        const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
+        this.setState({ avatarURL: updatedAvatar.data[0].avatar_img, passwordConfirm: '', imageAddress: '' })
     }
 
     async changePassword() {
@@ -174,6 +166,11 @@ class Account extends Component {
         this.setState({ pass: true })
     }
 
+    wrongPass = () => {
+        const passwordInput = document.querySelector('#account-password')
+        passwordInput.style.borderColor = 'red'
+    }
+
     render() {
         return (
             <section className="account-page">
@@ -225,11 +222,11 @@ class Account extends Component {
                         <img src={this.state.imageAddress || this.state.avatarURL || Placeholder} alt='User Image' style={{ cursor: 'pointer' }} onError={(e) => e.target.src = Placeholder} />
                         <div className='account-edit-inputs'>
                             <h1>USERNAME</h1>
-                            <input name="newUsername" onChange={(e) => this.handleChange(e)} />
+                            <input id='account-name' name="newUsername" onChange={(e) => this.handleChange(e)} />
                             <h1>EMAIL</h1>
-                            <input name="newEmail" onChange={(e) => this.handleChange(e)} />
+                            <input id='account-email' name="newEmail" onChange={(e) => this.handleChange(e)} />
                             <h1>CURRENT PASSWORD</h1>
-                            <input name="passwordConfirm" onChange={e => this.handleChange(e)} />
+                            <input id='account-password' name="passwordConfirm" onChange={e => this.handleChange(e)} />
                             {this.state.pass ?
                                 <>
                                     <h1>NEW PASSWORD</h1>
