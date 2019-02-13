@@ -52,7 +52,7 @@ class CreateGalleries extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.editGalleryId === 0 ) {
+        if (nextProps.editGalleryId === 0) {
             this.setState({ images: [], captions: [], galleryName: '', imageAddress: '', thumbnail: '' })
         }
     }
@@ -190,13 +190,12 @@ class CreateGalleries extends Component {
 
 
     render(props) {
-        console.log("PRESETS", this.state.galleryPresets)
         let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress, finalCountdown } = this.state
         return (
             <section className="create-galleries">
                 {maxLimit ?
                     <div className='lobby-empty'>
-                        <h1 style={{ color: 'rgb(110, 142, 254)'}} className='lobby-empty-header'>You currently have reached the gallery amount cap.</h1>
+                        <h1 style={{ color: 'rgb(110, 142, 254)' }} className='lobby-empty-header'>You currently have reached the gallery amount cap.</h1>
                         <h2>You can either edit an existing gallery or delete one to continue.</h2>
                     </div>
                     :
@@ -206,7 +205,7 @@ class CreateGalleries extends Component {
                             <div className='create-gallery_cardleft'>
                                 <h3>Gallery Info</h3>
                                 <h1>Gallery Name</h1>
-                                <input name="galleryName" onChange={(e) => this.handleChange(e)} maxLength='100' />
+                                <input name="galleryName" onChange={(e) => this.handleChange(e)} maxLength='100' value={galleryName ? galleryName : ''} />
                                 <h2>Privacy</h2>
                                 <div className='create-gallery-privacy'>
                                     <div style={this.state.isPrivate ? { opacity: '.5' } : { opacity: '1' }} onClick={() => this.handlePrivacy(false)}>Public <i className="fas fa-unlock" style={{ marginLeft: '10px', fontSize: '12px', marginTop: '5px' }}></i></div>
@@ -223,19 +222,7 @@ class CreateGalleries extends Component {
                                     multiple={false}
                                 >
                                     {({ getRootProps, getInputProps }) => (
-                                        <div {...getRootProps()} style={{
-                                            width: '100%',
-                                            height: '300px',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            background: 'rgb(119, 148, 253)',
-                                            marginTop: '15px',
-                                            fontSize: '15px',
-                                            color: 'white',
-                                            cursor: 'pointer',
-                                            position: 'relative'
-                                        }}>
+                                        <div {...getRootProps()} className='oof'>
                                             <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
                                             <span style={{ fontSize: '18px' }}>UPLOAD OR DRAG</span>
                                             <div className='main-upload-cover' />
@@ -245,35 +232,6 @@ class CreateGalleries extends Component {
                             </div>
 
                             <div className='create-gallery_cardright center'>
-                                <div className='preview-drop'>
-                                    <span className='gallery-upload-text'>UPLOAD OR DRAG</span>
-                                    <div className='gallery-upload-fade' />
-                                    <Dropzone
-                                        onDropAccepted={this.getSignedRequestThumbnails.bind(this)}
-                                        onFileDialogCancel={this.onCancel.bind(this)}
-                                        accept="image/*"
-                                        multiple={false}
-                                    >
-                                        {({ getRootProps, getInputProps }) => (
-                                            <div {...getRootProps()} style={{
-                                                width: '250px',
-                                                height: '210px',
-                                                display: 'flex',
-                                                justifyContent: 'center',
-                                                alignItems: 'center',
-                                                marginTop: '15px',
-                                                fontSize: '15px',
-                                                color: 'white',
-                                                cursor: 'pointer',
-                                                position: 'absolute',
-                                                top: '70px',
-                                                left: '114px'
-                                            }}>
-                                                <input {...getInputProps()} style={{ width: '1px', height: '1px', visibility: 'hidden' }} />
-                                            </div>
-                                        )}
-                                    </Dropzone>
-                                </div>
                                 <h3>Preview</h3>
                                 <div className='gallery-container' style={{ marginBottom: '0px' }}>
                                     {isUploading ?

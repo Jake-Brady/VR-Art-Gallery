@@ -41,7 +41,7 @@ class GalleryPresets extends Component {
     componentWillReceiveProps(props) {
         let { galleryPresets, finalCountdown, retrievingGalleryPresets } = props
         if (this.state.finalCountdown === 2 && galleryPresets) {
-            this.setState({  wall: galleryPresets[1], floor: galleryPresets[3], music: galleryPresets[4] }, () => {
+            this.setState({ wall: galleryPresets[1], floor: galleryPresets[3], music: galleryPresets[4] }, () => {
                 this.setState({ finalCountdown: 1 })
             })
         } else if (this.state.finalCountdown === 1 && galleryPresets) {
@@ -75,13 +75,22 @@ class GalleryPresets extends Component {
 
     audioPreview = (file, e) => {
         e.stopPropagation()
+        document.querySelectorAll('.gallery-audio-preview').forEach(icon => icon.style.color = 'black')
         const audio = document.querySelector('.gallery-audio-tag')
         const src = audio.getAttribute('src')
-        if (src === file && audio.paused) audio.play()
-        else if (audio.duration > 0 && src === file) audio.pause()
+        if (src === file && audio.paused) {
+            e.target.style.color = 'rgb(110, 142, 254)'
+            audio.play()
+        }
+        else if (audio.duration > 0 && src === file) {
+            e.target.style.color = 'black'
+            audio.pause()
+        }
         else {
+            e.target.style.color = 'rgb(110, 142, 254)'
             audio.setAttribute('src', file)
             audio.load()
+            audio.volume = 0.2
             audio.play()
         }
     }
@@ -149,40 +158,40 @@ class GalleryPresets extends Component {
                 </div>
                 <div id='music'>
                     <h1>Music Selection</h1>
+                    <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(gymnopediaPreview, e)}>
+                        <i className="fas fa-music"></i>
+                    </div>
+                    <div className='gallery-audio-preview center audio2' onClick={(e) => this.audioPreview(calmantPreview, e)}>
+                        <i className="fas fa-music"></i>
+                    </div>
+                    <div className='gallery-audio-preview center audio3' onClick={(e) => this.audioPreview(snowDropPreview, e)}>
+                        <i className="fas fa-music"></i>
+                    </div>
+                    <div className='gallery-audio-preview center audio4' onClick={(e) => this.audioPreview(timePreview, e)}>
+                        <i className="fas fa-music"></i>
+                    </div>
+                    <div className='gallery-audio-preview center audio5' onClick={(e) => this.audioPreview(impromptuPreview, e)}>
+                        <i className="fas fa-music"></i>
+                    </div>
                     <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data='gymnopedie'>
-                        <div className='gallery-preset-overlay' />
+                        <div className='gallery-preset-overlay audio-overlay' />
                         GYMNOPEDIE
-                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(gymnopediaPreview, e)}>
-                            <i className="fas fa-music"></i>
-                        </div>
                     </div>
                     <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="calmant">
-                        <div className='gallery-preset-overlay' />
+                        <div className='gallery-preset-overlay audio-overlay' />
                         CALMANT
-                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(calmantPreview, e)}>
-                            <i className="fas fa-music"></i>
-                        </div>
                     </div>
                     <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="snowDrop">
-                        <div className='gallery-preset-overlay' />
+                        <div className='gallery-preset-overlay audio-overlay' />
                         SNOW DROP
-                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(snowDropPreview, e)}>
-                            <i className="fas fa-music"></i>
-                        </div>
                     </div>
                     <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="impromptu">
-                        <div className='gallery-preset-overlay' />
+                        <div className='gallery-preset-overlay audio-overlay' />
                         IMPROMPTU IN QUARTER COMMA MEANTONE
-                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(impromptuPreview, e)}>
-                            <i className="fas fa-music"></i>
-                        </div>
                     </div>
                     <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data="onThePassingOfTime">
-                        <div className='gallery-preset-overlay' />
+                        <div className='gallery-preset-overlay audio-overlay' />
                         ON THE PASSING OF TIME
-                        <div className='gallery-audio-preview center' onClick={(e) => this.audioPreview(timePreview, e)}>
-                            <i className="fas fa-music"></i>
-                        </div>
                     </div>
                 </div>
             </section>

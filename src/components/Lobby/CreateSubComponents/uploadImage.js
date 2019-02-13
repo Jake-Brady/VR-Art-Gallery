@@ -40,8 +40,6 @@ class UploadImage extends Component {
     }
 
     getSignedRequest = ([file]) => {
-        console.log(this.state.url)
-        console.log(file)
         this.setState({ isUploading: true });
         const fileName = `${randomStringGenerator()}-${file.name.replace(/\s/g, '-')}`;
         axios
@@ -150,7 +148,7 @@ class UploadImage extends Component {
                         </figure>
                     }
                 </div>
-                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="15" placeholder={imageCaption ? imageCaption : "Image Caption (15 character limit)"}></input>
+                <input name="imageCaption" onChange={(e) => this.onChangeHandler(e)} maxLength="15" placeholder={"Image Caption (15 character limit)"} value={imageCaption ? imageCaption : ''}></input>
                 <span className="delete-btn center" onClick={(e) => this.delete(e)}>Delete Image</span>
             </section>
         )
