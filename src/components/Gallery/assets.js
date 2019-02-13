@@ -1,7 +1,8 @@
 import React,{Component} from 'react'
 import {connect} from 'react-redux'
 import {imagesHaveLoaded} from '../../ducks/reducer'
-import portalPreview from '../../assets/portalPreview.png'
+import portalPreviewPorcelain from '../../assets/portalPreviewPorcelain.png'
+import portalPreviewWood from '../../assets/portalPreviewWood.png'
 import Door from '../../assets/gltfs/door.glb'
 import Table from '../../assets/gltfs/table.glb'
 import WallLight from '../../assets/gltfs/wallLight.glb'
@@ -96,7 +97,8 @@ render(){
         <img id="seamlessStone" src={seamlessStone} alt="seamless stone texture" />
 
         {/* Portal Preview */}
-        <img id="portalPreview" src={portalPreview} alt="portal preview image" />
+        <img id="portalPreviewWood" src={portalPreviewWood} alt="portal preview image" />
+        <img id="portalPreviewPorcelain" src={portalPreviewPorcelain} alt="portal preview image" />
        
         {/* Objects */}
         <Entity id="frame" src={Frame} alt="Picture Frame" />

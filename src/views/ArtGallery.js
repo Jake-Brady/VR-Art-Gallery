@@ -27,7 +27,8 @@ class ArtGallery extends Component {
             imagesHaveLoaded: false,
             galleryName: '',
             author: '',
-            randomGallery: []
+            randomGallery: [],
+            isWoodFloor: false
         }
         this.exit = this.exit.bind(this)
     }
@@ -48,6 +49,7 @@ class ArtGallery extends Component {
             switch (floor_texture) {
                 case "wood":
                     floor_texture = '#wood'
+                    this.setState({isWoodFloor: true})
                     break;
                 case "porcelainTiles":
                     floor_texture = '#porcelainTiles'
@@ -135,7 +137,7 @@ class ArtGallery extends Component {
 
     render() {
         console.log(this.state)
-        let { wallTexture, floorTexture, music, captions, author, galleryName, randomGallery } = this.state
+        let { wallTexture, floorTexture, music, captions, author, galleryName, randomGallery, isWoodFloor } = this.state
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <>
@@ -226,7 +228,7 @@ class ArtGallery extends Component {
                     <a-circle
                     scale="1.5 1.8 1.5"
                     position="9 2 -1.9" 
-                    material="shader:portal;pano:#portalPreview"
+                    material={`shader:portal;pano: ${isWoodFloor ? "#portalPreviewPorcelain" : "#portalPreviewWood" }`}
                     onClick={() => this.portalHop()}
                     animation__onhover="property: scale; dir: alternate; startEvents: mouseenter; easing: easeInSine; from:1.5 1.8 1.5; to:1.8 1.8 1.8; dur: 250; loop: 1"
                     >
