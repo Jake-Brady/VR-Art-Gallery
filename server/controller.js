@@ -151,6 +151,18 @@ module.exports = {
         const db = req.app.get('db')
         db.get_gallery_data([galleryName, username]).then(images => {
             res.status(200).send(images)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
+    getRandomGallery: (req, res, next) => {
+        const db = req.app.get('db')
+        db.get_random_gallery().then(randoGallery => {
+            res.status(200).send(randoGallery)
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
         })
     },
     checkUser: (req, res, next) => {
@@ -203,7 +215,6 @@ module.exports = {
     updateGallery: (req, res, next) => {
         const {galleryId} = req.params
         const {isPrivate, galleryName, thumbnail, finalImages, finalCaptions, finalGalleryPresets} = req.body
-        console.log(finalGalleryPresets)
         const db = req.app.get('db')
         db.update_gallery([galleryId, isPrivate, galleryName, thumbnail, finalGalleryPresets[0], finalGalleryPresets[1], finalGalleryPresets[2], finalGalleryPresets[3], finalImages[0], finalImages[1], finalImages[2], finalImages[3], finalImages[4], finalImages[5], finalImages[6], finalImages[7], finalImages[8], finalImages[9], finalImages[10], finalImages[11], finalImages[12], finalImages[13], finalImages[14], finalCaptions[0], finalCaptions[1], finalCaptions[2], finalCaptions[3], finalCaptions[4], finalCaptions[5], finalCaptions[6], finalCaptions[7], finalCaptions[8], finalCaptions[9], finalCaptions[10], finalCaptions[11], finalCaptions[12], finalCaptions[13], finalCaptions[14]]).then(redirect => {
             res.status(200).send(redirect)
