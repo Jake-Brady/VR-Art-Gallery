@@ -140,7 +140,7 @@ class ArtGallery extends Component {
         let { wallTexture, floorTexture, music, captions, author, galleryName, randomGallery, isWoodFloor } = this.state
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
-            <>
+            <section className="gallery-scene-container">
                 <div className='lobby-loading center' id='gallery-loading'>
                     <div className='lobby-loading_content center'>
                         <span>VR<span className='lighttext'>ART GALLERY</span></span>
@@ -817,7 +817,7 @@ class ArtGallery extends Component {
                         >
                         </a-entity>
                 </Scene>
-            </>
+            </section>
         )
     }
 }

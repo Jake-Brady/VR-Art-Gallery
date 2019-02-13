@@ -1,3 +1,13 @@
+.gallery-scene-container{
+position: absolute; 
+height: 100%; 
+width: 100%;
+}
+
+#gallery-loading{
+    position: relative;
+}
+
 #scene {
     visibility: hidden;
 }
