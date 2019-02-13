@@ -114,6 +114,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     
     //Art-Gallery
     app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)
+    app.get('/api/randomGallery', ctrl.getRandomGallery)
 
     // PORT
     PORT = SERVER_PORT || 4500
