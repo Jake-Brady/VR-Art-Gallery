@@ -587,7 +587,7 @@ class ArtGallery extends Component {
                     scale='2.5 2.5 2.5' 
                     position='-1.3 1.58 .52' 
                     rotation="0 -90 0"
-                    sound={`src:${music}; on:click; rolloffFactor:.1`}
+                    sound={`src:${music || '#gymnopedie'}; on:click; rolloffFactor:.1`}
                     animation__onhover="property: scale; dir: alternate; startEvents: mouseenter; easing: easeInSine; from:2.5 2.5 2.5; to:2.54 2.58 2.54; dur: 250; loop: 1"
                     >
                     </a-gltf-model>
@@ -674,11 +674,11 @@ class ArtGallery extends Component {
                     {/* Everything below here is part of the architecture */}
                     {/* Main Art Gallery - 1st Floor */}
                     <rw-room id="room-floor" position="-2 0 -2">
-                        <rw-floor material={`src:${floorTexture}; repeat:2`}></rw-floor>
-                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 0" height="12"></rw-wall>
-                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="15 0 20" height="12"></rw-wall>
-                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="-5 0 20" height="12"></rw-wall>
-                        <rw-wall material={`src:${wallTexture}; repeat: 2`} position="-5 0 0" height="12"></rw-wall>
+                        <rw-floor material={`src:${floorTexture || '#wood'}; repeat:2`}></rw-floor>
+                        <rw-wall material={`src:${wallTexture || '#granite'}; repeat: 2`} position="15 0 0" height="12"></rw-wall>
+                        <rw-wall material={`src:${wallTexture || '#granite'}; repeat: 2`} position="15 0 20" height="12"></rw-wall>
+                        <rw-wall material={`src:${wallTexture || '#granite'}; repeat: 2`} position="-5 0 20" height="12"></rw-wall>
+                        <rw-wall material={`src:${wallTexture || '#granite'}; repeat: 2`} position="-5 0 0" height="12"></rw-wall>
                     </rw-room>
                      {/* Invisible Plane Barriers to prevent players from leaving the room. */}
                      <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
@@ -713,24 +713,24 @@ class ArtGallery extends Component {
 
                     {/* Flooring for outter sections of 2nd floor */}
             <a-entity geometry="primitive: plane; height: 18; width: 5"  position="-5 5.5 6"
-                         material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
+                         material={`src:${floorTexture || '#wood'}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 18; width: 5"  position="-5 5.501 6"
              material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 20; width: 5"  position="11 5.5 8"
-                         material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
+                         material={`src:${floorTexture || '#wood'}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 20; width: 5"  position="11 5.501 8"
-             material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
+             material={`src:${floorTexture || '#wood'}; repeat:2`} rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 5.5 -.5"
-                         material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
+                         material={`src:${floorTexture || '#wood'}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 5.501 -.5"
-             material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
+             material={`src:${floorTexture || '#wood'}; repeat:2`} rotation="-90 0 0"></a-entity>
 
             <a-entity geometry="primitive: plane; height: 3; width: 11"  position="3 5.5 16.5"
                          material={`src:${floorTexture}; repeat:2`} rotation="90 0 0"></a-entity>
                     <a-entity static-body geometry="primitive: plane; height: 3; width: 11"  position="3 5.501 16.5"
-             material={`src:${floorTexture}; repeat:2`} rotation="-90 0 0"></a-entity>
+             material={`src:${floorTexture || '#wood'}; repeat:2`} rotation="-90 0 0"></a-entity>
 
                     {/* Ceiling Floor */}
                 <a-entity geometry="primitive: plane; height: 14; width: 11"  position="3 12 8"
