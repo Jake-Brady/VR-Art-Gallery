@@ -36,65 +36,127 @@ class Account extends Component {
         })
     }
 
-    checkChanges = () => {
-        const { imageAddress, newUsername, newEmail, newPassword } = this.state
-        if (imageAddress) this.changeAvatar()
-        if (newUsername) this.changeUsername()
-        if (newEmail) this.changeEmail()
-        if (newPassword) this.changePassword()
-    }
-
-    async changeUsername() {
-        const { newUsername, passwordConfirm, username } = this.state
-        const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-        if (checkPassword.data === 'incorrect') {
-            this.wrongPass()
-        } else {
+    async checkChanges() {
+        this.clearErrors()
+        const { imageAddress, newUsername, newEmail, newPassword, newPasswordAgain, username, passwordConfirm } = this.state
+        //check username
+        if (newUsername) {
+            if (newUsername.split(' ').length > 1) {
+                this.noSpaces()
+                return;
+            }
+            if (!passwordConfirm) {
+                this.wrongPass()
+                return;
+            }
+            const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+            if (checkPassword.data === 'incorrect') {
+                this.wrongPass()
+                return;
+            }
             const updatedUsername = await axios.put(`/api/changeUsername/`, { newUsername, username })
             if (updatedUsername.data === 'username') {
                 this.userTaken()
-            } else {
-                this.setState({ username: updatedUsername.data[0].username, passwordConfirm: '' })
+                return;
             }
         }
-    }
-
-    async changeEmail() {
-        const { passwordConfirm, newEmail, username } = this.state
-        const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-        if (checkPassword.data[0] === 'incorrect') {
-            alert('Sorry, but that password is incorrect.  Your email will remain unchanged.')
-        } else {
-            const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
-            if (updatedEmail.data === 'email') {
-                alert('That email address is already in use.')
+        //new email
+        if (newEmail) {
+            console.log('new email')
+            if (!passwordConfirm) {
+                this.wrongPass()
+                return;
+            }
+            if (!newEmail.includes('@')) {
+                this.invalidEmail()
+                return;
+            }
+            const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+            if (checkPassword.data[0] === 'incorrect') {
+                this.wrongPass()
+                return;
             } else {
-                this.setState({ email: updatedEmail.data[0].email, passwordConfirm: '' })
+                const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
+                if (updatedEmail.data === 'email') {
+                    this.emailExists()
+                    return;
+                }
             }
         }
-    }
 
-    async changeAvatar() {
-        const { imageAddress, username } = this.state
-        const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
-        this.setState({ avatarURL: updatedAvatar.data[0].avatar_img, passwordConfirm: '', imageAddress: '' })
-    }
-
-    async changePassword() {
-        const { newPassword, newPasswordAgain, passwordConfirm, username } = this.state
-        if (newPassword === newPasswordAgain) {
+        if (newPassword) {
+            if (!passwordConfirm) {
+                this.wrongPass()
+                return;
+            }
             const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
             if (checkPassword.data === 'incorrect') {
-                alert('Incorrect current password.')
+                this.wrongPass()
+                return;
             } else {
                 const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
-                this.setState({ passwordConfirm: '', newPassword: '', newPasswordAgain: '' }, () => {
-                    alert('Success! Your password has successfully changed.')
-                })
             }
-        } else {
-            alert('Passwords do not match')
         }
+        if (imageAddress) {
+            const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
+            this.setState({ avatarURL: updatedAvatar.data[0].avatar_img, passwordConfirm: '', imageAddress: '' })
+        }
+        this.setState({ username: newUsername || this.state.username, email: newEmail || this.state.email})
+        this.cancelEdit()
+    }
+
+    clearErrors = () => {
+        const passwordInput = document.querySelector('#account-password'),
+            errorText = document.querySelector('.account-edit-inputs > h4'),
+            nameInput = document.querySelector('#account-name'),
+            nameText = document.querySelector('.account-edit-inputs > h3'),
+            emailInput = document.querySelector('#account-email'),
+            emailText = document.querySelector('.account-edit-inputs > h5')
+        passwordInput.style.borderColor = 'rgba(0, 0, 0, 0.1)'
+        nameInput.style.borderColor = 'rgba(0, 0, 0, 0.1)'
+        emailInput.style.borderColor = 'rgba(0, 0, 0, 0.1)'
+        nameText.style.visibility = 'hidden'
+        errorText.style.visibility = 'hidden'
+        emailText.style.visibility = 'hidden'
+    }
+
+    wrongPass = () => {
+        const passwordInput = document.querySelector('#account-password'),
+            errorText = document.querySelector('.account-edit-inputs > h4')
+        passwordInput.style.borderColor = 'red'
+        errorText.style.visibility = 'visible'
+    }
+
+    userTaken = () => {
+        const nameInput = document.querySelector('#account-name'),
+            nameText = document.querySelector('.account-edit-inputs > h3')
+        nameText.innerText = 'Name Taken'
+        nameInput.style.borderColor = 'red'
+        nameText.style.visibility = 'visible'
+    }
+
+    noSpaces = () => {
+        const nameInput = document.querySelector('#account-name'),
+            nameText = document.querySelector('.account-edit-inputs > h3')
+        nameText.innerText = 'No Spaces'
+        nameInput.style.borderColor = 'red'
+        nameText.style.visibility = 'visible'
+    }
+
+    emailExists = () => {
+        const emailInput = document.querySelector('#account-email'),
+            emailText = document.querySelector('.account-edit-inputs > h5')
+        emailText.innerText = 'Email Exists'
+        emailInput.style.borderColor = 'red'
+        emailText.style.visibility = 'visible'
+    }
+
+    invalidEmail = () => {
+        const emailInput = document.querySelector('#account-email'),
+            emailText = document.querySelector('.account-edit-inputs > h5')
+        emailText.innerText = 'Invalid Email'
+        emailInput.style.borderColor = 'red'
+        emailText.style.visibility = 'visible'
     }
 
     getSignedRequestThumbnails = ([file]) => {
@@ -159,16 +221,11 @@ class Account extends Component {
     }
 
     cancelEdit = () => {
-        this.setState({ edit: !this.state.edit, pass: false })
+        this.setState({ edit: !this.state.edit, pass: false, newUsername: '', newEmail: '', newPassword: '', imageAddress: '', passwordConfirm: '' })
     }
 
     addPass = () => {
         this.setState({ pass: true })
-    }
-
-    wrongPass = () => {
-        const passwordInput = document.querySelector('#account-password')
-        passwordInput.style.borderColor = 'red'
     }
 
     render() {
@@ -223,10 +280,13 @@ class Account extends Component {
                         <div className='account-edit-inputs'>
                             <h1>USERNAME</h1>
                             <input id='account-name' name="newUsername" onChange={(e) => this.handleChange(e)} />
+                            <h3>Name is Taken</h3>
                             <h1>EMAIL</h1>
                             <input id='account-email' name="newEmail" onChange={(e) => this.handleChange(e)} />
+                            <h5>Email is taken</h5>
                             <h1>CURRENT PASSWORD</h1>
                             <input id='account-password' name="passwordConfirm" onChange={e => this.handleChange(e)} />
+                            <h4>Incorrect Password</h4>
                             {this.state.pass ?
                                 <>
                                     <h1>NEW PASSWORD</h1>
@@ -248,46 +308,3 @@ class Account extends Component {
 }
 
 export default Account
-
-{/* <div className="account-information">
-                        <div className="change-username-inputs">
-                            <h2>Password</h2>
-                            <input value={`${this.state.passwordConfirm}`} type="password" className="inputbar" name="passwordConfirm" onChange={(e) => this.handleChange(e)}></input>
-                            <h2>Username</h2>
-                            <input value={`${this.state.newUsername}`} className="inputbar" name="newUsername" onChange={(e) => this.handleChange(e)}></input>
-                            <span onClick={() => this.changeUsername()} className="button">Submit</span>
-                        </div>
-                    </div>
-                    : theMagicWord === 'email' ?
-
-                    <div className="change-email-div">
-                        <h2>{this.state.email}</h2>
-                        <h2>Password</h2>
-                        <input value={`${this.state.passwordConfirm}`} type="password" className="inputbar" name="passwordConfirm" onChange={(e) => this.handleChange(e)}></input>
-                        <h2>Email</h2>
-                        <input value={`${this.state.newEmail}`} className="inputbar" name="newEmail" onChange={(e) => this.handleChange(e)}></input>
-                        <span onClick={() => this.changeEmail()} className="button">Submit</span>
-                    </div>
-
-                   : theMagicWord === 'password' ?
-                    <div className="change-password-div">
-                        <h2>Current Password</h2>
-                        <input value={`${this.state.passwordConfirm}`} type="password" className="inputbar" name="passwordConfirm" onChange={e => this.handleChange(e)}></input>
-                        <h2>New Password</h2>
-                        <input value={`${this.state.newPassword}`} type="password" className="inputbar" name="newPassword" onChange={e => this.handleChange(e)}></input>
-                        <h2>New Password(again)</h2>
-                        <input value={`${this.state.newPasswordAgain}`} type="password" className="inputbar" name="newPasswordAgain" onChange={e => this.handleChange(e)}></input>
-                        <span onClick={() => this.changePassword()} className="button">Submit</span>
-                    </div>
-                    
-                    : theMagicWord === 'avatar' &&
-                <div className="change-avatar-thumbnail">
-                    <div className="new-avatar-container">
-                        <img className="avatar-thumbnail" src={`${this.state.imageAddress}` || 'http://via.placeholder.com/450x450'} alt="new avatar" />
-                    </div>
-                    <input value={`${this.state.imageAddress}`} className="inputbar" name="imageAddress" onChange={(e) => this.handleChange(e)} />
-                    <h1>or</h1>
-                     <span onClick={() => this.changeAvatar()} className="button">Submit</span>
-                 </div>
-                    }
-                </div> */}

@@ -87,12 +87,43 @@
     margin-left: 30px;
     width: 550px;
     height: 300px;
+    position: relative;
 }
 
 .account-edit-inputs > h1, .account-edit-inputs > h2 {
     font-weight: 300;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.8);
+}
+
+.account-edit-inputs > h3 {
+    position: absolute;
+    right: 20px;
+    top: 38px;
+    font-size: 16px;
+    font-weight: 300;
+    color: red;
+    visibility: hidden;
+}
+
+.account-edit-inputs > h4 {
+    position: absolute;
+    right: 20px;
+    top: 215px;
+    font-weight: 300;
+    color: red;
+    font-size: 16px;
+    visibility: hidden;
+}
+
+.account-edit-inputs > h5 {
+    position: absolute;
+    right: 20px;
+    top: 125px;
+    font-weight: 300;
+    color: red;
+    font-size: 16px;
+    visibility: hidden;
 }
 
 .account-edit-inputs > input {
