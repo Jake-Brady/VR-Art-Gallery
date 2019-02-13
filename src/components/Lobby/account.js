@@ -16,7 +16,6 @@ class Account extends Component {
             imageAddress: '',
             isUploading: false,
             newPassword: '',
-            newPasswordAgain: '',
             passwordConfirm: '',
             newUsername: '',
             newEmail: '',
@@ -38,20 +37,19 @@ class Account extends Component {
 
     async checkChanges() {
         this.clearErrors()
-        const { imageAddress, newUsername, newEmail, newPassword, newPasswordAgain, username, passwordConfirm } = this.state
-        //check username
+        const { imageAddress, newUsername, newEmail, newPassword, username, passwordConfirm } = this.state
+        if (!passwordConfirm) {
+            this.wrongPass()
+            return;
+        }
+        const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+            if (checkPassword.data === 'incorrect') {
+                this.wrongPass()
+                return;
+            }
         if (newUsername) {
             if (newUsername.split(' ').length > 1) {
                 this.noSpaces()
-                return;
-            }
-            if (!passwordConfirm) {
-                this.wrongPass()
-                return;
-            }
-            const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-            if (checkPassword.data === 'incorrect') {
-                this.wrongPass()
                 return;
             }
             const updatedUsername = await axios.put(`/api/changeUsername/`, { newUsername, username })
@@ -59,49 +57,93 @@ class Account extends Component {
                 this.userTaken()
                 return;
             }
-        }
-        //new email
-        if (newEmail) {
-            console.log('new email')
-            if (!passwordConfirm) {
-                this.wrongPass()
-                return;
-            }
-            if (!newEmail.includes('@')) {
-                this.invalidEmail()
-                return;
-            }
-            const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-            if (checkPassword.data[0] === 'incorrect') {
-                this.wrongPass()
-                return;
-            } else {
-                const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
-                if (updatedEmail.data === 'email') {
-                    this.emailExists()
+            console.log(updatedUsername.data[0].username)
+            if (newEmail) {
+                if (!passwordConfirm) {
+                    this.wrongPass()
                     return;
                 }
+                if (!newEmail.includes('@')) {
+                    this.invalidEmail()
+                    return;
+                }
+                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+                if (checkPassword.data[0] === 'incorrect') {
+                    this.wrongPass()
+                    return;
+                } else {
+                    const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
+                    if (updatedEmail.data === 'email') {
+                        this.emailExists()
+                        return;
+                    }
+                }
+                console.log('EMAIL WENT THROUGH')
+            }
+    
+            if (newPassword) {
+                if (!passwordConfirm) {
+                    this.wrongPass()
+                    return;
+                }
+                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+                if (checkPassword.data === 'incorrect') {
+                    this.wrongPass()
+                    return;
+                } else {
+                    const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
+                    console.log('PASSWORD WENT THROUGH')
+                }
+            }
+            if (imageAddress) {
+                const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
+                console.log('PICTURE WENT THROUGH')
             }
         }
-
-        if (newPassword) {
-            if (!passwordConfirm) {
-                this.wrongPass()
-                return;
+        else {
+            if (newEmail) {
+                if (!passwordConfirm) {
+                    this.wrongPass()
+                    return;
+                }
+                if (!newEmail.includes('@')) {
+                    this.invalidEmail()
+                    return;
+                }
+                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+                if (checkPassword.data[0] === 'incorrect') {
+                    this.wrongPass()
+                    return;
+                } else {
+                    const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
+                    if (updatedEmail.data === 'email') {
+                        this.emailExists()
+                        return;
+                    }
+                }
+                console.log('EMAIL WENT THROUGH')
             }
-            const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-            if (checkPassword.data === 'incorrect') {
-                this.wrongPass()
-                return;
-            } else {
-                const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
+    
+            if (newPassword) {
+                if (!passwordConfirm) {
+                    this.wrongPass()
+                    return;
+                }
+                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+                if (checkPassword.data === 'incorrect') {
+                    this.wrongPass()
+                    return;
+                } else {
+                    const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
+                    console.log('PASSWORD WENT THROUGH')
+                }
+            }
+            if (imageAddress) {
+                const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
+                console.log('PICTURE WENT THROUGH')
             }
         }
-        if (imageAddress) {
-            const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
-            this.setState({ avatarURL: updatedAvatar.data[0].avatar_img, passwordConfirm: '', imageAddress: '' })
-        }
-        this.setState({ username: newUsername || this.state.username, email: newEmail || this.state.email})
+        this.setState({ username: newUsername || this.state.username, email: newEmail || this.state.email, avatarURL: imageAddress || this.state.avatarURL})
         this.cancelEdit()
     }
 

@@ -433,9 +433,6 @@ class Lobby extends Component {
                                     <i className="fas fa-search"></i>
                                 </div>
                             </div>
-                            <div className='lobby-header_right center'>
-                                <img src={Profile} alt='User Picture' />
-                            </div>
                         </header>
 
                         <section className="side-menu">
@@ -450,7 +447,7 @@ class Lobby extends Component {
                                 {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span> */}
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
-                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span>
+                                {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span> */}
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('About')}><i className="fas fa-question menu-icon"></i>About</span>
                                 <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
                             </div>
