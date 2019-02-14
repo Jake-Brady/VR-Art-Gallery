@@ -107,6 +107,15 @@ class ArtGallery extends Component {
             })
         })
     })
+    window.addEventListener('keyup', this.checkKey)
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keyup', this.checkKey)
+    }
+
+    checkKey = e => {
+        if (e.code === 'Escape') this.props.history.push('/')
     }
 
     checkFPS = () => {

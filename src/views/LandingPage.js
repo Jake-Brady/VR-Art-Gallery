@@ -16,11 +16,13 @@ class LandingPage extends Component {
             favoriteNum: 0,
             notificationType: '',
             sharedGalleries: [],
+            galleriesFiltered: [],
+            popping: false,
+            queue: []
         }
     }
 
     async componentDidMount() {
-        console.log(window.location.pathname)
         if (document.querySelector('html').classList.contains('a-html')) {
             window.location.reload(true)
         }
@@ -30,7 +32,24 @@ class LandingPage extends Component {
         const user = await axios.get('/api/checkUser/')
         this.setState({ user: user.data }, () => this.setState({ loading: false }))
         window.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('keypress', this.checkKey)
         this.getFavorites()
+    }
+
+    checkKey = e => {
+        if (e.code === 'Enter') this.handleSearch()
+    }
+
+    handleSearch = () => {
+        const input = document.querySelector('#landing-search > input')
+        if (input.value) this.searchResults(input.value)
+        else this.setState({ galleriesFiltered: [] })
+        input.value = ''
+    }
+
+    async searchResults(keywords) {
+        const searchResults = await axios.get(`/api/galleries?search=${keywords}`)
+        this.setState({ galleriesFiltered: searchResults.data }, () => console.log(this.state.galleries))
     }
 
     async getFavorites() {
@@ -71,6 +90,7 @@ class LandingPage extends Component {
 
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll)
+        window.removeEventListener('keypress', this.checkKey)
     }
 
     //yoinked this from the interwebs 😂
@@ -111,7 +131,7 @@ class LandingPage extends Component {
 
     smoothScroll(target) {
         if (target === 'gallery') {
-            const galleries = $('.landing-galleries').position().top;
+            const galleries = $('#landing-search').position().top;
             $('html, body').animate({
                 scrollTop: galleries
             }, 300)
@@ -154,7 +174,7 @@ class LandingPage extends Component {
     adjustFavorites(galleryId, timesFavorited) {
         //Check whether user is signed in first, otherwise cancel function
         if (!this.state.user) {
-            this.notification(null, 'signin')
+            this.removeFavPop({ name: null, type: 'signin' })
         } else {
             // Array of hearts on page and counters to be passed in axios calls
             let galleries = this.state.galleries
@@ -171,7 +191,7 @@ class LandingPage extends Component {
                         for (let i = 0; i < galleries.length; i++) {
                             if (galleries[i].id === galleryId) {
                                 // popup saying galleryName has been removed from favorites
-                                this.notification(galleries[i].gallery_name, 'removed')
+                                this.removeFavPop({ name: galleries[i].gallery_name, type: 'removed' })
                                 // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
                                 galleries[i].times_favorited = decreaseFave
                                 this.setState({ galleries }, () => {
@@ -185,7 +205,7 @@ class LandingPage extends Component {
                         }
                     } else {
                         //popup saying galleryName has been added to favorites
-                        this.notification(galleries[i].gallery_name, 'favorited')
+                        this.removeFavPop({ name: galleries[i].gallery_name, type: 'favorited' })
                         // add color
                         hearts[i].classList.add('make-red')
                         // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
@@ -207,11 +227,13 @@ class LandingPage extends Component {
         }
     }
 
-    shareGallery(galleryName, author, galleryId, galleryShares, {target}) {
+    shareGallery(galleryName, author, galleryId, galleryShares, { target }) {
         target.style.color = 'rgb(110, 142, 254)'
-        this.notification(galleryName, 'share')
+        this.removeFavPop({ name: galleryName, type: 'share' })
         this.increaseShare(galleryId, galleryShares)
         const location = window.location
+        galleryName = galleryName.split(' ').join('%20')
+        author = author.split(' ').join('%20')
         let destination = `${location}${author}/${galleryName}`
         let textField = document.createElement('textarea')
         textField.innerText = destination
@@ -242,34 +264,48 @@ class LandingPage extends Component {
         }
     }
 
-
-    notification = (name, type) => {
-        if (!name && type === 'signin') {
-            const pop = document.querySelector('.add-favorites-pop')
-            pop.innerText = `Sign in to add to favorites`
-            this.startNotification(pop)
-        }
-        if (name && type === 'share') {
-            const pop = document.querySelector('.clipboard-pop')
-            pop.innerText = `Copied ${name} to Clipboard`
-            this.startNotification(pop)
-        } else if (name && type === 'removed') {
-            const pop = document.querySelector('.remove-favorites-pop')
-            pop.innerText = `Removed ${name} from favorites`
-            pop.classList.add('notification-pop-anim')
-            this.startNotification(pop)
-        } else if (name && type === 'favorited') {
-            const pop = document.querySelector('.add-favorites-pop')
-            pop.innerText = `Added ${name} to favorites`
-            pop.classList.add('notification-pop-anim')
-            this.startNotification(pop)
-        }
+    removeFavPop = name => {
+        this.setState({ queue: [...this.state.queue, name] }, () => {
+            if (!this.state.popping) this.startInterval()
+        })
     }
 
-    startNotification(pop) {
-        pop.classList.add('notification-pop-anim')
+    startInterval = () => {
+        this.playAnim(this.state.queue[0])
+        this.setState({ popping: true, queue: [...this.state.queue.slice(1)] }, () => {
+            let interval = setInterval(() => {
+                if (this.state.queue.length) {
+                    console.log('QUEUE', this.state.queue[0])
+                    this.playAnim(this.state.queue[0])
+                    this.setState({ queue: [...this.state.queue.slice(1)] })
+                }
+                else this.setState({ popping: false }, () => clearInterval(interval))
+            }, 2050)
+        })
+    }
+
+    playAnim = obj => {
+        console.log('OBJECT', obj)
+        const pop = document.querySelector('.add-favorites-pop')
+        if (!obj.name && obj.type === 'signin') {
+            pop.style.background = 'rgb(238, 50, 50)'
+            pop.innerText = `Sign in to add to favorites`
+        }
+        else if (obj.name && obj.type === 'share') {
+            pop.style.background = 'rgb(61, 111, 220)'
+            pop.innerText = `Copied ${obj.name} to Clipboard`
+        }
+        else if (obj.name && obj.type === 'removed') {
+            pop.style.background = 'rgb(238, 50, 50)'
+            pop.innerText = `Removed ${obj.name} from favorites`
+        }
+        else if (obj.name && obj.type === 'favorited') {
+            pop.style.background = 'rgb(61, 111, 220)'
+            pop.innerText = `Added ${obj.name} to favorites`
+        }
+        pop.classList.add('lobby-pop-anim')
         setTimeout(() => {
-            pop.classList.remove('notification-pop-anim')
+            pop.classList.remove('lobby-pop-anim')
         }, 2000);
     }
 
@@ -291,6 +327,28 @@ class LandingPage extends Component {
 
     render() {
         const galleryArray = this.state.galleries.map(gallery => {
+            const galleryId = gallery.id
+            const galleryName = gallery.gallery_name
+            const author = gallery.author
+            let timesFavorited = gallery.times_favorited
+            return (
+                <div key={galleryId} className='gallery-container'>
+                    <img src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
+                    <div className='gallery-text'>
+                        <h1 className='gallery-title'>{galleryName.length > 20 ? galleryName.slice(0, 20) + '...' : galleryName}</h1>
+                        <div className='gallery-title-hover'>{galleryName}</div>
+                        <h3 className='gallery-author'>BY:{author}</h3>
+                        <div className='gallery-stats'>
+                            <i className="fas fa-eye stat"></i><span>{gallery.views}</span>
+                            <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><span>{timesFavorited}</span>
+                            <i onClick={(e) => this.shareGallery(galleryName, author, galleryId, gallery.shares, e)} className="fas fa-share stat"></i><span>{gallery.shares}</span>
+                        </div>
+                        <div onClick={() => this.visitGallery(galleryId, galleryName, author)} className='gallery-view center'>Visit Gallery</div>
+                    </div>
+                </div>
+            )
+        })
+        const filteredArray = this.state.galleriesFiltered.map(gallery => {
             const galleryId = gallery.id
             const galleryName = gallery.gallery_name
             const author = gallery.author
@@ -346,19 +404,31 @@ class LandingPage extends Component {
                                         </div>
                                         <video src={VRVideo} alt="trailer of VR-Art-Gallery" onClick={e => this.handleVideo(e)}></video>
                                     </div>
+                                    <div id='landing-search'>
+                                        <input placeholder='Search by Gallery or Author' />
+                                        {this.state.galleriesFiltered.length ?
+                                            <i className="fas fa-times center" onClick={() => this.handleSearch()}></i>
+                                            :
+                                            <i className="fas fa-search center" onClick={() => this.handleSearch()}></i>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <main className='landing-main'>
-                            <div className='landing-galleries'>
-                                {galleryArray}
-                            </div>
+                            {this.state.galleriesFiltered.length ?
+                                <div className='landing-galleries'>
+                                    {filteredArray}
+                                </div>
+                                :
+                                <div className='landing-galleries'>
+                                    {galleryArray}
+                                </div>
+                            }
                             <div className='landing-back center' onClick={() => this.smoothScroll('home')}>
                                 <i className="fas fa-arrow-up"></i>
                             </div>
-                            <div className="clipboard-pop center"></div>
                             <div className="add-favorites-pop center"></div>
-                            <div className="remove-favorites-pop center"></div>
                         </main>
                     </div>
                     :

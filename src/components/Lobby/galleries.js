@@ -13,7 +13,7 @@ class Galleries extends Component {
     }
 
     render() {
-        let { id, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery, isPrivate } = this.props
+        let { id, image, views, shares, favoriteNum, galleryName, author, visitGallery, editGallery, deleteGallery, isPrivate, share } = this.props
         return (
             <div key={id} className='gallery-container gallery-card-anim'>
                 <img src={image} alt='Card Thumbnail' className='gallery-thumbnail' />
@@ -25,7 +25,7 @@ class Galleries extends Component {
                         {isPrivate ? <><i className="fas fa-lock stat"></i> <span>Private</span></> : <><i className="fas fa-unlock stat"></i> <span>Public</span> </>}
                         <i className="fas fa-eye stat"></i><span>{views}</span>
                         <i className="fas fa-heart stat"></i><span>{favoriteNum}</span>
-                        <i className="fas fa-share stat"></i><span>{shares}</span>
+                        <i className="fas fa-share stat" onClick={(e) => share({galleryName, color: 'blue'}, e.target)}></i><span>{shares}</span>
                         <i className="fas fa-ellipsis-v gallery-option" onClick={e => this.toggleDrop(id, e)}></i>
                         <div className='gallery-pop' data-pop={id}>
                             <div className='center' onClick={() => editGallery(id)}>EDIT</div>
