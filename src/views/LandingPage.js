@@ -16,7 +16,9 @@ class LandingPage extends Component {
             favoriteNum: 0,
             notificationType: '',
             sharedGalleries: [],
-            galleriesFiltered: []
+            galleriesFiltered: [],
+            popping: false,
+            queue: []
         }
     }
 
@@ -172,7 +174,7 @@ class LandingPage extends Component {
     adjustFavorites(galleryId, timesFavorited) {
         //Check whether user is signed in first, otherwise cancel function
         if (!this.state.user) {
-            this.notification(null, 'signin')
+            this.removeFavPop({ name: null, type: 'signin' })
         } else {
             // Array of hearts on page and counters to be passed in axios calls
             let galleries = this.state.galleries
@@ -189,7 +191,7 @@ class LandingPage extends Component {
                         for (let i = 0; i < galleries.length; i++) {
                             if (galleries[i].id === galleryId) {
                                 // popup saying galleryName has been removed from favorites
-                                this.notification(galleries[i].gallery_name, 'removed')
+                                this.removeFavPop({ name: galleries[i].gallery_name, type: 'removed' })
                                 // Once gallery is found, replace times_favorited with decreaseFave which is the timesFavorited - 1;
                                 galleries[i].times_favorited = decreaseFave
                                 this.setState({ galleries }, () => {
@@ -203,7 +205,7 @@ class LandingPage extends Component {
                         }
                     } else {
                         //popup saying galleryName has been added to favorites
-                        this.notification(galleries[i].gallery_name, 'favorited')
+                        this.removeFavPop({ name: galleries[i].gallery_name, type: 'favorited' })
                         // add color
                         hearts[i].classList.add('make-red')
                         // loop through galleries, find matching gallery by galleryId, replace times_favorited by IncreaseFave, and reset state with newgallery
@@ -227,7 +229,7 @@ class LandingPage extends Component {
 
     shareGallery(galleryName, author, galleryId, galleryShares, { target }) {
         target.style.color = 'rgb(110, 142, 254)'
-        this.notification(galleryName, 'share')
+        this.removeFavPop({ name: galleryName, type: 'share' })
         this.increaseShare(galleryId, galleryShares)
         const location = window.location
         galleryName = galleryName.split(' ').join('%20')
@@ -262,34 +264,48 @@ class LandingPage extends Component {
         }
     }
 
-
-    notification = (name, type) => {
-        if (!name && type === 'signin') {
-            const pop = document.querySelector('.add-favorites-pop')
-            pop.innerText = `Sign in to add to favorites`
-            this.startNotification(pop)
-        }
-        if (name && type === 'share') {
-            const pop = document.querySelector('.clipboard-pop')
-            pop.innerText = `Copied ${name} to Clipboard`
-            this.startNotification(pop)
-        } else if (name && type === 'removed') {
-            const pop = document.querySelector('.remove-favorites-pop')
-            pop.innerText = `Removed ${name} from favorites`
-            pop.classList.add('notification-pop-anim')
-            this.startNotification(pop)
-        } else if (name && type === 'favorited') {
-            const pop = document.querySelector('.add-favorites-pop')
-            pop.innerText = `Added ${name} to favorites`
-            pop.classList.add('notification-pop-anim')
-            this.startNotification(pop)
-        }
+    removeFavPop = name => {
+        this.setState({ queue: [...this.state.queue, name] }, () => {
+            if (!this.state.popping) this.startInterval()
+        })
     }
 
-    startNotification(pop) {
-        pop.classList.add('notification-pop-anim')
+    startInterval = () => {
+        this.playAnim(this.state.queue[0])
+        this.setState({ popping: true, queue: [...this.state.queue.slice(1)] }, () => {
+            let interval = setInterval(() => {
+                if (this.state.queue.length) {
+                    console.log('QUEUE', this.state.queue[0])
+                    this.playAnim(this.state.queue[0])
+                    this.setState({ queue: [...this.state.queue.slice(1)] })
+                }
+                else this.setState({ popping: false }, () => clearInterval(interval))
+            }, 2050)
+        })
+    }
+
+    playAnim = obj => {
+        console.log('OBJECT', obj)
+        const pop = document.querySelector('.add-favorites-pop')
+        if (!obj.name && obj.type === 'signin') {
+            pop.style.background = 'rgb(238, 50, 50)'
+            pop.innerText = `Sign in to add to favorites`
+        }
+        else if (obj.name && obj.type === 'share') {
+            pop.style.background = 'rgb(61, 111, 220)'
+            pop.innerText = `Copied ${obj.name} to Clipboard`
+        }
+        else if (obj.name && obj.type === 'removed') {
+            pop.style.background = 'rgb(238, 50, 50)'
+            pop.innerText = `Removed ${obj.name} from favorites`
+        }
+        else if (obj.name && obj.type === 'favorited') {
+            pop.style.background = 'rgb(61, 111, 220)'
+            pop.innerText = `Added ${obj.name} to favorites`
+        }
+        pop.classList.add('lobby-pop-anim')
         setTimeout(() => {
-            pop.classList.remove('notification-pop-anim')
+            pop.classList.remove('lobby-pop-anim')
         }, 2000);
     }
 
@@ -412,9 +428,7 @@ class LandingPage extends Component {
                             <div className='landing-back center' onClick={() => this.smoothScroll('home')}>
                                 <i className="fas fa-arrow-up"></i>
                             </div>
-                            <div className="clipboard-pop center"></div>
                             <div className="add-favorites-pop center"></div>
-                            <div className="remove-favorites-pop center"></div>
                         </main>
                     </div>
                     :
