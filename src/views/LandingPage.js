@@ -230,6 +230,8 @@ class LandingPage extends Component {
         this.notification(galleryName, 'share')
         this.increaseShare(galleryId, galleryShares)
         const location = window.location
+        galleryName = galleryName.split(' ').join('%20')
+        author = author.split(' ').join('%20')
         let destination = `${location}${author}/${galleryName}`
         let textField = document.createElement('textarea')
         textField.innerText = destination

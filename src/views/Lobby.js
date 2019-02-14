@@ -322,6 +322,11 @@ class Lobby extends Component {
         }, 400);
     }
 
+    shareGalleryPop = (name, target) => {
+        target.style.color = 'rgb(110, 142, 254)'
+        this.removeFavPop(name)
+    }
+
     removeFavPop = name => {
         this.setState({ queue: [...this.state.queue, name] }, () => {
             if (!this.state.popping) this.startInterval()
@@ -343,7 +348,20 @@ class Lobby extends Component {
 
     playAnim = name => {
         const pop = document.querySelector('.lobby-pop')
-        pop.innerText = typeof name === 'object' ? `Deleted ${name.name} from galleries` : `Removed ${name} from favorites`
+        if (typeof name === 'object') {
+            if (name.color === 'blue') {
+                pop.style.background = 'rgb(61, 111, 220)'
+                pop.innerText = `Copied ${name.galleryName} to clipboard`
+            }
+            else {
+                pop.style.background = 'rgb(238, 50, 50)'
+                pop.innerText = `Deleted ${name.name} from galleries`
+            }
+        }
+        else {
+            pop.style.background = 'rgb(238, 50, 50)'
+            pop.innerText = `Removed ${name} from favorites`
+        }
         pop.classList.add('lobby-pop-anim')
         setTimeout(() => {
             pop.classList.remove('lobby-pop-anim')
@@ -376,6 +394,7 @@ class Lobby extends Component {
                     visitGallery={this.visitGallery}
                     author={galleryAuthor}
                     removeFav={this.removeFav}
+                    share={this.shareGalleryPop}
                 />
             )
         })
@@ -400,6 +419,7 @@ class Lobby extends Component {
                     visitGallery={this.visitGallery}
                     editGallery={this.editGallery}
                     deleteGallery={this.deleteGallery}
+                    share={this.shareGalleryPop}
                 />
             )
         })

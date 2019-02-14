@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Favorites = (props) => {
-   let { id, image, views, shares, favoriteNum, visitGallery, galleryName, author, removeFav } = props
+   let { id, image, views, shares, favoriteNum, visitGallery, galleryName, author, removeFav, share } = props
    return (
       <div key={id} className="gallery-container" id='favorite-card'>
          <img src={image} alt="gallery thumbnail" className="gallery-thumbnail" />
@@ -14,7 +14,7 @@ const Favorites = (props) => {
                <span>{views}</span>
                <i className="fas fa-heart stat make-red" onClick={() => removeFav(id, galleryName)}></i>
                <span>{favoriteNum}</span>
-               <i className="fas fa-share stat"></i>
+               <i className="fas fa-share stat" onClick={(e) => share({galleryName, color: 'blue'}, e.target)}></i>
                <span>{shares}</span>
             </div>
             <div className='gallery-view center' onClick={() => visitGallery(galleryName, author)}>Visit Gallery</div>
