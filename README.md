@@ -16,7 +16,7 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
  </ul>
  
  <p>
-  The foundation for the 3D environment was built in A-frame with aframe-react serving as a proxy between the aframe framework and react library.  The aframe-physics-system, as well as aframe-etras, were implemented for collision detection between the user and entities in addition to providing a gravitational force for when the user drops down from the 2nd floor to the first.  The aframe-room-component was used to build the 2D dimensional planes for the first-floor and walls of the gallery, which also allowed for the repetition of repeating textures for a more realistic, and less stretched, appearance of the user-selected presets.  The aframe-star-system-component provides the spherical backdrop and populates it with star-like particles.
+The foundation for the 3D environment was built in A-frame with aframe-react serving as a proxy between the aframe framework and react library.  The aframe-physics-system, as well as aframe-etras, were implemented for collision detection between the user and entities in addition to providing a gravitational force for when the user drops down from the 2nd floor to the first.  The aframe-room-component was used to build the 2D dimensional planes for the first-floor and walls of the gallery, which also allowed for the repetition of repeating textures for a more realistic, and less stretched, appearance of the user-selected presets.  The aframe-star-system-component provides the spherical backdrop and populates it with star-like particles. All entities within this application were either imported 3D models, entirely free and under the royalty free license from turboSquid, imported repeating-texture files, or built with aframe.registerComponent (Clock).
  </p>
  
  <h2>Amazon S3 Relevant Techs:</h2>
@@ -30,7 +30,7 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
  <img src="" alt="Dropzone in creating a gallery">
  
  <p>
-  Users are able to add images to their gallery thumbnails, as well as populate their gallery, using the react-dropzone on the client-side in combination with aws-sdk in the server - setting up a connection between the client and amazon S3 bucket.
+  Users are able to add images to their gallery thumbnails, as well as populate their gallery, using the react-dropzone on the client-side in combination with aws-sdk in the server - setting up a connection between the client and amazon S3 bucket.  Those images, presets, and captions are then retrieved using the techs listed below.
  </p>
  
  <h2>Client to Backend Techs:</h2>
@@ -43,10 +43,12 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
 
 <div>
 <img src="" alt="Register view">
+<p>Bcryptjs was used for salting and hashing user-created passwords for securely registered accounts, and all sensitive keys, passwords, and related information is stored in dotenv.</p>
 
 <img src="" alt="Login view">
 </div>
-  
+
+<p>Axios was used for making client to server-side calls, and massive was used for connecting my server-side to the database.</p>
 <h2>Core Application Techs:</h2>
 <ul>
   <li>preact</li>
@@ -73,10 +75,18 @@ As mentioned in the opening description, this application was built in react and
 
 <h1>Functional Features</h1>
 <ul>
-  <li>Search</li>
+  <li>Search Filters</li>
+  <li>Portal Hopping</li>
+  <li>Gallery Jams</li>
 </ul>
 
 <img src="" alt="Search bars on landing page, favorites, and galleries">
+<img src="" alt="Portal Hop">
+<img src="" alt="3D stereo">
+
+<p>
+A-Frame has a built in link entity that functions identically to an anchor tag and allows users to traverse from a-scene (3D environment) to a-scene; however, we found this incompatible within the react library, specifically with react-router-dom, and re-created the shader and portal entity without the link functionality; We simply created 
+</p>
 
 <h1>Creators</h1>
 <p>
@@ -90,5 +100,6 @@ As mentioned in the opening description, this application was built in react and
   <li>Make Gallery multi-network and supports audio chat.</li>
   <li>Notifications tab so users can get statistics on views, favorites, shares, and who is looking at their galleries specifically</li>
   <li>Built in Messages tab so users can message one another within Lobby/Landing Page - ostensibly in 3D Gallery as well.</li>
+  <li>Expand presets so that users are not limited to built-in application presets</li>
 </ul>
 
