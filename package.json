@@ -9,9 +9,7 @@
     "aframe-extras": "^5.0.1",
     "aframe-physics-system": "^3.3.0",
     "aframe-react": "^4.4.0",
-    "aframe-react-assets": "^2.0.5",
     "aframe-room-component": "^0.3.0",
-    "aframe-sharedspace-component": "^1.0.1",
     "aframe-star-system-component": "^1.0.0",
     "attr-accept": "^1.1.3",
     "aws-sdk": "^2.387.0",
@@ -22,7 +20,6 @@
     "express-session": "^1.15.6",
     "jquery": "^3.3.1",
     "massive": "^5.7.2",
-    "networked-aframe": "^0.6.1",
     "preact": "^8.4.2",
     "preact-compat": "^3.18.4",
     "prop-types": "^15.6.2",
@@ -33,8 +30,6 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
     "redux": "^4.0.1",
-    "socket.io": "^2.2.0",
-    "three": "^0.101.1",
     "uuid": "^3.3.2"
   },
   "alias": {
