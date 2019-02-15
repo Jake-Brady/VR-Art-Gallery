@@ -5,7 +5,6 @@ import portalPreviewPorcelain from '../../assets/portalPreviewPorcelain.png'
 import portalPreviewWood from '../../assets/portalPreviewWood.png'
 import Door from '../../assets/gltfs/door.glb'
 import Table from '../../assets/gltfs/table.glb'
-import WallLight from '../../assets/gltfs/wallLight.glb'
 import Frame from '../../assets/gltfs/frame.glb'
 import Gymnopedie from '../../assets/audio/Gymnopedie_No_1.mp3'
 import SnowDrop from '../../assets/audio/Snow_Drop.mp3'
@@ -17,7 +16,6 @@ import Nymph from '../../assets/gltfs/smallestNymph.glb'
 import Mars from '../../assets/gltfs/marsStatue.glb'
 import Moon from '../../assets/gltfs/moon.glb'
 import Carpet from '../../assets/gltfs/smallCarpet.glb'
-import Emoji from '../../assets/gltfs/joyemoji.glb'
 import StreetPaved from '../../assets/StreetPaved.jpg'
 import TerrazzoPocelainTiles from '../../assets/TerrazzoPocelainTiles.jpg'
 import brickPavement from '../../assets/brickpavementtexture.jpg'
@@ -106,8 +104,6 @@ render(){
         <Entity id="marsStatue" src={Mars} alt="Mars Statue Obj" />
         <Entity id="moon" src={Moon} alt="Moon Obj" />
         <Entity id="carpet" src={Carpet} alt="Carpet Obj" />
-        <Entity id="emoji" src={Emoji} alt="Emoji Entity" />
-        <Entity id="wallLight" src={WallLight} alt="Wall Light Obj" />
         <Entity id="door" src={Door} alt="Door Obj" />
         <Entity id="table" src={Table} alt="Table Obj" />
         <Entity id="stereo" src={Stereo} alt="Stereo Obj" change-size/>

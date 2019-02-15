@@ -96,12 +96,9 @@ class CreateGalleries extends Component {
         axios
             .put(signedRequest, file, options)
             .then(res => {
-                console.log(url)
                 this.setState({ thumbnail: url }, () => {
                     this.setState({ isUploading: false })
                 })
-                // .then(console.log("this is the url",url))
-                // THEN DO SOMETHING WITH THE URL. SEND TO DB 
             })
 
             .catch(err => {
@@ -175,7 +172,6 @@ class CreateGalleries extends Component {
     editGallery = id => {
         // set State with gallery related info after retrieving gallery info.
         axios.get(`/api/editGallery/${id}`).then(res => {
-            console.log(res.data[0])
             let { image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, gallery_name, atmosphere_lighting, music, wall_texture, is_private, thumbnail, ceiling_texture, floor_texture, img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption } = res.data[0]
             let images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15]
             let captions = [img1_caption, img2_caption, img3_caption, img4_caption, img5_caption, img6_caption, img7_caption, img8_caption, img9_caption, img10_caption, img11_caption, img12_caption, img13_caption, img14_caption, img15_caption]

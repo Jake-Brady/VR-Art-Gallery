@@ -34,7 +34,6 @@ class ArtGallery extends Component {
     }
 
     componentDidMount(props) {
-        console.log(this.props)
         let { username, galleryName } = this.props.match.params
         // Retrieve User's Images and Presets
         axios.get(`/api/getGalleryData/${username}/${galleryName}`).then(res => {
@@ -145,7 +144,6 @@ class ArtGallery extends Component {
     
 
     render() {
-        console.log(this.state)
         let { wallTexture, floorTexture, music, captions, author, galleryName, randomGallery, isWoodFloor } = this.state
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (

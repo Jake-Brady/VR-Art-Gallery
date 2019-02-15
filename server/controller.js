@@ -62,7 +62,6 @@ module.exports = {
         const { search } = req.query
         const db = req.app.get('db')
         db.get_gallery_by_search([search]).then(results => {
-            console.log(results)
             res.status(200).send(results)
         }).catch(err => {
             console.log(err)
@@ -259,7 +258,6 @@ module.exports = {
                 res.status(200).send('username')
             } else {
                 db.change_username([username, newUsername]).then(changedUsername => {
-                    console.log(changedUsername, 'has it changed tho?')
                     res.status(200).send(changedUsername)
                 }).catch(err => {
                     console.log(err)

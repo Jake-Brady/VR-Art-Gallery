@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom'
 import CreateGalleries from '../components/Lobby/createGalleries'
 import Galleries from '../components/Lobby/galleries'
 import Favorites from '../components/Lobby/favorites'
-import Notifications from '../components/Lobby/notifications'
 import Account from '../components/Lobby/account'
 import About from '../components/Lobby/about'
 import '../styles/Views/Lobby.css'
@@ -113,7 +112,6 @@ class Lobby extends Component {
     changeNav = current => {
         document.querySelectorAll('[data-tab]').forEach(tab => {
             const title = tab.innerText.split(' ')
-            console.log(title[0], current)
             if (title[0] === current) tab.classList.add('menu-back')
             else tab.classList.remove('menu-back')
         })
@@ -466,7 +464,7 @@ class Lobby extends Component {
                                 {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Notifications')}><i className="far fa-bell menu-icon"></i>Notifications</span> */}
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Galleries')}><i className="fas fa-image menu-icon"></i>Galleries ({this.state.galleryCopy.length})</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('Favorites')}><i className="fas fa-heart menu-icon"></i>Favorites ({this.state.favoritesCopy.length})</span>
-                                {/* <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span> */}
+                                <span data-tab className="menu-btn" onClick={() => this.changeWindow('Settings')}><i className="fas fa-cog menu-icon"></i>Settings</span>
                                 <span data-tab className="menu-btn" onClick={() => this.changeWindow('About')}><i className="fas fa-question menu-icon"></i>About</span>
                                 <span className="menu-btn" onClick={() => this.logout()}><i className="fas fa-arrow-alt-circle-left menu-icon"></i>Logout</span>
                             </div>
@@ -486,10 +484,10 @@ class Lobby extends Component {
                                         />
                                         : theMagicWord === 'notifications' ?
                                             <div>
-                                                <Notifications
+                                                {/* <Notifications
                                                     followersOfGalleries={this.state.usersWhoLiked}
                                                     galleries={usersGalleries}
-                                                />
+                                                /> */}
                                             </div>
                                             : theMagicWord === 'galleries' ?
                                                 <div className='lobby-container_gallery' onClick={() => this.clearPop()}>
