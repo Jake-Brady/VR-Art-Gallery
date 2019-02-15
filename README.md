@@ -1,3 +1,4 @@
+<section style="display:flex; flex-direction: column; align-items: center;">
 <h1>What is VR-Art-Gallery?</h1>
 <p>
 VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application built in React and deployed in Preact where users can upload images into their own custom art galleries to display to the world. As a user, you customize your art 2-floor gallery with texture presets for the floors and walls, and choose your own gallery music (all songs were performed by <a href="http://freemusicarchive.org/music/Kevin_MacLeod/">Kevin Macleod</a>).  Additionally, you can favorite other galleries, share their links, or create private galleries that are only accessible by the link you provide.
@@ -69,6 +70,7 @@ As mentioned in the opening description, this application was built in react and
 <h1>Stylistic Features</h1>
 <ul>
   <li>Pagination</li>
+  <li>Notifications (Favorites❤️, Sharing🤝)</li>
 </ul>
 
 <img src="" alt="Pagination on landing page">
@@ -77,8 +79,9 @@ As mentioned in the opening description, this application was built in react and
 <ul>
   <li>Search Filters</li>
   <li>Portal Hopping</li>
-  <li>Gallery Jams</li>
+  <li>Gallery Jams🎵</li>
 </ul>
+
 
 <img src="" alt="Search bars on landing page, favorites, and galleries">
 <img src="" alt="Portal Hop">
@@ -102,4 +105,5 @@ A-Frame has a built in link entity that functions identically to an anchor tag a
   <li>Built in Messages tab so users can message one another within Lobby/Landing Page - ostensibly in 3D Gallery as well.</li>
   <li>Expand presets so that users are not limited to built-in application presets</li>
 </ul>
+</section>
 
