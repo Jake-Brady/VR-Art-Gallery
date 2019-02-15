@@ -49,7 +49,7 @@ class LandingPage extends Component {
 
     async searchResults(keywords) {
         const searchResults = await axios.get(`/api/galleries?search=${keywords}`)
-        this.setState({ galleriesFiltered: searchResults.data }, () => console.log(this.state.galleries))
+        this.setState({ galleriesFiltered: searchResults.data })
     }
 
     async getFavorites() {
@@ -275,7 +275,6 @@ class LandingPage extends Component {
         this.setState({ popping: true, queue: [...this.state.queue.slice(1)] }, () => {
             let interval = setInterval(() => {
                 if (this.state.queue.length) {
-                    console.log('QUEUE', this.state.queue[0])
                     this.playAnim(this.state.queue[0])
                     this.setState({ queue: [...this.state.queue.slice(1)] })
                 }
@@ -285,7 +284,6 @@ class LandingPage extends Component {
     }
 
     playAnim = obj => {
-        console.log('OBJECT', obj)
         const pop = document.querySelector('.add-favorites-pop')
         if (!obj.name && obj.type === 'signin') {
             pop.style.background = 'rgb(238, 50, 50)'
@@ -392,8 +390,8 @@ class LandingPage extends Component {
                             </header>
                             <div className='landing-welcome'>
                                 <div className='landing-welcome_body'>
-                                    <h1>Walk around and see cool shit in VR</h1>
-                                    <h3>Make your own or browse other galleries</h3>
+                                    <h1>Walk around and see cool stuff in VR</h1>
+                                    <h3>Make your own gallery or browse others</h3>
                                     <div className='center' onClick={() => this.smoothScroll('gallery')}>VIEW GALLERIES</div>
                                     <div className='video-container center'>
                                         <div className='video-icons center'>

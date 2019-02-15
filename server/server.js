@@ -19,7 +19,6 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     /* AWS Connecting Endpoints - Section 1 */
     // AWS Thumbnails
     app.get('/api/amazons3/thumbnails/', (req, res) => {
-        console.log("in the server on api/amazons3")
         aws.config = {
             region: 'us-west-1',
             accessKeyId: AWS_ACCESS_KEY_ID,
@@ -52,7 +51,6 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
 
     // AWS Images
     app.get('/api/amazons3/images/', (req, res) => {
-        console.log("in the server on api/amazons3")
         aws.config = {
             region: 'us-west-1',
             accessKeyId: AWS_ACCESS_KEY_ID,

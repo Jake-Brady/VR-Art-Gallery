@@ -57,7 +57,6 @@ class Account extends Component {
                 this.userTaken()
                 return;
             }
-            console.log(updatedUsername.data[0].username)
             if (newEmail) {
                 if (!passwordConfirm) {
                     this.wrongPass()
@@ -320,8 +319,7 @@ class Account extends Component {
                         </Dropzone>
                         <img src={this.state.imageAddress || this.state.avatarURL || Placeholder} alt='User Image' style={{ cursor: 'pointer' }} onError={(e) => e.target.src = Placeholder} />
                         <div className='account-edit-inputs'>
-                            <h1>USERNAME</h1>
-                            <input id='account-name' name="newUsername" onChange={(e) => this.handleChange(e)} />
+                            
                             <h3>Name is Taken</h3>
                             <h1>EMAIL</h1>
                             <input id='account-email' name="newEmail" onChange={(e) => this.handleChange(e)} />

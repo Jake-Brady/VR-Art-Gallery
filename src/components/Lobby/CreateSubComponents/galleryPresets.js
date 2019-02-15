@@ -11,12 +11,6 @@ import terrazzoPorcelainTiles from '../../../assets/TerrazzoPocelainTiles.jpg'
 import seamlessStone from '../../../assets/repeatingSeamlessStone.jpg'
 import stoneTiles from '../../../assets/stoneTiles.jpg'
 import wood from '../../../assets/laminate-floor.jpg'
-// Music Covers
-import gymnopedie from '../../../assets/Gymnopedie.jpg'
-import calmant from '../../../assets/Calmant.jpg'
-import impromptu from '../../../assets/Impromptu.jpg'
-import onThePassingOfTime from '../../../assets/onThePassingOfTime.jpg'
-import snowDrop from '../../../assets/SnowDrop.jpg'
 //Audio
 import gymnopediaPreview from '../../../assets/audio/Gymnopedie_No_1.mp3'
 import calmantPreview from '../../../assets/audio/Calmant.mp3'
