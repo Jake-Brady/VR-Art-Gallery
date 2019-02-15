@@ -775,16 +775,6 @@ class ArtGallery extends Component {
                         animation="property: position; dir: alternate; from:-4.75 -3.3 16.5; to:-4.75 2 16.5; easing: easeInSine; dur:7000; loop: true"
                         rotation="90 0 0"
                         ></a-entity>
-                    {/* </a-entity> */}
-
-                    {/* <a-box
-                    id="elevatorButton"
-                    position="-4.75 .185 14"
-                    scale="1 1 1"
-                    emit-on-click="target:#elevator-floor; event: click"
-                    >
-                    </a-box> */}
-
                         <a-entity
                         className="elevatorElement"
                         geometry="primitive:plane"

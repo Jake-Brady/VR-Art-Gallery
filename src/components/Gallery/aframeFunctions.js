@@ -20,22 +20,5 @@ AFRAME.registerComponent('clock', {
   }  
 });
 
-AFRAME.registerComponent('emit-on-click', {
-  schema: {
-    target: {type: 'selector'},
-    event: {type: 'string'}
-  },
-
-  init: function () {
-    var el = this.el;
-    var targetEl = this.data.target;
-    var eventName = this.data.event;
-
-    el.addEventListener('click', function () {
-      targetEl.emit(eventName);
-    })
-  }
-});
-
 
 
