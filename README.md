@@ -83,7 +83,7 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
   <img src="./readmeFiles/stereo.gif" alt="3D stereo" width="100%">
 
   <p>
-  A-Frame has a built in link entity that functions identically to an anchor tag and allows users to traverse from a-scene (3D environment) to a-scene; however, we found this incompatible within the react library, specifically with react-router-dom, and re-created the shader and portal entity without the link functionality; We simply created 
+  A-Frame has a built in link entity that functions identically to an anchor tag and allows users to traverse from a-scene (3D environment) to a-scene; however, we found this incompatible within the react library, specifically with react-router-dom, and we re-created the shader and portal entity without the link functionality and simply redirected the user programtically with react-router's history.  The user simply has to left-click entities in order to interact with them: Stereo, Exit Door (redirects to landing page), and Portal.
   </p>
 
 <h1>Creators</h1>
@@ -96,9 +96,9 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
 <h1>Stretch Goals</h1>
   <ul>
     <li>Make Gallery multi-network and supports audio chat.</li>
-    <li>Notifications tab so users can get statistics on views, favorites, shares, and who is looking at their galleries specifically</li>
+    <li>Notifications tab so users can get statistics on views, favorites, shares, and who is looking at their galleries specifically.</li>
     <li>Built in Messages tab so users can message one another within Lobby/Landing Page - ostensibly in 3D Gallery as well.</li>
-    <li>Expand presets so that users are not limited to built-in application presets</li>
+    <li>Expand presets so that users are not limited to built-in application presets.</li>
   </ul>
 </section>
 
