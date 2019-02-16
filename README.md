@@ -82,10 +82,9 @@ As mentioned in the opening description, this application was built in react and
   <li>Gallery Jams🎵</li>
 </ul>
 
-
-<img src="" alt="Search bars on landing page, favorites, and galleries">
-<img src="" alt="Portal Hop">
-<img src="" alt="3D stereo">
+<img src="./readmeFiles/filter.gif" alt="Search bars on landing page, favorites, and galleries">
+<img src="./readmeFiles/portal.gif" alt="Portal Hop">
+<img src="./readmeFiles/stereo.gif" alt="3D stereo">
 
 <p>
 A-Frame has a built in link entity that functions identically to an anchor tag and allows users to traverse from a-scene (3D environment) to a-scene; however, we found this incompatible within the react library, specifically with react-router-dom, and re-created the shader and portal entity without the link functionality; We simply created 
