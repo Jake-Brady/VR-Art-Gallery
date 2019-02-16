@@ -80,6 +80,7 @@ class Account extends Component {
         }
         this.setState({ username: newUsername || this.state.username, email: newEmail || this.state.email, avatarURL: imageAddress || this.state.avatarURL })
         this.cancelEdit()
+        this.props.refresh()
     }
 
     clearErrors = () => {
