@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../../styles/Components/account.css'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as randomStringGenerator } from 'uuid';
 import Placeholder from '../../styles/Media/Placeholder.png'
@@ -185,6 +186,22 @@ class Account extends Component {
         this.setState({ pass: true })
     }
 
+    deleteAccount = async () => {
+        this.clearErrors()
+        const { passwordConfirm, username } = this.state
+        if (!passwordConfirm) {
+            this.wrongPass()
+            return;
+        }
+        const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+        if (checkPassword.data === 'incorrect') {
+            this.wrongPass()
+            return;
+        }
+        const deleteAccount = await axios.delete(`/api/deleteAccount/${username}`)
+        axios.post('/api/logout').then(() => this.props.history.push('/'))
+    }
+
     render() {
         return (
             <section className="account-page">
@@ -252,7 +269,7 @@ class Account extends Component {
                             }
                         </div>
                         <div className='edit-bottom'>
-                            <h3 className='center'>Delete Account</h3>
+                            <h3 onClick={() => this.deleteAccount()}className='center'>Delete Account</h3>
                             <h2 onClick={() => this.cancelEdit()}>Cancel</h2>
                             <h1 className='center' onClick={() => this.checkChanges()}>Save</h1>
                         </div>
@@ -263,4 +280,4 @@ class Account extends Component {
     }
 }
 
-export default Account
+export default withRouter(Account)

@@ -110,9 +110,8 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.put('/api/changeEmail/', ctrl.changeEmail)
     app.put('/api/changePassword', ctrl.changePassword)
     app.put('/api/changeAvatar/', ctrl.changeAvatar)
+    app.delete('/api/deleteAccount/:username', ctrl.deleteAccount)
 
-
-    
     //Art-Gallery
     app.get('/api/getGalleryData/:username/:galleryName', ctrl.getGalleryData)
     app.get('/api/randomGallery', ctrl.getRandomGallery)
