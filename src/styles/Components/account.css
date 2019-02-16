@@ -25,7 +25,7 @@
 }
 
 .account-overview-edit {
-    height: 450px;
+    min-height: 450px;
 }
 
 .account-upload {
@@ -142,7 +142,7 @@
 .edit-bottom {
     position: absolute;
     bottom: 0px;
-    width: 750px;
+    width: 100%;
     height: 60px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;

@@ -282,6 +282,13 @@ module.exports = {
             }
         })
     },
+    findEmail: (req, res, next) => {
+        const { email } = req.params
+        const db = req.app.get('db')
+        db.find_email([email]).then(email => {
+            res.status(200).send(email.length ? email : [])
+        })
+    },
     changePassword: (req, res, next) => {
         const { newPassword, username } = req.body
         const salt = bcrypt.genSaltSync(10)

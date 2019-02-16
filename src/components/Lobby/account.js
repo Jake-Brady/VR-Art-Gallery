@@ -43,120 +43,52 @@ class Account extends Component {
             return;
         }
         const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-            if (checkPassword.data === 'incorrect') {
+        if (checkPassword.data === 'incorrect') {
+            this.wrongPass()
+            return;
+        }
+        if (newEmail) {
+            if (!newEmail.includes('@')) {
+                this.invalidEmail()
+                return;
+            }
+            const emailResponse = await axios.get(`/api/findEmail/${newEmail}`)
+            if (emailResponse.data.length) {
+                this.emailExists()
+                return;
+            }
+        }
+
+        if (newPassword) {
+            if (!passwordConfirm) {
                 this.wrongPass()
                 return;
             }
-        if (newUsername) {
-            if (newUsername.split(' ').length > 1) {
-                this.noSpaces()
+            const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
+            if (checkPassword.data === 'incorrect') {
+                this.wrongPass()
                 return;
-            }
-            const updatedUsername = await axios.put(`/api/changeUsername/`, { newUsername, username })
-            if (updatedUsername.data === 'username') {
-                this.userTaken()
-                return;
-            }
-            if (newEmail) {
-                if (!passwordConfirm) {
-                    this.wrongPass()
-                    return;
-                }
-                if (!newEmail.includes('@')) {
-                    this.invalidEmail()
-                    return;
-                }
-                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-                if (checkPassword.data[0] === 'incorrect') {
-                    this.wrongPass()
-                    return;
-                } else {
-                    const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
-                    if (updatedEmail.data === 'email') {
-                        this.emailExists()
-                        return;
-                    }
-                }
-                console.log('EMAIL WENT THROUGH')
-            }
-    
-            if (newPassword) {
-                if (!passwordConfirm) {
-                    this.wrongPass()
-                    return;
-                }
-                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-                if (checkPassword.data === 'incorrect') {
-                    this.wrongPass()
-                    return;
-                } else {
-                    const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
-                    console.log('PASSWORD WENT THROUGH')
-                }
-            }
-            if (imageAddress) {
-                const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
-                console.log('PICTURE WENT THROUGH')
+            } else {
+                const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
             }
         }
-        else {
-            if (newEmail) {
-                if (!passwordConfirm) {
-                    this.wrongPass()
-                    return;
-                }
-                if (!newEmail.includes('@')) {
-                    this.invalidEmail()
-                    return;
-                }
-                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-                if (checkPassword.data[0] === 'incorrect') {
-                    this.wrongPass()
-                    return;
-                } else {
-                    const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
-                    if (updatedEmail.data === 'email') {
-                        this.emailExists()
-                        return;
-                    }
-                }
-                console.log('EMAIL WENT THROUGH')
-            }
-    
-            if (newPassword) {
-                if (!passwordConfirm) {
-                    this.wrongPass()
-                    return;
-                }
-                const checkPassword = await axios.get(`/api/confirmPassword/${passwordConfirm}/${username}`)
-                if (checkPassword.data === 'incorrect') {
-                    this.wrongPass()
-                    return;
-                } else {
-                    const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
-                    console.log('PASSWORD WENT THROUGH')
-                }
-            }
-            if (imageAddress) {
-                const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
-                console.log('PICTURE WENT THROUGH')
-            }
+        if (imageAddress) {
+            const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
         }
-        this.setState({ username: newUsername || this.state.username, email: newEmail || this.state.email, avatarURL: imageAddress || this.state.avatarURL})
+        if (newEmail) {
+            const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
+        }
+        this.setState({ username: newUsername || this.state.username, email: newEmail || this.state.email, avatarURL: imageAddress || this.state.avatarURL })
         this.cancelEdit()
     }
 
     clearErrors = () => {
         const passwordInput = document.querySelector('#account-password'),
             errorText = document.querySelector('.account-edit-inputs > h4'),
-            nameInput = document.querySelector('#account-name'),
-            nameText = document.querySelector('.account-edit-inputs > h3'),
             emailInput = document.querySelector('#account-email'),
             emailText = document.querySelector('.account-edit-inputs > h5')
         passwordInput.style.borderColor = 'rgba(0, 0, 0, 0.1)'
-        nameInput.style.borderColor = 'rgba(0, 0, 0, 0.1)'
         emailInput.style.borderColor = 'rgba(0, 0, 0, 0.1)'
-        nameText.style.visibility = 'hidden'
         errorText.style.visibility = 'hidden'
         emailText.style.visibility = 'hidden'
     }
@@ -166,22 +98,6 @@ class Account extends Component {
             errorText = document.querySelector('.account-edit-inputs > h4')
         passwordInput.style.borderColor = 'red'
         errorText.style.visibility = 'visible'
-    }
-
-    userTaken = () => {
-        const nameInput = document.querySelector('#account-name'),
-            nameText = document.querySelector('.account-edit-inputs > h3')
-        nameText.innerText = 'Name Taken'
-        nameInput.style.borderColor = 'red'
-        nameText.style.visibility = 'visible'
-    }
-
-    noSpaces = () => {
-        const nameInput = document.querySelector('#account-name'),
-            nameText = document.querySelector('.account-edit-inputs > h3')
-        nameText.innerText = 'No Spaces'
-        nameInput.style.borderColor = 'red'
-        nameText.style.visibility = 'visible'
     }
 
     emailExists = () => {
@@ -256,8 +172,7 @@ class Account extends Component {
     handleEdit = () => {
         this.setState({ edit: !this.state.edit }, () => {
             const inputs = document.querySelectorAll('.account-edit-inputs > input')
-            inputs[0].value = this.state.username
-            inputs[1].value = this.state.email
+            inputs[0].value = this.state.email
         })
     }
 
@@ -319,8 +234,7 @@ class Account extends Component {
                         </Dropzone>
                         <img src={this.state.imageAddress || this.state.avatarURL || Placeholder} alt='User Image' style={{ cursor: 'pointer' }} onError={(e) => e.target.src = Placeholder} />
                         <div className='account-edit-inputs'>
-                            
-                            <h3>Name is Taken</h3>
+
                             <h1>EMAIL</h1>
                             <input id='account-email' name="newEmail" onChange={(e) => this.handleChange(e)} />
                             <h5>Email is taken</h5>
@@ -337,6 +251,7 @@ class Account extends Component {
                             }
                         </div>
                         <div className='edit-bottom'>
+                            <h3 className='center'>Delete Account</h3>
                             <h2 onClick={() => this.cancelEdit()}>Cancel</h2>
                             <h1 className='center' onClick={() => this.checkChanges()}>Save</h1>
                         </div>
