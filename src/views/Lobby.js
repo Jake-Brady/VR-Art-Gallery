@@ -550,6 +550,7 @@ class Lobby extends Component {
                                                         <div>
                                                             <Account
                                                                 accountInfo={this.state.accountInfo}
+                                                                refresh={this.refresh}
                                                             />
                                                         </div>
                                                         : theMagicWord === 'about' &&
