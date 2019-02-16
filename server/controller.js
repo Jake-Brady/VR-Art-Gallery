@@ -329,6 +329,17 @@ module.exports = {
         // if user has no galleries send back an empty array
         else res.status(200).send([])
     },
+    deleteAccount: (req,res,next) => {
+        const {username} = req.params
+        console.log(username)
+        const db = req.app.get('db')
+        db.delete_account([username]).then(deletedAccount => {
+            res.status(200).send('deleteAccount')
+        }).catch(err => {
+            console.log(err)
+            res.status(500).send(err)
+        })
+    },
     logout: (req, res, next) => {
         req.session.destroy()
         res.sendStatus(200)
