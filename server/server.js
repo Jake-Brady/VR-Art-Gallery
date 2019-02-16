@@ -98,6 +98,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.get('/api/getAccountInfo', ctrl.getAccountInfo)
     app.get('/api/retrieveGalleries/', ctrl.retrieveGalleries)
     app.get('/api/getFavorites/', ctrl.getFavorites)
+    app.get('/api/findEmail/:email', ctrl.findEmail)
     app.post('/api/logout/', ctrl.logout)
     app.delete('/api/deleteGallery/:id', ctrl.deleteGallery)
     app.post('/api/createNewGallery/', ctrl.createNewGallery)
@@ -109,6 +110,7 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.put('/api/changeEmail/', ctrl.changeEmail)
     app.put('/api/changePassword', ctrl.changePassword)
     app.put('/api/changeAvatar/', ctrl.changeAvatar)
+
 
     
     //Art-Gallery

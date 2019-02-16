@@ -14,7 +14,8 @@
 }
 
 .account-overview, .account-overview-edit {
-    width: 800px;
+    width: 80%;
+    max-width: 800px;
     height: 200px;
     background: rgb(250, 250, 250);
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -24,7 +25,7 @@
 }
 
 .account-overview-edit {
-    height: 450px;
+    min-height: 450px;
 }
 
 .account-upload {
@@ -96,7 +97,7 @@
     color: rgba(0, 0, 0, 0.8);
 }
 
-.account-edit-inputs > h3 {
+.account-edit-inputs > h5 {
     position: absolute;
     right: 20px;
     top: 38px;
@@ -109,22 +110,13 @@
 .account-edit-inputs > h4 {
     position: absolute;
     right: 20px;
-    top: 215px;
-    font-weight: 300;
-    color: red;
-    font-size: 16px;
-    visibility: hidden;
-}
-
-.account-edit-inputs > h5 {
-    position: absolute;
-    right: 20px;
     top: 125px;
     font-weight: 300;
     color: red;
     font-size: 16px;
     visibility: hidden;
 }
+
 
 .account-edit-inputs > input {
     width: 100%;
@@ -150,12 +142,28 @@
 .edit-bottom {
     position: absolute;
     bottom: 0px;
-    width: 750px;
+    width: 100%;
     height: 60px;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+
+.edit-bottom > h3 {
+    font-weight: 300;
+    font-size: 18px;
+    height: 40px;
+    width: 130px;
+    background: rgb(228, 79, 79);
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    margin-right: 460px;
+}
+
+.edit-bottom > h3:hover {
+    background: rgb(243, 52, 52);
 }
 
 .edit-bottom > h1 {
@@ -210,4 +218,23 @@
 .account-image-hover:hover > div, .account-image-hover:hover > span {
     opacity: 1;
     pointer-events: none;
+}
+
+@media (max-width: 800px) {
+    .account-overview {
+        flex-direction: column;
+        min-height: 400px;
+        align-items: center;
+        width: 300px;
+    }
+    .account-text {
+        align-items: center;
+        margin: 0px;
+        min-height: 170px;
+        max-height: 170px;
+    }
+    .account-edit {
+        top: 340px;
+        left: 100px;
+    }
 }
