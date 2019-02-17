@@ -241,7 +241,19 @@ class ArtGallery extends Component {
                     >
                     </a-circle>
 
-                    
+                    <a-entity
+                    position="-12 2 -1.3"
+                    geometry="primitive: plane"
+                    material="color:black"
+                    scale="5 3 3"
+                    rotation="0 90 0"
+                    text={`
+                    align: center;
+                    font: sourcecodepro; 
+                    color: #191; 
+                    value: Welcome to the end of the internet.`}
+                    >
+                    </a-entity>
                     
 
                     {/* Frames for user images */}
@@ -266,12 +278,12 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[5] || null}
-                    position='1.9 1.13 2.09'
+                    position='2.54 1.13 2.09'
                     >
                     </a-text>
                     <a-text 
                     value={captions[6] || null}
-                    position='3.8 1.13 7.42'
+                    position='3.45 1.13 7.42'
                     rotation="0 180 0"
                     >
                     </a-text>
@@ -298,12 +310,12 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[7] || null}
-                    position='1.9 1.13 8.58'
+                    position='2.54 1.13 8.58'
                     >
                     </a-text>
                     <a-text 
                     value={captions[8] || null}
-                    position='3.8 1.13 13.92'
+                    position='3.45 1.13 13.92'
                     rotation="0 180 0"
                     ></a-text>
 
@@ -321,7 +333,7 @@ class ArtGallery extends Component {
                     {/* Caption */}
                     <a-text 
                     value={captions[9] || null}
-                    position='3.8 1.13 .92'
+                    position='3.45 1.13 .92'
                     rotation="0 180 0"
                     ></a-text>
                    
@@ -340,7 +352,7 @@ class ArtGallery extends Component {
                     {/* Caption */}
                     <a-text 
                     value={captions[10] || null}
-                    position='1.9 1.13 15.08'
+                    position='2.54 1.13 15.08'
                     rotation="0 0 0"
                     ></a-text>
                     
@@ -366,19 +378,19 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[11] || null}
-                    position='-6.92 1.13 5.7'
+                    position='-6.92 1.13 5.3'
                     rotation="0 90 0"
                     ></a-text>
                     <a-text 
                     value={captions[12] || null}
-                    position='-6.92 1.13 11.9'
+                    position='-6.92 1.13 11.5'
                     rotation="0 90 0"
                     ></a-text>
                     
 
                     
 
-                    {/* Wall - Opposite Side of Elevator - First Floor */}
+                    {/* Wall - Outer Walls Opposite Side of Elevator - First Floor */}
                     {/* User Images */}
                     <a-image id="portrait14" src="#Portrait14" height="2.5" width="3.5" className="user-image" position="12.99 2.5 4.75" rotation=" 0 270 0"></a-image>
                     <a-image id="portrait15" src="#Portrait15" height="2.5" width="3.5" className="user-image" position="12.99 2.5 11" rotation=" 0 270 0"></a-image>
@@ -398,12 +410,12 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[13] || null}
-                    position='12.91 1.13 4'
+                    position='12.91 1.13 4.28'
                     rotation="0 -90 0"
                     ></a-text>
                     <a-text 
                     value={captions[14] || null }
-                    position='12.91 1.13 10.3'
+                    position='12.91 1.13 10.35'
                     rotation="0 -90 0"
                     ></a-text>
                    
@@ -429,12 +441,12 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[1] || null}
-                    position='-6.92 6.4 5.5'
+                    position='-6.92 6.4 5.2'
                     rotation="0 90 0"
                     ></a-text>
                     <a-text 
                     value={captions[2] || null}
-                    position='-6.92 6.4 11.7'
+                    position='-6.92 6.4 11.5'
                     rotation="0 90 0"
                     ></a-text>
                     
@@ -459,13 +471,13 @@ class ArtGallery extends Component {
                     {/* Captions */}
                     <a-text 
                     value={captions[3] || null}
-                    position='12.92 6.4 4'
+                    position='12.92 6.4 4.25'
                     rotation="0 -90 0"
                     >
                     </a-text>
                     <a-text 
                     value={captions[4] || null}
-                    position='12.92 6.4 10.3'
+                    position='12.92 6.4 10.5'
                     rotation="0 -90 0"
                     ></a-text>
                   
@@ -483,7 +495,7 @@ class ArtGallery extends Component {
                     {/* Caption */}
                     <a-text 
                     value={captions[0] || null}
-                    position='2.3 6.4 -1.92'
+                    position='2.5 6.4 -1.92'
                     rotation="0 0 0"
                     ></a-text>
                     
@@ -665,10 +677,10 @@ class ArtGallery extends Component {
                     <a-gltf-model 
                     static-body
                     src="#moon" 
-                    scale='2 2 2' 
-                    position='3 50 7'
+                    scale='3.5 3.5 3.5' 
+                    position='3 55 7'
                     >
-                    <a-animation to='0 360 360' easing='linear' dur='30000' repeat='indefinite'/>
+                    <a-animation to='0 360 360' easing='linear' dur='40000' repeat='indefinite'/>
                     </a-gltf-model>
 
                     <a-gltf-model 
@@ -687,13 +699,13 @@ class ArtGallery extends Component {
                         <rw-wall material={`src:${wallTexture || '#granite'}; repeat: 2`} position="-5 0 0" height="12"></rw-wall>
                     </rw-room>
                      {/* Invisible Plane Barriers to prevent players from leaving the room. */}
-                     <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
+                     <a-plane visible="false" material="visible:true" width="20" height="15" static-body position="14 5 8" rotation=" 0 270 0"></a-plane>
 
                     <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="-8 5 10" rotation=" 0 270 0"></a-plane>
 
-                    <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="3 5 -3" rotation=" 0 180 0"></a-plane>
+                    <a-plane visible="false" material="visible:true" width="20" height="15" static-body position="3 5 -3" rotation=" 0 180 0"></a-plane>
 
-                    <a-plane visible="false" material="visible:true" width="18" height="15" static-body position="3 5 19" rotation=" 0 180 0"></a-plane>
+                    <a-plane visible="false" material="visible:true" width="20" height="15" static-body position="3 5 19" rotation=" 0 180 0"></a-plane>
 
                     {/* Interior Walls and Pillars for added Decorations */}
                     <a-box material="src:#marble;" width="8" height="7" depth="1" static-body position="3 2 1.5"></a-box>
@@ -740,9 +752,9 @@ class ArtGallery extends Component {
 
                     {/* Ceiling Floor */}
                 <a-entity geometry="primitive: plane; height: 14; width: 11"  position="3 12 8"
-            material="color: black; opacity: 0.5" rotation="90 0 0"></a-entity>
+            material="color: black; opacity: 0.3" rotation="90 0 0"></a-entity>
                 <a-entity static-body geometry="primitive: plane; height: 14; width: 11"  position="3 12.001 8"
-            material="color: black; opacity: 0.5" rotation="-90 0 0"></a-entity>
+            material="color: black; opacity: 0.3" rotation="-90 0 0"></a-entity>
 
                     {/* 3rd layer - ceiling */}
             <a-entity geometry="primitive: plane; height: 20; width: 5"  position="-5 12 8"
