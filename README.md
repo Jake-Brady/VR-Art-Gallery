@@ -1,7 +1,7 @@
 <section>
 <h1>What is VR-Art-Gallery?</h1>
 <p>
-VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application built in React and deployed in Preact where users can upload images into their own custom art galleries to display to the world. As a user, you customize your art 2-floor gallery with texture presets for the floors and walls, and choose your own gallery music (all songs were performed by <a href="http://freemusicarchive.org/music/Kevin_MacLeod/">Kevin Macleod</a>).  Additionally, you can favorite other galleries, share their links, or create private galleries that are only accessible by the link you provide.
+VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application built in React and deployed in Preact where users can upload images into their own custom art galleries to display to the world. As a user, you customize your two-story gallery with texture presets for the floors and walls, and choose your own gallery music (all songs were performed by <a href="http://freemusicarchive.org/music/Kevin_MacLeod/">Kevin Macleod</a>).  Additionally, you can favorite other galleries, share their links, or create private galleries that are only accessible by the link you provide.
 </p>
 
 <h1>Technologies</h1>
