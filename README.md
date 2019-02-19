@@ -60,7 +60,7 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
   </ul>
 
   <p>
-  As mentioned in the opening description, this application was built in react and therefore contains all of the same scripts as a react app; however, the deployed application is in preact using preact-compat alias in the package-json.  React-router-dom is used for redirected users from landing-page to lobby as well as anyone's gallery by taking in the author and gallery name as params.  Redux was implemented as a solution to a run-time error in passing image URLs in the mounting of the ArtGallery component to the assets file which contains the portrait entities populating the gallery.  Passing urls directly via props resulted in 
+  As mentioned in the opening description, this application was built in react and therefore contains all of the same scripts as a react app; however, the deployed application is in preact using preact-compat alias in the package-json.  React-router-dom is used for redirected users from landing-page to lobby as well as anyone's gallery by taking in the author and gallery name as params.  Redux was implemented as a solution to a run-time error in passing image URLs in the mounting of the ArtGallery component to the assets file which contains the portrait entities populating the gallery.
   </p>
 
 <h1>Stylistic Features</h1>
