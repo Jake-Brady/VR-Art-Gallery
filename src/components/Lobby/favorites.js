@@ -14,7 +14,7 @@ const Favorites = (props) => {
                <span>{views}</span>
                <i className="fas fa-heart stat make-red" onClick={() => removeFav(id, galleryName)}></i>
                <span>{favoriteNum}</span>
-               <i className="fas fa-share stat" onClick={(e) => share({galleryName, color: 'blue'}, e.target)}></i>
+               <i className="fas fa-share stat" onClick={(e) => share({galleryName, color: 'blue'}, e.target, galleryName, author)}></i>
                <span>{shares}</span>
             </div>
             <div className='gallery-view center' onClick={() => visitGallery(galleryName, author)}>Visit Gallery</div>

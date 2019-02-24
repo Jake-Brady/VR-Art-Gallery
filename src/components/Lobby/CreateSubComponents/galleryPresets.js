@@ -161,10 +161,10 @@ class GalleryPresets extends Component {
                     <div className='gallery-audio-preview center audio3' onClick={(e) => this.audioPreview(snowDropPreview, e)}>
                         <i className="fas fa-music"></i>
                     </div>
-                    <div className='gallery-audio-preview center audio4' onClick={(e) => this.audioPreview(timePreview, e)}>
+                    <div className='gallery-audio-preview center audio4' onClick={(e) => this.audioPreview(impromptuPreview, e)}>
                         <i className="fas fa-music"></i>
                     </div>
-                    <div className='gallery-audio-preview center audio5' onClick={(e) => this.audioPreview(impromptuPreview, e)}>
+                    <div className='gallery-audio-preview center audio5' onClick={(e) => this.audioPreview(timePreview, e)}>
                         <i className="fas fa-music"></i>
                     </div>
                     <div className='center gallery-preset gallery-music-box' onClick={(e) => this.setTexture('music', e.target)} data='gymnopedie'>

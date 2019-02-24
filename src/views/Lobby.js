@@ -320,9 +320,20 @@ class Lobby extends Component {
         }, 400);
     }
 
-    shareGalleryPop = (name, target) => {
+    shareGalleryPop = (name, target, galleryName, author) => {
         target.style.color = 'rgb(110, 142, 254)'
         this.removeFavPop(name)
+        // Location variable only works in production.
+        const location = 'vrartgallery.org/#/'
+        galleryName = galleryName.split(' ').join('%20')
+        author = author.split(' ').join('%20')
+        let destination = `${location}${author}/${galleryName}`
+        let textField = document.createElement('textarea')
+        textField.innerText = destination
+        document.body.appendChild(textField)
+        textField.select()
+        document.execCommand('copy')
+        textField.remove()
     }
 
     removeFavPop = name => {
@@ -398,7 +409,7 @@ class Lobby extends Component {
         })
 
         const galleryContainers = usersGalleries.map((e) => {
-            const isPrivate = (e.is_private === 'true'),
+            const isPrivate = e.is_private,
                 key = e.id,
                 image = e.thumbnail,
                 views = e.views,

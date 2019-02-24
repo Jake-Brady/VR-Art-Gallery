@@ -673,7 +673,7 @@ class ArtGallery extends Component {
                     position='12 .1 17.2' 
                     rotation="0 0 0">
                     </a-gltf-model>
-                    
+                
                     <a-gltf-model 
                     static-body
                     src="#moon" 
