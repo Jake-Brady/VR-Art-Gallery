@@ -27,7 +27,8 @@ class ArtGallery extends Component {
             galleryName: '',
             author: '',
             randomGallery: [],
-            isWoodFloor: false
+            isWoodFloor: false,
+            portalName: ''
         }
         this.exit = this.exit.bind(this)
     }
@@ -99,7 +100,15 @@ class ArtGallery extends Component {
                     break;
             }
             this.setState({wallTexture: wall_texture, floorTexture: floor_texture, atmosphereLighting: atmosphere_lighting, music, galleryName, author: username}, async () => {
+                let portalName;
                 const randomGallery = await axios.get(`/api/randomGallery/`)
+                if (randomGallery.data[0].gallery_name.length > 14){
+                    portalName = randomGallery.data[0].gallery_name.split('').slice(0, 14).join('') + '...'
+                    this.setState({portalName})
+                } else {
+                    portalName = randomGallery.data[0].gallery_name
+                    this.setState({portalName})
+                }
                 this.setState({randomGallery: randomGallery.data[0]})
                 this.checkFPS()
             })
@@ -129,6 +138,7 @@ class ArtGallery extends Component {
         }, 3000);
     }
 
+
     exit(){
         this.props.history.push('/')
     }
@@ -143,7 +153,7 @@ class ArtGallery extends Component {
     
 
     render() {
-        let { wallTexture, floorTexture, music, captions, author, galleryName, randomGallery, isWoodFloor } = this.state
+        let { wallTexture, floorTexture, music, captions, author, galleryName, portalName, isWoodFloor } = this.state
         // Identify floor_texture, wall_texture, atmosphere_lighting, music strings and assign ID equivalents to variables below and pass as template literals as src within each a-entity.
         return (
             <section className="gallery-scene-container">
@@ -215,6 +225,7 @@ class ArtGallery extends Component {
 
                     {/* Portal to Random Gallery */}
                     {/* Panel */}
+                    {/* {galleryName.length > 20 ? galleryName.slice(0, 20) + '...' : galleryName} */}
                     <a-entity
                     position="9 4.6 -1.9" 
                     geometry="primitive: circle"
@@ -224,9 +235,9 @@ class ArtGallery extends Component {
                     text={`
                     font: sourcecodepro; 
                     color: #191; 
-                    value: ${randomGallery.gallery_name}; 
+                    value: ${portalName}; 
                     align: center;
-                    width:2.8;
+                    width: 4.3;
                     `}
                     >
                     </a-entity>
@@ -674,14 +685,16 @@ class ArtGallery extends Component {
                     rotation="0 0 0">
                     </a-gltf-model>
                 
+                    
+                    
                     <a-gltf-model 
-                    static-body
                     src="#moon" 
-                    scale='3.5 3.5 3.5' 
-                    position='3 55 7'
+                    scale='7.5 7.5 7.5' 
+                    position="3 65 7"
                     >
-                    <a-animation to='0 360 360' easing='linear' dur='40000' repeat='indefinite'/>
+                    <a-animation to='0 360 360' easing='linear' dur='200000' repeat='indefinite'/>
                     </a-gltf-model>
+                
 
                     <a-gltf-model 
                     src="#carpet" 
