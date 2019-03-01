@@ -331,15 +331,15 @@ class LandingPage extends Component {
             let timesFavorited = gallery.times_favorited
             return (
                 <div key={galleryId} className='gallery-container'>
-                    <img src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
+                    <img onClick={() => this.visitGallery(galleryId, galleryName, author)} src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                     <div className='gallery-text'>
                         <h1 className='gallery-title'>{galleryName.length > 20 ? galleryName.slice(0, 20) + '...' : galleryName}</h1>
                         <div className='gallery-title-hover'>{galleryName}</div>
                         <h3 className='gallery-author'>BY:{author}</h3>
                         <div className='gallery-stats'>
-                            <i className="fas fa-eye stat"></i><span>{gallery.views}</span>
-                            <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><span>{timesFavorited}</span>
-                            <i onClick={(e) => this.shareGallery(galleryName, author, galleryId, gallery.shares, e)} className="fas fa-share stat"></i><span>{gallery.shares}</span>
+                            <i className="fas fa-eye stat"></i><p className="stats-view">Views</p><span>{gallery.views}</span>
+                            <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><p className="stats-favorite">Favorite</p><span>{timesFavorited}</span>
+                            <i onClick={(e) => this.shareGallery(galleryName, author, galleryId, gallery.shares, e)} className="fas fa-share stat"></i><p className="stats-shared">Share</p><span>{gallery.shares}</span>
                         </div>
                         <div onClick={() => this.visitGallery(galleryId, galleryName, author)} className='gallery-view center'>Visit Gallery</div>
                     </div>
@@ -353,15 +353,15 @@ class LandingPage extends Component {
             let timesFavorited = gallery.times_favorited
             return (
                 <div key={galleryId} className='gallery-container'>
-                    <img src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
+                    <img onClick={() => this.visitGallery(galleryId, galleryName, author)} src={gallery.thumbnail} alt='Card Thumbnail' className='gallery-thumbnail' />
                     <div className='gallery-text'>
                         <h1 className='gallery-title'>{galleryName.length > 20 ? galleryName.slice(0, 20) + '...' : galleryName}</h1>
                         <div className='gallery-title-hover'>{galleryName}</div>
                         <h3 className='gallery-author'>BY:{author}</h3>
                         <div className='gallery-stats'>
-                            <i className="fas fa-eye stat"></i><span>{gallery.views}</span>
-                            <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><span>{timesFavorited}</span>
-                            <i onClick={(e) => this.shareGallery(galleryName, author, galleryId, gallery.shares, e)} className="fas fa-share stat"></i><span>{gallery.shares}</span>
+                            <i className="fas fa-eye stat"></i><p className="stats-view">Views</p><span>{gallery.views}</span>
+                            <i onClick={() => this.adjustFavorites(galleryId, timesFavorited)} className="fas fa-heart stat" data-id={galleryId}></i><p className="stats-favorite">Favorite</p><span>{timesFavorited}</span>
+                            <i onClick={(e) => this.shareGallery(galleryName, author, galleryId, gallery.shares, e)} className="fas fa-share stat"></i><p className="stats-shared">Share</p><span>{gallery.shares}</span>
                         </div>
                         <div onClick={() => this.visitGallery(galleryId, galleryName, author)} className='gallery-view center'>Visit Gallery</div>
                     </div>
