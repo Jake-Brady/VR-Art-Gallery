@@ -267,6 +267,10 @@
     object-fit: cover;
 }
 
+.gallery-thumbnail {
+    cursor: pointer;
+}
+
 .gallery-text {
     padding: 15px;
     position: relative;
@@ -317,6 +321,60 @@
 .stat {
     font-size: 16px;
     margin-right: 3px;
+}
+
+.stats-view {
+    position: absolute;
+    padding: 5px;
+    top: 40px;
+    left: 5px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.178);
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 13px;
+    font-weight: 300;
+    visibility: hidden;
+}
+
+.stats-favorite {
+    position: absolute;
+    padding: 5px;
+    top: 40px;
+    left: 35px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.178);
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 13px;
+    font-weight: 300;
+    visibility: hidden;
+}
+
+.stats-shared {
+    position: absolute;
+    padding: 5px;
+    top: 40px;
+    left: 70px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.178);
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 13px;
+    font-weight: 300;
+    visibility: hidden;
+}
+
+.fa-eye:hover ~ .stats-view{
+ visibility: visible;
+}
+
+.fa-heart:hover ~ .stats-favorite{
+    visibility: visible;
+}
+
+.fa-share:hover ~ .stats-shared{
+    visibility: visible;
 }
 
 .fa-heart, .fa-share:hover{
