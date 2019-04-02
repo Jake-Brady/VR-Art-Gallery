@@ -85,6 +85,20 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
   <p>
   A-Frame has a built in link entity that functions identically to an anchor tag and allows users to traverse from a-scene (3D environment) to a-scene; however, we found this incompatible within the react library, specifically with react-router-dom, and we re-created the shader and portal entity without the link functionality and simply redirected the user programtically with react-router's history.  The user simply has to left-click entities in order to interact with them: Stereo, Exit Door (redirects to landing page), and Portal.
   </p>
+  
+<h1>Performance Issues</h1>
+<p>
+  Make sure that "Hardware Acceleration" is enabled if you are using Google Chrome. You can enable this setting by doing the following:
+ </p>
+ <ul>
+  <li>Click the 3 circles in the top right corner of the window</li>
+  <li>Click on settings</li>
+  <li>Scroll down and click on advanced</li>
+  <li>Enable "Use hardware acceleration when available"</li>
+  </ul>
+  <p>
+  This application has been tested for performance in Edge, Firefox, and Chrome.
+ </p>
 
 <h1>Creators</h1>
   <p>
