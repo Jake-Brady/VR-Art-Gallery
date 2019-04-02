@@ -95,6 +95,7 @@ VR-Art-Gallery is a full stack, mobile-responsive, virtual reality application b
   <li>Click on settings</li>
   <li>Scroll down and click on advanced</li>
   <li>Enable "Use hardware acceleration when available"</li>
+  <li>Click on the "Relaunch" button that appears</li>
   </ul>
   <p>
   This application has been tested for performance in Edge, Firefox, and Chrome.
