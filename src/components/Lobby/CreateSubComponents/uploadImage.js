@@ -48,7 +48,6 @@ class UploadImage extends Component {
             })
             .then(res => {
                 const { signedRequest, url } = res.data;
-                console.log(url)
                 this.uploadFile(file, signedRequest, url);
             })
             .catch(err => {
@@ -56,7 +55,6 @@ class UploadImage extends Component {
             });
     }
     uploadFile = (file, signedRequest, url) => {
-        console.log(url)
         const options = {
             headers: {
                 'Content-Type': file.type,
@@ -95,13 +93,11 @@ class UploadImage extends Component {
     }
 
     delete(){
-        console.log('this firing?')
         this.setState({newURL: '', imageURL: ''})
     }
 
     render(props) {
-        console.log(this.state)
-        let { imageURL, imageCaption, isUploading } = this.state
+        let { imageCaption, isUploading } = this.state
         return (
             <section className="image-block">
                 <div className="preview-image-box">

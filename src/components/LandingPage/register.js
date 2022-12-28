@@ -38,11 +38,11 @@ class Register extends Component {
         const inputs = [...document.querySelectorAll('#register-inputs > input')],
             stars = [...document.querySelectorAll('#register-inputs > span')]
         const filtered = inputs.filter(input => !input.value)
-        filtered.map(input => {
+        for (const input of filtered) {
             input.setAttribute('style', 'border-color: red; padding-right: 40px;')
             const index = inputs.findIndex(inputs => inputs.name === input.name)
             stars[index].style.visibility = 'visible'
-        })
+        }
     }
 
     noSpaces = () => {

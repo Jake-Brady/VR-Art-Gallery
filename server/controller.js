@@ -331,7 +331,6 @@ module.exports = {
     },
     deleteAccount: (req,res,next) => {
         const {username} = req.params
-        console.log(username)
         const db = req.app.get('db')
         db.delete_account([username]).then(deletedAccount => {
             res.status(200).send('deleteAccount')

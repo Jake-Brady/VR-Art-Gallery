@@ -9,9 +9,7 @@ import 'aframe'
 import 'aframe-room-component'
 import 'aframe-physics-system'
 import 'aframe-extras'
-import 'aframe-star-system-component'
-import 'aframe-animation-component'
-import 'aframe-animation-timeline-component'
+// import 'aframe-star-system-component'
 import axios from 'axios'
 import '../components/Gallery/aframeFunctions'
 
@@ -62,6 +60,9 @@ class ArtGallery extends Component {
                 case "stoneTiles":
                     floor_texture = '#stoneTiles'
                     break;
+                default:
+                    floor_texture = '#wood'
+                    this.setState({isWoodFloor: true})
             }
             // Wall Texture Assignments
             switch (wall_texture) {
@@ -80,6 +81,8 @@ class ArtGallery extends Component {
                 case "cobblestone":
                     wall_texture = "#cobblestone"
                     break;
+                default:
+                    wall_texture = '#granite'
             }
             // Music Selection Assignments
             switch (music) {
@@ -98,6 +101,8 @@ class ArtGallery extends Component {
                 case "onThePassingOfTime":
                     music = '#passingTime'
                     break;
+                default:
+                    music = '#gymnopedie'
             }
             this.setState({wallTexture: wall_texture, floorTexture: floor_texture, atmosphereLighting: atmosphere_lighting, music, galleryName, author: username}, async () => {
                 let portalName;
@@ -176,17 +181,17 @@ class ArtGallery extends Component {
                 <a-entity light="type: ambient; color: #BBB"></a-entity>
                 <a-entity light="type: directional; color: #FFF; intensity: 0.6" position="-0.5 1 1"></a-entity>
 
-                     {/* Shooting Stars - Animation */}
+                    {/* Shooting Stars - Animation */}
                 <a-entity 
-                mixin="shooting-star" 
-                position="-500 100 13.5"
-                scale="1 1 15"
-                rotation="0 90 0"
+                    mixin="shooting-star" 
+                    position="-500 100 13.5"
+                    scale="1 1 15"
+                    rotation="0 90 0"
+                    animation="property: position; from: -500 100 33.5; to: 500 100 -13.5; dur: 9000; loop: true"
+                    // animation__2="property: position; delay: 9000; dur: 9000; from: 500 100 -33.5; to: -500 100 13.5; loop: true"
+                    // animation__3="property: position; delay: 18000; from: -500 100 63.5; to: 500 100 -13.5 dur: 9000; loop: true"
+                    // animation__4="property: position; delay: 27000; from: -500 100 -53.5; to: 500 100 13.5; dur: 9000; loop: true"
                 >
-                    <a-animation direction="alternate" begin="3000" attribute="position" from="-500 100 33.5" to="500 100 -13.5"  dur="9000" repeat="indefinite"></a-animation>
-                    <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -33.5" to="500 100 13.5" delay="9000"  dur="9000" repeat="indefinite"></a-animation>
-                    <a-animation direction="alternate" attribute="position" from="-500 100 63.5" to="500 100 -13.5"  delay="18000" dur="9000" repeat="indefinite"></a-animation>
-                    <a-animation direction="alternate-reverse" attribute="position" from="-500 100 -53.5" to="500 100 13.5"  delay="27000" dur="9000" repeat="indefinite"></a-animation>
                 </a-entity>
                 
                     {/* Wall Digital Clock - Gallery Author/Gallery Name */}
@@ -248,7 +253,6 @@ class ArtGallery extends Component {
                     material={`shader:portal;pano: ${isWoodFloor ? "#portalPreviewPorcelain" : "#portalPreviewWood" }`}
                     onClick={() => this.portalHop()}
                     animation__onhover="property: scale; dir: alternate; startEvents: mouseenter; easing: easeInSine; from:1.5 1.8 1.5; to:1.8 1.8 1.8; dur: 250; loop: 1"
-                    >
                     >
                     </a-circle>
 
@@ -691,8 +695,8 @@ class ArtGallery extends Component {
                     src="#moon" 
                     scale='7.5 7.5 7.5' 
                     position="3 65 7"
+                    animation="property: rotation; dir: alternate; to: 0 360 360; easing: linear; dur:200000; loop: true"
                     >
-                    <a-animation to='0 360 360' easing='linear' dur='200000' repeat='indefinite'/>
                     </a-gltf-model>
                 
 

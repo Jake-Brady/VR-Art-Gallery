@@ -28,7 +28,6 @@ class Lobby extends Component {
             queue: [],
             popping: false,
             notifications: 0,
-            galleryId: '',
             id: 0,
             name: '',
             usersWhoLiked: []
@@ -195,6 +194,7 @@ class Lobby extends Component {
                     this.toggleMenu()
                 })
                 break;
+            default:
         }
     }
 
@@ -382,7 +382,7 @@ class Lobby extends Component {
     }
 
     render() {
-        const { favoritedGalleries, usersGalleries, theMagicWord, user, loading, usersWhoLiked, accountInfo } = this.state
+        const { favoritedGalleries, usersGalleries, theMagicWord, loading } = this.state
         //Map over list of favorites, followers, and existing galleries, pass to separate components for styling them as distinct sections.
         const listOfFavorites = favoritedGalleries.map((e) => {
             const image = e.thumbnail,
@@ -452,7 +452,7 @@ class Lobby extends Component {
                         <header className='lobby-header'>
                             <div className='lobby-header_left'>
                                 <i className="fas fa-bars" onClick={() => this.toggleMenu('open')}></i>
-                                <img id='header-image' src={Icon} onClick={() => this.props.history.push('/')} />
+                                <img alt='header' id='header-image' src={Icon} onClick={() => this.props.history.push('/')} />
                                 <span id='header-name' onClick={() => this.props.history.push('/')}>VR<span className='lighttext'>ART GALLERY</span></span>
                             </div>
                             <div className='lobby-header_search'>
@@ -467,7 +467,7 @@ class Lobby extends Component {
                             <div className="menu-column">
                                 <div className='menu-header'>
                                     <i className="fas fa-bars" onClick={() => this.toggleMenu()}></i>
-                                    <img src={Icon} onClick={() => this.props.history.push('/')} />
+                                    <img alt='logo' src={Icon} onClick={() => this.props.history.push('/')} />
                                     <span>VR<span className='lighttext'>ART GALLERY</span></span>
                                 </div>
                                 <span data-tab className="menu-btn menu-btn-first" onClick={() => this.props.history.push('/')}><i className="fas fa-home menu-icon"></i>Home</span>

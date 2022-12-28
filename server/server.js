@@ -1,5 +1,19 @@
 require('dotenv').config()
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_THUMBNAILS, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY} = process.env
+const {
+    SERVER_PORT, 
+    CONNECTION_STRING, 
+    SESSION_SECRET, 
+    ENVIRONMENT, 
+    S3_BUCKET_THUMBNAILS, 
+    S3_BUCKET, 
+    AWS_ACCESS_KEY_ID, 
+    AWS_SECRET_ACCESS_KEY,
+    HOST,
+    DB_PORT,
+    DB_NAME,
+    DB_USER,
+    DB_PW
+} = process.env
     const express = require('express'),
     session = require('express-session')({
         secret: SESSION_SECRET,
@@ -121,4 +135,16 @@ const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, ENVIRONMENT, S3_BUCKET_TH
     app.listen(PORT, ()=> console.log(`Someone is looking at Art on ${PORT}`))
 
     //Connecting to Database through Massive
-    massive(CONNECTION_STRING).then(db => app.set('db', db))
+    massive({
+        host: HOST,
+        port: DB_PORT,
+        database: DB_NAME,
+        user: DB_USER,
+        password: DB_PW,
+        ssl: false,
+        poolSize: 10
+    }).then(db => {
+        app.set('db', db)
+    }).catch(e => {
+        console.error(e)
+    })

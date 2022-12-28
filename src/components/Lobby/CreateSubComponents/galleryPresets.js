@@ -90,7 +90,6 @@ class GalleryPresets extends Component {
     }
 
     render() {
-        console.log('RENDER', this.state)
         return (
             <section className="gallery-presets">
                 <audio className='gallery-audio-tag' />

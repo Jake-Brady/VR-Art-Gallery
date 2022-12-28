@@ -70,14 +70,14 @@ class Account extends Component {
                 this.wrongPass()
                 return;
             } else {
-                const updatedPassword = await axios.put(`/api/changePassword/`, { newPassword, username })
+                await axios.put(`/api/changePassword/`, { newPassword, username })
             }
         }
         if (imageAddress) {
-            const updatedAvatar = await axios.put(`/api/changeAvatar/`, { imageAddress, username })
+            await axios.put(`/api/changeAvatar/`, { imageAddress, username })
         }
         if (newEmail) {
-            const updatedEmail = await axios.put(`/api/changeEmail/`, { newEmail, username })
+            await axios.put(`/api/changeEmail/`, { newEmail, username })
         }
         this.setState({ username: newUsername || this.state.username, email: newEmail || this.state.email, avatarURL: imageAddress || this.state.avatarURL })
         this.cancelEdit()
@@ -127,7 +127,6 @@ class Account extends Component {
             })
             .then(res => {
                 const { signedRequest, url } = res.data;
-                console.log(url)
                 this.uploadFile(file, signedRequest, url);
             })
             .catch(err => {
@@ -135,7 +134,6 @@ class Account extends Component {
             });
     }
     uploadFile = (file, signedRequest, url) => {
-        console.log(url)
         const options = {
             headers: {
                 'Content-Type': file.type,
@@ -145,7 +143,6 @@ class Account extends Component {
         axios
             .put(signedRequest, file, options)
             .then(res => {
-                console.log(url)
                 this.setState({ isUploading: false, imageAddress: url })
             })
 
@@ -198,7 +195,7 @@ class Account extends Component {
             this.wrongPass()
             return;
         }
-        const deleteAccount = await axios.delete(`/api/deleteAccount/${username}`)
+        await axios.delete(`/api/deleteAccount/${username}`)
         axios.post('/api/logout').then(() => this.props.history.push('/'))
     }
 
@@ -208,7 +205,7 @@ class Account extends Component {
                 <h1>My Account</h1>
                 {!this.state.edit ?
                     <div className='account-overview'>
-                        <img src={this.state.avatarURL || Placeholder} alt='User Image' onError={(e) => e.target.src = Placeholder} />
+                        <img src={this.state.avatarURL || Placeholder} alt='User Selected Pic' onError={(e) => e.target.src = Placeholder} />
                         <div className='account-text'>
                             <h1>USERNAME</h1>
                             <h2>{this.state.username}</h2>
@@ -250,7 +247,7 @@ class Account extends Component {
                                 </div>
                             )}
                         </Dropzone>
-                        <img src={this.state.imageAddress || this.state.avatarURL || Placeholder} alt='User Image' style={{ cursor: 'pointer' }} onError={(e) => e.target.src = Placeholder} />
+                        <img src={this.state.imageAddress || this.state.avatarURL || Placeholder} alt='User Selected Pic' style={{ cursor: 'pointer' }} onError={(e) => e.target.src = Placeholder} />
                         <div className='account-edit-inputs'>
 
                             <h1>EMAIL</h1>

@@ -5,9 +5,10 @@ class Galleries extends Component {
     toggleDrop = (id, e) => {
         e.stopPropagation()
         const pop = [...document.querySelectorAll('[data-pop]')],
-        index = pop.map(pop => pop.dataset.pop).findIndex(index => index == id),
-        filtered = pop.filter(pop => pop.dataset.pop != id),
-        target = pop[index]
+            index = pop.map(pop => pop.dataset.pop).findIndex(index => index === id),
+            filtered = pop.filter(pop => pop.dataset.pop !== id),
+            target = pop[index]
+        
         target.classList.contains('gallery-pop_show') ? target.classList.remove('gallery-pop_show') : target.classList.add('gallery-pop_show')
         filtered.map(pop => pop.classList.remove('gallery-pop_show'))
     }
@@ -26,7 +27,7 @@ class Galleries extends Component {
                         <i className="fas fa-eye stat"></i><span>{views}</span>
                         <i className="fas fa-heart stat"></i><span>{favoriteNum}</span>
                         <i className="fas fa-share stat" onClick={(e) => share({galleryName, color: 'blue'}, e.target, galleryName, author)}></i><span>{shares}</span>
-                        <i className="fas fa-ellipsis-v gallery-option" onClick={e => this.toggleDrop(id, e)}></i>
+                        <i className="fas fa-ellipsis-v gallery-option" onClick={e => this.toggleDrop(String(id), e)}></i>
                         <div className='gallery-pop' data-pop={id}>
                             <div className='center' onClick={() => editGallery(id)}>EDIT</div>
                             <div className='center' onClick={() => deleteGallery(id, galleryName)}>DELETE</div>

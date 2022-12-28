@@ -257,7 +257,7 @@ class LandingPage extends Component {
                 if (galleries[i].id === galleryId) {
                     galleries[i].shares = gallerySharesIncrement
                     this.setState({ galleries }, async () => {
-                        const shareIncrement = await axios.put(`/api/increaseShare/${galleryId}`)
+                        await axios.put(`/api/increaseShare/${galleryId}`)
                     })
                 }
             }

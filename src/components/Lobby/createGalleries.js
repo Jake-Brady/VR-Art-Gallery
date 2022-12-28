@@ -127,7 +127,7 @@ class CreateGalleries extends Component {
 
     createNewGallery = () => {
         // If galleryName, author, or thumbnail are left blank, user should be notified to fill in the missing blanks.
-        const { galleryName, author, thumbnail, isPrivate } = this.state
+        const { galleryName, author, thumbnail } = this.state
         if (!galleryName || !author || !thumbnail) return;
 
         // this state object value is being passed down to galleryPresets and uploadImage components which are waiting for the value to turn to 0 before sending the final selections for presets, images, and captions back to this component to be shipped to database. Relevant functions: retrievingImageData, retrievingGalleryPresets, and finalizeGallery - all listed below.
@@ -186,7 +186,7 @@ class CreateGalleries extends Component {
 
 
     render(props) {
-        let { author, galleryName, thumbnail, isPrivate, numOfGalleries, maxLimit, isUploading, editMode, galleryId, imageAddress, finalCountdown } = this.state
+        let { author, galleryName, thumbnail, isPrivate, maxLimit, isUploading, editMode, finalCountdown } = this.state
         return (
             <section className="create-galleries">
                 {maxLimit ?
