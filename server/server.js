@@ -1,7 +1,6 @@
 require('dotenv').config()
 const {
-    SERVER_PORT, 
-    CONNECTION_STRING, 
+    SERVER_PORT,
     SESSION_SECRET, 
     ENVIRONMENT, 
     S3_BUCKET_THUMBNAILS, 
